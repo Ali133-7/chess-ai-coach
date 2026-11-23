@@ -88,7 +88,7 @@ docker compose run --rm --no-deps studio python scripts/bootstrap_knowledge.py
 ### 5. تشغيل الموقع والخدمات الأساسية
 
 ```bash
-docker compose up -d studio studio-worker studio-sync
+docker compose up -d studio studio-worker studio-sync control-sync
 docker compose ps
 ```
 
@@ -99,6 +99,7 @@ docker compose ps
 | `studio` | الموقع وAPI واللعب والتعلّم | أساسية؛ منفذ محلي `8001` |
 | `studio-worker` | تحليل المباريات في الخلفية | أساسية |
 | `studio-sync` | مزامنة الأرشيف والتصنيفات المنشورة | أساسية |
+| `control-sync` | متابعة طلبات الدفع واشتراكات Google المسجلة | أساسية عند تفعيل الدفع؛ لا ينشئ دفعات |
 | `daily-exercises` | توليد التمارين اليومية | اختيارية؛ ملف تعريف `automation` |
 | `coach` | التطبيق السابق أحادي الحساب | اختيارية؛ ملف تعريف `legacy`؛ منفذ محلي `8000` |
 | `deep-worker` | التحليل العميق للتطبيق السابق | اختيارية؛ ملف تعريف `legacy` |
@@ -266,7 +267,7 @@ docker compose logs -f --tail 50 studio
 إعادة تشغيل الخدمات الأساسية:
 
 ```bash
-docker compose restart studio studio-worker studio-sync
+docker compose restart studio studio-worker studio-sync control-sync
 ```
 
 بعد تعديل `.env` استخدم `up -d --force-recreate` للخدمة المعنية؛ `restart` وحده لا يحمّل بيئة جديدة. إعداد مفاتيح AI بالأداة المرفقة لا يحتاج إعادة تشغيل.
@@ -280,7 +281,7 @@ docker compose --profile legacy --profile automation stop
 إعادة تشغيل الخدمات الأساسية:
 
 ```bash
-docker compose up -d studio studio-worker studio-sync
+docker compose up -d studio studio-worker studio-sync control-sync
 ```
 
 أعد تشغيل الخدمات الاختيارية فقط إذا كنت تستخدمها. تجنّب `docker compose down -v` لأنه يحذف وحدات التخزين وبياناتها.
@@ -291,7 +292,7 @@ docker compose up -d studio studio-worker studio-sync
 git status --short
 git pull --ff-only
 docker compose build
-docker compose up -d studio studio-worker studio-sync
+docker compose up -d studio studio-worker studio-sync control-sync
 ```
 
 عالج أي تعديلات محلية قبل السحب. أعد إنشاء الخدمات الاختيارية التي تستخدمها بالصورة الجديدة. احتفظ بملف `.env` وأضف فقط المتغيرات الجديدة عند الحاجة. بعد تحديث الواجهة استخدم `Ctrl+F5`.
@@ -306,14 +307,14 @@ docker compose up -d studio studio-worker studio-sync
 BACKUP_DIR="$HOME/chess-backup-$(date +%Y%m%d-%H%M%S)"
 mkdir -m 700 "$BACKUP_DIR"
 docker compose --profile automation stop daily-exercises
-docker compose stop studio studio-worker studio-sync
+docker compose stop studio studio-worker studio-sync control-sync
 docker compose cp studio:/studio-data "$BACKUP_DIR/studio-data"
 cp .env "$BACKUP_DIR/.env"
 chmod 600 "$BACKUP_DIR/.env"
-docker compose up -d studio studio-worker studio-sync
+docker compose up -d studio studio-worker studio-sync control-sync
 ```
 
-إذا كنت تستخدم مجدول systemd بدلاً من خدمة Compose، أوقف المؤقت ومحاولة التوليد الجارية أيضاً قبل النسخ، ثم أعد تشغيله بعد الانتهاء. إذا كانت خدمة `daily-exercises` مفعلة قبل النسخ، أعد تشغيلها:
+إذا كنت تستخدم systemd بدلاً من Compose، أوقف مؤقت التمارين ومحاولة التوليد الجارية ومؤقت متابعة الدفع `chess-control-status.timer` وخدمته أيضاً قبل النسخ، ثم أعد تشغيل المؤقتات بعد الانتهاء. إذا كانت خدمة `daily-exercises` مفعلة قبل النسخ، أعد تشغيلها:
 
 ```bash
 docker compose --profile automation up -d daily-exercises
