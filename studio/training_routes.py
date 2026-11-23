@@ -81,10 +81,14 @@ def get_annotation(gid,data,user):
                 settings,_=groq_settings()
                 # Fixed Groq selection; never send this game to an unselected fallback.
                 cfg={'primary':'groq','fallback':[],'providers':{'groq':copy.deepcopy(settings)}}
+                from .teacher_v7.grounding import enrich,audit
+                question=data.question.strip() or 'علّمني فكرة هذه النقلة: فائدتها، خطرها، وما البديل الأفضل إن وجد.'
+                context=enrich(analysis['_verified_context'],question)
                 answer,ins,outs,provider,model=generate(cfg,PLAY_INSTRUCTIONS,{
-                    'VERIFIED_CONTEXT':analysis['_verified_context'],
-                    'QUESTION_AR':data.question.strip() or 'علّمني فكرة هذه النقلة: فائدتها، خطرها، وما البديل الأفضل إن وجد.','RECENT_DISCUSSION':[]})
+                    'VERIFIED_CONTEXT':context,
+                    'QUESTION_AR':question,'RECENT_DISCUSSION':[]})
                 reply=vetted_reply(answer,analysis['scenarios'])
+                reply.update(audit(answer,context))
                 reply.update(language=lang,provider=provider,model=model,source='Groq + Stockfish',
                     disclaimer='شرح تدريبي لمباراة مستقلة داخل المنصة؛ التقييم والحركات من المحرك، والنص التفسيري قد يحتاج مراجعة.')
                 if not data.question.strip():

@@ -549,3 +549,9 @@ _install_daily_exercises(app, auth)
 
 from .control_api import install as _install_control
 _install_control(app, auth, admin)
+from .analysis_runtime import install as _install_analysis
+from .adaptive_training import install as _install_adaptive
+_install_analysis(app,auth)
+_install_adaptive(app,auth)
+from .performance import install as _install_performance
+_install_performance(app,admin)

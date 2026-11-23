@@ -22,6 +22,8 @@ jobs:
             modules: studio
           - group: control-and-payments
             modules: test_control_center test_google_play test_database_export test_security_review
+          - group: analysis-and-adaptation
+            modules: test_analysis_runtime test_analysis_engine test_adaptive_grounding
     env:
       PYTHONPATH: .:tests
       STUDIO_DB: /tmp/chess-ci/studio.sqlite3
@@ -62,3 +64,26 @@ jobs:
       - run: pip install pip-audit bandit
       - run: pip-audit -r requirements.lock
       - run: bandit -r studio main.py -lll
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: pip install -r requirements.lock
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

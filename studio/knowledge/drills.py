@@ -59,6 +59,8 @@ def move(sid,uid,uci,version,reveal=False):
   session=dict(row);item=puzzle(session['puzzle_id']);line=json.loads(item['moves_json'])
   if session['version']!=version or session['status']!='active':raise HTTPException(409,'تغيرت جلسة التمرين أو انتهت')
   if reveal:
+   from ..adaptive_training import record
+   record(db,uid,item,session,'revealed')
    session.update(status='revealed',version=version+1);db.execute("UPDATE knowledge_puzzle_sessions SET status='revealed',version=version+1 WHERE id=?",(sid,));remember(db,uid,item['id'],'revealed');return packed(session,item)
   board=chess.Board(item['fen'])
   for token in line[:session['cursor']]:board.push_uci(token)
@@ -76,7 +78,10 @@ def move(sid,uid,uci,version,reveal=False):
   if cursor<len(line):board.push_uci(line[cursor]);cursor+=1
   status='solved' if cursor>=len(line) or alternate_mate else 'active'
   db.execute('UPDATE knowledge_puzzle_sessions SET cursor=?,version=version+1,status=?,played_json=? WHERE id=?',(cursor,status,json.dumps(line[:cursor]),sid))
-  if status=='solved':remember(db,uid,item['id'],'solved')
+  if status=='solved':
+   remember(db,uid,item['id'],'solved')
+   from ..adaptive_training import record
+   record(db,uid,item,session,status)
   session.update(cursor=cursor,version=version+1,status=status,played_json=json.dumps(line[:cursor]));result=packed(session,item);result['correct']=True;return result
 
 def skip(sid,uid,version):
@@ -85,6 +90,8 @@ def skip(sid,uid,version):
   if not r:raise HTTPException(404,'جلسة التدريب ليست ضمن حسابك')
   r=dict(r)
   if r['version']!=version or r['status']!='active':raise HTTPException(409,'تغيرت جلسة التمرين أو انتهت')
+  from ..adaptive_training import record
+  record(db,uid,puzzle(r['puzzle_id']),r,'skipped')
   db.execute("UPDATE knowledge_puzzle_sessions SET status='skipped',version=version+1 WHERE id=?",(sid,));remember(db,uid,r['puzzle_id'],'skipped');r.update(status='skipped',version=version+1);return packed(r,puzzle(r['puzzle_id']))
 
 def history(uid):

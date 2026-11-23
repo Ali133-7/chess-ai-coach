@@ -84,6 +84,10 @@ def setup():
 
   from .control_store import setup as setup_control
   setup_control(db)
+  from .analysis_runtime import setup as setup_analysis_runtime
+  setup_analysis_runtime(db)
+  from .adaptive_training import setup as setup_adaptive
+  setup_adaptive(db)
 
 def passhash(password):
  salt=secrets.token_bytes(16)

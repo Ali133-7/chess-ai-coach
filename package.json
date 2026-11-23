@@ -4,9 +4,11 @@
   "version": "7.0.0",
   "description": "UI regression tests for Chess Studio",
   "scripts": {
-    "test": "node scripts/run_ui_tests.cjs"
+    "test": "node scripts/run_ui_tests.cjs",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "jsdom": "27.2.0"
   },
   "engines": {

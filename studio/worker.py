@@ -4,6 +4,8 @@ import hashlib, json, logging, os, time, io, csv
 from pathlib import Path
 from datetime import datetime, timezone
 import httpx, chess, chess.engine, chess.pgn
+from contextlib import ExitStack
+from . import analysis_runtime as runtime
 from .core import connection, setup, now, config, game_moves_from_pgn, grade_for, phase, user_analysis_speed
 from move_quality import candidate_sacrifice
 
@@ -190,22 +192,33 @@ def material_balance(board):
  return sum(vals.get(p.piece_type,0)*(1 if p.color else -1) for p in board.piece_map().values())
 
 def analyze_game(row):
- gid=row['id'];user_id=row['user_id']
+ gid=row['id'];user_id=row['user_id'];token=row.get('_lease');worked=0;started=time.monotonic()
  game,positions=game_moves_from_pgn(row['pgn']);boards=[game.board()]
  board=game.board()
  for _,uci,_,_,_ in positions:
   board.push_uci(uci);boards.append(board.copy())
  with connection() as db:
+  db.execute('BEGIN IMMEDIATE')
+  if not runtime.owns(db,gid,token):return
   db.execute("UPDATE games SET stage='running',total_positions=?,error=NULL,updated_at=? WHERE id=?",(len(boards),now(),gid))
- with chess.engine.SimpleEngine.popen_uci(STOCKFISH) as engine:
-  opts={}
-  if 'Threads' in engine.options:opts['Threads']=int(os.getenv('STUDIO_ENGINE_THREADS','1'))
-  if 'Hash' in engine.options:opts['Hash']=int(os.getenv('STUDIO_ENGINE_HASH_MB','96'))
-  if 'UCI_LimitStrength' in engine.options:opts['UCI_LimitStrength']=False
-  if 'Skill Level' in engine.options:opts['Skill Level']=20
-  engine.configure(opts)
+ with ExitStack() as stack:
+  engine=None
+  def compute(b,multipv,seconds):
+   nonlocal engine
+   if engine is None:
+    engine=stack.enter_context(chess.engine.SimpleEngine.popen_uci(STOCKFISH));opts={}
+    if 'Threads' in engine.options:opts['Threads']=int(os.getenv('STUDIO_ENGINE_THREADS','1'))
+    if 'Hash' in engine.options:opts['Hash']=int(os.getenv('STUDIO_ENGINE_HASH_MB','96'))
+    if 'UCI_LimitStrength' in engine.options:opts['UCI_LimitStrength']=False
+    if 'Skill Level' in engine.options:opts['Skill Level']=20
+    engine.configure(opts)
+   return scan_position(engine,b,multipv,seconds)
   for idx,b in enumerate(boards):
    with connection() as db:
+    db.execute('BEGIN IMMEDIATE')
+    if not runtime.owns(db,gid,token):return
+    runtime.heartbeat(db,gid,token)
+    if token and worked and (time.monotonic()-started>=10 or db.execute("SELECT 1 FROM analysis_jobs q JOIN games g ON g.id=q.game_id WHERE q.priority>0 AND q.game_id!=? AND g.stage='pending' LIMIT 1",(gid,)).fetchone()):break
     cached=db.execute('SELECT fen,scan_json FROM position_scans WHERE game_id=? AND ply=?',(gid,idx)).fetchone()
     budget=user_analysis_speed(db,user_id)
     seconds=budget['seconds']
@@ -214,24 +227,32 @@ def analyze_game(row):
    if paused:
     log.info('Pause requested; will continue after resume.');break
    if cached and cached['fen']==b.fen():continue
+   if token and worked>=runtime.QUANTUM:break
    if idx==0 or idx%8==0:
     log.info('Engine budget game=%s user=%s preset=%s seconds=%s multipv=%s position=%s/%s',
              gid,user_id,budget['preset'],seconds,multipv,idx,len(boards))
-   scan=scan_position(engine,b,multipv,seconds)
+   scan,source=runtime.shared_scan(b,seconds,multipv,lambda:compute(b,multipv,seconds))
+   if scan is None:row['_backoff']=2;break
+   worked+=1
    with connection() as db:
+    db.execute('BEGIN IMMEDIATE')
+    if not runtime.owns(db,gid,token):return
+    runtime.heartbeat(db,gid,token)
     db.execute('''INSERT INTO position_scans(game_id,ply,fen,scan_json) VALUES(?,?,?,?)
       ON CONFLICT(game_id,ply) DO UPDATE SET fen=excluded.fen,scan_json=excluded.scan_json''',
       (gid,idx,b.fen(),json.dumps(scan,ensure_ascii=False)))
     db.execute('UPDATE games SET completed_positions=?,updated_at=? WHERE id=?',(idx+1,now(),gid))
    if idx%8==0:log.info('Studio analysis game=%s user=%s %s/%s',gid,user_id,idx,len(boards))
  with connection() as db:
+  db.execute('BEGIN IMMEDIATE')
+  if not runtime.owns(db,gid,token):return
   scans=[dict(r) for r in db.execute('SELECT ply,scan_json FROM position_scans WHERE game_id=? ORDER BY ply',(gid,))]
   if len(scans)!=len(boards):
    db.execute("UPDATE games SET stage='pending',updated_at=? WHERE id=?",(now(),gid))
    return
   analyses=[json.loads(r['scan_json']) for r in scans]
   for (ply,uci,san,before,after),pre,post in zip(positions,analyses[:-1],analyses[1:]):
-   iswhite=ply%2==1
+   iswhite=chess.Board(before).turn==chess.WHITE
    best=pre['lines'][0] if pre['lines'] else None
    best_uci=best['uci'] if best else None
    best_san=best['san'] if best else None
@@ -258,19 +279,15 @@ def analyze_game(row):
  log.info('Finished game %d (%d moves)',gid,len(positions))
 
 def job():
- with connection() as db:
-  if config(db,'worker_paused','false')=='true':return False
-  previous=db.execute("SELECT value FROM worker_state WHERE key='last_user_id'").fetchone()
-  prev=int(previous['value']) if previous else 0
-  row=db.execute('''SELECT * FROM games WHERE stage IN ('pending','running') AND user_id>?
-       ORDER BY user_id,finished_at DESC LIMIT 1''',(prev,)).fetchone()
-  if not row:row=db.execute("SELECT * FROM games WHERE stage IN ('pending','running') ORDER BY user_id,finished_at DESC LIMIT 1").fetchone()
-  if not row:return False
-  db.execute("INSERT OR REPLACE INTO worker_state(key,value) VALUES('last_user_id',?)",(str(row['user_id']),))
- try:analyze_game(dict(row))
+ row=runtime.claim()
+ if not row:return False
+ try:analyze_game(row)
  except Exception as exc:
   log.exception('Game analysis %s failed',row['id'])
-  with connection() as db:db.execute("UPDATE games SET stage='error',error=?,updated_at=? WHERE id=?",(str(exc)[:220],now(),row['id']))
+  with connection() as db:
+   db.execute('BEGIN IMMEDIATE')
+   if runtime.owns(db,row['id'],row['_lease']):db.execute("UPDATE games SET stage='error',error=?,updated_at=? WHERE id=?",('analysis_failed',now(),row['id']))
+ finally:runtime.release(row['id'],row['_lease'],row.get('_backoff',0))
  return True
 
 def run():

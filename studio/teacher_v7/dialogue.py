@@ -49,9 +49,12 @@ def generate(data,user,question,conversation=True):
    hints=search(question,4)['items']
   except (sqlite3.Error,OSError):pass
   day=guard_quota(uid)
-  try:answer,ins,outs,provider,model=providers.generate(provider_config(),GENERAL_INSTRUCTIONS,{'VERIFIED_CONTEXT':{'scenarios':[],'topic':'general chess question','local_opening_facts':hints},'QUESTION_AR':question,'RECENT_DISCUSSION':history})
+  from .grounding import enrich,audit
+  context=enrich({'scenarios':[],'topic':'general chess question','local_opening_facts':hints},question)
+  try:answer,ins,outs,provider,model=providers.generate(provider_config(),GENERAL_INSTRUCTIONS,{'VERIFIED_CONTEXT':context,'QUESTION_AR':question,'RECENT_DISCUSSION':history})
   except providers.ProviderError:raise HTTPException(503,'تعذرت الإجابة العامة مؤقتاً. أعد المحاولة بعد قليل.') from None
   add_usage(uid,day,ins,outs);result=vetted_reply(answer,[]);result.update(provider=provider,model=model,source='General chess explanation + local facts when available',disclaimer='الشرح العام ليس تقييماً محسوباً للرقعة الحالية.')
+  result.update(audit(answer,context))
  result.update(answer_kind='general',analysis_mode='general')
  if conversation:
   with connection() as db:

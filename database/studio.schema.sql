@@ -1,3 +1,11 @@
+CREATE TABLE adaptive_attempts(session_id TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,puzzle_id TEXT NOT NULL,score REAL NOT NULL,themes_json TEXT NOT NULL,created_at REAL NOT NULL);
+
+CREATE TABLE adaptive_reviews(user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,puzzle_id TEXT NOT NULL,streak INTEGER NOT NULL DEFAULT 0,due_at REAL NOT NULL,last_score REAL NOT NULL,PRIMARY KEY(user_id,puzzle_id));
+
+CREATE TABLE adaptive_skills(user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,theme TEXT NOT NULL,attempts INTEGER NOT NULL,success_weight REAL NOT NULL,updated_at REAL NOT NULL,PRIMARY KEY(user_id,theme));
+
+CREATE TABLE analysis_jobs(game_id INTEGER PRIMARY KEY REFERENCES games(id) ON DELETE CASCADE,priority INTEGER NOT NULL DEFAULT 0,generation INTEGER NOT NULL DEFAULT 0,token TEXT,lease_until REAL NOT NULL DEFAULT 0,requested_at REAL NOT NULL DEFAULT 0);
+
 CREATE TABLE analysis_preferences(user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
        preset TEXT NOT NULL DEFAULT 'fast' CHECK(preset IN ('turbo','fast','balanced','detailed','deep')));
 
@@ -103,6 +111,8 @@ CREATE TABLE ratings(user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 CREATE TABLE sessions(token_hash TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
        csrf TEXT NOT NULL,expires_at INTEGER NOT NULL);
 
+CREATE TABLE shared_engine_scans(key TEXT PRIMARY KEY,scan_json TEXT,token TEXT,lease_until REAL NOT NULL DEFAULT 0,created_at REAL NOT NULL,hits INTEGER NOT NULL DEFAULT 0);
+
 CREATE TABLE teacher_cache (
           user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
           key TEXT NOT NULL,reply_json TEXT NOT NULL,created_at TEXT NOT NULL,
@@ -142,9 +152,15 @@ CREATE TABLE users(id INTEGER PRIMARY KEY, email TEXT NOT NULL UNIQUE, pass_hash
 
 CREATE TABLE worker_state(key TEXT PRIMARY KEY,value TEXT NOT NULL);
 
+CREATE INDEX adaptive_due ON adaptive_reviews(user_id,due_at);
+
+CREATE INDEX analysis_job_lease ON analysis_jobs(lease_until,priority);
+
 CREATE INDEX control_ad_user ON control_ad_deliveries(user_id,campaign_id,created_at);
 
 CREATE INDEX control_order_status ON control_orders(status,created_at);
+
+CREATE INDEX engine_scan_age ON shared_engine_scans(created_at);
 
 CREATE UNIQUE INDEX idx_groq_one_active ON groq_training_games(user_id) WHERE status='active';
 

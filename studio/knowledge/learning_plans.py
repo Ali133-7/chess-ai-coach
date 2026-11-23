@@ -38,6 +38,9 @@ def status(uid):
 def context(uid):
  cat=c.catalog(uid);p=placement.latest(uid);profile=analysis.profile(uid)
  aggregate={'completed':cat['completed'],'route_start_stage':cat['start_stage'],'route_completed':cat['route_completed'],'unassisted':cat['independent'],'placement_scores':p.get('scores',[]) if p else [],'reported_games':profile['reported_games'],'phases':profile['phases'],'motifs':profile['motifs']}
+ from ..adaptive_training import evidence
+ aggregate['practice_evidence']=evidence(uid)[:8]
+ aggregate['practice_measure']='Bayesian practice indicator, not a rating; cold start has no measured weakness.'
  if p and p.get('rating'):
   aggregate['published_rating']={'format':p['format'],'snapshot':p['rating']['ratings'].get(p['format']),'source':p['rating']['source']}
  # Only anonymous counts, public labels and source IDs go to the model.

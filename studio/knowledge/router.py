@@ -174,6 +174,10 @@ def install(app,auth):
  @app.get('/api/knowledge/recommendations')
  def recommendations(source:Literal['all','generated','original']='all',user=Depends(auth)):
   basis=analysis.recommendation_basis(user['id']);theme=basis['theme']
+  from ..adaptive_training import evidence
+  skills=evidence(user['id'])
+  if skills:
+   theme=skills[0]['theme'];basis['reference_rating']=max(0,min(5000,basis['reference_rating']+round(300*(skills[0]['mastery']-.5))))
   result=drills.list_puzzles(basis['reference_rating'],theme,uid=user['id'],source=source,daily_priority=True);broadened=False
   if not result['items']:
    result=drills.list_puzzles(basis['reference_rating'],uid=user['id'],broaden=True,source=source);broadened=True

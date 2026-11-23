@@ -19,3 +19,9 @@ node_modules
 .venv
 venv
 .github
+test-results
+playwright-report
+control-private
+control-media
+teacher-*.txt
+.openai_api_key

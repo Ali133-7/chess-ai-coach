@@ -184,6 +184,8 @@ def install(app,auth):
         try:context,scenarios=verified_context(r)
         except ValueError:raise HTTPException(409,'تعذر التحقق من الموقف المحفوظ')
         question=data.question.strip() or 'اشرح لي هذه النقلة وفوائدها ومخاطرها ثم اختبر فهمي.'
+        from .grounding import enrich,audit
+        context=enrich(context,question)
         history=[];tid=data.thread_id
         if conversation and tid:
             with connection() as db:
@@ -203,6 +205,7 @@ def install(app,auth):
         day=guard_quota(uid)
         try:
             answer,ins,outs,provider,model=call_teacher(context,question,history,cfg)
+            evidence=audit(answer,context)
         except ProviderError as error:
             log.warning('Teacher API request failed for user %s: %s', uid, error.code)
             messages = {
@@ -219,6 +222,7 @@ def install(app,auth):
             raise HTTPException(503,'تعذر الحصول على شرح توليدي حالياً. جرّب لاحقاً أو استخدم شرح Stockfish المحفوظ.')
         add_usage(uid,day,ins,outs)
         result=vetted_reply(answer,scenarios)
+        result.update(evidence)
         result['provider']=provider
         result['model']=model
         result['source']=provider+' + verified archived Stockfish lines'

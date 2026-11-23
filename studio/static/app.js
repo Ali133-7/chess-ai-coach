@@ -10,19 +10,26 @@ const esc=text=>String(text??'').replace(/[&<>"']/g,x=>ESC[x]);
 const fmtDate=x=>new Date(x*1000).toLocaleDateString(window.I18n?.locale||'ar-IQ',{year:'numeric',month:'short',day:'numeric'});
 const badge=g=>`<span class="grade-tag grade-${esc(g||'unrated')}">${esc(SYMBOLS[g]||'–')}</span>`;
 const toast=text=>{const n=$('toast');n.textContent=text;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),3800);};
-async function request(path,{method='GET',body}={}){
- const opt={method,credentials:'same-origin',cache:'no-store',headers:{'Accept':'application/json','Accept-Language':window.I18n?.lang||'ar'}};
+async function request(path,{method='GET',body,signal}={}){
+ if(method==='GET'&&!signal&&window.StudioRequests)return window.StudioRequests.get((S.me?.id||'anonymous')+':'+(window.I18n?.lang||'ar'),path,()=>rawRequest(path,{method,body}));
+ if(method!=='GET')window.StudioRequests?.invalidate();
+ return rawRequest(path,{method,body,signal});
+}
+async function rawRequest(path,{method='GET',body,signal}={}){
+ const requestSession=S.csrf;
+ const opt={method,signal,credentials:'same-origin',cache:'no-store',headers:{'Accept':'application/json','Accept-Language':window.I18n?.lang||'ar'}};
  if(method!=='GET')opt.headers['X-CSRF-Token']=S.csrf;
  if(body!==undefined){opt.headers['Content-Type']='application/json';opt.body=JSON.stringify(body);}
  let response;
- try{response=await fetch('/api'+path,opt);}catch{throw new Error('تعذر الاتصال بالخادم');}
+ try{response=await fetch('/api'+path,opt);}catch(e){if(e.name==='AbortError')throw e;throw new Error('تعذر الاتصال بالخادم');}
  const data=await response.json().catch(()=>({}));
- if(!response.ok){if(response.status===401&&S.me){S.me=null;showAuth();}throw new Error(typeof data.detail==='string'?data.detail:(data.detail?.message||(Array.isArray(data.detail)?data.detail.map(x=>x.msg).join(' · '):('خطأ '+response.status))));}
+ if(requestSession!==S.csrf&&!path.startsWith('/auth/'))throw new DOMException('Session changed','AbortError');
+ if(!response.ok){if(response.status===401&&S.me&&requestSession===S.csrf){S.me=null;showAuth();}throw new Error(typeof data.detail==='string'?data.detail:(data.detail?.message||(Array.isArray(data.detail)?data.detail.map(x=>x.msg).join(' · '):('خطأ '+response.status))));}
  return data;
 }
 async function boot(){try{S.me=await request('/me');S.csrf=S.me.csrf;showApp();}catch{showAuth();}}
-function showAuth(){$('auth-screen').hidden=false;$('workspace').hidden=true;}
-function showApp(){$('auth-screen').hidden=true;$('workspace').hidden=false;$('admin-nav').hidden=S.me.role!=='admin';
+function showAuth(){S.csrf='';S.review=null;S.lesson=null;S.dashboard=null;S.games=[];window.StudioRequests?.invalidate();document.dispatchEvent(new CustomEvent('studio:session',{detail:{id:null}}));$('auth-screen').hidden=false;$('workspace').hidden=true;}
+function showApp(){document.dispatchEvent(new CustomEvent('studio:session',{detail:{id:S.me.id}}));$('auth-screen').hidden=true;$('workspace').hidden=false;$('admin-nav').hidden=S.me.role!=='admin';
  $('current-player').textContent=S.me.chess_username||'اربط حساب Chess.com';setTheme(S.me.theme);document.body.dataset.board=S.me.board_theme||'classic';
  switchView(!S.me.chess_username?'settings':'home');}
 function setTheme(theme){const value=theme==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):theme;
@@ -34,7 +41,7 @@ $('auth-form').addEventListener('submit',async e=>{e.preventDefault();$('auth-er
  try{const d=await request('/auth/'+(registerMode?'register':'login'),{method:'POST',body:{email:$('auth-email').value,password:$('auth-pass').value}});
   S.csrf=d.csrf;S.me=await request('/me');$('auth-pass').value='';showApp();
  }catch(error){$('auth-error').textContent=error.message;}finally{btn.disabled=false;}});
-$('logout').addEventListener('click',async()=>{try{await request('/auth/logout',{method:'POST'});}catch{}S.me=null;S.csrf='';showAuth();});
+$('logout').addEventListener('click',async()=>{try{await request('/auth/logout',{method:'POST'});S.me=null;S.csrf='';showAuth();location.reload();}catch(e){toast(e.message);}});
 $('menu').addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));
 $('theme-toggle').addEventListener('click',async()=>{const theme=document.body.dataset.theme==='light'?'dark':'light';setTheme(theme);if(S.me){$('theme').value=theme;await saveSettings(true);}});
 function switchView(view){if(!(view in titles)||view==='admin'&&S.me?.role!=='admin')return;S.view=view;
@@ -47,7 +54,7 @@ function switchView(view){if(!(view in titles)||view==='admin'&&S.me?.role!=='ad
  if(view==='knowledge')window.loadKnowledge?.();
  if(view==='play')window.loadGroqPlay?.();
  if(view==='home')loadHome();if(view==='games')loadGames();if(view==='grades')loadGrades();
- if(view==='course')loadCourse();if(view==='settings')showSettings();if(view==='admin')loadAdmin();}
+ if(view==='course')loadCourse();if(view==='settings')showSettings();if(view==='admin')loadAdmin();document.dispatchEvent(new CustomEvent('studio:view',{detail:{view}}));}
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-view]');if(b)switchView(b.dataset.view);});
 function stat(v,label){return `<div class="stat"><strong>${esc(v)}</strong><span>${esc(label)}</span></div>`;}
 async function loadRatingTrend(){
@@ -64,31 +71,33 @@ async function loadRatingTrend(){
 function showRatings(items){const r=items||[];
  $('ratings').innerHTML=r.length?r.map(x=>`<div class="rating-card"><small>${esc(x.format.toUpperCase())} · Chess.com</small><strong>${esc(x.rating??'—')}</strong><small>الأعلى ${esc(x.best??'—')} · ${esc(x.wins||0)} فوز</small></div>`).join(''):
  '<p class="muted">بانتظار استيراد التصنيفات المنشورة من Chess.com.</p>';}
-function gameEntry(x){return `<div class="game-card" data-open-game="${Number(x.id)}"><div><strong>${esc(x.white)} × ${esc(x.black)}</strong><small>${fmtDate(x.finished_at)} · ${esc(x.stage==='done'?'تحليل عميق جاهز':x.stage==='running'?'جارٍ التحليل':x.stage==='error'?'خطأ في التحليل':'قيد الانتظار')}</small></div><div>${esc(x.grade_count??'')}<small>${esc(x.result)}</small></div></div>`;}
+function gameEntry(x){return `<div class="game-card" data-open-game="${Number(x.id)}"><div><strong>${esc(x.white)} × ${esc(x.black)}</strong><small>${fmtDate(x.finished_at)} · ${esc(x.stage==='done'?'تحليل عميق جاهز':x.stage==='running'?'جارٍ التحليل':x.stage==='error'?'خطأ في التحليل':x.stage==='cancelled'?'أُلغي التحليل — يمكن استئنافه':'قيد الانتظار')}</small></div><div>${esc(x.grade_count??'')}<small>${esc(x.result)}</small></div></div>`;}
 async function loadHome(){try{const d=await request('/dashboard?summary_only=true');S.dashboard=d;
  const g=d.games;$('summary').innerHTML=stat(g.total||0,'مباراة مستوردة')+stat(g.done||0,'مباراة محللة')+stat(g.pending||0,'بانتظار التحليل')+stat(d.lessons_passed+' / '+d.lessons_total,'دروس مجتازة');
  showRatings(d.ratings);loadRatingTrend();const done=Number(g.done||0),total=Number(g.total||0);const pct=total?100*done/total:0;
  $('queue').innerHTML=`<div class="between"><strong>${done} / ${total} مباراة</strong><small>${pct.toFixed(1)}%</small></div><progress class="progress" max="100" value="${pct}"></progress><p class="tiny muted">التحليل في السيرفر يستمر حتى بعد إغلاق المتصفح. قد يستغرق وقتاً طويلاً مع 120 ثانية لكل وضعية.</p>`;
  $('course-short').innerHTML=`<p>اجتزت ${d.lessons_passed} من أصل ${d.lessons_total} دروس.</p><button data-view="course">ابدأ المسار الدراسي</button>`;
  $('recent-games').innerHTML=d.recent.length?d.recent.slice(0,3).map(gameEntry).join(''):'<p class="muted">اربط حساب Chess.com لبدء الاستيراد التلقائي.</p>';
- }catch(e){toast(e.message);}}
+ }catch(e){if(e.name!=='AbortError')toast(e.message);}}
 $('refresh').addEventListener('click',loadHome);
 function filterButton(g){return `<button class="${S.filter===g?'active':''}" data-grade-filter="${g}">${g==='all'?'جميع النقلات':LABELS[g]}</button>`;}
-async function loadGames(){try{const d=await request('/games?limit=20&page='+S.page+'&grade='+S.filter+'&scope='+S.scope);S.games=d.games;
+let gamesReadSequence=0;
+async function loadGames(){const seq=++gamesReadSequence;try{const path='/games?limit=20&page='+S.page+'&grade='+S.filter+'&scope='+S.scope;const d=await (window.StudioRequests?window.StudioRequests.latest('games',path):request(path));if(seq!==gamesReadSequence||S.view!=='games')return;S.games=d.games;
  $('game-filters').innerHTML=['all',...Object.keys(LABELS)].map(filterButton).join('');
  $('game-list').innerHTML=d.games.length?d.games.map(gameEntry).join(''):'<p class="muted">لا توجد مباريات محللة في هذا التصنيف بعد.</p>';
  $('game-pagination').innerHTML=`<button id="page-prev" ${S.page===1?'disabled':''}>السابق</button><span>${S.page} / ${Math.max(1,Math.ceil(d.total/20))}</span><button id="page-next" ${S.page*20>=d.total?'disabled':''}>التالي</button>`;
  $('page-prev').onclick=()=>{S.page--;loadGames()};$('page-next').onclick=()=>{S.page++;loadGames()};
- }catch(e){toast(e.message);}}
+ }catch(e){if(e.name!=='AbortError')toast(e.message);}}
 document.addEventListener('click',e=>{const g=e.target.closest('[data-grade-filter]');if(g){S.filter=g.dataset.gradeFilter;S.page=1;switchView('games');}
  const x=e.target.closest('[data-open-game]');if(x){switchView('games');openGame(Number(x.dataset.openGame));}});
 $('scope').addEventListener('change',e=>{S.scope=e.target.value;$('grade-scope').value=S.scope;S.page=1;loadGames();});
 $('grade-scope').addEventListener('change',e=>{S.scope=e.target.value;$('scope').value=S.scope;S.page=1;loadGrades();});
-async function loadGrades(){try{const d=await request('/grades?scope='+S.scope);$('grade-cards').innerHTML=Object.keys(LABELS).map(k=>`<button class="grade-card" data-grade-filter="${k}">${badge(k)} <strong>${Number(d.counts[k]||0)}</strong><small>${esc(LABELS[k])} · عرض المباريات</small></button>`).join('');}catch(e){toast(e.message);}}
-async function openGame(id){try{S.teacherArrow=null;S.reviewTeacherToken=(S.reviewTeacherToken||0)+1;S.reviewTeacherPlan=null;$('review-teacher').hidden=true;S.review=await request('/games/'+id);S.ply=0;S.flip=false;S.scenario=null;S.practicing=false;S.practiceTrail=[];S.selected=null;
+async function loadGrades(){try{const d=await request('/grades?scope='+S.scope);$('grade-cards').innerHTML=Object.keys(LABELS).map(k=>`<button class="grade-card" data-grade-filter="${k}">${badge(k)} <strong>${Number(d.counts[k]||0)}</strong><small>${esc(LABELS[k])} · عرض المباريات</small></button>`).join('');}catch(e){if(e.name!=='AbortError')toast(e.message);}}
+let reviewReadSequence=0;
+async function openGame(id){const seq=++reviewReadSequence,owner=S.me?.id;try{S.teacherArrow=null;S.reviewTeacherToken=(S.reviewTeacherToken||0)+1;S.reviewTeacherPlan=null;$('review-teacher').hidden=true;const nextReview=await (window.StudioRequests?window.StudioRequests.latest('review','/games/'+id):request('/games/'+id));if(seq!==reviewReadSequence||S.me?.id!==owner)return;S.review=nextReview;if(['pending','running'].includes(nextReview.stage))request('/analysis/jobs/'+id+'/action',{method:'POST',body:{action:'prioritize'}}).catch(()=>{});S.ply=0;S.flip=false;S.scenario=null;S.practicing=false;S.practiceTrail=[];S.selected=null;
  $('review').hidden=false;$('review-title').textContent=S.review.white+' × '+S.review.black;renderPerGameStats();
  window.openReviewModal();drawReview();
- }catch(e){toast(e.message);}}
+ }catch(e){if(e.name!=='AbortError')toast(e.message);}}
 function renderPerGameStats(){
  const r=S.review;if(!r)return;
  const ownWhite=(r.white||'').toLowerCase()===(S.me.chess_username||'').toLowerCase();
@@ -212,14 +221,14 @@ function reviewClick(sq){if(!S.practicing||!S.scenario)return;
 function reviewDrop(from,to){if(!S.practicing||!S.scenario)return;const match=(S.scenario.legalMoves||[]).filter(x=>x.startsWith(from+to));window.ChessBoardPro.promotion(match,doPractice);}
 async function doPractice(uci){const trail=[...S.practiceTrail];try{const d=await request('/games/'+S.review.id+'/practice',{method:'POST',body:{root_ply:S.scenario.rootPly,trail,uci}});
  S.practiceTrail.push(uci);S.scenario.practiceFen=d.fen;S.scenario.legalMoves=d.legal_moves;S.selected=null;drawReview();
- if(d.ended)toast('وصلت إلى وضعية نهائية في التدريب.');}catch(e){toast(e.message);}}
+ if(d.ended)toast('وصلت إلى وضعية نهائية في التدريب.');}catch(e){if(e.name!=='AbortError')toast(e.message);}}
 async function loadCourse(){try{const d=await request('/course');const rating=d.current_rating;
  const target=d.target_rating,remaining=d.rating_gap;
  const milestones=[700,1000,1200,1500,1800,2000,2400].filter(x=>x<=Math.max(target,1500));
  $('rating-path').innerHTML=`<div class="between"><h2>مسار التقدم في ${esc(d.rating_format.toUpperCase())}</h2><span>${esc(rating??'لم يصل التصنيف')} → ${esc(target)}</span></div><progress class="progress" max="100" value="${rating?Math.min(100,rating/target*100):0}"></progress><p>الهدف: ${target} · الفارق الحالي: ${remaining??'بانتظار بيانات Chess.com'} نقطة.
   محورك الحالي من التحليل: <b>${esc(d.improvement_focus||'بانتظار نتائج التحليل')}</b>.</p><div class="filter-row">${milestones.map(x=>`<span class="grade-tag grade-${rating!==null&&rating>=x?'excellent':'unrated'}">${x}${rating!==null&&rating>=x?' ✓':''}</span>`).join('')}</div><p class="tiny muted">اجتياز الدروس لا يغيّر تصنيف Chess.com تلقائياً؛ التصنيف يتغيّر عبر نتائج مبارياتك المصنفة الفعلية.</p>`;
  $('course-list').innerHTML=[1,2,3].map(stage=>`<h2 class="stage-heading">المرحلة ${stage}</h2>`+d.lessons.filter(l=>l.stage===stage).map(l=>`<div class="lesson-card ${l.unlocked||l.passed?'':'locked'}"><div><strong>الدرس ${l.id}: ${esc(l.title)}</strong><small>${esc(l.goal)} · ${l.source_positions} وضعية من مبارياتك · ${l.solved}/${l.required} إجابات صحيحة</small></div><div><span>${l.passed?'✓ مجتاز':l.unlocked?'جاهز':'مقفل'}</span> <button data-start-lesson="${l.id}" ${l.unlocked||l.passed?'':'disabled'}> ${l.passed?'مراجعة':'ابدأ الدرس'} </button></div></div>`).join('')).join('');
- }catch(e){toast(e.message);}}
+ }catch(e){if(e.name!=='AbortError')toast(e.message);}}
 $('course-list').addEventListener('click',e=>{const b=e.target.closest('[data-start-lesson]');if(b)openLesson(b.dataset.startLesson);});
 async function openLesson(id){
  S.lessonSequence++;S.lessonMode='original';S.lessonPlan=null;S.lessonResult=null;S.lessonReveal=false;
@@ -432,7 +441,7 @@ $('analysis-speed').addEventListener('change',()=>{
 $('password-form').addEventListener('submit',async e=>{e.preventDefault();try{await request('/password',{method:'POST',body:{current_password:$('old-pass').value,new_password:$('new-pass').value}});toast('تم تغيير كلمة المرور. الرجاء تسجيل الدخول من جديد.');S.me=null;showAuth();}catch(err){toast(err.message);}});
 $('delete-account').onclick=async()=>{if(!confirm('هل تريد حذف حسابك وجميع بياناته نهائياً؟'))return;
  if(!confirm('تأكيد أخير: لن يمكن استعادة بيانات المنصة الجديدة.'))return;
- try{await request('/account',{method:'DELETE'});S.me=null;showAuth();}catch(e){toast(e.message);}};
+ try{await request('/account',{method:'DELETE'});S.me=null;showAuth();}catch(e){if(e.name!=='AbortError')toast(e.message);}};
 async function loadAdmin(){if(window.loadControl)return window.loadControl();return loadLegacyAdmin();}
 async function loadLegacyAdmin(){try{const [o,u]=await Promise.all([request('/admin/overview'),request('/admin/users')]);
  const c=o.config;$('deep-seconds').value=c.deep_seconds;$('multipv').value=c.multipv;
@@ -441,7 +450,7 @@ async function loadLegacyAdmin(){try{const [o,u]=await Promise.all([request('/ad
  $('pause-worker').checked=c.worker_paused==='true';$('registration-open').checked=c.registration_open==='true';
  $('admin-overview').innerHTML=`<p>المستخدمون: <strong>${o.users}</strong> · المباريات: <strong>${o.games}</strong></p>`+o.jobs.map(x=>`<p>${esc(x.stage)}: ${x.n}</p>`).join('');
  $('admin-users').innerHTML='<h3>الحسابات المسجلة</h3>'+u.users.map(x=>`<div class="between"><p>${esc(x.email)} · ${esc(x.chess_username||'غير مربوط')} · ${x.games} مباراة</p>${x.role==='admin'?'':`<button data-admin-uid="${Number(x.id)}" data-admin-disabled="${x.disabled?0:1}">${x.disabled?'تفعيل':'تعطيل'}</button>`}</div>`).join('');
- }catch(e){toast(e.message);}}
+ }catch(e){if(e.name!=='AbortError')toast(e.message);}}
 function updateAdminSpeedPreset(){
  const seconds=Number($('deep-seconds').value),lines=Number($('multipv').value);
  const match=Object.entries(ANALYSIS_SPEED_PRESETS).find(([,vals])=>vals[0]===seconds&&vals[1]===lines);
