@@ -42,6 +42,12 @@ all jobs passed: **242 Python tests, 14 UI suites**, plus dependency and static
 security checks. The subsequent legacy feedback assertion adjustment was also
 exercised by the 21-test Linux image gate before legacy deployment.
 
+Final deployed probes passed: health 200; hostile Host 400; unauthenticated
+administration 401; password validation redacted. Both deployed applications
+match all 22 locked dependency versions exactly. Both background timers remain
+active. Studio's final locked dependency layer passed 33 security/control/Play
+tests before recreation, in addition to the earlier 63-test image gate.
+
 - New focused regression module: `tests/test_security_review.py` (9 tests).
 - Existing control/payment/Google, teacher, tenant, knowledge, learning, engine
   and interface regression suites remain in GitHub Actions.
