@@ -193,14 +193,16 @@ def material_balance(board):
 
 def analyze_game(row):
  gid=row['id'];user_id=row['user_id'];token=row.get('_lease');worked=0;started=time.monotonic()
- game,positions=game_moves_from_pgn(row['pgn']);boards=[game.board()]
- board=game.board()
- for _,uci,_,_,_ in positions:
-  board.push_uci(uci);boards.append(board.copy())
+ game,positions=game_moves_from_pgn(row['pgn']);total=len(positions)+1
+ def boards():
+  board=game.board();yield board
+  for _,uci,_,_,_ in positions:
+   board.push_uci(uci);yield board
  with connection() as db:
   db.execute('BEGIN IMMEDIATE')
   if not runtime.owns(db,gid,token):return
-  db.execute("UPDATE games SET stage='running',total_positions=?,error=NULL,updated_at=? WHERE id=?",(len(boards),now(),gid))
+  db.execute("UPDATE games SET stage='running',total_positions=?,error=NULL,updated_at=? WHERE id=?",(total,now(),gid))
+  saved={x['ply']:dict(x) for x in db.execute('SELECT ply,fen,scan_json FROM position_scans WHERE game_id=?',(gid,))}
  with ExitStack() as stack:
   engine=None
   def compute(b,multipv,seconds):
@@ -213,24 +215,24 @@ def analyze_game(row):
     if 'Skill Level' in engine.options:opts['Skill Level']=20
     engine.configure(opts)
    return scan_position(engine,b,multipv,seconds)
-  for idx,b in enumerate(boards):
+  for idx,b in enumerate(boards()):
+   cached=saved.get(idx)
+   if cached and cached['fen']==b.fen():continue
    with connection() as db:
     db.execute('BEGIN IMMEDIATE')
     if not runtime.owns(db,gid,token):return
     runtime.heartbeat(db,gid,token)
     if token and worked and (time.monotonic()-started>=10 or db.execute("SELECT 1 FROM analysis_jobs q JOIN games g ON g.id=q.game_id WHERE q.priority>0 AND q.game_id!=? AND g.stage='pending' LIMIT 1",(gid,)).fetchone()):break
-    cached=db.execute('SELECT fen,scan_json FROM position_scans WHERE game_id=? AND ply=?',(gid,idx)).fetchone()
     budget=user_analysis_speed(db,user_id)
     seconds=budget['seconds']
     multipv=budget['multipv']
     paused=budget['worker_paused']
    if paused:
     log.info('Pause requested; will continue after resume.');break
-   if cached and cached['fen']==b.fen():continue
    if token and worked>=runtime.QUANTUM:break
    if idx==0 or idx%8==0:
     log.info('Engine budget game=%s user=%s preset=%s seconds=%s multipv=%s position=%s/%s',
-             gid,user_id,budget['preset'],seconds,multipv,idx,len(boards))
+             gid,user_id,budget['preset'],seconds,multipv,idx,total)
    scan,source=runtime.shared_scan(b,seconds,multipv,lambda:compute(b,multipv,seconds))
    if scan is None:row['_backoff']=2;break
    worked+=1
@@ -242,12 +244,12 @@ def analyze_game(row):
       ON CONFLICT(game_id,ply) DO UPDATE SET fen=excluded.fen,scan_json=excluded.scan_json''',
       (gid,idx,b.fen(),json.dumps(scan,ensure_ascii=False)))
     db.execute('UPDATE games SET completed_positions=?,updated_at=? WHERE id=?',(idx+1,now(),gid))
-   if idx%8==0:log.info('Studio analysis game=%s user=%s %s/%s',gid,user_id,idx,len(boards))
+   if idx%8==0:log.info('Studio analysis game=%s user=%s %s/%s',gid,user_id,idx,total)
  with connection() as db:
   db.execute('BEGIN IMMEDIATE')
   if not runtime.owns(db,gid,token):return
-  scans=[dict(r) for r in db.execute('SELECT ply,scan_json FROM position_scans WHERE game_id=? ORDER BY ply',(gid,))]
-  if len(scans)!=len(boards):
+  scans=[dict(r) for r in db.execute('SELECT ply,scan_json FROM position_scans WHERE game_id=? AND ply>=0 AND ply<? ORDER BY ply',(gid,total))]
+  if len(scans)!=total:
    db.execute("UPDATE games SET stage='pending',updated_at=? WHERE id=?",(now(),gid))
    return
   analyses=[json.loads(r['scan_json']) for r in scans]
@@ -275,7 +277,7 @@ def analyze_game(row):
      book_name=excluded.book_name,lines_json=excluded.lines_json,phase=excluded.phase''',
      (gid,ply,san,uci,before,after,grade,loss,post['eval'],best_uci,best_san,book_name,
       json.dumps(pre['lines'],ensure_ascii=False),phase(chess.Board(before))))
-  db.execute("UPDATE games SET stage='done',completed_positions=?,updated_at=?,error=NULL WHERE id=?",(len(boards),now(),gid))
+  db.execute("UPDATE games SET stage='done',completed_positions=?,updated_at=?,error=NULL WHERE id=?",(total,now(),gid))
  log.info('Finished game %d (%d moves)',gid,len(positions))
 
 def job():

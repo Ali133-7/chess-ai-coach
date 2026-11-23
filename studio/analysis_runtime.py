@@ -31,7 +31,7 @@ def engine_identity():
 def position_key(board,seconds,multipv,engine=None):
  # Halfmove clock and repetition rights matter. Ignore the move number, but
  # include the multiset of visited rule states since the last irreversible move.
- b=board.copy();states=Counter()
+ b=board.copy(stack=board.halfmove_clock!=0);states=Counter()
  while True:
   states[' '.join(b.fen().split()[:4])]+=1
   if not b.move_stack:break
