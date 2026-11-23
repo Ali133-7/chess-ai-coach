@@ -82,6 +82,9 @@ def setup():
   for key,val in [('deep_seconds','120'),('multipv','3'),('worker_paused','false'),('archive_refresh_hours','6'),('max_games_per_user','3000'),('registration_open','true')]:
    db.execute('INSERT OR IGNORE INTO app_config(key,value) VALUES (?,?)',(key,val))
 
+  from .control_store import setup as setup_control
+  setup_control(db)
+
 def passhash(password):
  salt=secrets.token_bytes(16)
  digest=hashlib.pbkdf2_hmac('sha256',password.encode(),salt,600000)

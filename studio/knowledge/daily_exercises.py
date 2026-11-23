@@ -116,6 +116,12 @@ def publish(row,notes,provider,model):
   db.execute("UPDATE kc_generated_exercises SET notes_json=?,provider=?,model=?,status='published',published_at=? WHERE puzzle_id=? AND status='engine_ready'",(json.dumps(notes,ensure_ascii=False),provider,model,core.now(),row['puzzle_id']))
 
 def run(target=TARGET,max_candidates=700,max_seconds=1800):
+ from ..control_store import settings
+ with core.connection() as cfg_db:
+  cfg=settings(cfg_db)
+  configured_target=cfg_db.execute("SELECT value FROM control_settings WHERE key='daily_target'").fetchone()
+ if not cfg['daily_enabled']:return {**status(),'paused':True}
+ if configured_target:target=int(json.loads(configured_target['value']))
  if not 21<=target<=48:raise ValueError('daily target must be 21..48')
  day=today();token=secrets.token_hex(16);started=time.monotonic()
  with store.connection() as db:
@@ -123,7 +129,7 @@ def run(target=TARGET,max_candidates=700,max_seconds=1800):
   if old and old['lease_until']>time.time():return {'status':'already_running'}
   prior=db.execute('SELECT cursor FROM kc_daily_runs ORDER BY day DESC LIMIT 1').fetchone()
   cursor=old['cursor'] if old else (prior[0] if prior else 0)
-  db.execute("INSERT INTO kc_daily_runs(day,target,status,cursor,lease,lease_until,updated_at) VALUES(?,?,'running',?,?,?,?) ON CONFLICT(day) DO UPDATE SET status='running',lease=excluded.lease,lease_until=excluded.lease_until,error_code=NULL",(day,target,cursor,token,time.time()+max_seconds+120,core.now()))
+  db.execute("INSERT INTO kc_daily_runs(day,target,status,cursor,lease,lease_until,updated_at) VALUES(?,?,'running',?,?,?,?) ON CONFLICT(day) DO UPDATE SET status='running',target=excluded.target,lease=excluded.lease,lease_until=excluded.lease_until,error_code=NULL",(day,target,cursor,token,time.time()+max_seconds+120,core.now()))
  def heartbeat(**fields):
   with store.connection() as db:
    db.execute('UPDATE kc_daily_runs SET cursor=?,updated_at=? WHERE day=? AND lease=?',(cursor,core.now(),day,token))

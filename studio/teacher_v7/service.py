@@ -30,7 +30,10 @@ def provider_config():
 
 def provider_status():
     try:
-        return providers.status(provider_config())
+        from ..control_store import global_ai_enabled
+        result=providers.status(provider_config())
+        if not global_ai_enabled():result.update(ready=False,available_providers=[])
+        return result
     except providers.ProviderError:
         return {'ready':False,'provider':None,'model':None,'fallback':[], 'available_providers':[]}
 

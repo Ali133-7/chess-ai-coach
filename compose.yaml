@@ -41,6 +41,15 @@ services:
     volumes: ["studiodata:/studio-data"]
     mem_limit: 350m
     cpus: "0.3"
+  control-sync:
+    <<: *runtime
+    command: ["python", "-u", "-m", "studio.control_worker", "--loop"]
+    environment:
+      STUDIO_DB: /studio-data/studio.sqlite3
+    volumes: ["studiodata:/studio-data"]
+    cpus: "0.15"
+    mem_limit: 192m
+    pids_limit: 48
   daily-exercises:
     <<: *runtime
     profiles: ["automation"]

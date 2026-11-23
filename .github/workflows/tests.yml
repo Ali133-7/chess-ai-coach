@@ -20,6 +20,8 @@ jobs:
             modules: test_master_games test_teacher_v7_integration test_training_teacher
           - group: studio
             modules: studio
+          - group: control-and-payments
+            modules: test_control_center test_google_play
     env:
       PYTHONPATH: .:tests
       STUDIO_DB: /tmp/chess-ci/studio.sqlite3

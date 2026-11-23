@@ -4,7 +4,7 @@ const S={me:null,csrf:'',view:'home',dashboard:null,games:[],filter:'all',scope:
  scenario:null,scenarioStep:0,practicing:false,practiceTrail:[],selected:null,lesson:null,lessonSelect:null,lessonHintArrow:null,lessonSide:'any',lessonPlan:null,lessonResult:null,lessonReveal:false,lessonMode:'original',lessonScenarioIndex:-1,lessonStep:0,lessonPracticeTrail:[],lessonPracticeFen:null,lessonPracticeLegal:[],lessonSequence:0,busy:false};
 const LABELS={book:'من الكتاب',brilliant:'مدهشة',excellent:'ممتازة',good:'جيدة',weak:'ضعيفة',missed:'ضياع فرصة',mistake:'خطأ',blunder:'خطأ فادح',unrated:'غير مُقيّمة'};
 const SYMBOLS={book:'▣',brilliant:'!!',excellent:'!',good:'✓',weak:'?!',missed:'○',mistake:'?',blunder:'??',unrated:'–'};
-const titles={learning:'مساري التعليمي',knowledge:'مركز المعرفة والتحليل',play:'العب وتعلّم',home:'الرئيسية',games:'المباريات والتحليل',grades:'تقييمات النقلات',course:'مسار التطوير',settings:'إعداداتي',admin:'إدارة المنصة'};
+const titles={billing:'الخطط والاشتراك',learning:'مساري التعليمي',knowledge:'مركز المعرفة والتحليل',play:'العب وتعلّم',home:'الرئيسية',games:'المباريات والتحليل',grades:'تقييمات النقلات',course:'مسار التطوير',settings:'إعداداتي',admin:'إدارة المنصة'};
 const ESC={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
 const esc=text=>String(text??'').replace(/[&<>"']/g,x=>ESC[x]);
 const fmtDate=x=>new Date(x*1000).toLocaleDateString(window.I18n?.locale||'ar-IQ',{year:'numeric',month:'short',day:'numeric'});
@@ -17,7 +17,7 @@ async function request(path,{method='GET',body}={}){
  let response;
  try{response=await fetch('/api'+path,opt);}catch{throw new Error('تعذر الاتصال بالخادم');}
  const data=await response.json().catch(()=>({}));
- if(!response.ok){if(response.status===401&&S.me){S.me=null;showAuth();}throw new Error(typeof data.detail==='string'?data.detail:('خطأ '+response.status));}
+ if(!response.ok){if(response.status===401&&S.me){S.me=null;showAuth();}throw new Error(typeof data.detail==='string'?data.detail:(data.detail?.message||(Array.isArray(data.detail)?data.detail.map(x=>x.msg).join(' · '):('خطأ '+response.status))));}
  return data;
 }
 async function boot(){try{S.me=await request('/me');S.csrf=S.me.csrf;showApp();}catch{showAuth();}}
@@ -41,6 +41,8 @@ function switchView(view){if(!(view in titles)||view==='admin'&&S.me?.role!=='ad
  for(const node of document.querySelectorAll('.view'))node.hidden=node.id!=='view-'+view;
  for(const b of document.querySelectorAll('#nav button'))b.classList.toggle('active',b.dataset.view===view);
  $('page-title').textContent=titles[view];document.querySelector('.sidebar').classList.remove('open');
+ if(view==='billing')window.loadBilling?.();
+ if(view==='settings')window.loadBillingSummary?.();
  if(view==='learning')window.loadLearningPath?.();
  if(view==='knowledge')window.loadKnowledge?.();
  if(view==='play')window.loadGroqPlay?.();
@@ -431,10 +433,11 @@ $('password-form').addEventListener('submit',async e=>{e.preventDefault();try{aw
 $('delete-account').onclick=async()=>{if(!confirm('هل تريد حذف حسابك وجميع بياناته نهائياً؟'))return;
  if(!confirm('تأكيد أخير: لن يمكن استعادة بيانات المنصة الجديدة.'))return;
  try{await request('/account',{method:'DELETE'});S.me=null;showAuth();}catch(e){toast(e.message);}};
-async function loadAdmin(){try{const [o,u]=await Promise.all([request('/admin/overview'),request('/admin/users')]);
+async function loadAdmin(){if(window.loadControl)return window.loadControl();return loadLegacyAdmin();}
+async function loadLegacyAdmin(){try{const [o,u]=await Promise.all([request('/admin/overview'),request('/admin/users')]);
  const c=o.config;$('deep-seconds').value=c.deep_seconds;$('multipv').value=c.multipv;
  updateAdminSpeedPreset();
- $('archive-refresh').value=c.archive_refresh_hours;$('max-games').value=c.max_games_per_user;
+ $('archive-refresh').value=c.archive_refresh_hours;$('max-games').value=c.max_games_per_user;if($('teacher-platform-limit'))$('teacher-platform-limit').value=c.teacher_daily_limit||20;
  $('pause-worker').checked=c.worker_paused==='true';$('registration-open').checked=c.registration_open==='true';
  $('admin-overview').innerHTML=`<p>المستخدمون: <strong>${o.users}</strong> · المباريات: <strong>${o.games}</strong></p>`+o.jobs.map(x=>`<p>${esc(x.stage)}: ${x.n}</p>`).join('');
  $('admin-users').innerHTML='<h3>الحسابات المسجلة</h3>'+u.users.map(x=>`<div class="between"><p>${esc(x.email)} · ${esc(x.chess_username||'غير مربوط')} · ${x.games} مباراة</p>${x.role==='admin'?'':`<button data-admin-uid="${Number(x.id)}" data-admin-disabled="${x.disabled?0:1}">${x.disabled?'تفعيل':'تعطيل'}</button>`}</div>`).join('');
@@ -451,7 +454,7 @@ $('admin-speed-preset').addEventListener('change',()=>{
 $('deep-seconds').addEventListener('input',updateAdminSpeedPreset);
 $('multipv').addEventListener('input',updateAdminSpeedPreset);
 $('admin-form').addEventListener('submit',async e=>{e.preventDefault();try{await request('/admin/settings',{method:'PUT',body:{deep_seconds:Number($('deep-seconds').value),multipv:Number($('multipv').value),
- archive_refresh_hours:Number($('archive-refresh').value),max_games_per_user:Number($('max-games').value),worker_paused:$('pause-worker').checked,registration_open:$('registration-open').checked}});toast('حُفظت إعدادات السيرفر');}catch(err){toast(err.message);}});
+ archive_refresh_hours:Number($('archive-refresh').value),max_games_per_user:Number($('max-games').value),worker_paused:$('pause-worker').checked,registration_open:$('registration-open').checked,teacher_daily_limit:Number($('teacher-platform-limit')?.value||20)}});toast('حُفظت إعدادات السيرفر');}catch(err){toast(err.message);}});
 boot();
 
 $('admin-users').addEventListener('click',async e=>{

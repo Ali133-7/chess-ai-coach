@@ -38,7 +38,7 @@ def reserve(db,uid,field,limit):
     if field not in ('analyses','explanations'):raise ValueError()
     day=datetime.now(timezone.utc).date().isoformat()
     row=db.execute('SELECT '+field+' FROM training_coach_usage WHERE user_id=? AND day=?',(uid,day)).fetchone()
-    if row and row[field]>=limit:raise HTTPException(429,'وصلت إلى حد التعليم اليومي. الشروح المحفوظة تبقى متاحة.')
+    if limit<=0 or row and row[field]>=limit:raise HTTPException(429,'وصلت إلى حد التعليم اليومي. الشروح المحفوظة تبقى متاحة.')
     db.execute('INSERT INTO training_coach_usage(user_id,day,'+field+') VALUES(?,?,1) ON CONFLICT(user_id,day) DO UPDATE SET '+field+'='+field+'+1',(uid,day))
 
 
@@ -55,10 +55,17 @@ def get_annotation(gid,data,user):
         reply=json.loads(cached['reply_json']) if cached and cached['reply_json'] and not data.question.strip() else None
         if reply and reply.get('language','ar')!=lang:reply=None
         need_analysis=analysis is None;need_reply=data.elaborate and reply is None
+        if need_reply:
+            from .control_store import feature,settings as control_settings
+            role=db.execute('SELECT role FROM users WHERE id=?',(uid,)).fetchone()['role']
+            if role!='admin' and not feature(uid,'ai_coach',db):raise HTTPException(403,'الشرح الموسع غير متاح في خطتك / Expanded notes are not included in your plan')
+            if not control_settings(db)['ai_enabled']:raise HTTPException(503,'AI services are paused')
         if need_analysis or need_reply:
             if cached and cached['lock_until']>time.time():raise HTTPException(409,'المعلّم يراجع هذه النقلة بالفعل. انتظر قليلاً ثم أعد المحاولة.')
             if need_analysis:reserve(db,uid,'analyses',MAX_ANALYSES)
-            if need_reply:reserve(db,uid,'explanations',MAX_EXPLANATIONS)
+            if need_reply:
+                from .control_store import entitlement
+                reserve(db,uid,'explanations',min(MAX_EXPLANATIONS,entitlement(uid,db)['plan']['limits']['coach_daily']))
             db.execute('INSERT INTO training_move_coaching(game_id,ply,lock_token,lock_until) VALUES(?,?,?,?) ON CONFLICT(game_id,ply) DO UPDATE SET lock_token=excluded.lock_token,lock_until=excluded.lock_until',(gid,data.ply,token,time.time()+90))
     explanation_error=None
     try:

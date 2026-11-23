@@ -1,5 +1,6 @@
 """Authenticated completed-game AI tutoring; limits, ownership, cache, threads."""
 from __future__ import annotations
+from ..control_store import teacher_limit
 import hashlib, json, logging, sqlite3
 from datetime import datetime, timezone
 from fastapi import Depends, HTTPException, Query
@@ -120,9 +121,9 @@ def guard_quota(user_id):
     with connection() as db:
         # sqlite write lock serializes concurrent usage reservations across web workers.
         db.execute('BEGIN IMMEDIATE')
-        lim=max(1,min(100,int(config(db,'teacher_daily_limit','20'))))
+        lim=teacher_limit(user_id,db)
         row=db.execute('SELECT requests FROM teacher_usage WHERE user_id=? AND day=?',(user_id,today)).fetchone()
-        if row and row['requests']>=lim:
+        if lim<=0 or row and row['requests']>=lim:
             raise HTTPException(429,'وصلت إلى الحد اليومي لأسئلة المعلّم؛ حاول غداً')
         db.execute('''INSERT INTO teacher_usage(user_id,day,requests) VALUES(?,?,1)
             ON CONFLICT(user_id,day) DO UPDATE SET requests=requests+1''',(user_id,today))
@@ -158,7 +159,7 @@ def install(app,auth):
         with connection() as db:
             r=db.execute('SELECT requests,input_tokens,output_tokens FROM teacher_usage WHERE user_id=? AND day=?',
                          (user['id'],day)).fetchone()
-            lim=max(1,min(100,int(config(db,'teacher_daily_limit','20'))))
+            lim=teacher_limit(user['id'],db)
         return {**provider_status(),'requests_today':r['requests'] if r else 0,
                 'daily_limit':lim,'input_tokens_today':r['input_tokens'] if r else 0,
                 'output_tokens_today':r['output_tokens'] if r else 0}
@@ -169,7 +170,7 @@ def install(app,auth):
             if not db.execute('SELECT id FROM games WHERE id=? AND user_id=?',(data.game_id,uid)).fetchone():
                 raise HTTPException(404,'هذه المباراة غير موجودة ضمن حسابك')
             day=datetime.now(timezone.utc).date().isoformat()
-            lim=max(1,min(100,int(config(db,'teacher_daily_limit','20'))))
+            lim=teacher_limit(uid,db)
             usage=db.execute('SELECT requests FROM teacher_usage WHERE user_id=? AND day=?',(uid,day)).fetchone()
         from .dialogue import kind as question_kind, generate as general_answer
         actual_question=data.question.strip()

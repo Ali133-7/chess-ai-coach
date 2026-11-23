@@ -111,6 +111,8 @@ async def auth(req:Request):
  if req.method in ('POST','PUT','PATCH','DELETE'):
   provided=req.headers.get('X-CSRF-Token','')
   if not provided or not hmac.compare_digest(provided,row['csrf']):raise HTTPException(403,'رمز حماية الطلب مفقود')
+ from .control_store import authorize
+ authorize(dict(row),req)
  return dict(row)
 
 def admin(user=Depends(auth)):
@@ -372,9 +374,10 @@ def overview(user=Depends(admin)):
   return {'users':db.execute('SELECT COUNT(*) FROM users').fetchone()[0],
    'games':db.execute('SELECT COUNT(*) FROM games').fetchone()[0],
    'jobs':[dict(r) for r in db.execute('SELECT stage,COUNT(*) n FROM games GROUP BY stage')],
-   'config':{k:config(db,k) for k in ('deep_seconds','multipv','worker_paused','archive_refresh_hours','max_games_per_user','registration_open')}}
+   'config':{k:config(db,k) for k in ('deep_seconds','multipv','worker_paused','archive_refresh_hours','max_games_per_user','registration_open','teacher_daily_limit')}}
 
 class AdminSettings(BaseModel):
+ teacher_daily_limit:int=Field(default=20,ge=1,le=100)
  deep_seconds:int=Field(ge=1,le=120)
  multipv:int=Field(ge=1,le=5)
  worker_paused:bool
@@ -385,6 +388,8 @@ class AdminSettings(BaseModel):
 def admin_settings(data:AdminSettings,user=Depends(admin)):
  with connection() as db:
   for k,v in data.model_dump().items():config_set(db,k,str(v).lower() if isinstance(v,bool) else v)
+  from .control_store import audit
+  audit(db,user['id'],'engine.settings','platform',data.model_dump())
  return {'ok':True,'note':'إعدادات البحث تُقرأ قبل الوضعية التالية، ولا تقاطع البحث الجاري.'}
 
 @app.get('/api/admin/users')
@@ -483,6 +488,9 @@ def set_user_status(uid:int,data:UserStatus,user=Depends(admin)):
  with connection() as db:
   r=db.execute('UPDATE users SET disabled=? WHERE id=? AND role!=?',(int(data.disabled),uid,'admin'))
   if r.rowcount!=1:raise HTTPException(404,'المستخدم غير موجود أو مدير آخر')
+  db.execute('DELETE FROM sessions WHERE user_id=?',(uid,))
+  from .control_store import audit
+  audit(db,user['id'],'user.legacy_status',uid,{'disabled':data.disabled})
  return {'ok':True}
 
 @app.post('/api/games/{gid}/retry')
@@ -513,3 +521,6 @@ _install_placement(app, auth)
 _install_learning_plans(app, auth)
 from .knowledge.daily_exercises import install as _install_daily_exercises
 _install_daily_exercises(app, auth)
+
+from .control_api import install as _install_control
+_install_control(app, auth, admin)

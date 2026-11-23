@@ -1221,5 +1221,15 @@
   "كيف أتابع مساري؟": "How do I follow my path?",
   "اضغط متابعة لفتح الخطوة المقترحة لك. كل درس يجمع الشرح والعرض والتطبيق وسؤال فهم. يمكنك أيضاً اختيار درس بنفسك، وتعود المراجعات في موعدها.": "Continue to open your recommended step. Each lesson combines an explanation, demonstration, practice and a question. You can also select lessons yourself; scheduled reviews return when due.",
   "ما الذي أحتاج إلى ضبطه؟": "What do I need to set up?",
-  "يمكنك تغيير لغة الواجهة وربط اسم حسابك في Chess.com من هنا. ابدأ بالتعلّم حتى لو لم تربط حساباً بعد.": "Change the interface language and connect your Chess.com username here. You can start learning before connecting an account."
+  "يمكنك تغيير لغة الواجهة وربط اسم حسابك في Chess.com من هنا. ابدأ بالتعلّم حتى لو لم تربط حساباً بعد.": "Change the interface language and connect your Chess.com username here. You can start learning before connecting an account.",
+  "الخطط والاشتراك": "Plans and membership",
+  "إعدادات المحرك والعمال": "Engine and workers",
+  "الحد اليومي الأعلى لطلبات المعلّم لكل مستخدم": "Platform daily teacher request cap per user",
+  "مركز إدارة المشروع": "Project control centre",
+  "إدارة الحسابات والخطط والخدمات والدفع والحملات من مكان واحد. المفاتيح محفوظة على الخادم ولا تُعاد للمتصفح.": "Manage accounts, plans, services, payments and campaigns in one place. Saved secrets never return to the browser.",
+  "تحديث القسم": "Refresh section",
+  "طلبات الدفع الخاصة بي": "My payment orders",
+  "إدارة المشروع": "Project administration",
+  "الدفع والاشتراك": "Payment and membership",
+  "إعلان": "Promotion"
 }

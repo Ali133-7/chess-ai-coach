@@ -94,6 +94,8 @@ def status(cfg):
 
 
 def generate(cfg, instructions, supplied, *, answer_type=TutorAnswer, schema=None, task_name='chess_teacher_v7', apply_locale=True):
+    from ..control_store import global_ai_enabled
+    if not global_ai_enabled():raise ProviderError('AI services paused by administrator','disabled')
     schema = copy.deepcopy(SCHEMA if schema is None else schema)
     teacher_task = answer_type is TutorAnswer
     from ..locale import instructions_for

@@ -72,7 +72,9 @@ def generate(uid,provider='auto'):
   if cached:return public(dict(cached))
   inflight=db.execute("SELECT id FROM learning_ai_plans WHERE user_id=? AND status='generating' AND updated_at>?",(uid,(c.utc()-timedelta(minutes=2)).isoformat())).fetchone()
   if inflight:raise HTTPException(409,'A follow-up plan is already being generated')
-  if db.execute('SELECT count(*) FROM learning_ai_plans WHERE user_id=? AND created_at>?',(uid,(c.utc()-timedelta(days=1)).isoformat())).fetchone()[0]>=3:raise HTTPException(429,'Daily plan generation limit reached')
+  from ..control_store import entitlement
+  limit=min(3,entitlement(uid,db)['plan']['limits']['plans_daily'])
+  if db.execute('SELECT count(*) FROM learning_ai_plans WHERE user_id=? AND created_at>?',(uid,(c.utc()-timedelta(days=1)).isoformat())).fetchone()[0]>=limit:raise HTTPException(429,'Daily plan generation limit reached')
   pid=secrets.token_hex(16);db.execute('INSERT INTO learning_ai_plans(id,user_id,fingerprint,status,created_at,updated_at) VALUES(?,?,?,?,?,?)',(pid,uid,fingerprint,'generating',now,now))
  try:
   schema=Plan.model_json_schema();schema['$defs']['Choice']['properties']['activity_id']['enum']=[x['id'] for x in pool]

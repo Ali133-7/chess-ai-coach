@@ -8,6 +8,8 @@ teacher-providers.json
 teacher-*.txt
 private/
 secrets/
+control-private/
+control-media/
 backups/
 /data/
 /studio-data/
