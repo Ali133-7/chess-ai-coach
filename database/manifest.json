@@ -1,0 +1,29 @@
+{
+  "exported_at_utc": "2026-11-23T19:36:22.995617+00:00",
+  "format": 1,
+  "tables": {
+    "kc_sources": 6,
+    "kc_meta": 1,
+    "kc_openings": 3865,
+    "kc_paths": 37700,
+    "kc_positions": 7983,
+    "kc_edges": 8192,
+    "kc_puzzles": 5048,
+    "kc_master_games": 1500,
+    "kc_master_moves": 131696,
+    "kc_generated_exercises": 48
+  },
+  "sqlite_sha256": "8f2014b9c25c2d6d4fd7de96d7d9e9e5524a7415b9728c31d67c52193299e51c",
+  "gzip_sha256": "ae7d112e054a946371caffe4e8f8328a7eb03cae1bf02f36cd67ff442147379b",
+  "sqlite_bytes": 159649792,
+  "gzip_bytes": 13421300,
+  "private_data_included": false,
+  "studio_data_rows_exported": 0,
+  "scope": "Public opening graph, licensed master games and published derived exercises only; no users, sessions, billing, credentials, caches or player history.",
+  "licenses": {
+    "openings": "CC0-1.0",
+    "lichess_puzzles": "CC0-1.0",
+    "master_games_and_derived_exercises": "CC-BY-SA-4.0"
+  },
+  "notices": "../THIRD_PARTY_NOTICES.md"
+}

@@ -21,7 +21,7 @@ jobs:
           - group: studio
             modules: studio
           - group: control-and-payments
-            modules: test_control_center test_google_play
+            modules: test_control_center test_google_play test_database_export
     env:
       PYTHONPATH: .:tests
       STUDIO_DB: /tmp/chess-ci/studio.sqlite3
