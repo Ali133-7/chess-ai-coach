@@ -10,71 +10,361 @@
 - تمارين يومية بهدف 24 وضعية مميزة مع تحقق Stockfish وشرح AI؛ حفظ سجل المستخدم لمنع التكرار التلقائي. اكتمال الدفعة يعتمد على المحرك وحصة المزود.
 - تشغيل تلقائي للنقلات ونوافذ دراسة وتحليل، ودعم الهاتف والتابلت والكمبيوتر وRTL/LTR.
 
-## تشغيل جديد باستخدام Docker
+## دليل التشغيل الكامل
+
+الأوامر التالية لتثبيت جديد مستقل. لترقية الخادم المنشور الحالي راجع [ملاحظات التشغيل](docs/OPERATIONS.md) أولاً، لأن أسماء وحدات التخزين وسياق البناء قد تختلف.
+
+### 1. المتطلبات
+
+- Git وحساب يملك صلاحية الوصول إلى هذا المستودع الخاص.
+- Docker يعمل، مع **Docker Compose V2**؛ نستخدم الأمر `docker compose`.
+- اتصال بالإنترنت للبناء الأول ومزامنة Chess.com واستخدام مزودي AI. بيانات المعرفة المرفقة تعمل محلياً بعد التهيئة.
+- على Windows شغّل Docker Desktop بوضع حاويات Linux قبل تنفيذ الأوامر. راجع التعليمات الرسمية لـ[Windows](https://docs.docker.com/desktop/setup/install/windows-install/) أو [Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
+
+تحقق من جاهزية الأدوات:
+
+```bash
+git --version
+docker version
+docker compose version
+```
+
+يجب أن يظهر في `docker version` كل من **Client وServer**. Python وStockfish يُثبتان داخل الصورة؛ لا تحتاج تثبيتهما على جهازك عند استخدام Docker. Node.js 22 وnpm مطلوبان فقط لاختبارات الواجهة على الجهاز.
+
+نفّذ أوامر التشغيل داخل مجلد المشروع. على Linux استخدم حساباً مخوّلاً لتشغيل Docker، أو أضف `sudo` لأوامره حسب إعداد خادمك. أوامر Docker المكتوبة بسطر واحد تعمل أيضاً في PowerShell.
+
+### 2. تنزيل المشروع
 
 ```bash
 git clone https://github.com/Ali133-7/chess-ai-coach.git
 cd chess-ai-coach
-cp .env.example .env
-docker compose build
-docker compose run --rm studio python scripts/bootstrap_knowledge.py
-docker compose up -d
 ```
 
-افتح <http://127.0.0.1:8001> وأنشئ حساباً جديداً. التهيئة تستورد البيانات العامة فقط، وهي قابلة لإعادة التنفيذ. ليست قاعدة المستخدمين المنشورة جزءاً من Git.
+إذا احتجت مصادقة للمستودع الخاص، استخدم [GitHub CLI](https://cli.github.com/manual/gh_auth_login) بدلاً من أمر الاستنساخ السابق:
 
-لخادم بعيد أبقِ المنفذ محلياً واستخدم نفق SSH، مثلاً:
+```bash
+gh auth login
+gh repo clone Ali133-7/chess-ai-coach
+cd chess-ai-coach
+```
+
+### 3. إنشاء ملف الإعدادات
+
+على Linux أو macOS أو WSL:
+
+```bash
+cp .env.example .env
+```
+
+على Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+أنشئ الملف مرة واحدة. عند تحديث تثبيت قائم احتفظ بملف `.env` الموجود وقيمه. يمكنك البدء بالإعدادات الافتراضية للتشغيل المحلي الأساسي؛ إعداد مفاتيح AI يأتي لاحقاً بإدخال مخفي داخل الحاوية.
+
+### 4. البناء وتهيئة قاعدة المعرفة
+
+```bash
+docker compose config --quiet
+docker compose build
+docker compose run --rm --no-deps studio python scripts/bootstrap_knowledge.py
+```
+
+البناء الأول ينزّل Python وStockfish والمكتبات، ويفك قاعدة مباريات الأساتذة العامة بعد التحقق من بصمتها. انتظر انتهاء كل أمر بنجاح قبل التالي.
+
+يجب أن تنتهي التهيئة برسالة `KNOWLEDGE_READY`. تستورد إلى وحدة التخزين:
+
+| البيانات | العدد الأولي |
+| --- | ---: |
+| سجلات الافتتاحيات | 3865 |
+| الألغاز المرجعية | 5000 |
+| مباريات الأساتذة | 1500 |
+| أمثلة تمارين مولدة بتاريخ 2026-11-22 | 24 |
+
+التهيئة لا تنشئ حسابات مستخدمين، والاستيراد قابل لإعادة التنفيذ عند انقطاعه مع منع التكرار. الأمثلة الـ24 تاريخية وليست دفعة جديدة عند كل تشغيل.
+
+### 5. تشغيل الموقع والخدمات الأساسية
+
+```bash
+docker compose up -d studio studio-worker studio-sync
+docker compose ps
+```
+
+افتح **<http://127.0.0.1:8001>** وأنشئ حساباً جديداً بكلمة مرور من 12 حرفاً على الأقل. يمكنك استخدام المعرفة والدروس واللعب بالمحرك قبل إعداد AI؛ الشرح التوليدي يحتاج مفتاح مزود.
+
+| الخدمة | الوظيفة | التشغيل |
+| --- | --- | --- |
+| `studio` | الموقع وAPI واللعب والتعلّم | أساسية؛ منفذ محلي `8001` |
+| `studio-worker` | تحليل المباريات في الخلفية | أساسية |
+| `studio-sync` | مزامنة الأرشيف والتصنيفات المنشورة | أساسية |
+| `daily-exercises` | توليد التمارين اليومية | اختيارية؛ ملف تعريف `automation` |
+| `coach` | التطبيق السابق أحادي الحساب | اختيارية؛ ملف تعريف `legacy`؛ منفذ محلي `8000` |
+| `deep-worker` | التحليل العميق للتطبيق السابق | اختيارية؛ ملف تعريف `legacy` |
+
+من **إعداداتي** اختر اللغة والمظهر واربط اسم حسابك العام في Chess.com إن أردت استيراد مبارياتك. لا تحتاج كلمة مرور Chess.com. الاستيراد والتحليل يجريان في الخلفية وقد يستغرقان وقتاً.
+
+تغيير اسم حساب Chess.com المرتبط يحذف أرشيف الحساب السابق من مساحة المستخدم في التطبيق ويبدأ استيراد الحساب الجديد؛ راجع الاسم قبل حفظ تغييره.
+
+ابدأ من **مساري التعليمي**، أو اختر **مركز المعرفة** للدراسة الحرة. الحسابات المسجلة لا تحصل على صلاحية المدير تلقائياً.
+
+### 6. إنشاء حساب المدير — اختياري
+
+بعد إنشاء حسابك في الموقع، نفّذ من جهاز المشغّل مع استبدال البريد ببريد حساب موثوق تديره أنت:
+
+```bash
+docker compose exec studio python -m studio.admin promote your-email@example.com
+```
+
+الأمر يمنح الحساب المحدد صلاحية الإدارة. أعد تسجيل الدخول إذا لم تظهر أدوات المدير.
+
+### 7. أهم متغيرات `.env`
+
+| المتغير | الاستخدام |
+| --- | --- |
+| `STUDIO_COOKIE_SECURE` | `false` للوصول المحلي عبر HTTP؛ `true` للاستضافة عبر HTTPS |
+| `STUDIO_BASE_URL` | فارغ محلياً، أو أصل الموقع الحقيقي مثل `https://chess.example.com` عند الاستضافة العامة |
+| `STUDIO_ENGINE_THREADS` | خيوط عامل التحليل؛ الافتراضي `1` |
+| `STUDIO_ENGINE_HASH_MB` | ذاكرة محرك عامل التحليل؛ الافتراضي `96` ميغابايت |
+| `TEACHER_PROVIDERS_FILE` | اترك `/studio-data/teacher-providers.json` عند استخدام أداة إعداد المزودين المرفقة |
+| `CHESS_USERNAME` | اسم الحساب العام للتطبيق السابق فقط؛ المنصة الحديثة تربط الحساب من الواجهة |
+| `CHESS_API_KEY` | مفتاح وصول داخلي للتطبيق السابق فقط، بطول 32 حرفاً على الأقل؛ ليس مفتاح مزود AI |
+
+بقية خيارات التحليل القديم في `.env.example`، وحدود CPU والذاكرة لكل خدمة في `compose.yaml`. يحتاج تشغيل التحليل العميق والتوليد معاً وأرشيف أكبر إلى موارد إضافية.
+
+### 8. إعداد مزودي الذكاء الاصطناعي
+
+**Groq Cloud وxAI Grok خدمتان مختلفتان.** يدعم المشروع أيضاً OpenRouter وOpenAI.
+
+بعد تشغيل `studio`، لإعداد Groq Cloud:
+
+```bash
+docker compose exec studio python configure_teacher_providers.py --primary groq --model groq=openai/gpt-oss-120b
+```
+
+أدخل المفتاح عند الطلب؛ لن تظهر أحرفه على الشاشة. عند إعادة الإعداد، ترك الإدخال فارغاً يحافظ على ملف المفتاح الخاص الموجود. لا يلزم إعادة التشغيل بعد حفظ إعداد المزود.
+
+اسم النموذج أعلاه مستخدم في نسخة المشروع؛ يجب أن يكون متاحاً لحسابك وقت التنفيذ. استبدله بنموذج يدعمه حسابك إذا تغيّر توفره.
+
+| المزود | الاسم في الأوامر |
+| --- | --- |
+| Groq Cloud | `groq` |
+| xAI Grok | `xai` |
+| OpenRouter | `openrouter` |
+| OpenAI | `openai` |
+
+مثال إعداد مزود أساسي وجميع البدائل، بعد استبدال أسماء `YOUR_…` بأسماء نماذج حساباتك:
+
+```bash
+docker compose exec studio python configure_teacher_providers.py --primary groq --fallback xai openrouter openai --model groq=YOUR_GROQ_MODEL --model xai=YOUR_XAI_MODEL --model openrouter=YOUR_OPENROUTER_MODEL --model openai=YOUR_OPENAI_MODEL
+```
+
+سيطلب البرنامج مفتاح كل مزود مدرج. ترتيب `--fallback` يحدد ترتيب البدائل. تُستخدم البدائل للأخطاء القابلة لإعادة المحاولة؛ أخطاء المفتاح أو الصلاحية تحتاج تصحيح الإعداد وقد توقف الطلب.
+
+لا تضع مفاتيح المزودين في Git أو سطر الأوامر أو صور الشاشة. تُحفظ ملفاتها الخاصة داخل وحدة تخزين `studiodata` بإدخال مخفي.
+
+### 9. تفعيل التمارين اليومية
+
+بعد تهيئة المعرفة وحفظ إعداد مزود صالح:
+
+```bash
+docker compose --profile automation up -d daily-exercises
+docker compose --profile automation logs --tail 50 daily-exercises
+```
+
+يفحص المجدول الحاجة للتوليد عند بدء الحاوية، ثم يستهدف **03:15 بتوقيت بغداد** مع استكمال كل ساعتين. الهدف 24 تمريناً مميزاً يومياً؛ يعرض النظام العدد الفعلي ويعيد المحاولة لاحقاً إذا تعذر المزود أو نفدت الحصة.
+
+لتشغيل محاولة واحدة في حاوية مستقلة بدلاً من المجدول المستمر:
+
+```bash
+docker compose --profile automation run --rm --no-deps daily-exercises python -m studio.knowledge.daily_exercises --target 24 --max-candidates 700 --max-seconds 1800
+```
+
+لإيقاف المجدول:
+
+```bash
+docker compose --profile automation stop daily-exercises
+```
+
+استخدم مجدولاً واحداً للبيانات نفسها. الخادم المنشور سابقاً يستخدم `chess-coach-exercises-20261122.timer`؛ خدمة Compose هنا بديل للتثبيت الجديد ولا تُفعّل بجانب المؤقت الحالي.
+
+### 10. الخدمات القديمة وتشغيل المشروع بجميع خدماته
+
+هذا القسم اختياري لاستخدام `coach` و`deep-worker`. المنصة الحديثة تعمل بدونهما.
+
+اضبط `CHESS_USERNAME` في `.env` على اسم حساب Chess.com العام، وأنشئ مفتاح وصول داخلي عشوائياً ثم احفظه في `CHESS_API_KEY`. يمكنك توليده محلياً بالصورة المبنية:
+
+```bash
+docker compose run --rm --no-deps studio python -c "import secrets; print(secrets.token_urlsafe(48))"
+```
+
+المخرَج سر خاص بك، فلا تضفه إلى Git. هذا المفتاح يختلف عن مفاتيح Groq وبقية المزودين.
+
+```bash
+docker compose --profile legacy up -d coach deep-worker
+```
+
+يفتح التطبيق السابق على <http://127.0.0.1:8000> ويستخدم قاعدة مستقلة في `coachdata`.
+
+بعد إكمال إعدادات الخدمات القديمة ومزود AI، لتشغيل **الخدمات الست كلها**:
+
+```bash
+docker compose --profile legacy --profile automation up -d
+docker compose --profile legacy --profile automation ps
+```
+
+يشغّل ذلك أيضاً التحليل العميق والتوليد الدوري، مع استهلاك الموارد وحصة المزود المرتبط بهما.
+
+### 11. خادم بعيد والوصول من الهاتف
+
+نفّذ خطوات البناء والتهيئة على الخادم. من جهازك افتح نفق SSH مع استبدال المستخدم والعنوان:
 
 ```bash
 ssh -L 18001:127.0.0.1:8001 your-user@your-server
 ```
 
-ثم افتح <http://127.0.0.1:18001>. ملفات compose في المستودع مخصصة لتشغيل مستقل جديد. توثيق النسخة المنشورة وترقياتها في [docs/OPERATIONS.md](docs/OPERATIONS.md).
+اترك جلسة SSH مفتوحة وافتح <http://127.0.0.1:18001> على الجهاز الذي أنشأ النفق. إذا كان `18001` مستخدماً، اختر مثلاً `18002` في الأمر والرابط.
 
-## إعداد معلّم Groq Cloud
+للاستضافة العامة:
 
-```bash
-docker compose exec studio python configure_teacher_providers.py \
-  --primary groq --model groq=openai/gpt-oss-120b
+1. وجّه النطاق إلى الخادم وجهّز وكيلاً عكسياً مع شهادة TLS أمام `127.0.0.1:8001`، مع تمرير `Host` الصحيح للتطبيق.
+2. اضبط `.env` على أصل الموقع الحقيقي دون مسار إضافي:
+
+```dotenv
+STUDIO_BASE_URL=https://chess.example.com
+STUDIO_COOKIE_SECURE=true
 ```
 
-يطلب المفتاح بإدخال مخفي ويحفظه داخل وحدة التخزين بصلاحيات خاصة. لا تضع المفتاح في سطر الأوامر أو Git. أسماء النماذج التي يقبلها حساب المزود قد تتغير؛ اختر نموذجاً متاحاً عند الإعداد.
-
-مثال مزود أساسي وبديل، مع أسماء نماذج حسابك:
+3. أعد إنشاء حاوية الموقع لتحميل الإعدادات:
 
 ```bash
-docker compose exec studio python configure_teacher_providers.py \
-  --primary groq --fallback xai \
-  --model groq=YOUR_GROQ_MODEL --model xai=YOUR_XAI_MODEL
+docker compose up -d --force-recreate studio
 ```
 
-Groq Cloud ليس xAI Grok. يدعم الأمر أيضاً `openrouter` و`openai`.
+المنافذ مرتبطة بـlocalhost افتراضياً. `127.0.0.1` على الهاتف يشير للهاتف نفسه؛ للوصول لخادمك من الهاتف استخدم نطاق HTTPS الخاص بالموقع، لا عنوان نفق الكمبيوتر.
 
-لتفعيل التوليد الدوري على تشغيل جديد:
+### 12. المراقبة والإيقاف وإعادة التشغيل والتحديث
+
+الحالة والسجلات:
+
+```bash
+docker compose ps
+docker compose logs --tail 100 studio
+docker compose logs --tail 100 studio-worker studio-sync
+docker compose --profile automation logs --tail 50 daily-exercises
+```
+
+لمتابعة سجل الموقع مباشرة:
+
+```bash
+docker compose logs -f --tail 50 studio
+```
+
+`Ctrl+C` ينهي متابعة السجل وتبقى الخدمة عاملة. ظهور حالة صحة `studio` قد يحتاج دورة الفحص التالية.
+
+إعادة تشغيل الخدمات الأساسية:
+
+```bash
+docker compose restart studio studio-worker studio-sync
+```
+
+بعد تعديل `.env` استخدم `up -d --force-recreate` للخدمة المعنية؛ `restart` وحده لا يحمّل بيئة جديدة. إعداد مفاتيح AI بالأداة المرفقة لا يحتاج إعادة تشغيل.
+
+إيقاف جميع الخدمات مع الاحتفاظ بالبيانات:
+
+```bash
+docker compose --profile legacy --profile automation stop
+```
+
+إعادة تشغيل الخدمات الأساسية:
+
+```bash
+docker compose up -d studio studio-worker studio-sync
+```
+
+أعد تشغيل الخدمات الاختيارية فقط إذا كنت تستخدمها. تجنّب `docker compose down -v` لأنه يحذف وحدات التخزين وبياناتها.
+
+لتحديث تثبيت أُنشئ بهذا الدليل، بعد النسخ الاحتياطي ومراجعة تعليمات الإصدار:
+
+```bash
+git status --short
+git pull --ff-only
+docker compose build
+docker compose up -d studio studio-worker studio-sync
+```
+
+عالج أي تعديلات محلية قبل السحب. أعد إنشاء الخدمات الاختيارية التي تستخدمها بالصورة الجديدة. احتفظ بملف `.env` وأضف فقط المتغيرات الجديدة عند الحاجة. بعد تحديث الواجهة استخدم `Ctrl+F5`.
+
+### 13. النسخ الاحتياطي
+
+`studiodata` تضم الحسابات والتقدم والمعرفة وإعدادات المزود ومفاتيحه، و`coachdata` تخص التطبيق القديم. احتفظ بنسخها وملف `.env` خارج Git في مكان خاص.
+
+المثال التالي لـ**Bash على Linux/WSL**، ويوقف كتّاب بيانات المنصة الحديثة مؤقتاً لأخذ نسخة متسقة. يسبب توقفاً قصيراً للموقع:
+
+```bash
+BACKUP_DIR="$HOME/chess-backup-$(date +%Y%m%d-%H%M%S)"
+mkdir -m 700 "$BACKUP_DIR"
+docker compose --profile automation stop daily-exercises
+docker compose stop studio studio-worker studio-sync
+docker compose cp studio:/studio-data "$BACKUP_DIR/studio-data"
+cp .env "$BACKUP_DIR/.env"
+chmod 600 "$BACKUP_DIR/.env"
+docker compose up -d studio studio-worker studio-sync
+```
+
+إذا كنت تستخدم مجدول systemd بدلاً من خدمة Compose، أوقف المؤقت ومحاولة التوليد الجارية أيضاً قبل النسخ، ثم أعد تشغيله بعد الانتهاء. إذا كانت خدمة `daily-exercises` مفعلة قبل النسخ، أعد تشغيلها:
 
 ```bash
 docker compose --profile automation up -d daily-exercises
-docker compose logs --tail 50 daily-exercises
 ```
 
-يعمل الفحص عند بدء الحاوية، ثم الساعة 03:15 بتوقيت بغداد مع استكمال كل ساعتين. شغّل مجدولاً واحداً فقط؛ الخادم الحالي يستخدم مؤقت systemd موجوداً بالفعل. يوضح العداد العدد الحقيقي المنشور، ولا تُنشأ نتائج بديلة وهمية عند فشل المزود.
+للتطبيق القديم أوقف `coach` و`deep-worker` قبل نسخ `/data` من حاوية `coach` بالطريقة نفسها. للاستعادة أوقف جميع الكتّاب واستعد النسخة إلى وحدات التخزين الصحيحة؛ لا تستبدل بيانات جارية أو أحدث دون مراجعة. استنساخ Git وحده لا يستعيد حساباتك أو مفاتيحك.
 
-## الاختبارات
+### 14. الاختبارات
+
+تشغّل الأوامر قواعد مؤقتة داخل الحاوية بدلاً من قواعد الإنتاج.
+
+اختبارات الخادم والخدمات القديمة والمعرفة:
 
 ```bash
-docker compose run --rm --no-deps \
-  -e STUDIO_DB=/tmp/tests/studio.sqlite3 \
-  -e CHESS_KNOWLEDGE_DB=/tmp/tests/knowledge.sqlite3 \
-  -e DATABASE_PATH=/tmp/tests/legacy.sqlite3 \
-  studio python -m unittest discover -s tests -p 'test_*.py' -q
+docker compose run --rm --no-deps -e STUDIO_DB=/tmp/tests/studio.sqlite3 -e CHESS_KNOWLEDGE_DB=/tmp/tests/knowledge.sqlite3 -e DATABASE_PATH=/tmp/tests/legacy.sqlite3 studio python -m unittest discover -s tests -p "test_*.py" -q
+```
+
+اختبارات Studio الإضافية:
+
+```bash
+docker compose run --rm --no-deps -e STUDIO_DB=/tmp/tests/studio.sqlite3 -e CHESS_KNOWLEDGE_DB=/tmp/tests/knowledge.sqlite3 -e DATABASE_PATH=/tmp/tests/legacy.sqlite3 studio python -m unittest discover -s studio/tests -p "test_*.py" -q
+```
+
+اختبارات الواجهة باستخدام Node.js 22 وnpm على جهازك:
+
+```bash
 npm ci
 npm test
 ```
 
-GitHub Actions يشغّل اختبارات Python والواجهة دون مفاتيح أو طلبات مدفوعة. لا تستخدم قاعدة الإنتاج للاختبارات. توجد اختبارات إضافية داخل `studio/tests`.
+يشغّل GitHub Actions الاختبارات دون مفاتيح أو طلبات AI مدفوعة. نجحت نسخة الكود المرفوعة في **207 اختبارات Python و12 مجموعة اختبارات واجهة**. الاختبارات التي تحتاج قاعدة مرجعية تبنيها من البيانات العامة المرفقة.
 
-## البيانات والحقوق
+### 15. حل المشكلات الشائعة
 
-بيانات المعرفة وملفاتها المرجعية في `studio/knowledge/data`، مع البصمات والمصادر والتراخيص. ملف مباريات الأساتذة العام مضغوط بحجم مناسب لـGit ويُفك مع التحقق من SHA-256 أثناء البناء. تشمل الأمثلة 24 تمريناً مولداً بتاريخ 2026-11-22؛ هذه أمثلة تاريخية وليست دفعة كل يوم.
+| المشكلة | الإجراء |
+| --- | --- |
+| تعذر الاتصال بـDocker أو `dockerDesktopLinuxEngine` | شغّل Docker Desktop بحاويات Linux، أو خدمة Docker على الخادم، ثم أعد `docker version` |
+| `Repository not found` | المستودع خاص؛ سجّل الدخول بحساب مخوّل باستخدام `gh auth login` |
+| `env file ... not found` | أنشئ `.env` من `.env.example` داخل المجلد الذي يحتوي `compose.yaml` |
+| المنفذ `8001` مستخدم | افحص الخدمة الحالية؛ لتثبيت منفصل غيّر الجانب الأيسر فقط، مثلاً `127.0.0.1:8002:8001`، ثم افتح المنفذ الجديد |
+| المعرفة أو المباريات المرجعية فارغة | تحقق من انتهاء التهيئة برسالة `KNOWLEDGE_READY` واستخدام مجلد المشروع ووحدة التخزين نفسيهما |
+| المعلّم غير متاح | شغّل أداة إعداد المزود وتحقق من مطابقة المفتاح للخدمة والنموذج |
+| خطأ `401/403` من المزود | صحّح المفتاح والصلاحيات واسم النموذج؛ إعادة تشغيل الموقع وحدها لا تصلح بيانات الاعتماد |
+| خطأ حصة أو `429` | انتظر تجدد الحصة أو اضبط بديلاً صالحاً؛ راقب العدد الفعلي للتمارين |
+| مباريات Chess.com لا تظهر فوراً | تحقق من الاسم المرتبط وعمل `studio-sync` و`studio-worker` وراجع سجلاتهما؛ المزامنة والتحليل في الخلفية |
+| تعذر تسجيل الدخول بعد تغيير عنوان الموقع | طابق `STUDIO_BASE_URL` مع العنوان المفتوح، واستخدم ملفات الارتباط الآمنة مع HTTPS؛ أعد إنشاء الحاوية بعد تغيير `.env` |
+| التصميم قديم في المتصفح | حدّث بـ`Ctrl+F5` وتحقق من عمل الحاوية بالصورة المبنية حديثاً |
+| أدوات المدير غير ظاهرة | أنشئ الحساب أولاً، ثم نفّذ `studio.admin promote` للبريد الصحيح وأعد تسجيل الدخول |
 
-راجع [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). الاستضافة العامة تتطلب تجهيز HTTPS وإعدادات ملفات الارتباط والأصل؛ المنافذ الافتراضية مرتبطة بـlocalhost.
+## البيانات والمصادر
+
+الملفات المرجعية في `studio/knowledge/data` مع البصمات والمصادر والتراخيص. ملف مباريات الأساتذة العام مضغوط ويُفك مع التحقق من SHA-256 أثناء البناء. الأمثلة المولدة لا تمثل تصنيف Elo معايراً أو ضماناً لفوز إجباري.
+
+راجع [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)، و[ملاحظات تشغيل الخادم](docs/OPERATIONS.md)، و[تقرير مراجعة الواجهة](docs/interface-review-ar.txt).
