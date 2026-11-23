@@ -8,7 +8,10 @@ from studio.teacher_v7 import service
 from studio.teacher_v7.schema import SCHEMA, TutorAnswer
 
 class DummyResponse:
-    def __init__(self, payload):self.payload=payload
+    def __init__(self, payload):self.payload=payload;self.status_code=200;self.headers={}
+    def __enter__(self):return self
+    def __exit__(self,*args):return False
+    def iter_bytes(self):yield json.dumps(self.payload).encode()
     def raise_for_status(self):pass
     def json(self):return self.payload
 
@@ -16,7 +19,7 @@ class DummyClient:
     def __init__(self, payload):self.payload=payload;self.sent=None
     def __enter__(self):return self
     def __exit__(self,*args):return False
-    def post(self,url,json,headers):
+    def stream(self,method,url,json,headers):
         self.sent=(url,json,headers)
         return DummyResponse(self.payload)
 
@@ -39,6 +42,7 @@ class TutorContractTests(unittest.TestCase):
         fake=DummyClient(result)
         with tempfile.TemporaryDirectory() as temp:
             key=Path(temp)/'secret';key.write_text('sk-proj-test-not-a-real-secret')
+            key.chmod(0o600)
             with patch.object(service,'KEY_FILE',key),patch.object(service.httpx,'Client',return_value=fake):
                 value,ins,outs=service.call_openai({'fen':'start'},'اشرح')
         self.assertEqual(value.explanation_ar,'شرح')
@@ -54,6 +58,7 @@ class TutorContractTests(unittest.TestCase):
         fake=DummyClient({'status':'incomplete','output':[]})
         with tempfile.TemporaryDirectory() as temp:
             key=Path(temp)/'secret';key.write_text('sk-proj-test-not-a-real-secret')
+            key.chmod(0o600)
             with patch.object(service,'KEY_FILE',key),patch.object(service.httpx,'Client',return_value=fake):
                 with self.assertRaises(RuntimeError):
                     service.call_openai({'fen':'start'},'اشرح')

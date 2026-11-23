@@ -50,7 +50,7 @@ class TutorV7Tests(unittest.TestCase):
             benefits_ar=['تحسين نشاط القطع'],risks_ar=['راجع تهديدات الخصم'],
             scenario_notes=[LineNote(scenario_id='line-0', explanation_ar='خيار مركزي', focus_ar='نشاط القطع'),
                 LineNote(scenario_id='invented',explanation_ar='غير صحيح',focus_ar='قصة مختلقة')],
-            learning_question_ar='ما أهمية السيطرة على المركز؟'),10,20
+            learning_question_ar='ما أهمية السيطرة على المركز؟'),10,20,'openai','test-model'
 
     def test_authentication_and_owner(self):
         req={'game_id':self.gid,'ply':1,'question':'اشرح لي'}
@@ -68,7 +68,7 @@ class TutorV7Tests(unittest.TestCase):
 
     def test_generation_cache_and_arrows_are_not_invented(self):
         req={'game_id':self.gid,'ply':1}
-        with patch('studio.teacher_v7.router.configured',return_value=True),patch('studio.teacher_v7.router.call_openai',side_effect=self.fake_answer) as fake:
+        with patch('studio.teacher_v7.router.configured',return_value=True),patch('studio.teacher_v7.router.provider_config',return_value={'primary':'openai','fallback':[],'providers':{'openai':{'model':'test-model','key_file':'/unused-mocked-key'}}}),patch('studio.teacher_v7.router.call_teacher',side_effect=self.fake_answer) as fake:
             r=self.a.post('/api/teacher/explain',json=req,headers={'X-CSRF-Token':self.csrf_a})
             self.assertEqual(r.status_code,200,r.text)
             result=r.json()
@@ -80,7 +80,7 @@ class TutorV7Tests(unittest.TestCase):
             self.assertEqual(fake.call_count,1)
 
     def test_chat_thread_permissions(self):
-        with patch('studio.teacher_v7.router.configured',return_value=True),patch('studio.teacher_v7.router.call_openai',side_effect=self.fake_answer):
+        with patch('studio.teacher_v7.router.configured',return_value=True),patch('studio.teacher_v7.router.provider_config',return_value={'primary':'openai','fallback':[],'providers':{'openai':{'model':'test-model','key_file':'/unused-mocked-key'}}}),patch('studio.teacher_v7.router.call_teacher',side_effect=self.fake_answer):
             req={'game_id':self.gid,'ply':1,'question':'لماذا؟'}
             first=self.a.post('/api/teacher/chat',json=req,headers={'X-CSRF-Token':self.csrf_a})
             self.assertEqual(first.status_code,200,first.text)
