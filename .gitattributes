@@ -1,0 +1,9 @@
+* text=auto eol=lf
+studio/knowledge/data/** -text
+*.gz binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.rtbw binary
+*.rtbz binary
+*.pgn -text

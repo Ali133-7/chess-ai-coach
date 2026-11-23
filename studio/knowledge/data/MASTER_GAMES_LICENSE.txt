@@ -1,0 +1,10 @@
+Grandmaster game dataset and derived game annotations
+Source: Lichess official broadcasts, https://database.lichess.org/#broadcasts
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+License URL: https://creativecommons.org/licenses/by-sa/4.0/
+Attribution: Lichess official broadcasts and the tournament broadcasts linked in each record.
+Changes: completed standard GM-vs-GM records were selected, legally validated, deduplicated, and normalized. Chess960 and invalid records were excluded. Bilingual board-fact explanations, material counts, opening recognition, and bounded local Stockfish estimates for missing positions were added.
+The adapted game data and game annotations are distributed under CC BY-SA 4.0. Retain attribution, the license link, and this changes notice when redistributing adaptations under the same license.
+See master-games-manifest.json for the upstream monthly archive URLs, SHA256 checksums, selection policy, exact record counts and analysis settings.
+Original source PGN evaluation annotations have unknown engine settings; local fallback evaluations use Stockfish 17.1, one thread and a 5000-node budget. These are estimates, not guaranteed best-play verdicts.
+The data license is separate from the application's source-code licenses. Stockfish is a separately licensed GPLv3 program; no Windows executable is distributed in this dataset package.

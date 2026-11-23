@@ -1,0 +1,3735 @@
+{
+  "revision": "curriculum-20261122-v1",
+  "authorship": "Original bilingual explanations and constructed legal examples; existing local CC0 opening/puzzle records retain source IDs. External curricula inspired structure only.",
+  "review_intervals_days": [
+    1,
+    3,
+    7,
+    14,
+    30
+  ],
+  "stages": [
+    {
+      "id": 1,
+      "title": {
+        "ar": "القواعد وحركة القطع",
+        "en": "Rules and pieces"
+      },
+      "goal": {
+        "ar": "ابدأ دون معرفة سابقة: اقرأ المربع، حرّك القطع، وافهم قانونية النقلة.",
+        "en": "Start from zero: read squares, move pieces and understand legality."
+      }
+    },
+    {
+      "id": 2,
+      "title": {
+        "ar": "الأمان والمات",
+        "en": "Safety and checkmate"
+      },
+      "goal": {
+        "ar": "تعرّف على التهديد قبل أن تبحث عن الهجوم.",
+        "en": "Recognise a threat before looking for an attack."
+      }
+    },
+    {
+      "id": 3,
+      "title": {
+        "ar": "لغة التكتيك",
+        "en": "Tactical patterns"
+      },
+      "goal": {
+        "ar": "اربط الشوكات والتثبيت والهجوم المكتشف بوضعيات فعلية.",
+        "en": "Connect forks, pins and discovered attacks with concrete positions."
+      }
+    },
+    {
+      "id": 4,
+      "title": {
+        "ar": "افتتاحية بخطة ولون",
+        "en": "Openings with a plan and a side"
+      },
+      "goal": {
+        "ar": "افهم المركز والتطوير واختر ردوداً محدودة للطرفين.",
+        "en": "Understand the centre and development; build a focused repertoire for both sides."
+      }
+    },
+    {
+      "id": 5,
+      "title": {
+        "ar": "الحساب واتخاذ القرار",
+        "en": "Calculation and decisions"
+      },
+      "goal": {
+        "ar": "احسب رد الخصم القوي قبل اختيار نقلة مرشحة.",
+        "en": "Calculate a strong opposing reply before selecting a candidate."
+      }
+    },
+    {
+      "id": 6,
+      "title": {
+        "ar": "بناء الخطة",
+        "en": "Building a plan"
+      },
+      "goal": {
+        "ar": "حوّل تركيب البيادق ونشاط القطع إلى هدف عملي.",
+        "en": "Turn pawn structure and piece activity into a practical target."
+      }
+    },
+    {
+      "id": 7,
+      "title": {
+        "ar": "تقنية النهايات",
+        "en": "Endgame technique"
+      },
+      "goal": {
+        "ar": "فعّل الملك وافهم الترقية ونشاط القلعة والتعادل.",
+        "en": "Activate the king; understand promotion, rook activity and drawing resources."
+      }
+    },
+    {
+      "id": 8,
+      "title": {
+        "ar": "الممارسة المتقدمة",
+        "en": "Advanced practice"
+      },
+      "goal": {
+        "ar": "ادمج الدفاع والتحليل والمباريات النموذجية وروتين المنافسة.",
+        "en": "Combine defence, analysis, model games and a tournament routine."
+      }
+    }
+  ],
+  "lessons": [
+    {
+      "id": "board-rook",
+      "stage": 1,
+      "order": 1,
+      "title": {
+        "ar": "الرقعة والإحداثيات والقلعة",
+        "en": "Board coordinates and the rook"
+      },
+      "theory": {
+        "ar": [
+          "تتكون الرقعة من 64 مربعاً: الملفات a إلى h والصفوف 1 إلى 8. المربع الفاتح على يمينك عند ترتيب الرقعة. القلعة تسير أفقياً أو عمودياً ولا تقفز فوق قطعة. a1 وa4 في الملف نفسه؛ اختلافهما في الصف فقط.",
+          "قبل النقل، سمِّ مربع البداية والوجهة وتأكد أن الطريق خالٍ. جرّب تدوير الرقعة: الإحداثيات نفسها لا تتغير."
+        ],
+        "en": [
+          "The board has 64 squares: files a–h and ranks 1–8. Place a light square on your right. A rook travels along ranks or files and cannot jump a piece. a1 and a4 share a file.",
+          "Name the origin and destination and check the path. Rotating the board does not change the coordinates."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ Ra4 ثم أكمل حركة القلعة الموضّحة.",
+        "en": "Play Ra4, then complete the illustrated rook route."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/8/R3K3 w - - 0 1",
+        "moves": [
+          "a1a4",
+          "e8f7",
+          "a4e4",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "كيف تصل القلعة من a1 إلى a4؟",
+          "en": "How does a rook reach a4 from a1?"
+        },
+        "options": [
+          {
+            "ar": "عمودياً في الملف a",
+            "en": "Vertically along the a-file"
+          },
+          {
+            "ar": "بالتحرك قطرياً إلى a4",
+            "en": "By moving diagonally to a4"
+          },
+          {
+            "ar": "بالقفز فوق قطعة على a2",
+            "en": "By jumping over a piece on a2"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: عمودياً في الملف a، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Vertically along the a-file, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "bishop-queen",
+      "stage": 1,
+      "order": 2,
+      "title": {
+        "ar": "الفيل والوزير وخطوط الحركة",
+        "en": "Bishop, queen and movement lines"
+      },
+      "theory": {
+        "ar": [
+          "الفيل يتحرك قطرياً ويبقى على لون مربعه طوال المباراة. الوزير يجمع حركة القلعة والفيل، لكنه أيضاً لا يقفز. قوة الوزير لا تسمح بإهمال سلامته؛ وضعه مبكراً أمام قطع الخصم قد يكسب الخصم أزمنة بتطويرها مع الهجوم عليه.",
+          "تتبّع القطر من c1 إلى g5، وافحص كل مربع وسيط قبل التنفيذ."
+        ],
+        "en": [
+          "A bishop moves diagonally and stays on one square colour. The queen combines rook and bishop movement but cannot jump. Its strength does not make it safe: early exposure can let opponents develop with tempo.",
+          "Trace the diagonal c1–g5 and check the intermediate squares."
+        ]
+      },
+      "objective": {
+        "ar": "حرّك الفيل إلى g5، ثم عد به إلى e3 وفق المثال.",
+        "en": "Move the bishop to g5, then to e3 as illustrated."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/8/2B1K3 w - - 0 1",
+        "moves": [
+          "c1g5",
+          "e8f7",
+          "g5e3",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل يستطيع الفيل تغيير لون مربعاته؟",
+          "en": "Can a bishop change its square colour?"
+        },
+        "options": [
+          {
+            "ar": "لا، يبقى على اللون نفسه",
+            "en": "No, it stays on the same colour"
+          },
+          {
+            "ar": "نعم، بعد كل نقلة",
+            "en": "Yes, after every move"
+          },
+          {
+            "ar": "نعم، عند عبور وسط الرقعة",
+            "en": "Yes, when crossing the centre"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، يبقى على اللون نفسه، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, it stays on the same colour, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      },
+      "extra_examples": [
+        {
+          "title": {
+            "ar": "حركة الوزير على خط وقطر",
+            "en": "Queen movement on files and diagonals"
+          },
+          "fen": "4k3/8/8/8/8/8/8/3QK3 w - - 0 1",
+          "moves": [
+            "d1h5",
+            "e8f8",
+            "h5e5",
+            "f8g8"
+          ],
+          "source": {
+            "kind": "original-example",
+            "label": "Chess Studio · original legal teaching position",
+            "url": null,
+            "license": "Original explanatory text and constructed example"
+          }
+        }
+      ]
+    },
+    {
+      "id": "knight",
+      "stage": 1,
+      "order": 3,
+      "title": {
+        "ar": "الحصان: قفزة وتهديد",
+        "en": "The knight: jump and threat"
+      },
+      "theory": {
+        "ar": [
+          "الحصان يقطع مربعين في اتجاه ومربعاً عمودياً عليه، فيشكل حرف L. هو القطعة الوحيدة التي تقفز فوق القطع. يتغير لون المربع في كل قفزة. الحصان في الوسط يملك خيارات أكثر غالباً من حصان على الحافة، لكن الأمان أهم من العدّ وحده.",
+          "انطلق من b1 وابحث عن c3. احسب أهداف الحصان من مربع الوصول، لا من مكانه القديم."
+        ],
+        "en": [
+          "A knight moves two squares in one direction and one perpendicular, forming an L. It can jump pieces and changes square colour each move. Central knights often have more options, but safety matters more than a move count.",
+          "Find c3 from b1. Count attacks from the destination, not the old square."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ Nc3 ثم Ne4 بعد رد الملك.",
+        "en": "Play Nc3, then Ne4 after the king reply."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/8/1N2K3 w - - 0 1",
+        "moves": [
+          "b1c3",
+          "e8f7",
+          "c3e4",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "أي قطعة تستطيع القفز؟",
+          "en": "Which piece can jump?"
+        },
+        "options": [
+          {
+            "ar": "الحصان",
+            "en": "The knight"
+          },
+          {
+            "ar": "الفيل",
+            "en": "The bishop"
+          },
+          {
+            "ar": "القلعة",
+            "en": "The rook"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الحصان، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The knight, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "king-check",
+      "stage": 1,
+      "order": 4,
+      "title": {
+        "ar": "الملك والكش والنقلة القانونية",
+        "en": "King safety, check and legality"
+      },
+      "theory": {
+        "ar": [
+          "الملك يتحرك مربعاً واحداً ولا يجوز وضعه تحت هجوم. عندما يكون في كش، يجب إزالة الكش: نقل الملك أو أخذ المهاجم أو سد الخط إن أمكن. لا يمكن سد كش الحصان أو الكش القريب. لا يُؤخذ الملك؛ تنتهي المباراة بالمات عندما يستحيل رفع الكش.",
+          "في المثال قلعة e2 غير محمية، لذا يستطيع الملك أخذها. افحص دائماً حماية القطعة قبل محاولة أخذها بالملك."
+        ],
+        "en": [
+          "A king moves one square and cannot move into attack. In check you must move the king, capture the attacker or block a sliding attack where possible. A knight check cannot be blocked. Kings are never captured; checkmate ends the game.",
+          "Here the rook on e2 is undefended, so the king can capture it. Always check the protection of a piece before a king capture."
+        ]
+      },
+      "objective": {
+        "ar": "أزل الكش بأخذ القلعة ثم فعّل الملك كما في المثال.",
+        "en": "Capture the checking rook, then activate the king as shown."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/4r3/4K3 w - - 0 1",
+        "moves": [
+          "e1e2",
+          "e8f7",
+          "e2d3",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الواجب عندما تكون في كش؟",
+          "en": "What must you do when in check?"
+        },
+        "options": [
+          {
+            "ar": "إزالة الكش بنقلة قانونية",
+            "en": "Remove the check with a legal move"
+          },
+          {
+            "ar": "تجاهل الكش وهاجم الوزير",
+            "en": "Ignore check and attack the queen"
+          },
+          {
+            "ar": "نفّذ التبييت للخروج من الكش",
+            "en": "Castle out of check"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: إزالة الكش بنقلة قانونية، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Remove the check with a legal move, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "pawn-promotion",
+      "stage": 1,
+      "order": 5,
+      "title": {
+        "ar": "البيدق والأخذ والترقية",
+        "en": "Pawn moves, captures and promotion"
+      },
+      "theory": {
+        "ar": [
+          "البيدق يتقدم إلى الأمام ويأخذ قطرياً. يمكنه التقدم مربعين من موضعه الأصلي إذا خلا المربعان، لكنه لا يأخذ بهذه الطريقة. عندما يبلغ الصف الأخير يجب ترقيته إلى وزير أو قلعة أو فيل أو حصان؛ لا يتوقف على وجود قطع مأخوذة.",
+          "اختيار الوزير شائع، لكنه ليس واجباً؛ افحص البات أو تكتيك الترقية الأقل."
+        ],
+        "en": [
+          "A pawn moves forward but captures diagonally. From its starting square it may advance two squares if both are clear; this is not a capture. On the last rank it must promote to a queen, rook, bishop or knight, regardless of captured pieces.",
+          "A queen is common but not compulsory: check stalemate and underpromotion tactics."
+        ]
+      },
+      "objective": {
+        "ar": "رقِّ a7 إلى وزير بكش ثم أكمل المثال.",
+        "en": "Promote a7 to a queen with check, then finish the example."
+      },
+      "example": {
+        "fen": "4k3/P7/8/8/8/8/8/4K3 w - - 0 1",
+        "moves": [
+          "a7a8q",
+          "e8d7",
+          "a8e4",
+          "d7d6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل الترقية محصورة بالوزير؟",
+          "en": "Must promotion be to a queen?"
+        },
+        "options": [
+          {
+            "ar": "لا، توجد أربع قطع مسموحة",
+            "en": "No, four piece types are allowed"
+          },
+          {
+            "ar": "نعم، يجب اختيار الوزير دائماً",
+            "en": "Yes, always choose a queen"
+          },
+          {
+            "ar": "يمكن ترقيته إلى ملك ثانٍ",
+            "en": "It can become a second king"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، توجد أربع قطع مسموحة، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, four piece types are allowed, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      },
+      "extra_examples": [
+        {
+          "title": {
+            "ar": "تقدم البيدق والأخذ القطري",
+            "en": "Pawn advance and diagonal capture"
+          },
+          "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          "moves": [
+            "e2e4",
+            "d7d5",
+            "e4d5",
+            "d8d5"
+          ],
+          "source": {
+            "kind": "original-example",
+            "label": "Chess Studio · original legal teaching position",
+            "url": null,
+            "license": "Original explanatory text and constructed example"
+          }
+        }
+      ]
+    },
+    {
+      "id": "special-rules",
+      "stage": 1,
+      "order": 6,
+      "title": {
+        "ar": "التبييت والأخذ بالتجاوز",
+        "en": "Castling and en passant"
+      },
+      "theory": {
+        "ar": [
+          "التبييت ينقل الملك مربعين نحو القلعة وتنتقل القلعة إلى جانبه. يشترط ألا يكون أيهما قد تحرك، وأن يخلو الطريق، وألا يكون الملك في كش أو يمر أو ينتهي في مربع مهدد. الأخذ بالتجاوز متاح في الرد المباشر على تقدم بيدق خصم مربعين إلى جوارك؛ بعد نقلة أخرى تضيع الفرصة.",
+          "فقدان حق التبييت لا يُصلَح بإعادة الملك أو القلعة إلى موضعهما. اقرأ حقوق FEN بدلاً من الاعتماد على شكل الرقعة وحده."
+        ],
+        "en": [
+          "Castling moves the king two squares towards a rook and brings the rook beside it. Neither may have moved, the path must be clear and the king cannot be in, cross or end in check. En passant is available only immediately after an adjacent opposing pawn advances two squares.",
+          "Returning a king or rook does not restore castling rights. Rights and en-passant timing are part of the position, not just piece placement."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ التبييت القصير للأبيض ثم شاهد التبييت الطويل للأسود.",
+        "en": "Castle White kingside and observe Black castling queenside."
+      },
+      "example": {
+        "fen": "r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1",
+        "moves": [
+          "e1g1",
+          "e8c8",
+          "f1f7",
+          "d8d7"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "متى يمكن الأخذ بالتجاوز؟",
+          "en": "When is en passant available?"
+        },
+        "options": [
+          {
+            "ar": "في الرد المباشر على التقدم المناسب",
+            "en": "Only in the immediate eligible reply"
+          },
+          {
+            "ar": "في أي نقلة لاحقة",
+            "en": "On any later move"
+          },
+          {
+            "ar": "كلما جاور بيدق بيدقاً آخر",
+            "en": "Whenever two pawns are adjacent"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: في الرد المباشر على التقدم المناسب، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Only in the immediate eligible reply, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      },
+      "extra_examples": [
+        {
+          "title": {
+            "ar": "الأخذ بالتجاوز في الرد المباشر",
+            "en": "En passant in the immediate reply"
+          },
+          "fen": "4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 2",
+          "moves": [
+            "e5d6",
+            "e8d7",
+            "e1d2",
+            "d7d6"
+          ],
+          "source": {
+            "kind": "original-example",
+            "label": "Chess Studio · original legal teaching position",
+            "url": null,
+            "license": "Original explanatory text and constructed example"
+          }
+        }
+      ]
+    },
+    {
+      "id": "material",
+      "stage": 2,
+      "order": 7,
+      "title": {
+        "ar": "قيمة القطع ليست حكماً نهائياً",
+        "en": "Material is not the whole position"
+      },
+      "theory": {
+        "ar": [
+          "قيم البيدق 1 والحصان والفيل نحو 3 والقلعة 5 والوزير 9 وسائل تقريبية لحساب التبادل. الملك لا يملك قيمة تبادلية. قد يعوض نشاط القطع أو هجوم المات فرق المادة؛ لذلك افصل حساب المادة عن تقييم الموقف.",
+          "قبل أخذ قطعة، احسب ما سيُؤخذ بعدها. في المثال الوزير مكشوف على الملف a ويمكن أخذه قانونياً."
+        ],
+        "en": [
+          "Pawn 1, knight/bishop about 3, rook 5 and queen 9 are rough exchange guides. A king has no exchange value. Activity or a mating attack can compensate for material, so distinguish material count from positional evaluation.",
+          "Before capturing, count the recapture. Here the queen is exposed on the a-file and can legally be taken."
+        ]
+      },
+      "objective": {
+        "ar": "خذ الوزير المكشوف ثم أكمل تنشيط القلعة.",
+        "en": "Capture the exposed queen and complete the rook activation."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/q7/8/8/R3K3 w - - 0 1",
+        "moves": [
+          "a1a4",
+          "e8f7",
+          "a4e4",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل زيادة المادة تضمن الفوز؟",
+          "en": "Does extra material guarantee a win?"
+        },
+        "options": [
+          {
+            "ar": "لا، يجب فحص أمان الملك والنشاط",
+            "en": "No; king safety and activity still matter"
+          },
+          {
+            "ar": "نعم، قطعة إضافية تضمن الفوز",
+            "en": "Yes, an extra piece guarantees victory"
+          },
+          {
+            "ar": "نعم، حتى لو كان ملكي معرضاً للمات",
+            "en": "Yes, even if my king faces mate"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، يجب فحص أمان الملك والنشاط، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No; king safety and activity still matter, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "hanging",
+      "stage": 2,
+      "order": 8,
+      "title": {
+        "ar": "القطع غير المحمية",
+        "en": "Undefended pieces"
+      },
+      "theory": {
+        "ar": [
+          "القطعة غير المحمية هدف محتمل وليست قطعة مجانية دائماً. قد يؤدي أخذها إلى مات أو هجوم مضاد. افحص المهاجمين والمدافعين والكشات أولاً، ثم احسب الأخذ والرد. بعد نقل قطعة كانت تدافع عن أخرى، أعد فحص الأهداف الجديدة.",
+          "طبّق الحل المرجعي للغز. إذا كانت نقلة قانونية مختلفة فذلك لا يعني تلقائياً أنها خسارة؛ هذا تدريب على النمط المحدد."
+        ],
+        "en": [
+          "An undefended piece is a target, not always a free capture. Taking it may allow mate or a counterattack. Check attackers, defenders and checks, then calculate captures and replies. Moving a defender can create new loose pieces.",
+          "Play the source solution. A different legal move is not automatically losing; this exercise trains the selected pattern."
+        ]
+      },
+      "objective": {
+        "ar": "أكمل التسلسل التكتيكي المرجعي دون ترك تهديد مباشَر.",
+        "en": "Complete the reference tactical line while checking immediate threats."
+      },
+      "example": {
+        "fen": "5rk1/2p2p2/ppB1p1p1/4Q3/1PP3q1/P6R/5PPP/3R2K1 b - - 0 27",
+        "moves": [
+          "g4d1",
+          "e5e1",
+          "d1e1"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "021cG",
+          "themes": [
+            "endgame",
+            "hangingPiece",
+            "kingsideAttack",
+            "mate",
+            "mateIn2",
+            "short"
+          ],
+          "rating": 659,
+          "label": "Lichess puzzle 021cG",
+          "url": "https://lichess.org/game/EvKDthbj#53",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الذي تفحصه قبل أخذ قطعة معلّقة؟",
+          "en": "What should precede taking a hanging piece?"
+        },
+        "options": [
+          {
+            "ar": "الردود القسرية وأمان الملك",
+            "en": "Forcing replies and king safety"
+          },
+          {
+            "ar": "خذ القطعة فوراً دون حساب",
+            "en": "Capture immediately without calculating"
+          },
+          {
+            "ar": "افحص اسم الافتتاحية بدلاً من رد الخصم",
+            "en": "Check the opening name instead of the reply"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الردود القسرية وأمان الملك، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Forcing replies and king safety, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "endgame"
+      }
+    },
+    {
+      "id": "mate-one",
+      "stage": 2,
+      "order": 9,
+      "title": {
+        "ar": "الكش والمات في نقلة",
+        "en": "Checkmate in one"
+      },
+      "theory": {
+        "ar": [
+          "الكش هجوم على الملك. المات كش لا يمكن إزالته بأي نقلة قانونية. لإثبات المات افحص مربعات الهروب، وإمكان أخذ القطعة المهاجمة أو سد الخط. علامة + للكش و# للمات، ولا تعني كل نقلة بكش أنها جيدة.",
+          "بعد تنفيذ الحل، تأكد أن الملك في كش وأن قائمة النقلات القانونية فارغة."
+        ],
+        "en": [
+          "Check attacks the king; checkmate is check with no legal escape. Verify flight squares, capture of the attacker and blocking possibilities. + marks check and # mate. Giving check alone does not make a move good.",
+          "After the solution, verify that the king is in check and there are no legal moves."
+        ]
+      },
+      "objective": {
+        "ar": "أعطِ ماتاً بالقلعة على الصف الثامن.",
+        "en": "Deliver rook mate on the eighth rank."
+      },
+      "example": {
+        "fen": "6k1/5ppp/8/8/8/8/6PP/4R1K1 w - - 0 1",
+        "moves": [
+          "e1e8"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الذي يثبت المات؟",
+          "en": "What proves checkmate?"
+        },
+        "options": [
+          {
+            "ar": "كش مع انعدام أي رد قانوني",
+            "en": "Check with no legal reply"
+          },
+          {
+            "ar": "مجرد تهديد الوزير",
+            "en": "Simply attacking the queen"
+          },
+          {
+            "ar": "كش يمكن صده بقطعة",
+            "en": "Check that can be blocked"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: كش مع انعدام أي رد قانوني، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Check with no legal reply, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "stalemate",
+      "stage": 2,
+      "order": 10,
+      "title": {
+        "ar": "البات: التعادل بدل الفوز",
+        "en": "Stalemate: a draw instead of a win"
+      },
+      "theory": {
+        "ar": [
+          "إذا كان صاحب الدور لا يملك نقلة قانونية وملكه ليس في كش فالوضع بات وتعادل. يحدث كثيراً عند مطاردة ملك وحيد بالوزير. عند امتلاك أفضلية كبيرة، اترك للخصم نقلة أو أعطِ كشاً محسوباً، ولا تنقل الوزير دون فحص خانات الملك.",
+          "المثال مقصود لإظهار الخطأ: Qb6 ينتج باتاً، لا ماتاً. تطبيقه هنا يثبت فهم الفرق ولا يعني أنه اختيار جيد في مباراة فائزة."
+        ],
+        "en": [
+          "If the side to move has no legal move but is not in check, it is stalemate and a draw. It often occurs when a queen corners a lone king. When winning, check the opposing king’s legal squares before moving.",
+          "This deliberately demonstrates an error: Qb6 gives stalemate, not mate. Reproducing it checks understanding, not good winning technique."
+        ]
+      },
+      "objective": {
+        "ar": "أعد الوضع التعليمي Qb6 ولاحظ البات.",
+        "en": "Reproduce Qb6 and observe stalemate."
+      },
+      "example": {
+        "fen": "k7/2Q5/2K5/8/8/8/8/8 w - - 0 1",
+        "moves": [
+          "c7b6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما نتيجة انعدام النقلات دون كش؟",
+          "en": "No legal moves without check means what?"
+        },
+        "options": [
+          {
+            "ar": "تعادل بالبات",
+            "en": "A draw by stalemate"
+          },
+          {
+            "ar": "فوز الطرف الذي يملك قطعاً أكثر",
+            "en": "The side with more material wins"
+          },
+          {
+            "ar": "كش مات رغم أن الملك غير مهدد",
+            "en": "Checkmate even though the king is not attacked"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: تعادل بالبات، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: A draw by stalemate, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "backrank",
+      "stage": 2,
+      "order": 11,
+      "title": {
+        "ar": "المات على الصف الخلفي",
+        "en": "Back-rank safety"
+      },
+      "theory": {
+        "ar": [
+          "بيادق غطاء الملك قد تحبس ملكها. عندما تخترق قلعة أو وزير الصف الخلفي بكش مع غياب الهروب قد يحدث المات. صنع منفذ مثل h3 أو h6 مفيد في مواقف معينة لكنه يكلف نقلة ويضعف مربعات، فلا تعالجه كقاعدة آلية.",
+          "افحص أولاً هل يستطيع الخصم أخذ المهاجم أو سد الخط، ثم نفّذ التسلسل المرجعي."
+        ],
+        "en": [
+          "A pawn shield can trap its own king. A rook or queen entering the back rank may mate when escape squares are absent. Luft such as h3/h6 can help, but costs a tempo and weakens squares; do not play it automatically.",
+          "First check capture and blocking defences, then play the reference line."
+        ]
+      },
+      "objective": {
+        "ar": "استغل غياب منفذ الملك في اللغز الحقيقي.",
+        "en": "Exploit the missing king escape in a real puzzle."
+      },
+      "example": {
+        "fen": "1k1r1br1/ppp5/5q2/4pP2/6P1/3Q1P1p/PPP5/3RR1K1 w - - 0 27",
+        "moves": [
+          "d3d8",
+          "f6d8",
+          "d1d8"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00xMV",
+          "themes": [
+            "backRankMate",
+            "mate",
+            "mateIn2",
+            "middlegame",
+            "short"
+          ],
+          "rating": 800,
+          "label": "Lichess puzzle 00xMV",
+          "url": "https://lichess.org/game/WWJj7s9K/black#52",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما سبب خطر الصف الخلفي؟",
+          "en": "What makes a back rank vulnerable?"
+        },
+        "options": [
+          {
+            "ar": "ملك محبوس مع اختراق قسري",
+            "en": "A boxed king and forcing entry"
+          },
+          {
+            "ar": "وجود وزيرين على الرقعة",
+            "en": "Having two queens on the board"
+          },
+          {
+            "ar": "تقدم بيدق واحد في الوسط فقط",
+            "en": "Only advancing a central pawn"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: ملك محبوس مع اختراق قسري، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: A boxed king and forcing entry, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "backRankMate"
+      }
+    },
+    {
+      "id": "safety-routine",
+      "stage": 2,
+      "order": 12,
+      "title": {
+        "ar": "روتين الأمان قبل النقلة",
+        "en": "A pre-move safety routine"
+      },
+      "theory": {
+        "ar": [
+          "اسأل: ما تهديد الخصم؟ ما الكشات والأخذات والتهديدات لكل طرف؟ ماذا سيتغير إذا حرّكت المدافع؟ بعد اختيار النقلة تخيل الرد الأقوى قبل لمس القطعة. هذا الروتين القصير يخفض السهو، لكنه لا يغني عن الحساب في المواقف الحادة.",
+          "في التدريب الدفاعي لا تبحث عن هجوم شكلي؛ حل مشكلة الموقف أولاً."
+        ],
+        "en": [
+          "Ask: what is the threat, and what checks, captures and threats exist for both sides? What changes if a defender moves? Before committing, imagine the strongest reply. This routine reduces oversights but does not replace calculation in sharp positions.",
+          "In a defensive exercise, solve the position’s problem before seeking a cosmetic attack."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ الدفاع المرجعي واحسب رد الخصم.",
+        "en": "Play the reference defence and calculate the reply."
+      },
+      "example": {
+        "fen": "8/8/p1k3p1/P1P2P2/2K4p/7P/8/8 b - - 0 51",
+        "moves": [
+          "g6f5",
+          "c4d4",
+          "f5f4"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01mGq",
+          "themes": [
+            "crushing",
+            "defensiveMove",
+            "endgame",
+            "pawnEndgame",
+            "short"
+          ],
+          "rating": 894,
+          "label": "Lichess puzzle 01mGq",
+          "url": "https://lichess.org/game/ROGXECAH#101",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "متى تفحص رد الخصم؟",
+          "en": "When should you check the opponent’s reply?"
+        },
+        "options": [
+          {
+            "ar": "قبل اعتماد نقلتك",
+            "en": "Before committing your move"
+          },
+          {
+            "ar": "بعد تنفيذ النقلة فقط",
+            "en": "Only after making the move"
+          },
+          {
+            "ar": "عند خسارة قطعة فقط",
+            "en": "Only after losing a piece"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: قبل اعتماد نقلتك، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Before committing your move, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "fork",
+      "stage": 3,
+      "order": 13,
+      "title": {
+        "ar": "الشوكة والهجوم المزدوج",
+        "en": "Forks and double attacks"
+      },
+      "theory": {
+        "ar": [
+          "الشوكة تهدد هدفين بنقلة واحدة؛ الكش مع هجوم على قطعة يجعل الرد على الملك أولوية. قد ينفذها حصان أو بيدق أو وزير أو قطعة أخرى. افحص هل يستطيع الخصم إزالة المهاجم أو صنع تهديد أقوى قبل أن تحتسب المكسب.",
+          "حدد الهدفين ذهنياً ثم احسب إلى ما بعد استعادة القطعة، لا إلى لحظة الشوكة فقط."
+        ],
+        "en": [
+          "A fork attacks two targets at once. Check can force attention to the king while another piece is attacked. Any piece can fork. Verify that the attacker cannot be removed or met by a stronger threat before counting a gain.",
+          "Name both targets and calculate beyond the fork to the recapture."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ الشوكة وأكمل الأخذ المرجعي.",
+        "en": "Execute the fork and finish the reference capture."
+      },
+      "example": {
+        "fen": "8/1K3Npk/5n2/R6p/8/p6r/8/8 w - - 2 49",
+        "moves": [
+          "f7g5",
+          "h7g6",
+          "g5h3"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01NVd",
+          "themes": [
+            "advantage",
+            "endgame",
+            "fork",
+            "master",
+            "short"
+          ],
+          "rating": 900,
+          "label": "Lichess puzzle 01NVd",
+          "url": "https://lichess.org/game/acDgVv4Q/black#96",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل الشوكة خاصة بالحصان؟",
+          "en": "Are forks exclusive to knights?"
+        },
+        "options": [
+          {
+            "ar": "لا، تستطيع قطع متعددة تنفيذها",
+            "en": "No, several piece types can fork"
+          },
+          {
+            "ar": "نعم، الحصان وحده يصنع هجوماً مزدوجاً",
+            "en": "Yes, only a knight can fork"
+          },
+          {
+            "ar": "الوزير وحده يستطيع ذلك",
+            "en": "Only a queen can do it"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، تستطيع قطع متعددة تنفيذها، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, several piece types can fork, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "advantage"
+      }
+    },
+    {
+      "id": "pin",
+      "stage": 3,
+      "order": 14,
+      "title": {
+        "ar": "التثبيت والقطعة المدافعة",
+        "en": "Pins and defenders"
+      },
+      "theory": {
+        "ar": [
+          "في التثبيت تكون قطعة أمام هدف أعلى أهمية على خط واحد. التثبيت إلى الملك مطلق: لا يجوز كشف الكش. أما التثبيت إلى الوزير فنسبي ويمكن كسره إذا كان التعويض مناسباً. زيادة الضغط على القطعة المثبتة أو مهاجمة مدافعها قد يستثمران الفكرة.",
+          "ميّز بين عدم قانونية الحركة وبين كونها مكلفة مادياً."
+        ],
+        "en": [
+          "A pin places a piece in front of a more important target on one line. A king pin is absolute: exposing check is illegal. A queen pin is relative and may be broken for compensation. Add pressure or attack the defender when appropriate.",
+          "Distinguish an illegal move from a legal but materially costly one."
+        ]
+      },
+      "objective": {
+        "ar": "استثمر التثبيت وفق حل اللغز.",
+        "en": "Exploit the pin according to the puzzle line."
+      },
+      "example": {
+        "fen": "2kr1b1r/pbp5/1pn1q2p/3p1pp1/3P4/P1P1BQ1B/1P3P1P/R3K1R1 w Q - 0 19",
+        "moves": [
+          "h3f5",
+          "e6f5",
+          "f3f5"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01gQ1",
+          "themes": [
+            "advantage",
+            "middlegame",
+            "pin",
+            "short"
+          ],
+          "rating": 908,
+          "label": "Lichess puzzle 01gQ1",
+          "url": "https://lichess.org/game/4gkLoCF2/black#36",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما التثبيت المطلق؟",
+          "en": "What is an absolute pin?"
+        },
+        "options": [
+          {
+            "ar": "تثبيت إلى الملك يمنع كشف الكش",
+            "en": "A king pin that forbids exposing check"
+          },
+          {
+            "ar": "هجوم على قطعتين غير محميتين",
+            "en": "An attack on two undefended pieces"
+          },
+          {
+            "ar": "كل هجوم على الوزير",
+            "en": "Any attack on the queen"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: تثبيت إلى الملك يمنع كشف الكش، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: A king pin that forbids exposing check, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "advantage"
+      }
+    },
+    {
+      "id": "skewer",
+      "stage": 3,
+      "order": 15,
+      "title": {
+        "ar": "السيخ وترتيب الأهداف",
+        "en": "Skewers and target order"
+      },
+      "theory": {
+        "ar": [
+          "في السيخ يكون الهدف الأهم في المقدمة، وعندما يتحرك ينكشف هدف خلفه. القلعة والفيل والوزير تستعمل خطوطاً مفتوحة لتنفيذه. لا يكفي وجود قطعتين على خط؛ يجب أن يصل المهاجم قانونياً وأن لا يخسر نفسه دون تعويض.",
+          "ابحث عن الملك ثم القطعة الواقعة خلفه على الخط نفسه."
+        ],
+        "en": [
+          "In a skewer the more valuable target stands in front; moving it exposes the piece behind. Rooks, bishops and queens use open lines. Alignment alone is not enough: entry must be legal and tactically safe.",
+          "Look for a king and a second target behind it on the same line."
+        ]
+      },
+      "objective": {
+        "ar": "افتح خط الكش ثم خذ الهدف الخلفي.",
+        "en": "Use the checking line and capture the rear target."
+      },
+      "example": {
+        "fen": "r4k1r/pppq1p2/3pb2p/6p1/2nQ4/8/PPP2PPP/R4RK1 w - - 0 17",
+        "moves": [
+          "d4h8",
+          "f8e7",
+          "h8a8"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01qfU",
+          "themes": [
+            "advantage",
+            "hangingPiece",
+            "middlegame",
+            "short",
+            "skewer"
+          ],
+          "rating": 906,
+          "label": "Lichess puzzle 01qfU",
+          "url": "https://lichess.org/game/qBk26Y80/black#32",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما فرق السيخ عن التثبيت؟",
+          "en": "How does a skewer differ from a pin?"
+        },
+        "options": [
+          {
+            "ar": "الهدف الأهم أمام الهدف الخلفي",
+            "en": "The more valuable target is in front"
+          },
+          {
+            "ar": "القطعة الأقل قيمة في الأمام دائماً",
+            "en": "The less valuable piece is always in front"
+          },
+          {
+            "ar": "القطعتان على مربع واحد",
+            "en": "Both pieces occupy one square"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الهدف الأهم أمام الهدف الخلفي، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The more valuable target is in front, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "advantage"
+      }
+    },
+    {
+      "id": "discovery",
+      "stage": 3,
+      "order": 16,
+      "title": {
+        "ar": "الهجوم المكتشف",
+        "en": "Discovered attacks"
+      },
+      "theory": {
+        "ar": [
+          "عند تحريك قطعة من أمام فيل أو قلعة أو وزير ينفتح هجوم القطعة الخلفية. أقوى الحالات تضيف فيها القطعة المتحركة تهديداً ثانياً. افحص أن فتح الخط لا يكشف ملكك؛ القطعة المثبتة قد لا تستطيع إخلاء الطريق.",
+          "اقرأ خط الهجوم قبل النقل وبعده وسمِّ القطعة التي ظهر تأثيرها."
+        ],
+        "en": [
+          "Moving a blocker can uncover a bishop, rook or queen attack. The strongest versions create a second threat with the moving piece. Ensure that clearing the line does not expose your own king.",
+          "Compare the attack line before and after moving and name the newly active piece."
+        ]
+      },
+      "objective": {
+        "ar": "أخلِ الخط مع تهديد فعّال ثم أكمل الحل.",
+        "en": "Clear the line with an effective threat and complete the line."
+      },
+      "example": {
+        "fen": "3r4/ppk2pp1/2p1p3/4b3/P3n1P1/8/KPP2PN1/3rBR1R w - - 3 32",
+        "moves": [
+          "e1a5",
+          "b7b6",
+          "f1d1"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00sO1",
+          "themes": [
+            "advantage",
+            "discoveredAttack",
+            "master",
+            "middlegame",
+            "short"
+          ],
+          "rating": 901,
+          "label": "Lichess puzzle 00sO1",
+          "url": "https://lichess.org/game/vsfFkG0s/black#62",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "من ينفذ الهجوم المكتشف؟",
+          "en": "Which piece delivers the discovered attack?"
+        },
+        "options": [
+          {
+            "ar": "القطعة التي انفتح خطها",
+            "en": "The piece whose line was uncovered"
+          },
+          {
+            "ar": "القطعة التي ابتعدت عن الخط دائماً",
+            "en": "Always the piece that moved away"
+          },
+          {
+            "ar": "الملك وحده",
+            "en": "Only the king"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: القطعة التي انفتح خطها، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The piece whose line was uncovered, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "advantage"
+      }
+    },
+    {
+      "id": "double-check",
+      "stage": 3,
+      "order": 17,
+      "title": {
+        "ar": "الكش المزدوج",
+        "en": "Double check"
+      },
+      "theory": {
+        "ar": [
+          "عندما ينكشف كش خلف قطعة تتحرك لتعطي كشاً أيضاً، يتعرض الملك لهجوم قطعتين. في الشطرنج القياسي لا يزيل أخذ مهاجم واحد أو سد خط واحد الكشين؛ يجب تحريك الملك. لذلك يمكن للكش المزدوج إجبار الملك على مربع حاسم.",
+          "تحقق من الوضعية الفعلية؛ ليست كل حركة مكتشفة كشاً مزدوجاً."
+        ],
+        "en": [
+          "When a moving piece gives check while uncovering another check, two pieces attack the king. In standard chess, capturing one attacker or blocking one line does not remove both; the king must move. This can force a decisive king placement.",
+          "Verify both actual checking pieces; not every discovery is double check."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ التسلسل الذي يظهر تهديدين للملك.",
+        "en": "Execute the line that produces two checks."
+      },
+      "example": {
+        "fen": "rnb1k2r/ppB2p2/8/3p2p1/3Q2np/2N2N1K/PPP1B1PP/R6R b kq - 1 14",
+        "moves": [
+          "g4f2"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00c0D",
+          "themes": [
+            "discoveredCheck",
+            "doubleCheck",
+            "mate",
+            "mateIn1",
+            "middlegame",
+            "oneMove"
+          ],
+          "rating": 761,
+          "label": "Lichess puzzle 00c0D",
+          "url": "https://lichess.org/game/JCwpco4I#27",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الرد القانوني على كش مزدوج؟",
+          "en": "How must double check be answered?"
+        },
+        "options": [
+          {
+            "ar": "بنقلة ملك قانونية",
+            "en": "With a legal king move"
+          },
+          {
+            "ar": "بأخذ إحدى القطعتين بأي قطعة",
+            "en": "By capturing either attacker with any piece"
+          },
+          {
+            "ar": "بسد أحد الخطين فقط",
+            "en": "By blocking just one line"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: بنقلة ملك قانونية، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: With a legal king move, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "discoveredCheck"
+      }
+    },
+    {
+      "id": "remove-defender",
+      "stage": 3,
+      "order": 18,
+      "title": {
+        "ar": "إزالة المدافع",
+        "en": "Removing a defender"
+      },
+      "theory": {
+        "ar": [
+          "قد تكون قطعة الخصم تحمي هدفاً حساساً. أخذ المدافع أو جذبه بعيداً يغير ميزان الهجوم والدفاع. احسب ما إذا كان يمكن للخصم تجاهل الأخذ واللعب بكش أو نقل الهدف إلى الأمان. العدد وحده لا يكفي إذا وجد تثبيت أو ترتيب أخذات مختلف.",
+          "احسب الرد القسري أولاً، ولا تفترض أن الخصم سيستعيد القطعة مباشرة."
+        ],
+        "en": [
+          "A defender may protect a sensitive target. Capturing or distracting it changes the balance. Calculate whether the opponent can ignore the capture, give check or move the target. Counting alone misses pins and capture order.",
+          "Calculate forcing replies first; do not assume an automatic recapture."
+        ]
+      },
+      "objective": {
+        "ar": "أبعد المدافع ثم استثمر الهدف.",
+        "en": "Deflect the defender and exploit the target."
+      },
+      "example": {
+        "fen": "8/8/2k5/P2RK1p1/8/5P2/r7/8 b - - 6 57",
+        "moves": [
+          "a2e2",
+          "e5d4",
+          "e2d2",
+          "d4e3",
+          "d2d5"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "02Wbe",
+          "themes": [
+            "crushing",
+            "deflection",
+            "endgame",
+            "long",
+            "rookEndgame",
+            "skewer"
+          ],
+          "rating": 1001,
+          "label": "Lichess puzzle 02Wbe",
+          "url": "https://lichess.org/game/VqGqk92B#113",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الذي يغيّر قيمة المدافع؟",
+          "en": "What can make a defender critical?"
+        },
+        "options": [
+          {
+            "ar": "الهدف الذي يتركه دون حماية",
+            "en": "The target it would leave unprotected"
+          },
+          {
+            "ar": "اسم القطعة وحده",
+            "en": "The piece name alone"
+          },
+          {
+            "ar": "لون المربع فقط مهما كانت الوضعية",
+            "en": "Only the square colour regardless of position"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الهدف الذي يتركه دون حماية، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The target it would leave unprotected, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "opening-principles",
+      "stage": 4,
+      "order": 19,
+      "title": {
+        "ar": "المركز والتطوير والتبييت",
+        "en": "Centre, development and castling"
+      },
+      "theory": {
+        "ar": [
+          "ابدأ بإشراك القطع والسيطرة على المركز وحماية الملك. التطوير إلى مربعات نشطة أهم من تكرار حركة قطعة دون سبب. هذه مبادئ وليست قوانين: قد تبرر تكتيكات ملموسة أخذ بيدق أو تأخير التبييت. لا تحفظ النقلات دون معرفة ما تهاجمه وما تتركه.",
+          "بعد كل نقلة، سمِّ القطعة التي تطورت ومربعاً مركزياً تأثر."
+        ],
+        "en": [
+          "Develop pieces, influence the centre and protect your king. Avoid repeated piece moves without a reason. These are principles, not laws: concrete tactics may justify a pawn grab or delayed castling. Learn what a move attacks and what it leaves behind.",
+          "After each move, name the developed piece and an affected central square."
+        ]
+      },
+      "objective": {
+        "ar": "طبّق بدء الإيطالية من الجانبين وافهم التطوير.",
+        "en": "Reproduce the Italian development for both sides."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "e2e4",
+          "e7e5",
+          "g1f3",
+          "b8c6",
+          "f1c4"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "e9c4a584048e13e36b1470b5",
+          "label": "Italian Game",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الهدف الأول من الافتتاح؟",
+          "en": "What is an opening’s primary practical goal?"
+        },
+        "options": [
+          {
+            "ar": "موقف آمن وقطع نشطة",
+            "en": "A safe position and active pieces"
+          },
+          {
+            "ar": "إخراج الوزير مبكراً في كل مباراة",
+            "en": "Bring the queen out early in every game"
+          },
+          {
+            "ar": "تحريك البيدق نفسه مراراً",
+            "en": "Move the same pawn repeatedly"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: موقف آمن وقطع نشطة، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: A safe position and active pieces, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "Italian Game"
+      }
+    },
+    {
+      "id": "italian",
+      "stage": 4,
+      "order": 20,
+      "title": {
+        "ar": "الإيطالية بالأبيض وردود الأسود",
+        "en": "Italian: White plans and Black replies"
+      },
+      "theory": {
+        "ar": [
+          "بعد e4 e5 وNf3 Nc6 ينظر Bc4 إلى f7 ويطور الفيل. الأسود ليس مضطراً إلى فخاخ معروفة؛ يستطيع تطوير فيله وحصانه. يساند c3 التقدم d4 أحياناً، لكن ترك e4 أو f2 دون حساب قد يغير الخطة.",
+          "تابع تأثير كل رد بدلاً من إعادة نقلات الأبيض آلياً."
+        ],
+        "en": [
+          "After e4 e5 Nf3 Nc6, Bc4 develops with pressure on f7. Black has sound developing replies, not an obligation to enter traps. c3 may support d4, but tactical pressure on e4 or f2 can change the plan.",
+          "Track each opposing reply rather than replaying White’s moves blindly."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ الخط الأساسي من البداية.",
+        "en": "Play the basic line from the start."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "e2e4",
+          "e7e5",
+          "g1f3",
+          "b8c6",
+          "f1c4"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "e9c4a584048e13e36b1470b5",
+          "label": "Italian Game",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "لماذا Bc4 في الإيطالية؟",
+          "en": "What is a purpose of Bc4?"
+        },
+        "options": [
+          {
+            "ar": "تطوير الفيل والضغط على f7",
+            "en": "Develop the bishop and pressure f7"
+          },
+          {
+            "ar": "حماية الملك مباشرة على e1",
+            "en": "Directly shelter the king on e1"
+          },
+          {
+            "ar": "أخذ بيدق f7 فوراً في كل وضعية",
+            "en": "Capture f7 immediately in every position"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: تطوير الفيل والضغط على f7، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Develop the bishop and pressure f7, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "Italian Game"
+      }
+    },
+    {
+      "id": "spanish",
+      "stage": 4,
+      "order": 21,
+      "title": {
+        "ar": "الإسبانية: ضغط طويل",
+        "en": "Spanish: sustained pressure"
+      },
+      "theory": {
+        "ar": [
+          "الفيل على b5 يضغط على حصان c6 المدافع عن e5. لا يعني ذلك أن أخذ الحصان ثم البيدق يربح فوراً؛ توجد ردود تكتيكية واستعادة للمادة في فروع متعددة. يوازن الأبيض بين الضغط والمحافظة على الفيل وبناء المركز.",
+          "افصل فكرة الضغط عن الادعاء بوجود مكسب مادي مباشر."
+        ],
+        "en": [
+          "Bb5 pressures the c6 knight that supports e5. This does not mean Bxc6 followed by taking e5 wins a pawn automatically; tactical replies and recovery matter. White balances pressure, the bishop pair and central development.",
+          "Separate positional pressure from an immediate material gain."
+        ]
+      },
+      "objective": {
+        "ar": "طبّق تشكيل الإسبانية وتعرّف على الهدف.",
+        "en": "Build the Spanish setup and identify the target."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "e2e4",
+          "e7e5",
+          "g1f3",
+          "b8c6",
+          "f1b5"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "ae1bfd86af1647bc40842793",
+          "label": "Ruy Lopez",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الهدف المرتبط بـBb5؟",
+          "en": "What is a main idea of Bb5?"
+        },
+        "options": [
+          {
+            "ar": "الضغط على مدافع e5",
+            "en": "Pressure the defender of e5"
+          },
+          {
+            "ar": "إجبار الأسود على الاستسلام فوراً",
+            "en": "Force Black to resign immediately"
+          },
+          {
+            "ar": "ضمان كسب الحصان دون رد",
+            "en": "Guarantee winning the knight without a reply"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الضغط على مدافع e5، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Pressure the defender of e5, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "Ruy Lopez"
+      }
+    },
+    {
+      "id": "sicilian",
+      "stage": 4,
+      "order": 22,
+      "title": {
+        "ar": "الصقلية بالأسود",
+        "en": "Sicilian from Black’s side"
+      },
+      "theory": {
+        "ar": [
+          "يرد الأسود على e4 بـc5 لمنافسة d4 وخلق تركيب غير متناظر. في الصقلية المفتوحة يبادل بيدق c ببيدق d غالباً، فتظهر خطوط وبيادق مختلفة للطرفين. اسم الدفاع يخص اختيار الأسود، لكن دراسة ردود الأبيض ضرورية.",
+          "لا تنفذ خطة جناح الوزير إذا كان ملكك تحت هجوم مباشر؛ احسب التوقيت."
+        ],
+        "en": [
+          "Black answers e4 with c5 to contest d4 and create asymmetry. In an Open Sicilian the c-pawn often exchanges for the d-pawn, producing different files and structures. The defence is Black’s choice, but White’s replies are essential study.",
+          "Do not pursue a queenside plan while ignoring a direct king threat; calculate timing."
+        ]
+      },
+      "objective": {
+        "ar": "بعد 1.e4، العب الرد الصقلي ...c5 بالأسود.",
+        "en": "After 1.e4, play the Sicilian reply ...c5 as Black."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "e2e4",
+          "c7c5"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "b95326a85c2f6e08a5a12a72",
+          "label": "Sicilian Defense",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 1,
+      "quiz": {
+        "question": {
+          "ar": "أي لون يختار ...c5 بعد e4؟",
+          "en": "Which side chooses ...c5 after e4?"
+        },
+        "options": [
+          {
+            "ar": "الأسود",
+            "en": "Black"
+          },
+          {
+            "ar": "الأبيض بنقلته الأولى",
+            "en": "White on the first move"
+          },
+          {
+            "ar": "أي طرف دون اعتبار للدور",
+            "en": "Either side regardless of turn"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الأسود، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Black, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "Sicilian Defense"
+      }
+    },
+    {
+      "id": "french",
+      "stage": 4,
+      "order": 23,
+      "title": {
+        "ar": "الفرنسية وسلسلة البيادق",
+        "en": "French Defence and pawn chains"
+      },
+      "theory": {
+        "ar": [
+          "يرد الأسود بـe6 استعداداً لـd5. قد يصبح فيل c8 محدوداً خلف السلسلة، فيبحث الأسود عن تنشيطه وتكسير مركز الأبيض بتقدمات مناسبة. لا تعالج السلسلة بدفع كل البيادق؛ حدد قاعدتها ونقطة الاختراق وحساب الرد.",
+          "التكتيك يحدد توقيت ...c5 أو ...f6؛ الفكرة العامة ليست إذناً بتنفيذهما في كل وضع."
+        ],
+        "en": [
+          "Black plays e6 preparing d5. The c8 bishop may be constrained behind the chain, so Black seeks activity and timely pawn breaks. Do not answer a chain by pushing every pawn: identify its base, a break and the replies.",
+          "Tactics determine when ...c5 or ...f6 works; a general plan is not permission in every position."
+        ]
+      },
+      "objective": {
+        "ar": "بعد 1.e4، العب ...e6 بالأسود استعداداً لـ...d5.",
+        "en": "After 1.e4, play ...e6 as Black, preparing ...d5."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "e2e4",
+          "e7e6"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "1027410185913ec0d24ed06c",
+          "label": "French Defense",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 1,
+      "quiz": {
+        "question": {
+          "ar": "ما الفكرة وراء ...e6؟",
+          "en": "What is an idea of ...e6?"
+        },
+        "options": [
+          {
+            "ar": "الاستعداد لمنافسة المركز بـ...d5",
+            "en": "Prepare to challenge the centre with ...d5"
+          },
+          {
+            "ar": "منع الأسود من لعب d5 نهائياً",
+            "en": "Prevent Black from ever playing d5"
+          },
+          {
+            "ar": "إغلاق طريق الفيل دون خطة للوسط",
+            "en": "Block the bishop without a central plan"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الاستعداد لمنافسة المركز بـ...d5، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Prepare to challenge the centre with ...d5, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "French Defense"
+      }
+    },
+    {
+      "id": "queens-gambit",
+      "stage": 4,
+      "order": 24,
+      "title": {
+        "ar": "جامبيت الوزير والردود",
+        "en": "Queen’s Gambit and responses"
+      },
+      "theory": {
+        "ar": [
+          "بعد d4 d5 يهاجم c4 بيدق d5 ويعرض بيدقاً للتأثير في المركز. يستطيع الأسود القبول أو الرفض؛ القبول ليس فخاً خاسراً بذاته. يختار الطرفان التطوير واستعادة المركز أو الحفاظ عليه وفق الفرع. ادرس خطة للونك ورداً سليماً للون الآخر.",
+          "لا تضحِّ بالتطوير لمجرد الاحتفاظ ببيدق زائد مؤقت."
+        ],
+        "en": [
+          "After d4 d5, c4 challenges d5 and offers a pawn to influence the centre. Black may accept or decline; acceptance is not inherently a losing trap. Both sides develop and contest the centre according to the branch.",
+          "Do not sacrifice development merely to hold a temporary extra pawn."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ d4 d5 c4 وحدد التحدي المركزي.",
+        "en": "Play d4 d5 c4 and identify the central challenge."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "d2d4",
+          "d7d5",
+          "c2c4"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "74f5748fa3656458d0e8f773",
+          "label": "Queen's Gambit",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل قبول الجامبيت خسارة إجبارية؟",
+          "en": "Is accepting this gambit a forced loss?"
+        },
+        "options": [
+          {
+            "ar": "لا، توجد فروع سليمة للطرفين",
+            "en": "No, sound branches exist for both sides"
+          },
+          {
+            "ar": "نعم، قبول أي تضحية يخسر حتماً",
+            "en": "Yes, accepting any sacrifice always loses"
+          },
+          {
+            "ar": "الأبيض يستعيد البيدق إجبارياً في النقلة التالية",
+            "en": "White must regain the pawn on the next move"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، توجد فروع سليمة للطرفين، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, sound branches exist for both sides, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "Queen's Gambit"
+      }
+    },
+    {
+      "id": "candidates",
+      "stage": 5,
+      "order": 25,
+      "title": {
+        "ar": "النقلات المرشحة",
+        "en": "Candidate moves"
+      },
+      "theory": {
+        "ar": [
+          "ابحث أولاً عن الكشات والأخذات والتهديدات، ثم أضف نقلة دفاع أو تحسين هادئ إذا احتاج الموقف. قارن مرشحين قليلين بعمق مناسب بدلاً من القفز بين عشر أفكار. النتيجة التي تتخيلها يجب أن تأتي بعد أقوى دفاع، لا بعد الرد الذي تتمناه.",
+          "اكتب مرشحين ذهنياً قبل مشاهدة المثال، ثم قارن الحل."
+        ],
+        "en": [
+          "Start with checks, captures and threats; include a defensive or improving move when needed. Compare a few candidates deeply enough instead of jumping among many ideas. Evaluate the result after the best defence, not a hoped-for reply.",
+          "Name two candidates before watching the demonstration, then compare the reference."
+        ]
+      },
+      "objective": {
+        "ar": "قارن المرشحين ثم طبّق التسلسل المرجعي.",
+        "en": "Compare candidates, then play the reference line."
+      },
+      "example": {
+        "fen": "r1q1r1k1/1p3pp1/n1p4p/p2pp2P/P3P3/2P2P2/1P1QBb2/R1BK3R w - - 0 24",
+        "moves": [
+          "e2a6",
+          "b7a6",
+          "d2f2"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00O37",
+          "themes": [
+            "advantage",
+            "discoveredAttack",
+            "middlegame",
+            "short"
+          ],
+          "rating": 1300,
+          "label": "Lichess puzzle 00O37",
+          "url": "https://lichess.org/game/N2UAIb27/black#46",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "أي رد تحسبه لخصمك؟",
+          "en": "Which opposing reply should you calculate?"
+        },
+        "options": [
+          {
+            "ar": "أقوى رد تراه",
+            "en": "The strongest reply you can find"
+          },
+          {
+            "ar": "الرد الذي أتمنى أن يلعبه الخصم",
+            "en": "The reply I hope the opponent plays"
+          },
+          {
+            "ar": "أضعف رد قانوني فقط",
+            "en": "Only the weakest legal reply"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: أقوى رد تراه، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The strongest reply you can find, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "advantage"
+      }
+    },
+    {
+      "id": "forcing-lines",
+      "stage": 5,
+      "order": 26,
+      "title": {
+        "ar": "النقلات القسرية ونقطة التوقف",
+        "en": "Forcing lines and stopping points"
+      },
+      "theory": {
+        "ar": [
+          "الكش يقلص خيارات الخصم لكنه قد يساعد ملكه على الهروب. احسب سلسلة النقلات القسرية حتى يصبح الموقف هادئاً بما يكفي لعد المادة وفحص الأمان. التوقف عند أول أخذ يخفي الاستعادة أو المات في نهاية الخط.",
+          "لا تخلط طول التسلسل مع جودته؛ ابحث عن النتيجة بعد الردود القانونية."
+        ],
+        "en": [
+          "Checks restrict replies but may help the king escape. Calculate forcing lines until a sufficiently quiet position lets you count material and assess safety. Stopping at the first capture hides recaptures or mate at the end.",
+          "Do not confuse line length with quality; examine the outcome after legal replies."
+        ]
+      },
+      "objective": {
+        "ar": "احسب خط المات المرجعي إلى نهايته.",
+        "en": "Calculate the reference mating line to its end."
+      },
+      "example": {
+        "fen": "4r1k1/4qp2/3p3p/3P1np1/8/2Q5/1P3PPP/R2N1K2 b - - 3 30",
+        "moves": [
+          "e7e2",
+          "f1g1",
+          "e2e1",
+          "c3e1",
+          "e8e1"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "0175u",
+          "themes": [
+            "backRankMate",
+            "endgame",
+            "long",
+            "mate",
+            "mateIn3"
+          ],
+          "rating": 1248,
+          "label": "Lichess puzzle 0175u",
+          "url": "https://lichess.org/game/ZAjVr7XP#59",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "أين تتوقف عن حساب الأخذ؟",
+          "en": "When can you stop calculating an exchange?"
+        },
+        "options": [
+          {
+            "ar": "بعد فحص الاستعادات والتهديدات",
+            "en": "After checking recaptures and threats"
+          },
+          {
+            "ar": "فور أخذ أول قطعة",
+            "en": "Immediately after the first capture"
+          },
+          {
+            "ar": "عندما يبدو التبادل جميلاً",
+            "en": "When the exchange looks attractive"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: بعد فحص الاستعادات والتهديدات، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: After checking recaptures and threats, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "backRankMate"
+      }
+    },
+    {
+      "id": "intermezzo",
+      "stage": 5,
+      "order": 27,
+      "title": {
+        "ar": "النقلة البينية",
+        "en": "The intermediate move"
+      },
+      "theory": {
+        "ar": [
+          "قبل استعادة قطعة قد توجد نقلة بكش أو تهديد أقوى تغير ترتيب الأخذ. تُسمى بينية لأنها تدخل بين نقلتين متوقعتين. لا تنفذها لمجرد كونها بكش؛ يجب حساب عواقب التأخير والردود المتاحة.",
+          "اسأل قبل الاستعادة: هل توجد نقلة قسرية أقوى؟"
+        ],
+        "en": [
+          "Before recapturing, a check or stronger threat may change the exchange order. An intermediate move interrupts the expected sequence. Do not play it merely because it checks: calculate the cost of delaying the recapture.",
+          "Before recapturing, ask whether a stronger forcing move exists."
+        ]
+      },
+      "objective": {
+        "ar": "غيّر ترتيب النقلات وفق الفكرة البينية.",
+        "en": "Change the move order using the intermediate idea."
+      },
+      "example": {
+        "fen": "6r1/8/p1p1k3/P1B3Rr/1P2pp1P/2P5/7K/6R1 b - - 0 44",
+        "moves": [
+          "h5h4",
+          "h2g2",
+          "g8g5"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01Qta",
+          "themes": [
+            "crushing",
+            "endgame",
+            "interference",
+            "intermezzo",
+            "short"
+          ],
+          "rating": 1146,
+          "label": "Lichess puzzle 01Qta",
+          "url": "https://lichess.org/game/GnRDQgRO#87",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل يجب الاستعادة دائماً فوراً؟",
+          "en": "Must you always recapture immediately?"
+        },
+        "options": [
+          {
+            "ar": "لا، افحص النقلة البينية",
+            "en": "No; check for an intermediate move"
+          },
+          {
+            "ar": "نعم، استعد القطعة فوراً دائماً",
+            "en": "Yes, always recapture immediately"
+          },
+          {
+            "ar": "تجاهل كل كش أثناء التبادل",
+            "en": "Ignore all checks during an exchange"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، افحص النقلة البينية، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No; check for an intermediate move, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "deflection",
+      "stage": 5,
+      "order": 28,
+      "title": {
+        "ar": "الإبعاد والجذب",
+        "en": "Deflection and attraction"
+      },
+      "theory": {
+        "ar": [
+          "الإبعاد يجبر مدافعاً على ترك مهمة، والجذب يدفع قطعة إلى مربع يجعلها هدفاً. قد تشمل الفكرة تضحية، فلا تحكم عليها من المادة في أول نقلة. احسب قبول العرض ورفضه، وميّز مثالاً مشروطاً عن فوز إجباري.",
+          "حدد مهمة المدافع والمربع الحاسم قبل اختيار التضحية."
+        ],
+        "en": [
+          "Deflection removes a defender from a duty; attraction lures a piece to a vulnerable square. A sacrifice may be involved, so do not judge only the first material exchange. Calculate acceptance and refusal and distinguish a conditional example from a forced win.",
+          "Identify the defender’s duty and the critical square before sacrificing."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ الجذب وأكمل استثمار الهدف.",
+        "en": "Execute the attraction and finish exploiting the target."
+      },
+      "example": {
+        "fen": "8/8/5k2/1p3pp1/p1p2P1p/P1P1KP1P/1P6/8 w - - 0 47",
+        "moves": [
+          "f4g5",
+          "f6g5",
+          "f3f4",
+          "g5g6",
+          "e3d4"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "02GOf",
+          "themes": [
+            "attraction",
+            "crushing",
+            "endgame",
+            "long",
+            "pawnEndgame"
+          ],
+          "rating": 1248,
+          "label": "Lichess puzzle 02GOf",
+          "url": "https://lichess.org/game/JycqgNS9/black#92",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما المطلوب لإثبات تضحية؟",
+          "en": "What is needed to justify a sacrifice?"
+        },
+        "options": [
+          {
+            "ar": "حساب الردود والنتيجة",
+            "en": "Calculation of replies and outcome"
+          },
+          {
+            "ar": "وجود اسم مشهور للتضحية",
+            "en": "A famous name for the sacrifice"
+          },
+          {
+            "ar": "كثرة القطع المتجهة للهجوم فقط",
+            "en": "Only the number of attacking pieces"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: حساب الردود والنتيجة، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Calculation of replies and outcome, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "attraction"
+      }
+    },
+    {
+      "id": "clearance",
+      "stage": 5,
+      "order": 29,
+      "title": {
+        "ar": "إخلاء الخط أو المربع",
+        "en": "Clearance of a line or square"
+      },
+      "theory": {
+        "ar": [
+          "قد تكون قطعتك نفسها تحجب خط قطعة أقوى أو تحتل مربعاً يحتاجه هجومك. إخلاء الطريق بنقلة فعالة يمكن أن يكسب زمناً، لكنه قد يترك دفاعاً مهماً. افحص ما أخلته القطعة وما كشفت عنه للطرفين.",
+          "اقرأ الوضعية التالية في ذهنك قبل لمس القطعة الحاجبة."
+        ],
+        "en": [
+          "Your own piece may block a stronger piece or occupy a needed square. Clearing it with tempo can help, but may abandon a defensive duty. Check both what is cleared and what is newly exposed for each side.",
+          "Picture the resulting position before moving the blocking piece."
+        ]
+      },
+      "objective": {
+        "ar": "أخلِ الطريق ضمن التسلسل القانوني المرجعي.",
+        "en": "Clear the route within the legal reference line."
+      },
+      "example": {
+        "fen": "r2q1rk1/pp2bpp1/2p1b2p/4P3/3PNn2/1P1Q3P/P4BP1/1BR2RK1 w - - 5 26",
+        "moves": [
+          "e4f6",
+          "g7f6",
+          "d3h7"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00aCb",
+          "themes": [
+            "clearance",
+            "kingsideAttack",
+            "mate",
+            "mateIn2",
+            "middlegame",
+            "sacrifice",
+            "short"
+          ],
+          "rating": 1157,
+          "label": "Lichess puzzle 00aCb",
+          "url": "https://lichess.org/game/teDm3wIz/black#50",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل إخلاء الخط مفيد دائماً؟",
+          "en": "Is clearing a line always useful?"
+        },
+        "options": [
+          {
+            "ar": "لا، يجب فحص الدفاع الذي تتركه",
+            "en": "No; check the defensive duty left behind"
+          },
+          {
+            "ar": "نعم، فتح أي خط مفيد دائماً",
+            "en": "Yes, opening any line always helps"
+          },
+          {
+            "ar": "نعم، حتى إن ترك الملك مكشوفاً",
+            "en": "Yes, even if it exposes the king"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، يجب فحص الدفاع الذي تتركه، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No; check the defensive duty left behind, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "clearance"
+      }
+    },
+    {
+      "id": "trap-discipline",
+      "stage": 5,
+      "order": 30,
+      "title": {
+        "ar": "الفخ وردّه الصحيح",
+        "en": "Traps and sound replies"
+      },
+      "theory": {
+        "ar": [
+          "الفخ أداة لفهم الخطأ لا بديل عن افتتاحية سليمة. تميّز المكتبة صاحب الفخ ونقلة تهيئته والرد الذي يسمح به وبديل التجنب. لا تنسب فوز المثال إلى كل الردود؛ قد يرفض الخصم الفكرة ويحتفظ بموقف جيد.",
+          "ادرس خط الوقوع وخط التجنب كزوج واحد، خصوصاً إذا لعبت اللون المدافع."
+        ],
+        "en": [
+          "A trap teaches a mistake; it is not a substitute for a sound opening. The library identifies its owner, setup, triggering reply and avoidance branch. A winning example does not prove every reply loses.",
+          "Study the trap and avoidance branches together, especially as the defending side."
+        ]
+      },
+      "objective": {
+        "ar": "درّب عادة البحث عن الدفاع قبل مطاردة المكسب.",
+        "en": "Train the habit of finding defence before chasing a gain."
+      },
+      "example": {
+        "fen": "8/7R/5p2/p7/7P/2p5/3k2N1/1K6 b - - 0 48",
+        "moves": [
+          "c3c2",
+          "b1a2",
+          "c2c1q",
+          "h7d7",
+          "d2e2"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "004LZ",
+          "themes": [
+            "advancedPawn",
+            "crushing",
+            "defensiveMove",
+            "deflection",
+            "endgame",
+            "long",
+            "promotion"
+          ],
+          "rating": 1208,
+          "label": "Lichess puzzle 004LZ",
+          "url": "https://lichess.org/game/drahwNdj#95",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل الاسم «فخ» يعني فوزاً إجبارياً؟",
+          "en": "Does a trap name imply a forced win?"
+        },
+        "options": [
+          {
+            "ar": "لا، يعتمد على رد الخصم",
+            "en": "No, it depends on the reply"
+          },
+          {
+            "ar": "نعم، الاسم وحده يضمن الفوز",
+            "en": "Yes, the name alone guarantees victory"
+          },
+          {
+            "ar": "نعم، حتى أمام أفضل دفاع",
+            "en": "Yes, even against the best defence"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، يعتمد على رد الخصم، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, it depends on the reply, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "traps"
+      }
+    },
+    {
+      "id": "pawn-structure",
+      "stage": 6,
+      "order": 31,
+      "title": {
+        "ar": "تركيب البيادق والخطة",
+        "en": "Pawn structure and plans"
+      },
+      "theory": {
+        "ar": [
+          "البيادق تحدد المربعات المتاحة وخطوط القطع، لكنها لا تتحرك إلى الخلف. في مراكز مغلقة ابحث عن اختراق محسوب وتحسين القطع، وفي المراكز المفتوحة راقب الأعمدة والقطريات وأمان الملك. لا تضع وصف «ضعيف» على بيدق دون إمكان مهاجمته فعلياً.",
+          "اربط كل تقدم بيدق بخط يُفتح أو مربع يضعف."
+        ],
+        "en": [
+          "Pawns define squares and lines and cannot move backwards. Closed centres invite preparation of breaks; open centres emphasise lines and king safety. A pawn is not a useful target merely because it looks weak: it must be attackable.",
+          "Connect each pawn push to a line opened or a square weakened."
+        ]
+      },
+      "objective": {
+        "ar": "شاهد بناء السلسلة وطبّق المثال.",
+        "en": "Observe the pawn chain and reproduce the example."
+      },
+      "example": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "moves": [
+          "e2e4",
+          "e7e6",
+          "d2d4",
+          "d7d5",
+          "e4e5"
+        ],
+        "source": {
+          "kind": "opening",
+          "id": "d765ab1a0217002b4426037b",
+          "label": "French Defense: Advance Variation",
+          "url": "https://github.com/lichess-org/chess-openings",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما ثمن تقدم البيدق؟",
+          "en": "What is a cost of a pawn advance?"
+        },
+        "options": [
+          {
+            "ar": "تغير دائم في المربعات والخطوط",
+            "en": "A lasting change to squares and lines"
+          },
+          {
+            "ar": "يمكن إعادة البيدق إلى الوراء لاحقاً",
+            "en": "The pawn can move backwards later"
+          },
+          {
+            "ar": "لا يؤثر في المربعات المحيطة",
+            "en": "It does not affect nearby squares"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: تغير دائم في المربعات والخطوط، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: A lasting change to squares and lines, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "opening",
+        "name": "French Defense: Advance Variation"
+      }
+    },
+    {
+      "id": "outposts",
+      "stage": 6,
+      "order": 32,
+      "title": {
+        "ar": "المربعات القوية وتحسين الحصان",
+        "en": "Outposts and knight improvement"
+      },
+      "theory": {
+        "ar": [
+          "المربع القوي ليس مجرد مربع في نصف الخصم؛ يكون أكثر ثباتاً عندما لا تستطيع بيادقه طرد القطعة بسهولة، ويكون نافعاً إذا هاجم أهدافاً أو دعم اختراقاً. افحص دعم القطعة ومسار وصولها قبل إعادة توجيهها.",
+          "المثال يدرّب مسار الحصان فقط؛ قيمته الاستراتيجية في مباراة كاملة تحتاج فحص بيادق الخصم."
+        ],
+        "en": [
+          "A strong square is not just an advanced square. It is more stable when opposing pawns cannot easily drive a piece away, and useful when it attacks targets or supports a break. Verify support and the route before manoeuvring.",
+          "The example trains a knight route only; its strategic value in a full game depends on opposing pawns."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ مسار الحصان ثم قيّم ما يهاجمه.",
+        "en": "Reproduce the knight route and examine its attacks."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/8/1N2K3 w - - 0 1",
+        "moves": [
+          "b1c3",
+          "e8f7",
+          "c3e4",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "متى يكون مربع الحصان أكثر ثباتاً؟",
+          "en": "When is a knight square more stable?"
+        },
+        "options": [
+          {
+            "ar": "عندما يصعب طرده ببيادق الخصم",
+            "en": "When opposing pawns cannot easily chase it"
+          },
+          {
+            "ar": "عندما تستطيع بيادق الخصم طرده بسهولة",
+            "en": "When enemy pawns can easily chase it"
+          },
+          {
+            "ar": "عندما لا يملك الحصان أي مربع خروج",
+            "en": "When the knight has no exit squares"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: عندما يصعب طرده ببيادق الخصم، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: When opposing pawns cannot easily chase it, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "open-files",
+      "stage": 6,
+      "order": 33,
+      "title": {
+        "ar": "العمود المفتوح ونشاط القلعة",
+        "en": "Open files and rook activity"
+      },
+      "theory": {
+        "ar": [
+          "العمود المفتوح خالٍ من البيادق، وشبه المفتوح يخلو من بيدقك مع وجود بيدق للخصم. وضع القلعة عليه مفيد إذا أمكن الدخول أو الضغط على هدف. مضاعفة القلاع ليست هدفاً مستقلاً إذا لم يوجد مربع دخول آمن.",
+          "قبل احتلال العمود حدد الهدف ومربع الدخول ورد الخصم."
+        ],
+        "en": [
+          "An open file has no pawns; a semi-open file lacks your pawn but has an opposing pawn. A rook belongs there when entry or a target is available. Doubling rooks is not an end in itself without a safe entry square.",
+          "Before occupying a file, name a target, an entry square and an opposing reply."
+        ]
+      },
+      "objective": {
+        "ar": "انقل القلعة بين العمود والصف كما في المثال.",
+        "en": "Reproduce the rook’s file and rank activity."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/8/R3K3 w - - 0 1",
+        "moves": [
+          "a1a4",
+          "e8f7",
+          "a4e4",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الذي يجعل العمود ذا قيمة؟",
+          "en": "What makes a file valuable?"
+        },
+        "options": [
+          {
+            "ar": "وجود دخول أو هدف قابل للاستغلال",
+            "en": "An exploitable entry or target"
+          },
+          {
+            "ar": "كون العمود مفتوحاً دون إمكانية دخول",
+            "en": "Being open even without an entry square"
+          },
+          {
+            "ar": "عدد النقلات التي حركتها القلعة فقط",
+            "en": "Only the number of rook moves made"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: وجود دخول أو هدف قابل للاستغلال، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: An exploitable entry or target, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "weaknesses",
+      "stage": 6,
+      "order": 34,
+      "title": {
+        "ar": "خلق ضعف ثانٍ",
+        "en": "Creating a second weakness"
+      },
+      "theory": {
+        "ar": [
+          "الدفاع عن هدف واحد قد يكون ممكناً، بينما نقل الضغط إلى جناح آخر يرهق المدافعين. قبل تحويل اللعب، أمّن القطع والملك وتأكد أن الخصم لا يملك اختراقاً فورياً. الخطة تنشأ من أهداف فعلية، لا من قاعدة تحريك الوزير يميناً ويساراً.",
+          "في المثال التكتيكي افحص القطعة التي لا تستطيع أداء مهمتين معاً."
+        ],
+        "en": [
+          "One weakness may be defensible; transferring pressure to another sector can overload the defence. Before switching wings, secure your pieces and check for an immediate counterbreak. Plans need concrete targets, not arbitrary queen shuffling.",
+          "In the tactical illustration identify the piece that cannot fulfil both duties."
+        ]
+      },
+      "objective": {
+        "ar": "استثمر عبء المدافع في اللغز.",
+        "en": "Exploit the defender’s burden in the puzzle."
+      },
+      "example": {
+        "fen": "2k1r3/pppn1pp1/3b2b1/3B2Pp/5P2/3P3P/PPPR4/2K3NR b - - 0 18",
+        "moves": [
+          "e8e1",
+          "d2d1",
+          "d6f4",
+          "c1b1",
+          "e1d1"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00Aq4",
+          "themes": [
+            "backRankMate",
+            "deflection",
+            "long",
+            "mate",
+            "mateIn3",
+            "middlegame"
+          ],
+          "rating": 1497,
+          "label": "Lichess puzzle 00Aq4",
+          "url": "https://lichess.org/game/VIBqOZyc#35",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "لماذا تهاجم هدفاً ثانياً؟",
+          "en": "Why create a second target?"
+        },
+        "options": [
+          {
+            "ar": "لتوزيع مهام الدفاع وإرهاقها",
+            "en": "To stretch defensive duties"
+          },
+          {
+            "ar": "لترك الهدف الأول دون ضغط",
+            "en": "To abandon pressure on the first target"
+          },
+          {
+            "ar": "لزيادة عدد النقلات فقط",
+            "en": "Just to increase the move count"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لتوزيع مهام الدفاع وإرهاقها، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: To stretch defensive duties, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "backRankMate"
+      }
+    },
+    {
+      "id": "bishop-pair",
+      "stage": 6,
+      "order": 35,
+      "title": {
+        "ar": "الفيلان والمركز المفتوح",
+        "en": "Bishops and an open centre"
+      },
+      "theory": {
+        "ar": [
+          "الفيل طويل المدى يستفيد من القطريات المفتوحة، وقد يزداد أثر زوج الفيلين مع اللعب على جناحين. الحصان قد يتفوق في مركز مغلق أو على مربع ثابت. لا تبدّل قطعة جيدة تلقائياً لأن القيم التقريبية متساوية.",
+          "قبل المبادلة قارن نشاط القطع وتركيب البيادق بعد الأخذ."
+        ],
+        "en": [
+          "Bishops benefit from open diagonals and a bishop pair can influence both wings. Knights may excel in closed centres or secure squares. Equal nominal values do not make every exchange desirable.",
+          "Before exchanging compare activity and the pawn structure after recaptures."
+        ]
+      },
+      "objective": {
+        "ar": "تتبّع قطر الفيل ونقاط تأثيره.",
+        "en": "Trace the bishop diagonal and its influence."
+      },
+      "example": {
+        "fen": "4k3/8/8/8/8/8/8/2B1K3 w - - 0 1",
+        "moves": [
+          "c1g5",
+          "e8f7",
+          "g5e3",
+          "f7g6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل الفيل أفضل من الحصان دائماً؟",
+          "en": "Is a bishop always better than a knight?"
+        },
+        "options": [
+          {
+            "ar": "لا، يعتمد على الموقف والنشاط",
+            "en": "No, it depends on position and activity"
+          },
+          {
+            "ar": "نعم، في كل وضعية",
+            "en": "Yes, in every position"
+          },
+          {
+            "ar": "الحصان أفضل دائماً مهما كانت البيادق",
+            "en": "The knight is always better regardless of pawns"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، يعتمد على الموقف والنشاط، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, it depends on position and activity, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "conversion",
+      "stage": 6,
+      "order": 36,
+      "title": {
+        "ar": "تحويل الأفضلية دون تسرع",
+        "en": "Converting an advantage"
+      },
+      "theory": {
+        "ar": [
+          "عند زيادة المادة قد تفيد مبادلة القطع المهاجمة للخصم، لكن مبادلة كل البيادق قد تسهّل التعادل. امنع اللعب المضاد وحسّن أسوأ قطعة، ثم اختر التبسيط بعد حساب النهاية الناتجة. لا تختزل التحويل في أمر «بدّل كل شيء».",
+          "احسب النهاية قبل الموافقة على المبادلة، خصوصاً نشاط الملك والبيدق المار."
+        ],
+        "en": [
+          "When ahead, exchanging opposing active pieces may help, but exchanging every pawn can ease a draw. Restrict counterplay, improve your worst piece and calculate the resulting ending before simplifying. Conversion is not “trade everything”.",
+          "Calculate the ending before exchanging, especially king activity and passed pawns."
+        ]
+      },
+      "objective": {
+        "ar": "طبّق تسلسل التحويل المرجعي.",
+        "en": "Play the reference conversion line."
+      },
+      "example": {
+        "fen": "5k2/6p1/p1b3Pp/2N2P1r/p7/8/1KP5/5R2 w - - 0 37",
+        "moves": [
+          "c5e6",
+          "f8e7",
+          "e6g7"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00DcC",
+          "themes": [
+            "crushing",
+            "deflection",
+            "endgame",
+            "master",
+            "short"
+          ],
+          "rating": 1400,
+          "label": "Lichess puzzle 00DcC",
+          "url": "https://lichess.org/game/mWXM78x4/black#72",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ماذا تفحص قبل التبسيط؟",
+          "en": "What should precede simplification?"
+        },
+        "options": [
+          {
+            "ar": "النهاية الناتجة ولعب الخصم المضاد",
+            "en": "The resulting ending and counterplay"
+          },
+          {
+            "ar": "عدد القطع المتبادلة فقط",
+            "en": "Only the number of exchanged pieces"
+          },
+          {
+            "ar": "التبديل آمن دائماً عند التفوق",
+            "en": "Exchanges are always safe when ahead"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: النهاية الناتجة ولعب الخصم المضاد، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The resulting ending and counterplay, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "active-king",
+      "stage": 7,
+      "order": 37,
+      "title": {
+        "ar": "الملك قطعة مقاتلة في النهاية",
+        "en": "The active endgame king"
+      },
+      "theory": {
+        "ar": [
+          "بعد انخفاض خطر المات يصبح الملك مدافعاً ومهاجماً للبيادق. اقترب عبر مربعات آمنة وساند البيدق المار بدلاً من دفعه بعيداً عن حمايتك. وجود وزير أو قلاع نشطة قد يبقي خطر الكش كبيراً؛ تسمية «نهاية» لا تلغي الأمان.",
+          "احسب مربعات اقتراب الملك ثم تقدم البيدق بتنسيق معه."
+        ],
+        "en": [
+          "When mating danger decreases, the king can defend and attack pawns. Approach safely and support a passer rather than pushing it beyond protection. Active queens or rooks can still create danger: “endgame” does not remove safety concerns.",
+          "Calculate safe king approach squares and coordinate the pawn advance."
+        ]
+      },
+      "objective": {
+        "ar": "فعّل الملك إلى e6 ثم ادعم تقدم البيدق.",
+        "en": "Activate the king to e6 and support the pawn."
+      },
+      "example": {
+        "fen": "7k/8/8/3K4/4P3/8/8/8 w - - 0 1",
+        "moves": [
+          "d5e6",
+          "h8g7",
+          "e4e5",
+          "g7f8",
+          "e6d7"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "متى ينشط الملك؟",
+          "en": "When can the king become active?"
+        },
+        "options": [
+          {
+            "ar": "حين يسمح الأمان وطبيعة القطع",
+            "en": "When safety and the remaining pieces permit"
+          },
+          {
+            "ar": "من أول نقلة مهما كانت التهديدات",
+            "en": "From move one regardless of threats"
+          },
+          {
+            "ar": "لا يجوز للملك مهاجمة البيادق",
+            "en": "The king may never attack pawns"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: حين يسمح الأمان وطبيعة القطع، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: When safety and the remaining pieces permit, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "opposition",
+      "stage": 7,
+      "order": 38,
+      "title": {
+        "ar": "المقابلة ومربعات الدخول",
+        "en": "Opposition and entry squares"
+      },
+      "theory": {
+        "ar": [
+          "عندما يقف الملكان على خط وبينهما مربع واحد، قد يستطيع صاحب الدور الأقل ملاءمة إجبار ملكه على التراجع. المقابلة وسيلة للوصول لا غاية منفصلة؛ مواقع البيدق ومربعاته الحاسمة والاحتياط في النقلات تحدد النتيجة.",
+          "في المثال الدور للأسود؛ بعد ابتعاده يدخل ملك الأبيض عبر f7."
+        ],
+        "en": [
+          "With kings facing on a line and one square between, the side to move may have to yield. Opposition is a tool for entry, not a standalone goal: pawn position, key squares and spare tempi decide the outcome.",
+          "Black moves first in the example; White’s king enters via f7 after Black yields."
+        ]
+      },
+      "objective": {
+        "ar": "نفّذ المثال من دور الأسود ثم راقب دخول ملك الأبيض.",
+        "en": "Play the example from Black’s turn and observe White’s king entering."
+      },
+      "example": {
+        "fen": "4k3/8/4K3/4P3/8/8/8/8 b - - 0 1",
+        "moves": [
+          "e8d8",
+          "e6f7",
+          "d8d7",
+          "e5e6"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل المقابلة تُفهم دون معرفة صاحب الدور؟",
+          "en": "Can opposition be assessed without the side to move?"
+        },
+        "options": [
+          {
+            "ar": "لا، الدور عنصر أساسي",
+            "en": "No, the side to move is essential"
+          },
+          {
+            "ar": "نعم، دور اللعب لا يغير شيئاً",
+            "en": "Yes, the side to move changes nothing"
+          },
+          {
+            "ar": "نعم، تكفي المسافة بين الملكين وحدها",
+            "en": "Yes, the distance between kings alone is enough"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، الدور عنصر أساسي، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, the side to move is essential, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "passed-pawn",
+      "stage": 7,
+      "order": 39,
+      "title": {
+        "ar": "البيدق المار وسباق الترقية",
+        "en": "Passed pawns and promotion races"
+      },
+      "theory": {
+        "ar": [
+          "البيدق المار لا توجد أمامه بيادق خصم في ملفه أو الملفين المجاورين يمكنها إيقافه بالأخذ. احسب عدد النقلات إلى الترقية والكشات بعد الترقية؛ قد يتغير السباق بكش واحد. لا تدفعه إلى الأخذ إذا كان دعم الملك أولى.",
+          "عد أنصاف النقلات للطرفين ولا تفترض تزامن الترقية."
+        ],
+        "en": [
+          "A passed pawn has no opposing pawn ahead on its file or adjacent files that can stop it by capture. Count moves to promotion and checks after promotion; one check can change a race. Do not push into capture when king support is needed.",
+          "Count plies for both sides; do not assume simultaneous promotion."
+        ]
+      },
+      "objective": {
+        "ar": "قدّم البيدق إلى الترقية وفق المثال.",
+        "en": "Advance the pawn to promotion as illustrated."
+      },
+      "example": {
+        "fen": "7k/8/4P3/8/3K4/8/8/8 w - - 0 1",
+        "moves": [
+          "e6e7",
+          "h8g7",
+          "e7e8q"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الذي يجب حسابه في سباق البيادق؟",
+          "en": "What matters in a pawn race?"
+        },
+        "options": [
+          {
+            "ar": "الدور والكشات وتوقيت الترقية",
+            "en": "Move order, checks and promotion timing"
+          },
+          {
+            "ar": "عدد البيادق وحده",
+            "en": "Only the pawn count"
+          },
+          {
+            "ar": "لون البيدق وحده",
+            "en": "Only the pawn colour"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الدور والكشات وتوقيت الترقية، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Move order, checks and promotion timing, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "rook-behind",
+      "stage": 7,
+      "order": 40,
+      "title": {
+        "ar": "القلعة خلف البيدق المار",
+        "en": "Rooks behind passed pawns"
+      },
+      "theory": {
+        "ar": [
+          "من خلف البيدق تستطيع القلعة دعمه مع تقدمه أو مهاجمته عن بعد إذا كان للخصم. هذه قاعدة عملية لها استثناءات: الكش الجانبي ونشاط الملك وموضع الحافة قد يفرضان طريقة أخرى. افحص مربعات القلعة قبل نقلها إلى ملف البيدق.",
+          "المثال يوضح الدعم من e1؛ لا يدعي أن هذه النقلة وحيدة أو الأفضل في كل نهاية."
+        ],
+        "en": [
+          "Behind a passed pawn a rook can support its advance, or attack it from behind if it belongs to the opponent. Exceptions depend on side checks, king activity and edge files. Verify the rook’s safe squares before moving it.",
+          "The example illustrates support from e1; it does not claim a unique best move in every ending."
+        ]
+      },
+      "objective": {
+        "ar": "ضع القلعة على e1 ثم تابع الترقية.",
+        "en": "Place the rook on e1 and continue to promotion."
+      },
+      "example": {
+        "fen": "7k/8/4P3/8/3K4/8/8/R7 w - - 0 1",
+        "moves": [
+          "a1e1",
+          "h8g7",
+          "e6e7",
+          "g7f7",
+          "e7e8q"
+        ],
+        "source": {
+          "kind": "original-example",
+          "label": "Chess Studio · original legal teaching position",
+          "url": null,
+          "license": "Original explanatory text and constructed example"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "لماذا تقف القلعة خلف المار غالباً؟",
+          "en": "Why often place a rook behind a passer?"
+        },
+        "options": [
+          {
+            "ar": "ليبقى خط الدعم مفتوحاً مع تقدمه",
+            "en": "To keep supporting it as it advances"
+          },
+          {
+            "ar": "لمنع البيدق من التقدم دائماً",
+            "en": "To always stop the pawn advancing"
+          },
+          {
+            "ar": "لإبعاد القلعة عن جميع الأعمدة",
+            "en": "To remove the rook from every file"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: ليبقى خط الدعم مفتوحاً مع تقدمه، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: To keep supporting it as it advances, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": ""
+      }
+    },
+    {
+      "id": "rook-technique",
+      "stage": 7,
+      "order": 41,
+      "title": {
+        "ar": "نشاط القلعة قبل عدّ البيادق",
+        "en": "Rook activity before pawn counting"
+      },
+      "theory": {
+        "ar": [
+          "القلاع النشطة تعطي كشات وتهاجم بيادق وقد تعوض نقص بيدق. الدفاع السلبي قد يسمح بتقدم الملك والمار. تتطلب لوسينا وفيلدور شروطاً دقيقة لمواضع الملك والقلعة والبيدق؛ ادرس النموذج كاملاً ولا تطبق اسمه على نهاية مختلفة.",
+          "هذا التطبيق لغز نهاية قلعة من العينة المحلية، وليس ادعاءً بأنه وضع لوسينا أو فيلدور."
+        ],
+        "en": [
+          "Active rooks give checks and attack pawns and may compensate for a pawn deficit. Passive defence may allow king and passer advances. Lucena and Philidor require exact piece placements: study the full model rather than applying a name to a different ending.",
+          "This exercise is a real rook-ending puzzle from the local sample, not a claim that it is Lucena or Philidor."
+        ]
+      },
+      "objective": {
+        "ar": "حل نهاية القلعة المرجعية مع فحص النشاط.",
+        "en": "Solve the reference rook ending while checking activity."
+      },
+      "example": {
+        "fen": "8/6R1/3rk1p1/8/2K5/6P1/8/8 w - - 0 55",
+        "moves": [
+          "g7g6",
+          "e6e5",
+          "g6d6",
+          "e5d6",
+          "c4d4",
+          "d6e6",
+          "d4e4",
+          "e6f6",
+          "e4f4",
+          "f6g6",
+          "f4g4"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "02U6o",
+          "themes": [
+            "crushing",
+            "defensiveMove",
+            "endgame",
+            "rookEndgame",
+            "veryLong",
+            "zugzwang"
+          ],
+          "rating": 1548,
+          "label": "Lichess puzzle 02U6o",
+          "url": "https://lichess.org/game/uJwAK8ER/black#108",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل بيدق زائد يكفي لحكم نهاية القلاع؟",
+          "en": "Is an extra pawn enough to judge a rook ending?"
+        },
+        "options": [
+          {
+            "ar": "لا، النشاط والملك والتهديدات مهمة",
+            "en": "No; activity, kings and threats matter"
+          },
+          {
+            "ar": "نعم، بيدق إضافي يضمن الفوز",
+            "en": "Yes, an extra pawn guarantees victory"
+          },
+          {
+            "ar": "نعم، لا أهمية لنشاط القلاع",
+            "en": "Yes, rook activity is irrelevant"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، النشاط والملك والتهديدات مهمة، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No; activity, kings and threats matter, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "endgame-precision",
+      "stage": 7,
+      "order": 42,
+      "title": {
+        "ar": "الزغزوانغ والدقة في النهاية",
+        "en": "Zugzwang and endgame precision"
+      },
+      "theory": {
+        "ar": [
+          "في الزغزوانغ تصبح إلزامية النقل عبئاً: كل نقلة متاحة تفسد الوضع. وجود نقلات احتياط للبيادق قد يغير صاحب العبء. افحص البات ونقص المادة وقواعد التعادل عند تقييم نهاية، ولا تعامل كل وضع ساكن كزغزوانغ.",
+          "قارن الوضع نفسه مع اختلاف صاحب الدور لتفهم حساسية النقل."
+        ],
+        "en": [
+          "In zugzwang the obligation to move is harmful: available moves worsen the position. Spare pawn tempi can change who must yield. Check stalemate, insufficient material and drawing rules; not every quiet position is zugzwang.",
+          "Compare the position with a different side to move to understand tempo sensitivity."
+        ]
+      },
+      "objective": {
+        "ar": "طبّق تسلسل النهاية الدقيق دون نقلات احتياط عشوائية.",
+        "en": "Play the precise ending without wasting spare tempi."
+      },
+      "example": {
+        "fen": "8/8/5r2/1p1pBk2/p1pP4/P1P2K2/1P6/8 w - - 0 47",
+        "moves": [
+          "e5f6",
+          "f5f6",
+          "f3f4"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "02myt",
+          "themes": [
+            "crushing",
+            "defensiveMove",
+            "endgame",
+            "short",
+            "zugzwang"
+          ],
+          "rating": 1048,
+          "label": "Lichess puzzle 02myt",
+          "url": "https://lichess.org/game/Ivp9f0zu/black#92",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما جوهر الزغزوانغ؟",
+          "en": "What defines zugzwang?"
+        },
+        "options": [
+          {
+            "ar": "ضرر الاضطرار إلى النقل",
+            "en": "Being harmed by the obligation to move"
+          },
+          {
+            "ar": "أن يكون اللاعب تحت كش دائماً",
+            "en": "Always being in check"
+          },
+          {
+            "ar": "أن يملك اللاعب وقتاً أقل على الساعة",
+            "en": "Having less time on the clock"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: ضرر الاضطرار إلى النقل، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Being harmed by the obligation to move, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "prophylaxis",
+      "stage": 8,
+      "order": 43,
+      "title": {
+        "ar": "الوقاية وفهم خطة الخصم",
+        "en": "Prophylaxis and the opposing plan"
+      },
+      "theory": {
+        "ar": [
+          "اسأل ما النقلة التي يرغب بها خصمك لو أعطيته وقتاً. امنعها إذا كانت قوية وكان ثمن المنع مناسباً، أو تجاهلها بحساب إذا كان تهديدك أسرع. الوقاية ليست انتظاراً سلبياً؛ تجمع تحسين القطعة مع تقليل خيارات الخصم.",
+          "اكتب خطة الخصم بجملة قبل اختيار خطة لك."
+        ],
+        "en": [
+          "Ask what the opponent would like to play with an extra tempo. Prevent it if strong and prevention is affordable, or calculate whether your threat is faster. Prophylaxis is not passive waiting: improve your pieces while restricting opposing options.",
+          "State the opposing plan in one sentence before choosing yours."
+        ]
+      },
+      "objective": {
+        "ar": "اعثر على الدفاع المرجعي ضد التهديد.",
+        "en": "Find the reference defence against the threat."
+      },
+      "example": {
+        "fen": "1r4k1/5p1p/3R2p1/1qN5/1r1Qp3/7P/5PPK/8 w - - 1 36",
+        "moves": [
+          "d6d8",
+          "b8d8",
+          "d4d8",
+          "g8g7",
+          "c5d7"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00xHQ",
+          "themes": [
+            "advantage",
+            "defensiveMove",
+            "endgame",
+            "long"
+          ],
+          "rating": 1703,
+          "label": "Lichess puzzle 00xHQ",
+          "url": "https://lichess.org/game/Bt8SnbNt/black#70",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل كل نقلة تمنع تهديد الخصم تكون مفيدة؟",
+          "en": "Is every move that prevents an opponent’s threat useful?"
+        },
+        "options": [
+          {
+            "ar": "لا؛ قارن ما تخسره بالنقلة بخطورة التهديد الذي تمنعه",
+            "en": "No; weigh the move’s cost against the threat it prevents"
+          },
+          {
+            "ar": "نعم، أي نقلة دفاعية جيدة",
+            "en": "Yes, every defensive move is good"
+          },
+          {
+            "ar": "نعم، حتى لو أضاعت قطعة بلا مقابل",
+            "en": "Yes, even if it loses a piece for nothing"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "النقلة الوقائية تمنع خطة للخصم. اخترها إذا كانت فائدتها أكبر من خسارة وقت أو نشاط أو مادة.",
+          "en": "A preventive move stops an opposing plan. Weigh that benefit against lost time, activity or material."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "advantage"
+      }
+    },
+    {
+      "id": "resilient-defence",
+      "stage": 8,
+      "order": 44,
+      "title": {
+        "ar": "الدفاع النشط والموارد المخفية",
+        "en": "Active defence and hidden resources"
+      },
+      "theory": {
+        "ar": [
+          "في المواقف الصعبة ابحث عن كشات متبادلة، تضحية تخفف الهجوم أو انتقال إلى نهاية قابلة للدفاع. لا يعني انخفاض تقييم سريع أن كل النقلات متساوية أو أن الاستسلام واجب. احسب الموارد الفعلية مع الاعتراف بأن دفاعاً عملياً لا يثبت التعادل نظرياً.",
+          "ابدأ بالتهديد الأقرب واحسب جواباً يغير طبيعة الموقف."
+        ],
+        "en": [
+          "In difficult positions look for counterchecks, exchanges, sacrifices or a defensible ending. A low quick evaluation does not make all moves equal or require resignation. Calculate concrete resources while distinguishing practical resistance from a theoretical draw.",
+          "Start with the immediate threat and seek a reply that changes the position."
+        ]
+      },
+      "objective": {
+        "ar": "طبّق المورد الدفاعي المرجعي.",
+        "en": "Play the reference defensive resource."
+      },
+      "example": {
+        "fen": "8/pp6/8/2p2k1P/3p4/2P3K1/PP6/8 w - - 0 40",
+        "moves": [
+          "c3d4",
+          "c5d4",
+          "g3f3"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01312",
+          "themes": [
+            "crushing",
+            "defensiveMove",
+            "endgame",
+            "pawnEndgame",
+            "short"
+          ],
+          "rating": 2001,
+          "label": "Lichess puzzle 01312",
+          "url": "https://lichess.org/game/9U62VOsr/black#78",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل تقييم سلبي يعني انعدام أي مورد؟",
+          "en": "Does a negative evaluation mean no resources exist?"
+        },
+        "options": [
+          {
+            "ar": "لا، يجب فحص الدفاعات القانونية",
+            "en": "No, legal defensive resources still need examination"
+          },
+          {
+            "ar": "نعم، لا داعي للبحث عن دفاع",
+            "en": "Yes, there is no reason to seek a defence"
+          },
+          {
+            "ar": "نعم، كل رد قانوني يخسر فوراً",
+            "en": "Yes, every legal reply loses immediately"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، يجب فحص الدفاعات القانونية، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, legal defensive resources still need examination, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "exchange-decision",
+      "stage": 8,
+      "order": 45,
+      "title": {
+        "ar": "قرار المبادلة والنهاية الناتجة",
+        "en": "Exchange decisions and resulting endings"
+      },
+      "theory": {
+        "ar": [
+          "اختيار المبادلة قرار عن الوضع التالي: نشاط الملك، تركيب البيادق، جودة القطعة المتبقية وإمكان الاختراق. في حساب متقدم قد تقبل تشويه البيادق مقابل نشاط أو تمنع مبادلة تزيل المدافع الوحيد. اربط الحكم بوضعية ملموسة لا بالشعور العام.",
+          "تخيّل الرقعة بعد الاستعادة الأخيرة ثم أعد تقييم المرشحين."
+        ],
+        "en": [
+          "An exchange decision concerns the next position: king activity, pawn structure, remaining pieces and breaks. You may accept damaged pawns for activity or avoid trading the only defender. Ground the judgement in a concrete position.",
+          "Visualise the board after the last recapture before comparing candidates."
+        ]
+      },
+      "objective": {
+        "ar": "احسب التبسيط المرجعي حتى الموقف الناتج.",
+        "en": "Calculate the reference simplification to the resulting position."
+      },
+      "example": {
+        "fen": "8/5k2/4R2p/p7/5rPK/8/7P/8 w - - 3 43",
+        "moves": [
+          "e6h6",
+          "f4f6",
+          "h6h7",
+          "f7g6",
+          "h7a7"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "004Ax",
+          "themes": [
+            "crushing",
+            "endgame",
+            "exposedKing",
+            "long",
+            "rookEndgame"
+          ],
+          "rating": 1999,
+          "label": "Lichess puzzle 004Ax",
+          "url": "https://lichess.org/game/x2mMwVJD/black#84",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما الذي تقيمه عند المبادلة؟",
+          "en": "What should you assess in an exchange?"
+        },
+        "options": [
+          {
+            "ar": "الموقف بعد الاستعادات",
+            "en": "The position after recaptures"
+          },
+          {
+            "ar": "قيمة القطعة المأخوذة وحدها",
+            "en": "Only the value of the captured piece"
+          },
+          {
+            "ar": "اسم النهاية دون النظر للرقعة",
+            "en": "The ending name without looking at the board"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: الموقف بعد الاستعادات، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: The position after recaptures, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "drills",
+        "theme": "crushing"
+      }
+    },
+    {
+      "id": "model-games",
+      "stage": 8,
+      "order": 46,
+      "title": {
+        "ar": "دراسة مباريات الأساتذة بفاعلية",
+        "en": "Studying master games actively"
+      },
+      "theory": {
+        "ar": [
+          "اختر مباراة مرتبطة بافتتاحيتك أو فكرة تريدها. أوقف العرض عند القرار، اكتب مرشحين وخطة، ثم قارن النقلة الفعلية والتقييم المحفوظ. نقلة الأستاذ ليست برهاناً أنها الأفضل؛ بيانات المصدر وميزانية المحرك تحددان قوة المقارنة.",
+          "استخدم مكتبة المباريات الفعلية بعد الدرس، ولا تشاهد 50 نقلة دون توقف للتفكير."
+        ],
+        "en": [
+          "Choose a game linked to your opening or target concept. Pause at a decision, name candidates and a plan, then compare the played move and stored evaluation. A master’s move is not proof of optimality; source quality and engine budget limit the comparison.",
+          "Continue with the real-game library and pause to think rather than passively watch 50 moves."
+        ]
+      },
+      "objective": {
+        "ar": "احسب القرار في لغز موسوم master ثم انتقل للمكتبة.",
+        "en": "Calculate a master-tagged puzzle, then continue to the game library."
+      },
+      "example": {
+        "fen": "8/p1B4p/1p3pk1/6p1/3PQ1P1/2P1nP1K/P3q2P/8 b - - 10 36",
+        "moves": [
+          "g6h6",
+          "e4e3",
+          "e2e3"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "01273",
+          "themes": [
+            "crushing",
+            "defensiveMove",
+            "endgame",
+            "master",
+            "pin",
+            "short"
+          ],
+          "rating": 1750,
+          "label": "Lichess puzzle 01273",
+          "url": "https://lichess.org/game/9n1XKNs2#71",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "كيف تجعل مشاهدة مباراة تدريباً؟",
+          "en": "How can replay become active training?"
+        },
+        "options": [
+          {
+            "ar": "توقع النقلة وقارن تفسيرك",
+            "en": "Predict a move and compare your reasoning"
+          },
+          {
+            "ar": "تشغيل المباراة سريعاً دون توقف",
+            "en": "Replay quickly without pausing"
+          },
+          {
+            "ar": "حفظ اسم الفائز فقط",
+            "en": "Memorise only the winner's name"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: توقع النقلة وقارن تفسيرك، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Predict a move and compare your reasoning, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "masters"
+      }
+    },
+    {
+      "id": "self-analysis",
+      "stage": 8,
+      "order": 47,
+      "title": {
+        "ar": "تحليل مباراتك وسجل الأخطاء",
+        "en": "Self-analysis and an error log"
+      },
+      "theory": {
+        "ar": [
+          "راجع المباراة أولاً دون محرك: أين كنت محتاراً وما الذي حسبته؟ بعد ذلك قارن بالمحرك والشروح، وصنّف السبب إلى تهديد فائت أو حساب أو خطة أو وقت. اختر عادة واحدة وتمريناً مرتبطاً؛ حفظ رقم التقييم وحده لا يغير قرارك القادم.",
+          "اربط الخطأ بسبب وقرار بديل، ثم أعد تطبيق الفكرة بعد أيام."
+        ],
+        "en": [
+          "Review without an engine first: where were you uncertain and what did you calculate? Then compare with analysis and classify the cause: missed threat, calculation, plan or time. Choose one habit and a related exercise; memorising evaluation numbers alone changes little.",
+          "Connect an error to a cause and an alternative decision, then revisit it after a few days."
+        ]
+      },
+      "objective": {
+        "ar": "حل التطبيق ثم افتح تدريب أخطائك من مبارياتك.",
+        "en": "Solve the exercise, then open training from your own games."
+      },
+      "example": {
+        "fen": "8/P1q4p/5pk1/6p1/5P2/6KP/5QP1/7r w - - 0 52",
+        "moves": [
+          "a7a8q",
+          "c7c3",
+          "a8f3"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "00Zks",
+          "themes": [
+            "advancedPawn",
+            "advantage",
+            "defensiveMove",
+            "endgame",
+            "promotion",
+            "short"
+          ],
+          "rating": 1800,
+          "label": "Lichess puzzle 00Zks",
+          "url": "https://lichess.org/game/CPhnVb98/black#102",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "ما أول خطوة في مراجعة ذاتية مفيدة؟",
+          "en": "What is a useful first self-review step?"
+        },
+        "options": [
+          {
+            "ar": "تسجيل أفكارك قبل رؤية المحرك",
+            "en": "Record your thoughts before viewing engine output"
+          },
+          {
+            "ar": "نسخ خط المحرك دون التفكير",
+            "en": "Copy the engine line without thinking"
+          },
+          {
+            "ar": "تسجيل النتيجة فقط",
+            "en": "Record only the result"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: تسجيل أفكارك قبل رؤية المحرك، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: Record your thoughts before viewing engine output, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "personal"
+      }
+    },
+    {
+      "id": "competition",
+      "stage": 8,
+      "order": 48,
+      "title": {
+        "ar": "روتين المنافسة وخطة الاستمرار",
+        "en": "Tournament routine and continued study"
+      },
+      "theory": {
+        "ar": [
+          "قسّم وقت التدريب بين حساب واعٍ، نهايات، ذخيرة افتتاح محدودة ومباريات بوقت يسمح بالتفكير. في اللعب راقب الساعة واستخدم روتين الأمان. بعده راجع قرارين مهمين وحدد تمريناً للمراجعة. إكمال المسار تأسيس وعادات متقدمة، وليس لقباً أو ضمان تصنيف؛ الاحتراف يحتاج ممارسة تنافسية وتقييماً مستمراً.",
+          "اجعل المراجعة المستحقة أول جلسة قصيرة، ثم تابع أول درس غير مكتمل."
+        ],
+        "en": [
+          "Balance calculation, endings, a focused repertoire and games long enough for thought. During play monitor the clock and use the safety routine. Afterwards review two key decisions and choose a follow-up exercise. Finishing this path builds foundations and advanced habits; it does not award a title or guarantee a rating.",
+          "Start a short session with due review, then continue the first unfinished lesson."
+        ]
+      },
+      "objective": {
+        "ar": "طبّق روتين الحساب في التحدي الأخير ثم ضع خطة استمرار.",
+        "en": "Apply the calculation routine in the final challenge, then plan continued study."
+      },
+      "example": {
+        "fen": "3rr1k1/pp2qpb1/2n2n2/4p2p/2P4P/2NBBP2/PPQ2P2/2K3RR b - - 4 17",
+        "moves": [
+          "c6b4",
+          "e3h6",
+          "b4c2",
+          "g1g7",
+          "g8h8"
+        ],
+        "source": {
+          "kind": "puzzle",
+          "id": "016jq",
+          "themes": [
+            "advantage",
+            "long",
+            "middlegame"
+          ],
+          "rating": 2100,
+          "label": "Lichess puzzle 016jq",
+          "url": "https://lichess.org/game/BQ17R23n#33",
+          "license": "CC0-1.0"
+        }
+      },
+      "practice_from": 0,
+      "quiz": {
+        "question": {
+          "ar": "هل إكمال المسار يمنح لقباً معتمداً؟",
+          "en": "Does completing the path award an official title?"
+        },
+        "options": [
+          {
+            "ar": "لا، التقدم هنا خاص بالأنشطة",
+            "en": "No, progress measures these activities"
+          },
+          {
+            "ar": "نعم، يمنح لقب أستاذ دولي",
+            "en": "Yes, it awards an international master title"
+          },
+          {
+            "ar": "نعم، يحدد تصنيفاً رسمياً تلقائياً",
+            "en": "Yes, it automatically assigns an official rating"
+          }
+        ],
+        "answer": 0,
+        "explanation": {
+          "ar": "الفكرة الأساسية: لا، التقدم هنا خاص بالأنشطة، وفق الشرح والمثال في هذا الدرس.",
+          "en": "Key idea: No, progress measures these activities, as illustrated in this lesson."
+        }
+      },
+      "resource": {
+        "type": "personal"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "name": "Lichess Learn",
+      "url": "https://lichess.org/learn",
+      "idea": "Piece movement before basic checks and captures; immediate board feedback.",
+      "reuse": "Ideas only; no lesson code or text copied."
+    },
+    {
+      "name": "Lichess Practice",
+      "url": "https://lichess.org/practice",
+      "idea": "Pattern groups, pawn endings and rook technique.",
+      "reuse": "Ideas only; existing local CC0 puzzles reused with provenance."
+    },
+    {
+      "name": "Chess.com Learn Path",
+      "url": "https://support.chess.com/en/articles/8609703-how-do-lessons-work-on-chess-com",
+      "idea": "Guided levels with explanation and interactive challenge.",
+      "reuse": "Ideas only; proprietary lesson texts and videos not imported."
+    },
+    {
+      "name": "Chess.com study plans",
+      "url": "https://www.chess.com/article/view/study-plan-directory",
+      "idea": "Level-specific work across game phases.",
+      "reuse": "Ideas only; no rating promises copied."
+    },
+    {
+      "name": "GM Neiksans advanced guide",
+      "url": "https://www.chess.com/article/view/gm-arturs-neiksans-advanced-study-guide-1800-elo",
+      "idea": "Advanced training and self-analysis beyond opening recall.",
+      "reuse": "Ideas only."
+    },
+    {
+      "name": "Steps Method public samples",
+      "url": "https://www.stappenmethode.nl/en/material/download/",
+      "idea": "Small skills, progressive difficulty and repeated exercises.",
+      "reuse": "Public samples inspected; copyrighted workbook content not imported."
+    },
+    {
+      "name": "CSC curriculum",
+      "url": "https://www.chessinschools.co.uk/csc-curriculum-lessons",
+      "idea": "A structured sequence divided into short lessons and checks.",
+      "reuse": "Ideas only; worksheets not copied."
+    },
+    {
+      "name": "Chess Tempo opening trainer",
+      "url": "https://chesstempo.com/opening-training/",
+      "idea": "Spaced review and linking repertoire to actual play.",
+      "reuse": "Ideas only; independent simple review schedule."
+    },
+    {
+      "name": "Lila learning stage source",
+      "url": "https://github.com/lichess-org/lila/blob/master/ui/learn/src/stage/list.ts",
+      "idea": "Stage/level separation and explicit board goals.",
+      "reuse": "Architecture inspected; AGPL code not copied."
+    },
+    {
+      "name": "Chessground",
+      "url": "https://github.com/lichess-org/chessground",
+      "idea": "Accessible interactive board, animation and orientation.",
+      "reuse": "Existing project ChessBoardPro reused; no new board library copied."
+    },
+    {
+      "name": "ORBT Chess",
+      "url": "https://github.com/carlvonburg/orbt-chess",
+      "idea": "Repertoire training and spaced repetition.",
+      "reuse": "README inspected; AGPL code not copied."
+    },
+    {
+      "name": "Offline opening trainer",
+      "url": "https://github.com/mateusmazza/chess-opening-trainer",
+      "idea": "Short local sessions and a training loop connected to games.",
+      "reuse": "README inspected; implementation independently written."
+    },
+    {
+      "name": "Lichess openings and puzzles",
+      "url": "https://database.lichess.org/",
+      "idea": "Real local opening paths and tactical exercises.",
+      "reuse": "Existing public data only: CC0; game collection retains its separate CC BY-SA attribution."
+    }
+  ]
+}

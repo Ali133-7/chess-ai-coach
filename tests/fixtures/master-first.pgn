@@ -1,0 +1,70 @@
+[Event "Tata Steel Masters 2024"]
+[Site "Wijk aan Zee, Netherlands"]
+[Date "2024.01.18"]
+[Round "5.4"]
+[White "Praggnanandhaa, R"]
+[Black "Giri, Anish"]
+[Result "1/2-1/2"]
+[WhiteElo "2743"]
+[WhiteTitle "GM"]
+[WhiteFideId "25059530"]
+[BlackElo "2749"]
+[BlackTitle "GM"]
+[BlackFideId "24116068"]
+[Variant "Standard"]
+[ECO "D01"]
+[Opening "Rapport-Jobava System"]
+[StudyName "Round 5"]
+[ChapterName "Praggnanandhaa, R - Giri, Anish"]
+[BroadcastName "Tata Steel Masters 2024"]
+[BroadcastURL "https://lichess.org/broadcast/tata-steel-masters-2024/round-5/cmDGoJr1"]
+[GameURL "https://lichess.org/broadcast/tata-steel-masters-2024/round-5/cmDGoJr1/IChpywEI"]
+
+1. d4 { [%eval 0.15] [%clk 1:40:18] } 1... d5 { [%eval 0.27] [%clk 1:40:52] }
+2. Nc3 { [%eval -0.04] [%clk 1:40:18] } 2... Nf6
+{ [%eval -0.17] [%clk 1:40:38] } 3. Bf4 { [%eval -0.11] [%clk 1:40:41] } 3...
+Bf5 { [%eval 0.0] [%clk 1:36:51] } 4. e3 { [%eval 0.0] [%clk 1:40:50] } 4... e6
+{ [%eval 0.0] [%clk 1:36:51] } 5. Bd3 { [%eval 0.0] [%clk 1:41:14] } 5... Bxd3
+{ [%eval 0.0] [%clk 1:34:02] } 6. cxd3 { [%eval 0.22] [%clk 1:41:24] } 6... Bd6
+{ [%eval 0.21] [%clk 1:34:29] } 7. Qb3 { [%eval 0.32] [%clk 1:35:07] } 7... b6
+{ [%eval 0.21] [%clk 1:33:13] } 8. Bxd6 { [%eval 0.06] [%clk 1:35:17] } 8...
+Qxd6 { [%eval 0.09] [%clk 1:33:15] } 9. Nf3 { [%eval 0.17] [%clk 1:19:15] }
+9... c6 { [%eval 0.22] [%clk 1:17:12] } 10. O-O { [%eval 0.17] [%clk 1:12:40] }
+10... Ng8 { [%eval 0.32] [%clk 1:09:20] } 11. a4
+{ [%eval 0.31] [%clk 1:10:08] } 11... Ne7 { [%eval 0.4] } 12. a5
+{ [%eval 0.23] } 12... b5 { [%eval 0.42] [%clk 1:03:03] } 13. Na2
+{ [%eval 0.4] [%clk 0:46:26] } 13... Na6 { [%eval 0.39] [%clk 1:02:10] } 14.
+Qa3 { [%eval 0.58] [%clk 0:44:20] } 14... b4 { [%eval 0.42] [%clk 1:00:21] }
+15. Qa4 { [%eval 0.55] [%clk 0:44:37] } 15... O-O
+{ [%eval 0.57] [%clk 1:00:43] } 16. Nc1 { [%eval 0.62] [%clk 0:44:46] } 16...
+Rfc8 { [%eval 0.7] [%clk 0:47:14] } 17. Nb3 { [%eval 0.74] [%clk 0:44:42] }
+17... c5 { [%eval 0.7] [%clk 0:47:31] } 18. dxc5
+{ [%eval 0.76] [%clk 0:35:14] } 18... Nxc5 { [%eval 0.64] [%clk 0:47:44] } 19.
+Nxc5 { [%eval 0.66] [%clk 0:35:39] } 19... Qxc5 { [%eval 0.71] [%clk 0:47:59] }
+20. d4 { [%eval 0.66] [%clk 0:36:00] } 20... Qd6
+{ [%eval 0.94] [%clk 0:46:55] } 21. Ne5 { [%eval 0.77] [%clk 0:28:54] } 21...
+f6 { [%eval 0.73] [%clk 0:42:41] } 22. Nd3 { [%eval 0.83] [%clk 0:28:14] }
+22... e5 { [%eval 0.79] [%clk 0:43:02] } 23. dxe5
+{ [%eval 0.73] [%clk 0:25:07] } 23... fxe5 { [%eval 0.88] [%clk 0:43:25] } 24.
+Rac1 { [%eval 0.7] [%clk 0:25:08] } 24... Rxc1 { [%eval 0.8] [%clk 0:40:32] }
+25. Rxc1 { [%eval 0.79] [%clk 0:25:31] } 25... Rb8
+{ [%eval 0.93] [%clk 0:40:55] } 26. h3 { [%eval 0.83] [%clk 0:23:43] } 26... h6
+{ [%eval 0.86] [%clk 0:40:42] } 27. Qd1 $6
+{ [%eval 0.22] Inaccuracy. Nc5 was best. [%clk 0:19:13] } 27... Ng6
+{ [%eval 0.33] [%clk 0:37:43] } 28. Rc2 { [%eval 0.1] [%clk 0:13:44] } 28...
+Kh7 { [%eval 0.55] [%clk 0:35:15] } 29. Nc5 { [%eval 0.67] [%clk 0:11:50] }
+29... Rb5 { [%eval 0.85] [%clk 0:33:03] } 30. Nb3
+{ [%eval 0.76] [%clk 0:11:21] } 30... Rb8 { [%eval 0.83] [%clk 0:30:00] } 31.
+Rc5 { [%eval 0.76] [%clk 0:08:55] } 31... Rd8 { [%eval 0.81] [%clk 0:26:48] }
+32. Qc2 { [%eval 0.81] [%clk 0:09:18] } 32... Qf6
+{ [%eval 0.73] [%clk 0:21:29] } 33. Rc6 { [%eval 0.79] [%clk 0:07:18] } 33...
+Rd6 { [%eval 0.75] [%clk 0:21:39] } 34. Rxd6 { [%eval 0.44] [%clk 0:06:48] }
+34... Qxd6 { [%eval 0.43] [%clk 0:22:08] } 35. Qf5
+{ [%eval 0.44] [%clk 0:06:22] } 35... Kg8 { [%eval 0.42] [%clk 0:13:52] } 36.
+Qc8+ { [%eval 0.47] [%clk 0:06:48] } 36... Kh7 { [%eval 0.44] [%clk 0:14:14] }
+37. Qf5 { [%eval 0.54] [%clk 0:07:12] } 37... Kg8
+{ [%eval 0.44] [%clk 0:14:40] } 38. Qc8+ { [%eval 0.49] [%clk 0:06:47] } 38...
+Kh7 { [%eval 0.31] [%clk 0:15:08] } 39. Qc5 { [%eval 0.13] [%clk 0:03:23] }
+39... Qxc5 { [%eval 0.06] [%clk 0:12:26] } 40. Nxc5
+{ [%eval 0.14] [%clk 0:03:52] } 40... Ne7 { [%eval 0.21] [%clk 0:10:13] } 41.
+Kf1 { [%eval 0.0] [%clk 0:48:23] } 1/2-1/2

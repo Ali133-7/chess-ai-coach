@@ -1,0 +1,85 @@
+/* Original responsive shell. Board rules remain in the existing board component. */
+:root{--tap-size:44px;--mobile-nav-height:70px}
+html{scroll-padding-block:20px}body{min-width:0}
+.main-wrapper,.content,.view,.panel,.cols>*,.play-layout>*,.kc-layout>*,.lp-content>*,.pa-question-layout>*{min-width:0}
+button,input,select,textarea{max-width:100%;font:inherit}
+button,summary,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,select,input:not([type=range]):not([type=checkbox]){min-height:var(--tap-size)}
+button{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent,#087f78);outline-offset:3px}
+h1,h2,h3,p,.game-row,.lesson-card{overflow-wrap:anywhere}
+.chess-board{aspect-ratio:1;flex-shrink:0;max-inline-size:100%}
+.chess-board .square{min-height:0;min-width:0}
+.between,.filter-row,.section-heading,.lp-controls{flex-wrap:wrap}
+.filter-row>*,.form input,.form select,.master-filters>*{min-width:0}
+.content{width:100%;margin-inline:auto;padding-inline:clamp(14px,2.5vw,36px)}
+.section-heading h1{font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.5}
+.mobile-nav,.drawer-backdrop,.drawer-close{display:none}
+.getting-started{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 26px;border:1px solid var(--stroke);border-inline-start:4px solid var(--accent);border-radius:16px;background:var(--panel);margin-block:0 22px}
+.getting-started h2{margin:0 0 7px;font-size:1.15rem}.getting-started p{margin:0;color:var(--muted);line-height:1.8}.getting-started button{flex-shrink:0}
+.view-guide{border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin-block:0 18px}.view-guide summary{padding:12px 16px;cursor:pointer;font-weight:600}.view-guide p{padding:0 16px 14px;margin:0;max-width:75ch;line-height:1.9;color:var(--muted)}
+.lp-dialog[open],.kc-study-dialog[open],.pa-dialog[open]{display:flex;flex-direction:column;inset:0;margin:auto;width:min(1300px,calc(100% - 24px));height:calc(100dvh - 24px);max-height:calc(100dvh - 24px)}
+.lp-header,.kc-study-header{height:auto;min-height:76px;flex-shrink:0;flex-wrap:wrap}
+.lp-header h2,.kc-study-header h2{min-width:0;overflow-wrap:anywhere}.lp-header #lp-close,.kc-study-header #kc-study-close,.pa-dialog #pa-close{flex-shrink:0;width:44px;min-height:44px}
+#lp-content,.kc-study-body,.pa-body{height:auto;flex:1;min-height:0;min-width:0}
+.lp-content{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+.lp-board-panel .chess-board{width:min(100%,calc(100dvh - 320px),600px)}
+.lp-coach,.kc-coach{scrollbar-width:thin;scrollbar-gutter:stable;overflow-x:hidden}
+.lp-phases button{min-width:0;white-space:normal;line-height:1.6;min-height:44px}
+.lp-demo-controls button,.board-control button,.kc-study-header button,.lp-demo-controls select{min-height:44px}
+.kc-study-body{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+.kc-stage .chess-board{width:min(100%,calc(100dvh - 290px),620px)!important}
+.kc-study-progress{flex:none}.kc-stage .kc-line{flex:none;min-height:30px}
+.review-modal[open]{display:flex;flex-direction:column;height:calc(100dvh - 24px)}
+.review-modal #review{flex:1;min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.review-modal #review>.panel{min-width:0}.review-modal .review-modal-close{min-height:44px}
+.chat-composer textarea{min-width:0;width:100%;font-size:16px}.chat-compose-bottom{flex-wrap:wrap}
+.kc-tabs{flex-wrap:wrap}.kc-tabs>button{flex:1 1 130px;min-width:0;white-space:normal}
+.master-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.master-filters label:first-child{grid-column:1/-1}
+@media(min-width:1600px){.content{max-width:1500px}.start-actions{gap:24px}}
+@media(max-width:1100px){.play-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.lp-content,.kc-study-body{gap:16px;padding:16px}}
+@media(max-width:850px){
+ .play-layout{grid-template-columns:minmax(0,1fr)}
+ .review-modal[open]{inset:0;width:100%;height:100dvh;max-height:100dvh;margin:0;border-radius:0}
+ .review-modal #review{display:block;max-height:none;overflow:auto}.review-modal #review>.panel{max-height:none;overflow:visible;margin-block-end:12px}
+ .review-modal #board,.review-modal .review-board-panel:has(#scenario-controls:not([hidden])) #board{max-width:min(100%,520px)}
+}
+@media(max-width:800px){
+ .lp-dialog[open],.kc-study-dialog[open],.pa-dialog[open]{width:100%;height:100dvh;max-height:100dvh;margin:0;border-radius:0;border:0}
+ .lp-header,.kc-study-header{padding:8px 12px;gap:8px;min-height:60px}
+ .lp-header h2{flex:1 1 calc(100% - 60px);font-size:16px;order:0;margin:0}.lp-header #lp-close,.pa-dialog #pa-close{order:1}.lp-header select{order:2;flex:1 1 100px;max-width:180px!important;font-size:13px!important;min-height:44px}
+ .kc-study-header .between{flex:1 1 calc(100% - 60px);min-width:0}.kc-study-header h2{font-size:16px}.kc-study-header .language-select{max-width:120px}.kc-study-header #kc-study-close{order:-1}
+ #lp-content,.kc-study-body{display:block;overflow:auto;overscroll-behavior:contain;padding:12px;height:auto}
+ .lp-board-panel,.kc-stage{gap:8px;min-height:0}
+ .lp-board-panel .chess-board,.kc-stage .chess-board{width:min(100%,430px)!important;margin-inline:auto}
+ .lp-coach,.kc-coach{overflow:visible;margin-top:18px;padding:0 0 24px;scrollbar-gutter:auto}
+ .lp-phases{position:static;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding-bottom:12px}.lp-phases button{font-size:13px;padding:8px}
+ .lp-demo-controls{width:100%;max-width:430px}.lp-demo-controls>div{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}.lp-demo-controls button{font-size:13px;padding:8px 10px}
+ .pa-body{padding:14px}.pa-question-layout{grid-template-columns:minmax(0,1fr)}.pa-question-layout .chess-board{width:min(100%,430px);margin-inline:auto}
+ .lp-source-list{columns:1}.lp-controls{gap:12px}.lp-controls select{width:100%}
+}
+@media(max-width:780px){
+ .app{display:block}.main-wrapper{width:100%}.content{padding:18px 14px calc(var(--mobile-nav-height) + env(safe-area-inset-bottom) + 24px)}
+ .topbar{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:10px 14px;height:auto;min-height:64px;position:sticky;top:0;z-index:40;background:var(--panel);border-bottom:1px solid var(--stroke)}
+ .topbar #page-title{min-width:0;font-size:15px}.top-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;margin:0}.top-actions #current-player{display:none}.top-actions .language-select{font-size:14px;min-width:100px}.top-actions #logout{margin-inline-start:auto}
+ .sidebar{position:fixed;inset-block:0;inset-inline-start:0;inset-inline-end:auto;width:min(300px,88vw);height:100dvh;z-index:160;transform:none!important;visibility:hidden;pointer-events:none;overflow-y:auto;overscroll-behavior:contain;padding:20px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 0 40px #0005}
+ [dir=ltr] .sidebar,[dir=rtl] .sidebar{left:auto;right:auto;inset-inline-start:0;transform:none!important}.sidebar.open{visibility:visible;pointer-events:auto}.sidebar .brand{padding-inline-end:44px}.drawer-close{display:grid;place-items:center;position:absolute;inset-inline-end:14px;top:18px;width:44px;font-size:26px;padding:0;background:var(--panel2);color:var(--text);border:1px solid var(--stroke)}
+ .drawer-backdrop:not([hidden]){display:block;position:fixed;inset:0;z-index:150;background:#07151dbb;border:0;border-radius:0;width:100%;height:100dvh;margin:0;cursor:default}
+ html.drawer-open{overflow:hidden}
+ .mobile-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;inset-inline:0;bottom:0;min-height:var(--mobile-nav-height);padding:5px 6px calc(5px + env(safe-area-inset-bottom));background:var(--panel);border-top:1px solid var(--stroke);z-index:60;box-shadow:0 -5px 24px #0001;gap:3px}
+ .mobile-nav button{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:6px 2px;min-width:0;min-height:58px;font-size:11px;line-height:1.5;background:transparent;color:var(--muted);border:1px solid transparent;border-radius:10px}.mobile-nav button>span:first-child{font-size:21px;line-height:1}.mobile-nav button[aria-current=page]{color:var(--accent);border-color:var(--stroke);background:var(--panel2);font-weight:700}
+ .footer{padding-bottom:calc(var(--mobile-nav-height) + env(safe-area-inset-bottom) + 20px)}#toast{bottom:calc(var(--mobile-nav-height) + env(safe-area-inset-bottom) + 12px)}
+ .getting-started{display:block;padding:18px}.getting-started button{margin-top:14px;width:100%}.start-actions{gap:10px}
+ .lp-stage>header>div,.lp-stage li button>span{min-width:0}.lp-lesson-kind{display:none}.lp-stage li button{gap:12px}
+ .opening-starters{grid-template-columns:repeat(2,minmax(0,1fr))!important}.opening-starters button{font-size:15px;min-height:68px}
+ .master-filters,.master-games,.ap-activities{grid-template-columns:minmax(0,1fr)}.master-filters>label:first-child{grid-column:auto}.master-filters button{width:100%}
+ .kc-tabs{gap:6px}.kc-tabs>button{flex-basis:40%;font-size:14px}.kc-more-tools{width:100%}.kc-more-tools summary{padding-inline:0}
+ .play-setup{padding:14px}.play-setup label,.play-setup select{min-width:0}.play-setup select{flex:1}.training-side,.play-side,.play-board-panel{padding:14px}
+ .board-control{gap:5px;flex-wrap:wrap}.board-control button{padding:8px;min-width:40px}.game-row,.lesson-card{flex-wrap:wrap}
+ input:not([type=range]),select,textarea{font-size:16px}.stats,.rating-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* Short screens use one scroll surface instead of clipping controls or shrinking the board. */
+@media(max-height:560px) and (min-width:801px){
+ #lp-content,.kc-study-body{overflow:auto;align-items:start}.lp-coach,.kc-coach{overflow:visible}.lp-board-panel .chess-board,.kc-stage .chess-board{width:min(100%,360px)!important}.lp-board-panel,.kc-stage{min-height:400px}
+ .review-modal #review{overflow:auto}.review-modal #review>.panel{max-height:none;overflow:visible}.review-modal #board{max-width:min(100%,360px)}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto!important}}

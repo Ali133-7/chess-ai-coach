@@ -1,0 +1,68 @@
+{
+  "source": "Lichess official broadcasts",
+  "source_page": "https://database.lichess.org/#broadcasts",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "archives": [
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-01.pgn.zst",
+      "month": "2024-01",
+      "archive_sha256": "edd008e921e495e0f176967eb81434004692c52ae1cd1fe20e3d03bde37d24fb",
+      "archive_bytes": 8005269,
+      "eligible_headers": 391,
+      "license": "CC-BY-SA-4.0"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-01.pgn.zst",
+      "month": "2025-01",
+      "archive_sha256": "301bb574c3aca71d51a070ef7c43954434c10601e90869a262adf21c38801423",
+      "archive_bytes": 11411195,
+      "eligible_headers": 514,
+      "license": "CC-BY-SA-4.0"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-12.pgn.zst",
+      "month": "2024-12",
+      "archive_sha256": "b2ae52c6cacfc078045760e2f4fd5e8e5ae3d24accf6d02fb8692d3fb5b02e9e",
+      "archive_bytes": 18767695,
+      "eligible_headers": 2343,
+      "license": "CC-BY-SA-4.0"
+    }
+  ],
+  "selected": 1500,
+  "selection": "Completed standard GM-vs-GM records; known year; 10–600 legal plies; deterministic sampling across months with priority for named elite players, event/player caps, deduplication. Not all games on the web.",
+  "changes": "Dates normalized, invalid records and duplicates excluded; legal move explanations and engine analysis added separately.",
+  "rejected": {
+    "known year required": 166,
+    "completed legal standard game required": 26,
+    "invalid continuation": 5,
+    "nonstandard or invalid PGN": 4
+  },
+  "by_month": {
+    "2024-01": 300,
+    "2025-01": 472,
+    "2024-12": 728
+  },
+  "pgn_sha256": "f75ad569e1cc90d490d10e718d7a34fe2189f17db2506aa17bd313b082fc1dba",
+  "stats": {
+    "games": 1500,
+    "moves": 131696,
+    "source_evaluations": 121773,
+    "locally_evaluated_positions": 9177,
+    "years": {
+      "2025": 458,
+      "2024": 1036,
+      "2023": 6
+    },
+    "unique_players": 562,
+    "evaluated_move_coverage_percent": 100
+  },
+  "seed_sha256": "fc6b08f7e3129593b0bfc43eb7f25507ab428ff0e4e7c78f825e6bf903c3dedd",
+  "local_analysis": {
+    "engine": "Stockfish 17.1",
+    "nodes_budget": 5000,
+    "threads": 1,
+    "source": "https://github.com/official-stockfish/Stockfish/releases/tag/sf_17.1",
+    "note": "Source PGN evaluation annotations are preferred when present. Missing positions have bounded local engine estimates. No fabricated evaluations or forced error labels."
+  }
+}

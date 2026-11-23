@@ -1,0 +1,15 @@
+{
+  "name": "chess-ai-coach",
+  "private": true,
+  "version": "7.0.0",
+  "description": "UI regression tests for Chess Studio",
+  "scripts": {
+    "test": "node scripts/run_ui_tests.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "27.2.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

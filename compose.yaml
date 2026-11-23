@@ -1,0 +1,73 @@
+x-runtime: &runtime
+  image: chess-ai-coach:local
+  build: .
+  restart: unless-stopped
+  env_file: .env
+  security_opt: ["no-new-privileges:true"]
+
+services:
+  studio:
+    <<: *runtime
+    environment:
+      STUDIO_DB: /studio-data/studio.sqlite3
+      CHESS_KNOWLEDGE_DB: /studio-data/knowledge.sqlite3
+    ports: ["127.0.0.1:8001:8001"]
+    volumes: ["studiodata:/studio-data"]
+    mem_limit: 512m
+    cpus: "0.6"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+  studio-worker:
+    <<: *runtime
+    command: ["python", "-u", "-m", "studio.worker"]
+    environment:
+      STUDIO_DB: /studio-data/studio.sqlite3
+      STUDIO_ENGINE_THREADS: ${STUDIO_ENGINE_THREADS:-1}
+      STUDIO_ENGINE_HASH_MB: ${STUDIO_ENGINE_HASH_MB:-96}
+      STUDIO_SYNC_SECONDS: ${STUDIO_SYNC_SECONDS:-900}
+    volumes: ["studiodata:/studio-data"]
+    mem_limit: 1024m
+    cpus: "0.8"
+    cpu_shares: 128
+  studio-sync:
+    <<: *runtime
+    command: ["python", "-u", "-m", "studio.syncer"]
+    environment:
+      STUDIO_DB: /studio-data/studio.sqlite3
+    volumes: ["studiodata:/studio-data"]
+    mem_limit: 350m
+    cpus: "0.3"
+  daily-exercises:
+    <<: *runtime
+    profiles: ["automation"]
+    command: ["python", "-u", "scripts/daily_scheduler.py"]
+    environment:
+      STUDIO_DB: /studio-data/studio.sqlite3
+      CHESS_KNOWLEDGE_DB: /studio-data/knowledge.sqlite3
+    volumes: ["studiodata:/studio-data"]
+    cpus: "0.35"
+    cpu_shares: 64
+    mem_limit: 512m
+    pids_limit: 64
+  coach:
+    <<: *runtime
+    profiles: ["legacy"]
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["coachdata:/data"]
+  deep-worker:
+    <<: *runtime
+    profiles: ["legacy"]
+    command: ["python", "-u", "deep_worker.py"]
+    volumes: ["coachdata:/data"]
+    mem_limit: 1536m
+    cpus: "1.0"
+    cpu_shares: 128
+
+volumes:
+  studiodata:
+  coachdata:

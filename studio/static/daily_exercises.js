@@ -1,0 +1,13 @@
+'use strict';
+(()=>{
+ const $=id=>document.getElementById(id),t=(a,b)=>window.I18n?.lang==='en'?b:a,pick=x=>x?.[window.I18n?.lang==='en'?'en':'ar']||'';
+ let daily=null,history=null,puzzle=null;
+ window.renderDailySummary=(d,h)=>{daily=d;history=h;summary();};
+ function summary(){if(!daily)return;const counts=history?.counts||{};$('daily-summary').innerHTML=`<strong>${t('دفعة اليوم','Today’s batch')}: ${daily.published_today} / ${daily.target}</strong><p>${esc(daily.day)} · ${t('تمارين مولدة مع تحقق Stockfish وشرح AI','Generated exercises with Stockfish verification and AI notes')}</p><p>${t('منجز: ','Solved: ')}${counts.solved||0} · ${t('متجاوز: ','Skipped: ')}${counts.skipped||0} · ${t('الجديد يستبعد كل تمرين سبق فتحه.','New recommendations exclude every previously opened exercise.')}</p><p class="tiny">${t('التوليد اليومي يعمل في الخلفية. يظهر العدد الفعلي فقط؛ عند تعذر المزود تُستأنف المحاولة لاحقاً.','Daily generation runs in the background. Only the actual published count is shown; provider failures are retried later.')}</p>`;}
+ window.renderDailyPuzzle=p=>{puzzle=p;render();};
+ function render(){const node=$('daily-explanation'),g=puzzle?.generated;node.hidden=!g;if(!g){node.replaceChildren();return;}const active=puzzle.status==='active';let html=`<h3>${esc(pick(g.title))}</h3><p>${esc(pick(g.instruction))}</p><p class="tiny">${t('مولد وغير مصنف بمعيار Elo','Generated; no calibrated Elo rating')} · ${esc(g.engine.engine)} · ${g.engine.nodes.toLocaleString()} ${t('عقدة (ميزانية)، عمق فعلي ','nodes (budget), actual depth ')}${g.engine.depth}</p>`;
+ if(!active&&g.explanation){const facts=g.verified_facts?.[window.I18n?.lang==='en'?'en':'ar'];html+=`<h4>${t('ما يتغير على الرقعة','What changes on the board')}</h4><p>${esc(facts?.why||'')}</p><h4>${t('شرح المعلّم المولد','AI teacher explanation')}</h4><p>${esc(pick(g.explanation))}</p><p>${esc(pick(g.check))}</p><p class="tiny">${t('الشرح مولد؛ الحل مرجعي من تحليل محدود للمحرك، وليس ضماناً لفوز إجباري.','Notes are AI-generated; the reference solution comes from bounded engine analysis, not a guarantee of a forced win.')}</p>`;}
+ html+=`<details><summary>${t('المصدر والتحقق','Source and verification')}</summary><p>${esc(g.source.white)} × ${esc(g.source.black)} · ${esc(g.source.date)} · ${t('الوضعية بعد النقلة المفردة ','Position after ply ')}${g.source.ply}</p><p>${esc(g.provider)} · ${esc(g.model)}</p><p>CC BY-SA 4.0 · ${t('وضعية مختارة، مع إضافة تحليل وشروح.','Selected position with added analysis and notes.')}</p><a target="_blank" rel="noopener noreferrer" href="${esc(g.source.url)}">${t('المباراة الأصلية','Original game')}</a></details>`;node.innerHTML=html;
+ }
+ document.addEventListener('languagechange',()=>{summary();render();});
+})();

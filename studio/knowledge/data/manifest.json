@@ -1,0 +1,174 @@
+{
+  "retrieved_at": "2026-11-20T09:31:45.967902+00:00",
+  "sources": [
+    {
+      "file": "a.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/a.tsv",
+      "license": "CC0-1.0",
+      "sha256": "3282e4c9155289a29224f9a85fba0decb46efa35c2fa5e39662d2ac48fb0f793",
+      "bytes": 67257,
+      "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+    },
+    {
+      "file": "b.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/b.tsv",
+      "license": "CC0-1.0",
+      "sha256": "2744a3890879bd9dce79093147fe5b6c3a9d9d42a3388af698e67b6829be1c48",
+      "bytes": 78137,
+      "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+    },
+    {
+      "file": "c.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+      "license": "CC0-1.0",
+      "sha256": "447bbd4b15d68067b150faf12bf66aa14b18582cf80d736aaa7c0081131806ef",
+      "bytes": 132304,
+      "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+    },
+    {
+      "file": "d.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/d.tsv",
+      "license": "CC0-1.0",
+      "sha256": "1cf4057a8aece94f27bb3f278ad410ee2844831a642364eeceaafa091dbcceda",
+      "bytes": 73318,
+      "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+    },
+    {
+      "file": "e.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/e.tsv",
+      "license": "CC0-1.0",
+      "sha256": "48c6f6645b031a5937c8386839debab0e2e48837251687ba1afb6369677f8546",
+      "bytes": 44061,
+      "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+    },
+    {
+      "file": "COPYING.txt",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/COPYING.txt",
+      "license": "CC0-1.0",
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "bytes": 7048,
+      "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+    },
+    {
+      "file": "puzzles-sample.csv",
+      "url": "https://database.lichess.org/lichess_db_puzzle.csv.zst",
+      "license": "CC0-1.0",
+      "sha256": "8c4c96b9bce7f8e4e222570ad7d421c28bcb7f228979e8da697354c156c494cf",
+      "bytes": 949962,
+      "scope": "bounded prefix sample, not the full dataset",
+      "records": 5000,
+      "compressed_bytes_read": 327680,
+      "last_modified": "Sun, 01 Nov 2026 07:57:40 GMT"
+    },
+    {
+      "file": "evaluations-sample.jsonl",
+      "url": "https://database.lichess.org/lichess_db_eval.jsonl.zst",
+      "license": "CC0-1.0",
+      "sha256": "0b785a82707c417a266bda7092b5ebe41acb53b0900fe49dedc43e40f31a70f0",
+      "bytes": 720470,
+      "scope": "bounded prefix sample, not the full dataset",
+      "records": 1000,
+      "compressed_bytes_read": 163840,
+      "last_modified": "Sun, 01 Nov 2026 17:23:27 GMT"
+    },
+    {
+      "file": "syzygy/KQvK.rtbw",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-wdl/KQvK.rtbw",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "517667dff787162dbb1ed9d5d6484d30ee854e686ee0675c08d99ecf045d2d50",
+      "bytes": 272,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KQvK.rtbz",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-dtz/KQvK.rtbz",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "71ea9444fa5bd42897d781a0c356975ea6f23e0f65a4254e470897031c161c8c",
+      "bytes": 5392,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KRvK.rtbw",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-wdl/KRvK.rtbw",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "386fbde73308e49a4207836922c68b30b664e83c5a37f7fa37305a15cd16f2f1",
+      "bytes": 208,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KRvK.rtbz",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-dtz/KRvK.rtbz",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "cab59f42e75c2a25da3939231850a79fa838593fff5c28d7772da92062ed965a",
+      "bytes": 7632,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KBvK.rtbw",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-wdl/KBvK.rtbw",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "bc0d8ab3560de9038460f0e8f61e3b7efd3e3d0327d19ae0387c0da7ddeb244d",
+      "bytes": 80,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KBvK.rtbz",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-dtz/KBvK.rtbz",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "6246c8a5c643eec9d4758d55ed843e31cc28a9b82a6f630c1c950d8b7755975b",
+      "bytes": 80,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KNvK.rtbw",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-wdl/KNvK.rtbw",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "9d3518b12df3d2006441df758bce31e961346e70a11920aaad75c647003bb6e7",
+      "bytes": 80,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KNvK.rtbz",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-dtz/KNvK.rtbz",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "0e49a0f2810a131c32fc14872e83044aa9810ce2c86df071851512077291fc25",
+      "bytes": 80,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KPvK.rtbw",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-wdl/KPvK.rtbw",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "02fd2bdcd92821c869458f019f63524def1c9e7a2862ca8d2b16dc7712b16183",
+      "bytes": 7824,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "syzygy/KPvK.rtbz",
+      "url": "https://tablebase.lichess.ovh/tables/standard/3-4-5-dtz/KPvK.rtbz",
+      "license": "Redistribution permitted by Syzygy generator author",
+      "sha256": "ad01af2076183c90ccee662ca6c5d74da3222ff1fee47c01b5d4e56ed01938de",
+      "bytes": 4176,
+      "terms": "https://github.com/syzygy1/tb#terms-of-use"
+    },
+    {
+      "file": "explorer-seed.json",
+      "url": "https://explorer.lichess.org/lichess",
+      "license": "Lichess factual API statistics; underlying games CC0",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "positions": 0,
+      "scope": "rated standard rapid/classical, rating buckets 1600/1800/2000/2200"
+    },
+    {
+      "file": "masters-seed.json",
+      "url": "https://explorer.lichess.org/masters",
+      "license": "Public API aggregate facts; no game PGNs mirrored; not asserted CC0",
+      "sha256": "4575d8c9fc2ef69672300bb9747cca606393284b2a32d64c6304d94366076991",
+      "bytes": 9914,
+      "positions": 8,
+      "scope": "Lichess Masters aggregate sample; distinct from Lichess rated-player statistics"
+    }
+  ],
+  "openings_revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+}

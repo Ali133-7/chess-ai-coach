@@ -1,0 +1,2423 @@
+{
+  "version": "traps-v1",
+  "catalogue_entries": 14,
+  "count": 19,
+  "method": "All 14 Trap-named entries in the pinned opening catalogue plus five classic examples. Branches are conditional examples, not an exhaustive set of all chess traps. Explanations written for this project; legal moves, outcomes and sampled engine lines verified.",
+  "items": [
+    {
+      "id": "3f5ab9f47d4344562028ea44",
+      "opening_id": "3f5ab9f47d4344562028ea44",
+      "name": "Kádas Opening: Beginner's Trap",
+      "name_ar": "فخ القلعة المبكرة — كاداس",
+      "eco": "A00",
+      "pgn": "1. h4 d5 2. Rh3 Bxh3 Nxh3",
+      "source_pgn": "1. h4 d5 2. Rh3",
+      "side": "black",
+      "setup_ply": 2,
+      "mistake_ply": 3,
+      "punish_ply": 4,
+      "safe_san": "d4",
+      "idea": {
+        "ar": "دفع ...d5 يفتح قطر فيل c8 نحو h3. إخراج القلعة إلى هذا القطر يتيح أخذها بالفيل.",
+        "en": "...d5 opens the c8 bishop’s diagonal toward h3. An early rook move onto it allows a bishop capture."
+      },
+      "benefit": {
+        "ar": "بعد ...Bxh3 وNxh3 استبدل الأسود فيلاً بقلعة، أي كسب فرق الجودة في المثال.",
+        "en": "After ...Bxh3 and Nxh3, Black has traded a bishop for a rook: an exchange gain in this example."
+      },
+      "avoid": {
+        "ar": "بالأبيض، أبقِ القلعة في مكانها وطوّر المركز؛ 2.d4 يتجنب خسارة الجودة المباشرة.",
+        "en": "As White, keep the rook home and develop the center; 2.d4 avoids the immediate exchange loss."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "h2h4",
+        "d7d5",
+        "h1h3",
+        "c8h3",
+        "g1h3"
+      ],
+      "safe_moves": [
+        "h2h4",
+        "d7d5",
+        "d2d4",
+        "c7c5",
+        "e2e3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -28,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300272,
+          "pv": [
+            "d2d4",
+            "c7c5",
+            "e2e3",
+            "g8f6",
+            "c2c4",
+            "c5d4",
+            "e3d4",
+            "c8g4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -277,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300249,
+          "pv": [
+            "c8h3",
+            "g1h3",
+            "g8f6",
+            "g2g3",
+            "e7e5",
+            "f1g2",
+            "c7c6",
+            "d2d3"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -39,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300127,
+          "pv": [
+            "c7c5",
+            "e2e3"
+          ]
+        },
+        "end": {
+          "cp_white": -284,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300348,
+          "pv": [
+            "g8f6",
+            "c2c4",
+            "d5d4",
+            "g2g3",
+            "b8d7",
+            "d1b3",
+            "d7c5",
+            "b3f3"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/a.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 3
+    },
+    {
+      "id": "064e19f44bc7b5f6e36bf706",
+      "opening_id": "064e19f44bc7b5f6e36bf706",
+      "name": "Ware Opening: Meadow Hay Trap",
+      "name_ar": "فخ ميدو هاي — وير",
+      "eco": "A00",
+      "pgn": "1. a4 e5 2. Ra3 Bxa3 Nxa3",
+      "source_pgn": "1. a4 e5 2. Ra3",
+      "side": "black",
+      "setup_ply": 2,
+      "mistake_ply": 3,
+      "punish_ply": 4,
+      "safe_san": "e4",
+      "idea": {
+        "ar": "بعد ...e5 ينفتح قطر فيل f8 إلى a3. القلعة المبكرة على a3 تصبح هدفاً للأخذ.",
+        "en": "...e5 opens the f8 bishop’s diagonal to a3. The prematurely developed rook becomes a capture target."
+      },
+      "benefit": {
+        "ar": "...Bxa3 ثم Nxa3 يعطي الأسود قلعة مقابل فيل. الفائدة مادية، لا هجوم مات.",
+        "en": "...Bxa3 followed by Nxa3 gives Black a rook for a bishop. The gain is material, not a mating attack."
+      },
+      "avoid": {
+        "ar": "بالأبيض، 2.e4 ينافس على المركز دون تعريض القلعة لقطر الفيل.",
+        "en": "As White, 2.e4 contests the center without putting the rook on the bishop’s diagonal."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "a2a4",
+        "e7e5",
+        "a1a3",
+        "f8a3",
+        "b1a3"
+      ],
+      "safe_moves": [
+        "a2a4",
+        "e7e5",
+        "e2e4",
+        "g8f6",
+        "b1c3",
+        "f8b4",
+        "c3d5",
+        "b4c5"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -3,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300034,
+          "pv": [
+            "e2e4",
+            "g8f6",
+            "b1c3",
+            "d7d5",
+            "e4d5",
+            "f6d5",
+            "g1f3",
+            "b8c6"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -275,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300312,
+          "pv": [
+            "f8a3",
+            "b1a3",
+            "g8f6",
+            "e2e3",
+            "d8e7",
+            "b2b3",
+            "d7d6",
+            "g2g3"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -16,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300336,
+          "pv": [
+            "g8f6",
+            "b1c3",
+            "f8b4",
+            "c3d5",
+            "b4c5",
+            "d5f6",
+            "d8f6",
+            "g1f3"
+          ]
+        },
+        "end": {
+          "cp_white": -263,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300275,
+          "pv": [
+            "g8f6",
+            "e2e3",
+            "d7d6",
+            "d2d4",
+            "e8g8",
+            "g1e2",
+            "b8c6",
+            "d4d5"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/a.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 3
+    },
+    {
+      "id": "ebcf4c257da7ac5ddb110065",
+      "opening_id": "ebcf4c257da7ac5ddb110065",
+      "name": "Zukertort Opening: Tennison Gambit, Brigg's Trap",
+      "name_ar": "فخ بريغ — تينيسون",
+      "eco": "A06",
+      "pgn": "1. e4 d5 2. Nf3 dxe4 3. Ng5 Nf6 4. Nc3 Bf5 5. Qe2 Qd4 Qb5+ Bd7 Qxb7 Qb6 Qxa8",
+      "source_pgn": "1. e4 d5 2. Nf3 dxe4 3. Ng5 Nf6 4. Nc3 Bf5 5. Qe2 Qd4",
+      "side": "white",
+      "setup_ply": 9,
+      "mistake_ply": 10,
+      "punish_ply": 11,
+      "safe_san": "Nc6",
+      "idea": {
+        "ar": "ينتقل الوزير من e2 إلى b5 بكش، مع الضغط على b7 وخلفه قلعة a8 بعد خروج وزير الأسود إلى d4.",
+        "en": "The queen goes from e2 to b5 with check, pressuring b7 and the a8 rook after Black’s queen has moved to d4."
+      },
+      "benefit": {
+        "ar": "الكش يمنح الأبيض وقتاً للأخذ على b7؛ في الردود المعروضة يصل الوزير إلى a8 ويأخذ القلعة.",
+        "en": "The check gains time to capture on b7; against the illustrated replies, the queen reaches a8 and takes the rook."
+      },
+      "avoid": {
+        "ar": "بالأسود، لا تحرّك الوزير إلى d4 آلياً. الرد البديل المعروض من المحرك يتفادى هذا التسلسل.",
+        "en": "As Black, do not automatically play ...Qd4. The displayed engine alternative avoids this sequence."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "d7d5",
+        "g1f3",
+        "d5e4",
+        "f3g5",
+        "g8f6",
+        "b1c3",
+        "c8f5",
+        "d1e2",
+        "d8d4",
+        "e2b5",
+        "f5d7",
+        "b5b7",
+        "d4b6",
+        "b7a8"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "d7d5",
+        "g1f3",
+        "d5e4",
+        "f3g5",
+        "g8f6",
+        "b1c3",
+        "c8f5",
+        "d1e2",
+        "b8c6",
+        "e2c4",
+        "e7e6"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -193,
+          "mate_white": null,
+          "depth": 22,
+          "nodes": 300065,
+          "pv": [
+            "b8c6",
+            "e2c4",
+            "e7e6",
+            "g5e4",
+            "f6e4",
+            "c3e4",
+            "c6d4",
+            "c4a4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": 374,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300030,
+          "pv": [
+            "e2b5"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -207,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300014,
+          "pv": [
+            "e2c4",
+            "e7e6"
+          ]
+        },
+        "end": {
+          "cp_white": 360,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300224,
+          "pv": [
+            "d7c6",
+            "f1b5",
+            "c6b5",
+            "c3b5",
+            "b6b5",
+            "a2a4",
+            "b5g5",
+            "a8b8"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 5
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/a.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 10
+    },
+    {
+      "id": "8fa5437871af78783d8b16be",
+      "opening_id": "8fa5437871af78783d8b16be",
+      "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Siberian Variation, Siberian Trap",
+      "name_ar": "فخ سيبيريا — جامبيت مورا",
+      "eco": "B21",
+      "pgn": "1. e4 c5 2. d4 cxd4 3. c3 dxc3 4. Nxc3 Nc6 5. Nf3 e6 6. Bc4 Qc7 7. Qe2 Nf6 8. O-O Ng4 h3 Nd4 Nxd4 Qh2#",
+      "source_pgn": "1. e4 c5 2. d4 cxd4 3. c3 dxc3 4. Nxc3 Nc6 5. Nf3 e6 6. Bc4 Qc7 7. Qe2 Nf6 8. O-O Ng4",
+      "side": "black",
+      "setup_ply": 16,
+      "mistake_ply": 17,
+      "punish_ply": 18,
+      "safe_san": "Rd1",
+      "idea": {
+        "ar": "حصان g4 يحمي h2 والوزير c7 يراقب القطر نحوه. h3 يسمح بـ...Nd4 مع هجوم على الوزير؛ وNxd4 لاحقاً يترك h2 بلا مدافع كافٍ.",
+        "en": "The g4 knight protects h2 and the c7 queen has a diagonal toward it. h3 allows ...Nd4 to attack the queen; a later Nxd4 removes h2’s defender."
+      },
+      "benefit": {
+        "ar": "بعد Nxd4 يأتي ...Qh2#؛ المات في هذا الفرع مثبت بقانونية الوضعية، وليس بتقدير احتمالي.",
+        "en": "After Nxd4 comes ...Qh2#. Checkmate in this branch is verified by the legal position, not estimated."
+      },
+      "avoid": {
+        "ar": "بالأبيض، 9.Rd1 بدلاً من h3 يتجنب هذا التسلسل. بعد h3 و...Nd4، الأخذ hxg4 يمنع المات الفوري لكنه يظل يخسر مادة.",
+        "en": "As White, 9.Rd1 instead of h3 avoids this sequence. After h3 and ...Nd4, hxg4 stops immediate mate but still loses material."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "c7c5",
+        "d2d4",
+        "c5d4",
+        "c2c3",
+        "d4c3",
+        "b1c3",
+        "b8c6",
+        "g1f3",
+        "e7e6",
+        "f1c4",
+        "d8c7",
+        "d1e2",
+        "g8f6",
+        "e1g1",
+        "f6g4",
+        "h2h3",
+        "c6d4",
+        "f3d4",
+        "c7h2"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "c7c5",
+        "d2d4",
+        "c5d4",
+        "c2c3",
+        "d4c3",
+        "b1c3",
+        "b8c6",
+        "g1f3",
+        "e7e6",
+        "f1c4",
+        "d8c7",
+        "d1e2",
+        "g8f6",
+        "e1g1",
+        "f6g4",
+        "f1d1",
+        "f8c5"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 39,
+          "mate_white": null,
+          "depth": 17,
+          "nodes": 300349,
+          "pv": [
+            "f1d1",
+            "f8e7"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -272,
+          "mate_white": null,
+          "depth": 17,
+          "nodes": 300074,
+          "pv": [
+            "c6d4",
+            "h3g4",
+            "d4e2",
+            "c4e2",
+            "a7a6",
+            "c1e3",
+            "f8c5",
+            "e3c5"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 31,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300182,
+          "pv": [
+            "f8c5"
+          ]
+        },
+        "end": {
+          "terminal": true,
+          "result": "0-1",
+          "cp_white": null,
+          "mate_white": null,
+          "pv": [],
+          "depth": 0,
+          "nodes": 0
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 2
+      },
+      "classification": "mate-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/b.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 16
+    },
+    {
+      "id": "a80721e6a5b5c2dc92b235ff",
+      "opening_id": "a80721e6a5b5c2dc92b235ff",
+      "name": "Sicilian Defense: Magnus Smith Trap",
+      "name_ar": "فخ ماغنوس سميث",
+      "eco": "B57",
+      "pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 d6 6. Bc4 g6 7. Nxc6 bxc6 8. e5 dxe5 Bxf7+ Kxf7 Qxd8",
+      "source_pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 d6 6. Bc4 g6 7. Nxc6 bxc6 8. e5",
+      "side": "white",
+      "setup_ply": 15,
+      "mistake_ply": 16,
+      "punish_ply": 17,
+      "safe_san": "Ng4",
+      "idea": {
+        "ar": "دفع e5 يهاجم حصان f6. الأخذ ...dxe5 يفتح للوزير الأبيض خط d ويتيح ضربة على f7.",
+        "en": "e5 attacks the f6 knight. ...dxe5 opens the d-file for White’s queen and permits a blow on f7."
+      },
+      "benefit": {
+        "ar": "Bxf7+ يجذب الملك بعيداً عن e8؛ وبعد ...Kxf7 يأخذ Qxd8 وزير الأسود في المثال.",
+        "en": "Bxf7+ draws the king away from e8; after ...Kxf7, Qxd8 captures Black’s queen in this example."
+      },
+      "avoid": {
+        "ar": "بالأسود، انقل الحصان مثل ...Ng4 بدلاً من فتح خط الوزير بالأخذ ...dxe5.",
+        "en": "As Black, move the knight, for example ...Ng4, rather than opening the queen’s file with ...dxe5."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "b8c6",
+        "d2d4",
+        "c5d4",
+        "f3d4",
+        "g8f6",
+        "b1c3",
+        "d7d6",
+        "f1c4",
+        "g7g6",
+        "d4c6",
+        "b7c6",
+        "e4e5",
+        "d6e5",
+        "c4f7",
+        "e8f7",
+        "d1d8"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "b8c6",
+        "d2d4",
+        "c5d4",
+        "f3d4",
+        "g8f6",
+        "b1c3",
+        "d7d6",
+        "f1c4",
+        "g7g6",
+        "d4c6",
+        "b7c6",
+        "e4e5",
+        "f6g4",
+        "c1f4",
+        "d6d5",
+        "c3d5",
+        "f8g7",
+        "d5c3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 50,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300000,
+          "pv": [
+            "f6g4",
+            "c1f4",
+            "d6d5",
+            "c3d5",
+            "f8g7",
+            "d5c3",
+            "d8d1",
+            "a1d1"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": 496,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300161,
+          "pv": [
+            "c4f7",
+            "e8f7",
+            "d1d8",
+            "f8g7",
+            "d8d3",
+            "c8f5",
+            "d3e2",
+            "h8b8"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 46,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300298,
+          "pv": [
+            "c1f4",
+            "d6d5",
+            "c3d5",
+            "f8g7",
+            "d5c3",
+            "d8d1",
+            "a1d1",
+            "g7e5"
+          ]
+        },
+        "end": {
+          "cp_white": 506,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300212,
+          "pv": [
+            "f8g7",
+            "d8d3",
+            "c8e6",
+            "f2f3",
+            "h8d8",
+            "d3e2",
+            "d8d4",
+            "c1e3"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 6
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/b.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 15
+    },
+    {
+      "id": "bcd91c83474880a27432e10d",
+      "opening_id": "bcd91c83474880a27432e10d",
+      "name": "Vienna Game: Vienna Gambit, Wurzburger Trap",
+      "name_ar": "فخ فورتسبورغ — فيينا",
+      "eco": "C29",
+      "pgn": "1. e4 e5 2. Nc3 Nf6 3. f4 d5 4. fxe5 Nxe4 5. d3 Qh4+ 6. g3 Nxg3 7. Nf3 Qh5 8. Nxd5 Nxh1 Nxc7+ Kd8 Nxa8",
+      "source_pgn": "1. e4 e5 2. Nc3 Nf6 3. f4 d5 4. fxe5 Nxe4 5. d3 Qh4+ 6. g3 Nxg3 7. Nf3 Qh5 8. Nxd5",
+      "side": "white",
+      "setup_ply": 15,
+      "mistake_ply": 16,
+      "punish_ply": 17,
+      "safe_san": "Bg4",
+      "idea": {
+        "ar": "الأبيض يترك قلعة h1 مؤقتاً ويلعب Nxd5 مع فكرة شوكة Nc7+ بين الملك وقلعة a8.",
+        "en": "White temporarily leaves the h1 rook and plays Nxd5 with the idea of Nc7+, forking the king and a8 rook."
+      },
+      "benefit": {
+        "ar": "إذا اندفع الأسود إلى ...Nxh1، يرد الأبيض بشوكة كش ثم يأخذ قلعة a8. الفكرة تعويض ونشاط، لا قلعة مجانية.",
+        "en": "If Black rushes into ...Nxh1, White forks with check and then takes a8. This is compensation and activity, not a free rook."
+      },
+      "avoid": {
+        "ar": "بالأسود، ...Bg4 يعالج الموقف بنشاط بدلاً من أخذ القلعة فوراً.",
+        "en": "As Black, ...Bg4 addresses the position actively instead of immediately taking the rook."
+      },
+      "warning": {
+        "ar": "استرداد القلعة وحده لا يثبت فوزاً؛ راقب مصير الحصانين والتهديدات اللاحقة.",
+        "en": "Recovering a rook alone does not prove a win; watch both knights and the follow-up threats."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "b1c3",
+        "g8f6",
+        "f2f4",
+        "d7d5",
+        "f4e5",
+        "f6e4",
+        "d2d3",
+        "d8h4",
+        "g2g3",
+        "e4g3",
+        "g1f3",
+        "h4h5",
+        "c3d5",
+        "g3h1",
+        "d5c7",
+        "e8d8",
+        "c7a8"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "b1c3",
+        "g8f6",
+        "f2f4",
+        "d7d5",
+        "f4e5",
+        "f6e4",
+        "d2d3",
+        "d8h4",
+        "g2g3",
+        "e4g3",
+        "g1f3",
+        "h4h5",
+        "c3d5",
+        "c8g4",
+        "d5f4",
+        "g4f3",
+        "f4h5",
+        "f3d1",
+        "h2g3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 33,
+          "mate_white": null,
+          "depth": 16,
+          "nodes": 300195,
+          "pv": [
+            "g3h1",
+            "d5c7"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": 11,
+          "mate_white": null,
+          "depth": 16,
+          "nodes": 300157,
+          "pv": [
+            "d5c7",
+            "e8d8"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 47,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300102,
+          "pv": [
+            "d5f4",
+            "g4f3",
+            "f4h5",
+            "f3d1",
+            "h2g3",
+            "d1f3",
+            "h1h2",
+            "b8c6"
+          ]
+        },
+        "end": {
+          "cp_white": 12,
+          "mate_white": null,
+          "depth": 15,
+          "nodes": 300195,
+          "pv": [
+            "c8g4",
+            "f1g2",
+            "b8c6",
+            "d3d4",
+            "d8c8",
+            "g2h1",
+            "f7f6",
+            "c1e3"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 1
+      },
+      "classification": "counterplay",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 15
+    },
+    {
+      "id": "41802bf766869f80ca46a0dc",
+      "opening_id": "41802bf766869f80ca46a0dc",
+      "name": "Petrov's Defense: Classical Attack, Marshall Trap",
+      "name_ar": "فخ مارشال — بتروف",
+      "eco": "C42",
+      "pgn": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4 d5 6. Bd3 Bd6 7. O-O O-O 8. c4 Bg4 9. cxd5 f5 10. Re1 Bxh2+ Kxh2 Nxf2 Qe2 Nxd3 Qxd3 Bxf3 Qxf3 Qh4+ Kg1 Qxe1+",
+      "source_pgn": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4 d5 6. Bd3 Bd6 7. O-O O-O 8. c4 Bg4 9. cxd5 f5 10. Re1 Bxh2+",
+      "side": "black",
+      "setup_ply": 20,
+      "mistake_ply": 21,
+      "punish_ply": 22,
+      "safe_san": "Kf1",
+      "idea": {
+        "ar": "...Bxh2+ يعرض فيلاً ويفتح غطاء الملك. قبول العرض بالملك يتيح ...Nxf2 بشوكة للوزير والفيل.",
+        "en": "...Bxh2+ offers a bishop and opens the king’s cover. Accepting with the king permits ...Nxf2, forking queen and bishop."
+      },
+      "benefit": {
+        "ar": "في الخط المعروض تُزال القطع المدافعة عن h4، ثم يأتي كش بالوزير وأخذ قلعة e1.",
+        "en": "In the displayed line, defenders of h4 are removed, followed by a queen check and capture of the e1 rook."
+      },
+      "avoid": {
+        "ar": "لا تُجبر نفسك على Kxh2؛ Kf1 رد قانوني يتجنب فرع القبول المعروض.",
+        "en": "You are not forced to play Kxh2; Kf1 is a legal way to avoid the illustrated acceptance branch."
+      },
+      "warning": {
+        "ar": "...Bxh2+ ليس إثباتاً لفوز إجباري أمام كل رد. نقل الملك إلى f1 يغيّر الحساب.",
+        "en": "...Bxh2+ does not establish a forced win against every reply. Moving the king to f1 changes the calculation."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "g8f6",
+        "f3e5",
+        "d7d6",
+        "e5f3",
+        "f6e4",
+        "d2d4",
+        "d6d5",
+        "f1d3",
+        "f8d6",
+        "e1g1",
+        "e8g8",
+        "c2c4",
+        "c8g4",
+        "c4d5",
+        "f7f5",
+        "f1e1",
+        "d6h2",
+        "g1h2",
+        "e4f2",
+        "d1e2",
+        "f2d3",
+        "e2d3",
+        "g4f3",
+        "d3f3",
+        "d8h4",
+        "h2g1",
+        "h4e1"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "g8f6",
+        "f3e5",
+        "d7d6",
+        "e5f3",
+        "f6e4",
+        "d2d4",
+        "d6d5",
+        "f1d3",
+        "f8d6",
+        "e1g1",
+        "e8g8",
+        "c2c4",
+        "c8g4",
+        "c4d5",
+        "f7f5",
+        "f1e1",
+        "d6h2",
+        "g1f1",
+        "d8e8",
+        "b1d2"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -54,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300221,
+          "pv": [
+            "g1f1"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -143,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300064,
+          "pv": [
+            "e4f2"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -54,
+          "mate_white": null,
+          "depth": 17,
+          "nodes": 300132,
+          "pv": [
+            "d8e8",
+            "b1d2"
+          ]
+        },
+        "end": {
+          "cp_white": -445,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300042,
+          "pv": [
+            "f3f1",
+            "e1f1",
+            "g1f1",
+            "b8d7",
+            "c1f4",
+            "d7b6",
+            "b1c3",
+            "f8f7"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -3
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 20
+    },
+    {
+      "id": "8d422cd4f14aafb58843aeec",
+      "opening_id": "8d422cd4f14aafb58843aeec",
+      "name": "Ruy Lopez: Berlin Defense, Anti-Berlin Variation, Mortimer Trap",
+      "name_ar": "فخ مورتيمر",
+      "eco": "C65",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. d3 Ne7 5. Nxe5 c6 Bc4 Qa5+ Nc3 Qxe5",
+      "source_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. d3 Ne7 5. Nxe5 c6",
+      "side": "black",
+      "setup_ply": 8,
+      "mistake_ply": 9,
+      "punish_ply": 10,
+      "safe_san": "Nc3",
+      "idea": {
+        "ar": "...Ne7 يعرض بيدق e5 ظاهرياً. بعد Nxe5 يأتي ...c6 لطرد الفيل ثم ...Qa5+ بكش وهجوم على الحصان.",
+        "en": "...Ne7 apparently offers e5. After Nxe5, ...c6 drives the bishop away and ...Qa5+ checks while attacking the knight."
+      },
+      "benefit": {
+        "ar": "الكش المزدوج الهدف يسمح للوزير بأخذ حصان e5 في هذا الخط؛ كسب بيدق مبكر لا يعوّض خسارة قطعة.",
+        "en": "The double-purpose check lets the queen take e5 in this line; an early pawn does not compensate for losing a piece."
+      },
+      "avoid": {
+        "ar": "بالأبيض، 5.Nc3 يطوّر قطعة دون التقاط بيدق e5 المعروض.",
+        "en": "As White, 5.Nc3 develops a piece without grabbing the offered e5 pawn."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "g8f6",
+        "d2d3",
+        "c6e7",
+        "f3e5",
+        "c7c6",
+        "b5c4",
+        "d8a5",
+        "b1c3",
+        "a5e5"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "g8f6",
+        "d2d3",
+        "c6e7",
+        "b1c3",
+        "c7c6",
+        "b5c4"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 45,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300172,
+          "pv": [
+            "b5c4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -173,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300269,
+          "pv": [
+            "c7c6"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 40,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300049,
+          "pv": [
+            "c7c6",
+            "b5c4"
+          ]
+        },
+        "end": {
+          "cp_white": -244,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300027,
+          "pv": [
+            "d3d4",
+            "e5h5",
+            "c4e2",
+            "h5a5",
+            "c1d2",
+            "a5b6",
+            "e4e5",
+            "f6d5"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 10
+    },
+    {
+      "id": "325e5cf2b46ecc1bdc5befbd",
+      "opening_id": "325e5cf2b46ecc1bdc5befbd",
+      "name": "Ruy Lopez: Berlin Defense, Tarrasch Trap",
+      "name_ar": "فخ تاراش — دفاع شتاينيتز",
+      "eco": "C66",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 d6 4. d4 Bd7 5. Nc3 Nf6 6. O-O Be7 7. Re1 O-O Bxc6 Bxc6 dxe5 dxe5 Qxd8 Raxd8 Nxe5 Bxe4 Nxe4 Nxe4 Nd3 f5 f3 Bc5+ Nxc5 Nxc5 Bg5 Rd5 Be7 Re8 c4 Rxe7 cxd5",
+      "source_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 d6 4. d4 Bd7 5. Nc3 Nf6 6. O-O Be7 7. Re1 O-O",
+      "side": "white",
+      "setup_ply": 13,
+      "mistake_ply": 14,
+      "punish_ply": 15,
+      "safe_san": "exd4",
+      "idea": {
+        "ar": "تكديس الضغط على e5 ثم تبديل الفيلين والوزيرين يكشف تكتيكاً ضد قطع الأسود بعد التبييت المتعجل.",
+        "en": "Pressure on e5 followed by bishop and queen exchanges reveals tactics against Black after premature castling."
+      },
+      "benefit": {
+        "ar": "يعرض الدرس استمراراً ينتهي بكسب فرق الجودة. النقلات الوسطية مهمة؛ مجرد التبييت لا يعني سقوط قلعة فوراً.",
+        "en": "The lesson shows a continuation ending in an exchange gain. The intermediate moves matter; castling does not instantly lose a rook."
+      },
+      "avoid": {
+        "ar": "بالأسود، ...exd4 قبل التبييت يغيّر توتر المركز ويتجنب هذا التسلسل المحدد.",
+        "en": "As Black, ...exd4 before castling changes the central tension and avoids this particular sequence."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "d7d6",
+        "d2d4",
+        "c8d7",
+        "b1c3",
+        "g8f6",
+        "e1g1",
+        "f8e7",
+        "f1e1",
+        "e8g8",
+        "b5c6",
+        "d7c6",
+        "d4e5",
+        "d6e5",
+        "d1d8",
+        "a8d8",
+        "f3e5",
+        "c6e4",
+        "c3e4",
+        "f6e4",
+        "e5d3",
+        "f7f5",
+        "f2f3",
+        "e7c5",
+        "d3c5",
+        "e4c5",
+        "c1g5",
+        "d8d5",
+        "g5e7",
+        "f8e8",
+        "c2c4",
+        "e8e7",
+        "c4d5"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "d7d6",
+        "d2d4",
+        "c8d7",
+        "b1c3",
+        "g8f6",
+        "e1g1",
+        "f8e7",
+        "f1e1",
+        "e5d4",
+        "f3d4",
+        "c6d4"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 25,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300131,
+          "pv": [
+            "e5d4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": 120,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300084,
+          "pv": [
+            "b5c6",
+            "d7c6"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 34,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300312,
+          "pv": [
+            "f3d4",
+            "c6d4"
+          ]
+        },
+        "end": {
+          "cp_white": 363,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300171,
+          "pv": [
+            "e7d7",
+            "a1d1",
+            "c5a4",
+            "d1d3",
+            "b7b5",
+            "b2b3",
+            "a4b6",
+            "e1c1"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 14
+    },
+    {
+      "id": "3ee6a3ebe240edc3239d755d",
+      "opening_id": "3ee6a3ebe240edc3239d755d",
+      "name": "Ruy Lopez: Noah's Ark Trap",
+      "name_ar": "فخ سفينة نوح — قبل التبييت",
+      "eco": "C71",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 b5 5. Bb3 d6 6. d4 Nxd4 7. Nxd4 exd4 8. Qxd4 c5 Qd5 Be6 Qc6+ Bd7 Qd5 c4 Bxc4 bxc4",
+      "source_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 b5 5. Bb3 d6 6. d4 Nxd4 7. Nxd4 exd4 8. Qxd4 c5",
+      "side": "black",
+      "setup_ply": 8,
+      "mistake_ply": 15,
+      "punish_ply": 16,
+      "safe_san": "c3",
+      "idea": {
+        "ar": "بيادق b5 وc5 تطارد الوزير وتغلق مخارج فيل b3. التقدم ...c4 يحبس الفيل بدعم بيدق b5.",
+        "en": "The b5 and c5 pawns chase the queen and restrict the b3 bishop. ...c4 traps it with support from b5."
+      },
+      "benefit": {
+        "ar": "في الردود المعروضة يضطر الأبيض إلى إعطاء الفيل مقابل بيدق؛ يتحقق كسب قطعة مقابل بيدق في النهاية.",
+        "en": "Against the displayed replies, White gives up the bishop for a pawn; the final position verifies that material gain."
+      },
+      "avoid": {
+        "ar": "بالأبيض، c3 بدلاً من الأخذ بالوزير يفتح مربع c2 لفيل b3 ويغيّر شبكة الحبس.",
+        "en": "As White, c3 instead of the queen capture opens c2 for the b3 bishop and changes the trapping net."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "b7b5",
+        "a4b3",
+        "d7d6",
+        "d2d4",
+        "c6d4",
+        "f3d4",
+        "e5d4",
+        "d1d4",
+        "c7c5",
+        "d4d5",
+        "c8e6",
+        "d5c6",
+        "e6d7",
+        "c6d5",
+        "c5c4",
+        "b3c4",
+        "b5c4"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "b7b5",
+        "a4b3",
+        "d7d6",
+        "d2d4",
+        "c6d4",
+        "f3d4",
+        "e5d4",
+        "c2c3",
+        "d4c3",
+        "b1c3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 28,
+          "mate_white": null,
+          "depth": 17,
+          "nodes": 300074,
+          "pv": [
+            "c2c3",
+            "d4c3"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -256,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300287,
+          "pv": [
+            "c7c5",
+            "d4c3",
+            "c5c4",
+            "a2a4",
+            "c4b3",
+            "a4b5",
+            "b3c2",
+            "c3c2"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 33,
+          "mate_white": null,
+          "depth": 16,
+          "nodes": 300264,
+          "pv": [
+            "d4c3",
+            "b1c3"
+          ]
+        },
+        "end": {
+          "cp_white": -310,
+          "mate_white": null,
+          "depth": 22,
+          "nodes": 300193,
+          "pv": [
+            "b1c3",
+            "g8f6",
+            "d5c4",
+            "f8e7",
+            "c1f4",
+            "e8g8",
+            "e1c1",
+            "d7e6"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 16
+    },
+    {
+      "id": "66c1230c94ae05495eeafb23",
+      "opening_id": "66c1230c94ae05495eeafb23",
+      "name": "Ruy Lopez: Noah's Ark Trap",
+      "name_ar": "فخ سفينة نوح — بعد التبييت",
+      "eco": "C88",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. d4 Nxd4 9. Nxd4 exd4 10. Qxd4 c5 Qd5 Be6 Qc6+ Bd7 Qd5 c4 Bxc4 bxc4",
+      "source_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. d4 Nxd4 9. Nxd4 exd4 10. Qxd4 c5",
+      "side": "black",
+      "setup_ply": 12,
+      "mistake_ply": 19,
+      "punish_ply": 20,
+      "safe_san": "c3",
+      "idea": {
+        "ar": "بيادق b5 وc5 تطارد الوزير وتغلق مخارج فيل b3. التقدم ...c4 يحبس الفيل بدعم بيدق b5.",
+        "en": "The b5 and c5 pawns chase the queen and restrict the b3 bishop. ...c4 traps it with support from b5."
+      },
+      "benefit": {
+        "ar": "في الردود المعروضة يضطر الأبيض إلى إعطاء الفيل مقابل بيدق؛ يتحقق كسب قطعة مقابل بيدق في النهاية.",
+        "en": "Against the displayed replies, White gives up the bishop for a pawn; the final position verifies that material gain."
+      },
+      "avoid": {
+        "ar": "بالأبيض، c3 بدلاً من الأخذ بالوزير يفتح مربع c2 لفيل b3 ويغيّر شبكة الحبس.",
+        "en": "As White, c3 instead of the queen capture opens c2 for the b3 bishop and changes the trapping net."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f8e7",
+        "f1e1",
+        "b7b5",
+        "a4b3",
+        "d7d6",
+        "d2d4",
+        "c6d4",
+        "f3d4",
+        "e5d4",
+        "d1d4",
+        "c7c5",
+        "d4d5",
+        "c8e6",
+        "d5c6",
+        "e6d7",
+        "c6d5",
+        "c5c4",
+        "b3c4",
+        "b5c4"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f8e7",
+        "f1e1",
+        "b7b5",
+        "a4b3",
+        "d7d6",
+        "d2d4",
+        "c6d4",
+        "f3d4",
+        "e5d4",
+        "c2c3",
+        "d4c3",
+        "b1c3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -43,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300328,
+          "pv": [
+            "a2a4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -353,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300209,
+          "pv": [
+            "c7c5",
+            "d4c3",
+            "c5c4",
+            "b3c4",
+            "b5c4",
+            "c3c4",
+            "e8g8",
+            "b1c3"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -54,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300061,
+          "pv": [
+            "d4c3",
+            "b1c3"
+          ]
+        },
+        "end": {
+          "cp_white": -338,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300106,
+          "pv": [
+            "d5c4",
+            "e8g8",
+            "b1c3",
+            "d7e6",
+            "c4d3",
+            "f6g4",
+            "h2h3",
+            "g4e5"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 20
+    },
+    {
+      "id": "e114fd3d7f5d6ff7cabb3aa1",
+      "opening_id": "e114fd3d7f5d6ff7cabb3aa1",
+      "name": "Ruy Lopez: Open, Tarrasch Trap",
+      "name_ar": "فخ تاراش — الإسباني المفتوح",
+      "eco": "C83",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5 Be6 9. c3 Be7 10. Re1 O-O 11. Nd4 Qd7 12. Nxe6 fxe6 13. Rxe4 dxe4 Qxd7",
+      "source_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5 Be6 9. c3 Be7 10. Re1 O-O 11. Nd4 Qd7 12. Nxe6 fxe6 13. Rxe4",
+      "side": "white",
+      "setup_ply": 21,
+      "mistake_ply": 22,
+      "punish_ply": 23,
+      "safe_san": "Nxe5",
+      "idea": {
+        "ar": "وضع وزير الأسود على d7 يجعل بيدق d5 مدافعاً غير مأمون: تحريكه يفتح خط الوزير الأبيض على d.",
+        "en": "Putting Black’s queen on d7 makes the d5 pawn an unreliable defender: moving it opens White’s queen along the d-file."
+      },
+      "benefit": {
+        "ar": "Nxe6 ثم Rxe4 يكسبان مادة. إذا رد الأسود ...dxe4، يفتح خط d ويأتي Qxd7 لأخذ الوزير.",
+        "en": "Nxe6 followed by Rxe4 wins material. If Black replies ...dxe4, the d-file opens for Qxd7."
+      },
+      "avoid": {
+        "ar": "بالأسود، ...Nxe5 بحصان c6 بدلاً من ...Qd7 يلتقط بيدق e5 دون وضع الوزير على الخط المكشوف.",
+        "en": "As Black, ...Nxe5 with the c6 knight instead of ...Qd7 takes e5 without putting the queen on the exposed file."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f6e4",
+        "d2d4",
+        "b7b5",
+        "a4b3",
+        "d7d5",
+        "d4e5",
+        "c8e6",
+        "c2c3",
+        "f8e7",
+        "f1e1",
+        "e8g8",
+        "f3d4",
+        "d8d7",
+        "d4e6",
+        "f7e6",
+        "e1e4",
+        "d5e4",
+        "d1d7"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f6e4",
+        "d2d4",
+        "b7b5",
+        "a4b3",
+        "d7d5",
+        "d4e5",
+        "c8e6",
+        "c2c3",
+        "f8e7",
+        "f1e1",
+        "e8g8",
+        "f3d4",
+        "c6e5",
+        "f2f3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -11,
+          "mate_white": null,
+          "depth": 15,
+          "nodes": 300418,
+          "pv": [
+            "c6e5"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": 381,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300251,
+          "pv": [
+            "d4e6",
+            "f7e6",
+            "e1e4",
+            "f8f7",
+            "e4e2",
+            "a8f8",
+            "f2f3",
+            "d7d8"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 24,
+          "mate_white": null,
+          "depth": 16,
+          "nodes": 300161,
+          "pv": [
+            "f2f3"
+          ]
+        },
+        "end": {
+          "cp_white": 604,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300285,
+          "pv": [
+            "e7c5",
+            "d7e6",
+            "g8h8",
+            "c1e3",
+            "c5e3",
+            "f2e3",
+            "c6a5",
+            "b1d2"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 7
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/c.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 25
+    },
+    {
+      "id": "50abe9e650724afa2f27a731",
+      "opening_id": "50abe9e650724afa2f27a731",
+      "name": "Queen's Gambit Declined: Albin Countergambit, Lasker Trap",
+      "name_ar": "فخ لاسكر — جامبيت ألبين المضاد",
+      "eco": "D08",
+      "pgn": "1. d4 d5 2. c4 e5 3. dxe5 d4 4. e3 Bb4+ 5. Bd2 dxe3 Bxb4 exf2+ Ke2 fxg1=N+ Rxg1 Bg4+ Kf2 Qxd1",
+      "source_pgn": "1. d4 d5 2. c4 e5 3. dxe5 d4 4. e3 Bb4+ 5. Bd2 dxe3",
+      "side": "black",
+      "setup_ply": 10,
+      "mistake_ply": 11,
+      "punish_ply": 12,
+      "safe_san": "fxe3",
+      "idea": {
+        "ar": "بيدق e3 يهدد f2. أخذ الفيل على b4 يتجاهل تقدّم البيدق بكش ثم ترقية بحصان على g1 بكش جديد.",
+        "en": "The e3 pawn threatens f2. Taking the b4 bishop overlooks a checking pawn advance and a checking knight promotion on g1."
+      },
+      "benefit": {
+        "ar": "الترقية إلى حصان تمنح كشاً على e2؛ وبعد إزالة القطع ينفتح خط d ليُؤخذ الوزير في المثال.",
+        "en": "Promoting to a knight checks e2; after the exchanges, the d-file opens and the queen is captured in the example."
+      },
+      "avoid": {
+        "ar": "بالأبيض، fxe3 يعالج البيدق المتقدم بدلاً من أخذ الفيل وترك الهجوم يستمر.",
+        "en": "As White, fxe3 deals with the advanced pawn instead of taking the bishop and letting the attack continue."
+      },
+      "warning": {
+        "ar": "نجاح المثال مشروط بردود الخصم المعروضة، وليس ضماناً للفوز.",
+        "en": "The example depends on the displayed replies; it is not a guarantee of winning."
+      },
+      "moves": [
+        "d2d4",
+        "d7d5",
+        "c2c4",
+        "e7e5",
+        "d4e5",
+        "d5d4",
+        "e2e3",
+        "f8b4",
+        "c1d2",
+        "d4e3",
+        "d2b4",
+        "e3f2",
+        "e1e2",
+        "f2g1n",
+        "h1g1",
+        "c8g4",
+        "e2f2",
+        "d8d1"
+      ],
+      "safe_moves": [
+        "d2d4",
+        "d7d5",
+        "c2c4",
+        "e7e5",
+        "d4e5",
+        "d5d4",
+        "e2e3",
+        "f8b4",
+        "c1d2",
+        "d4e3",
+        "f2e3",
+        "d8h4",
+        "g2g3",
+        "h4e4",
+        "g1f3",
+        "b4d2"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -12,
+          "mate_white": null,
+          "depth": 22,
+          "nodes": 300020,
+          "pv": [
+            "f2e3",
+            "d8h4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -517,
+          "mate_white": null,
+          "depth": 18,
+          "nodes": 300328,
+          "pv": [
+            "e3f2",
+            "e1f2",
+            "d8d1",
+            "g1f3",
+            "d1c2",
+            "b1d2",
+            "g8h6",
+            "b4a3"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -14,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300291,
+          "pv": [
+            "d8h4",
+            "g2g3",
+            "h4e4",
+            "g1f3",
+            "b4d2",
+            "b1d2",
+            "e4e3",
+            "d1e2"
+          ]
+        },
+        "end": {
+          "cp_white": -712,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300129,
+          "pv": [
+            "b4c3",
+            "d1d8",
+            "e5e6",
+            "f7f6",
+            "f1e2",
+            "g4e2",
+            "f2e2",
+            "d8c8"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -9
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/d.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 10
+    },
+    {
+      "id": "fa5434c47f628d4d6c88d251",
+      "opening_id": "fa5434c47f628d4d6c88d251",
+      "name": "Bogo-Indian Defense: Monticelli Trap",
+      "name_ar": "فخ مونتيتشيلي",
+      "eco": "E11",
+      "pgn": "1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Bb4+ 6. Bd2 Bxd2+ 7. Qxd2 O-O 8. Nc3 Ne4 9. Qc2 Nxc3 10. Ng5 Bxg2 Qxh7#",
+      "source_pgn": "1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Bb4+ 6. Bd2 Bxd2+ 7. Qxd2 O-O 8. Nc3 Ne4 9. Qc2 Nxc3 10. Ng5",
+      "side": "white",
+      "setup_ply": 19,
+      "mistake_ply": 20,
+      "punish_ply": 21,
+      "safe_san": "Qxg5",
+      "idea": {
+        "ar": "Ng5 يحمي h7 ويجمع تهديد المات بالوزير مع ضغط فيل g2 على جناح الوزير.",
+        "en": "Ng5 protects h7 and combines a queen mate threat with the g2 bishop’s pressure on the queenside."
+      },
+      "benefit": {
+        "ar": "إذا تجاهل الأسود المات ولعب ...Bxg2، يأتي Qxh7#. لكن الردود الأخرى قد تعطي الأسود تعويضاً.",
+        "en": "If Black ignores mate and plays ...Bxg2, Qxh7# follows. Other replies can give Black compensation."
+      },
+      "avoid": {
+        "ar": "...Qxg5 يزيل الحصان الذي يحمي h7، فيتجنب المات المعروض، مع بقاء حسابات فرق الجودة والتعويض.",
+        "en": "...Qxg5 removes h7’s defender and avoids the shown mate, while exchange and compensation calculations remain."
+      },
+      "warning": {
+        "ar": "هذا المثال يثبت المات بعد ...Bxg2 فقط، ولا يثبت فوزاً إجبارياً ضد أفضل دفاع.",
+        "en": "This example proves mate after ...Bxg2 only, not a forced win against best defense."
+      },
+      "moves": [
+        "d2d4",
+        "g8f6",
+        "c2c4",
+        "e7e6",
+        "g1f3",
+        "b7b6",
+        "g2g3",
+        "c8b7",
+        "f1g2",
+        "f8b4",
+        "c1d2",
+        "b4d2",
+        "d1d2",
+        "e8g8",
+        "b1c3",
+        "f6e4",
+        "d2c2",
+        "e4c3",
+        "f3g5",
+        "b7g2",
+        "c2h7"
+      ],
+      "safe_moves": [
+        "d2d4",
+        "g8f6",
+        "c2c4",
+        "e7e6",
+        "g1f3",
+        "b7b6",
+        "g2g3",
+        "c8b7",
+        "f1g2",
+        "f8b4",
+        "c1d2",
+        "b4d2",
+        "d1d2",
+        "e8g8",
+        "b1c3",
+        "f6e4",
+        "d2c2",
+        "e4c3",
+        "f3g5",
+        "d8g5",
+        "g2b7",
+        "c3e2",
+        "c2e2",
+        "b8c6",
+        "b7a8"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 64,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300013,
+          "pv": [
+            "c3e4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": null,
+          "mate_white": 1,
+          "depth": 245,
+          "nodes": 9329,
+          "pv": [
+            "c2h7"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 90,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300151,
+          "pv": [
+            "g2b7",
+            "c3e2",
+            "c2e2",
+            "b8c6",
+            "b7a8",
+            "f8a8",
+            "e2d3",
+            "g5a5"
+          ]
+        },
+        "end": {
+          "terminal": true,
+          "result": "1-0",
+          "cp_white": null,
+          "mate_white": null,
+          "pv": [],
+          "depth": 0,
+          "nodes": 0
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -5
+      },
+      "classification": "mate-example",
+      "source": {
+        "url": "https://github.com/lichess-org/chess-openings/blob/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39/e.tsv",
+        "license": "CC0-1.0",
+        "revision": "3ba6b20d31b2e6125cb0e6a2e792f400717d9d39"
+      },
+      "source_plies": 19
+    },
+    {
+      "id": "legal-mate",
+      "opening_id": null,
+      "name": "Legal Mate",
+      "name_ar": "فخ ليغال",
+      "eco": "",
+      "pgn": "1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5#",
+      "source_pgn": "1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5#",
+      "side": "white",
+      "setup_ply": 9,
+      "mistake_ply": 10,
+      "punish_ply": 11,
+      "safe_san": "dxe5",
+      "idea": {
+        "ar": "يعرض الأبيض الوزير، لكن الفيل والحصانين يصنعون شبكة مات حول ملك e8.",
+        "en": "White offers the queen while the bishop and knights form a mating net around e8."
+      },
+      "benefit": {
+        "ar": "بعد ...Bxd1، يأتي Bxf7+ ثم Nd5#؛ قيمة الوزير لا تنقذ الملك من المات.",
+        "en": "After ...Bxd1, Bxf7+ and Nd5# deliver mate despite the queen loss."
+      },
+      "avoid": {
+        "ar": "بالأسود، ...dxe5 يزيل الحصان المهاجم بدلاً من الاندفاع إلى الوزير.",
+        "en": "As Black, ...dxe5 removes the attacking knight instead of rushing to take the queen."
+      },
+      "warning": {
+        "ar": "مثال تكتيكي مشروط بالنقلات المعروضة؛ افحص ردود الخصم.",
+        "en": "A tactical example conditional on these moves; check the opponent’s replies."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "d7d6",
+        "f1c4",
+        "c8g4",
+        "b1c3",
+        "g7g6",
+        "f3e5",
+        "g4d1",
+        "c4f7",
+        "e8e7",
+        "c3d5"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "d7d6",
+        "f1c4",
+        "c8g4",
+        "b1c3",
+        "g7g6",
+        "f3e5",
+        "d6e5",
+        "d1g4",
+        "b8c6",
+        "d2d3",
+        "g8f6",
+        "g4f3"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 215,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300320,
+          "pv": [
+            "d6e5",
+            "d1g4",
+            "b8c6",
+            "g4f3",
+            "d8d7",
+            "c3e2",
+            "h7h5",
+            "d2d3"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": null,
+          "mate_white": 2,
+          "depth": 245,
+          "nodes": 19931,
+          "pv": [
+            "c4f7",
+            "e8e7",
+            "c3d5"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 206,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300146,
+          "pv": [
+            "d1g4",
+            "b8c6",
+            "d2d3",
+            "g8f6",
+            "g4f3",
+            "c6d4",
+            "f3d1",
+            "c7c6"
+          ]
+        },
+        "end": {
+          "terminal": true,
+          "result": "1-0",
+          "cp_white": null,
+          "mate_white": null,
+          "pv": [],
+          "depth": 0,
+          "nodes": 0
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -7
+      },
+      "classification": "mate-example",
+      "source": {
+        "url": "https://lichess.org/study/Lg3Qgggs",
+        "license": "independently written explanation and independently verified illustrative line; no third-party commentary copied"
+      },
+      "source_plies": 0
+    },
+    {
+      "id": "elephant-trap",
+      "opening_id": null,
+      "name": "Elephant Trap",
+      "name_ar": "فخ الفيل",
+      "eco": "",
+      "pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7 5. cxd5 exd5 6. Nxd5 Nxd5 7. Bxd8 Bb4+ 8. Qd2 Bxd2+ 9. Kxd2 Kxd8",
+      "source_pgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7 5. cxd5 exd5 6. Nxd5 Nxd5 7. Bxd8 Bb4+ 8. Qd2 Bxd2+ 9. Kxd2 Kxd8",
+      "side": "black",
+      "setup_ply": 8,
+      "mistake_ply": 11,
+      "punish_ply": 12,
+      "safe_san": "Nf3",
+      "idea": {
+        "ar": "التثبيت على f6 يبدو كأنه يمنع أخذ الحصان، لكن كش ...Bb4+ يفرض تدخّل الوزير.",
+        "en": "The f6 pin seems to prevent a knight capture, but ...Bb4+ forces the queen to interpose."
+      },
+      "benefit": {
+        "ar": "تتبادل الوزيران ثم يُؤخذ فيل d8، ويخرج الأسود بقطعة مقابل بيدق في هذا التسلسل.",
+        "en": "The queens are exchanged and the d8 bishop is taken, leaving Black a piece for a pawn in this sequence."
+      },
+      "avoid": {
+        "ar": "بالأبيض، Nf3 يطوّر الحصان دون افتراض أن التثبيت وحده يجعل أخذ d5 آمناً.",
+        "en": "As White, Nf3 develops without assuming that the pin alone makes capturing d5 safe."
+      },
+      "warning": {
+        "ar": "مثال تكتيكي مشروط بالنقلات المعروضة؛ افحص ردود الخصم.",
+        "en": "A tactical example conditional on these moves; check the opponent’s replies."
+      },
+      "moves": [
+        "d2d4",
+        "d7d5",
+        "c2c4",
+        "e7e6",
+        "b1c3",
+        "g8f6",
+        "c1g5",
+        "b8d7",
+        "c4d5",
+        "e6d5",
+        "c3d5",
+        "f6d5",
+        "g5d8",
+        "f8b4",
+        "d1d2",
+        "b4d2",
+        "e1d2",
+        "e8d8"
+      ],
+      "safe_moves": [
+        "d2d4",
+        "d7d5",
+        "c2c4",
+        "e7e6",
+        "b1c3",
+        "g8f6",
+        "c1g5",
+        "b8d7",
+        "c4d5",
+        "e6d5",
+        "g1f3",
+        "h7h6"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 42,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300324,
+          "pv": [
+            "e2e3"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -420,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300098,
+          "pv": [
+            "f6d5",
+            "g5d8",
+            "f8b4",
+            "d1d2",
+            "e8d8",
+            "e2e4",
+            "h8e8",
+            "f1d3"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 21,
+          "mate_white": null,
+          "depth": 21,
+          "nodes": 300221,
+          "pv": [
+            "h7h6"
+          ]
+        },
+        "end": {
+          "cp_white": -380,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300118,
+          "pv": [
+            "e2e4",
+            "d5e7",
+            "f2f3",
+            "f7f5",
+            "f1d3",
+            "d7f6",
+            "a1e1",
+            "a7a5"
+          ]
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": -2
+      },
+      "classification": "material-example",
+      "source": {
+        "url": "https://lichess.org/study/Lg3Qgggs",
+        "license": "independently written explanation and independently verified illustrative line; no third-party commentary copied"
+      },
+      "source_plies": 0
+    },
+    {
+      "id": "blackburne-shilling",
+      "opening_id": null,
+      "name": "Blackburne Shilling Trap",
+      "name_ar": "فخ بلاكبيرن شيلينغ",
+      "eco": "",
+      "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4 4. Nxe5 Qg5 5. Nxf7 Qxg2 6. Rf1 Qxe4+ 7. Be2 Nf3#",
+      "source_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4 4. Nxe5 Qg5 5. Nxf7 Qxg2 6. Rf1 Qxe4+ 7. Be2 Nf3#",
+      "side": "black",
+      "setup_ply": 6,
+      "mistake_ply": 7,
+      "punish_ply": 8,
+      "safe_san": "Nxd4",
+      "idea": {
+        "ar": "...Nd4 يعرض e5 ويهيئ خروج الوزير إلى g5 ثم g2؛ الانشغال بقلعة h8 يترك الملك في المركز.",
+        "en": "...Nd4 offers e5 and prepares ...Qg5 and ...Qxg2; chasing h8 leaves the king in the center."
+      },
+      "benefit": {
+        "ar": "في الفرع المعروض ينتهي الهجوم بـ...Nf3# مع إغلاق مربعات هروب الملك بقطعه.",
+        "en": "The shown branch ends in ...Nf3#, with the king’s own pieces blocking its escape."
+      },
+      "avoid": {
+        "ar": "بالأبيض، Nxd4 يزيل الحصان المتقدم بدلاً من ملاحقة البيدق والقلعة.",
+        "en": "As White, Nxd4 removes the advanced knight instead of chasing the pawn and rook."
+      },
+      "warning": {
+        "ar": "مثال تكتيكي مشروط بالنقلات المعروضة؛ افحص ردود الخصم.",
+        "en": "A tactical example conditional on these moves; check the opponent’s replies."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1c4",
+        "c6d4",
+        "f3e5",
+        "d8g5",
+        "e5f7",
+        "g5g2",
+        "h1f1",
+        "g2e4",
+        "c4e2",
+        "d4f3"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1c4",
+        "c6d4",
+        "f3d4",
+        "e5d4"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": 136,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300050,
+          "pv": [
+            "f3d4"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": -68,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300024,
+          "pv": [
+            "d8g5"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": 116,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300276,
+          "pv": [
+            "e5d4"
+          ]
+        },
+        "end": {
+          "terminal": true,
+          "result": "0-1",
+          "cp_white": null,
+          "mate_white": null,
+          "pv": [],
+          "depth": 0,
+          "nodes": 0
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 0
+      },
+      "classification": "mate-example",
+      "source": {
+        "url": "https://lichess.org/study/Lg3Qgggs",
+        "license": "independently written explanation and independently verified illustrative line; no third-party commentary copied"
+      },
+      "source_plies": 0
+    },
+    {
+      "id": "scholars-mate",
+      "opening_id": null,
+      "name": "Scholar’s Mate",
+      "name_ar": "مات الراعي",
+      "eco": "",
+      "pgn": "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7#",
+      "source_pgn": "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7#",
+      "side": "white",
+      "setup_ply": 5,
+      "mistake_ply": 6,
+      "punish_ply": 7,
+      "safe_san": "g6",
+      "idea": {
+        "ar": "الوزير h5 والفيل c4 يجتمعان على f7 الذي يحميه الملك وحده في البداية.",
+        "en": "The h5 queen and c4 bishop converge on f7, initially defended only by the king."
+      },
+      "benefit": {
+        "ar": "...Nf6 يتجاهل التهديد المباشر، فيأتي Qxf7# بدعم الفيل.",
+        "en": "...Nf6 ignores the direct threat and allows Qxf7#, supported by the bishop."
+      },
+      "avoid": {
+        "ar": "بالأسود، ...g6 يغلق قطر الوزير نحو f7 ويهاجمه؛ لا يكفي تطوير قطعة مع تجاهل المات.",
+        "en": "As Black, ...g6 blocks the queen’s diagonal to f7 and attacks it; development must address mate threats."
+      },
+      "warning": {
+        "ar": "مثال تكتيكي مشروط بالنقلات المعروضة؛ افحص ردود الخصم.",
+        "en": "A tactical example conditional on these moves; check the opponent’s replies."
+      },
+      "moves": [
+        "e2e4",
+        "e7e5",
+        "d1h5",
+        "b8c6",
+        "f1c4",
+        "g8f6",
+        "h5f7"
+      ],
+      "safe_moves": [
+        "e2e4",
+        "e7e5",
+        "d1h5",
+        "b8c6",
+        "f1c4",
+        "g7g6",
+        "h5d1",
+        "f8g7"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -32,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300111,
+          "pv": [
+            "g7g6"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": null,
+          "mate_white": 1,
+          "depth": 245,
+          "nodes": 10539,
+          "pv": [
+            "h5f7"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -35,
+          "mate_white": null,
+          "depth": 20,
+          "nodes": 300363,
+          "pv": [
+            "h5d1",
+            "f8g7"
+          ]
+        },
+        "end": {
+          "terminal": true,
+          "result": "1-0",
+          "cp_white": null,
+          "mate_white": null,
+          "pv": [],
+          "depth": 0,
+          "nodes": 0
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 1
+      },
+      "classification": "mate-example",
+      "source": {
+        "url": "https://lichess.org/study/Lg3Qgggs",
+        "license": "independently written explanation and independently verified illustrative line; no third-party commentary copied"
+      },
+      "source_plies": 0
+    },
+    {
+      "id": "fools-mate",
+      "opening_id": null,
+      "name": "Fool’s Mate",
+      "name_ar": "مات الأحمق",
+      "eco": "",
+      "pgn": "1. f3 e5 2. g4 Qh4#",
+      "source_pgn": "1. f3 e5 2. g4 Qh4#",
+      "side": "black",
+      "setup_ply": 2,
+      "mistake_ply": 3,
+      "punish_ply": 4,
+      "safe_san": "e4",
+      "idea": {
+        "ar": "تحريك بيدقي f وg يكشف قطر h4–e1 نحو ملك الأبيض. ...e5 يفتح طريق الوزير.",
+        "en": "Moving the f- and g-pawns exposes h4–e1 toward White’s king; ...e5 opens the queen’s route."
+      },
+      "benefit": {
+        "ar": "...Qh4# مات فعلي بعد النقلتين المعروضتين للأبيض.",
+        "en": "...Qh4# is actual mate after the two illustrated White moves."
+      },
+      "avoid": {
+        "ar": "بالأبيض، 2.e4 يحتفظ ببيدق g2 لإمكان سد القطر، بدلاً من كشفه بـg4.",
+        "en": "As White, 2.e4 retains g2’s pawn to block the diagonal rather than exposing it with g4."
+      },
+      "warning": {
+        "ar": "مثال تكتيكي مشروط بالنقلات المعروضة؛ افحص ردود الخصم.",
+        "en": "A tactical example conditional on these moves; check the opponent’s replies."
+      },
+      "moves": [
+        "f2f3",
+        "e7e5",
+        "g2g4",
+        "d8h4"
+      ],
+      "safe_moves": [
+        "f2f3",
+        "e7e5",
+        "e2e4",
+        "f8c5",
+        "c2c3",
+        "b8c6",
+        "b2b4",
+        "c5b6"
+      ],
+      "evidence": {
+        "before_mistake": {
+          "cp_white": -91,
+          "mate_white": null,
+          "depth": 16,
+          "nodes": 300080,
+          "pv": [
+            "e2e3",
+            "b8c6"
+          ]
+        },
+        "after_mistake": {
+          "cp_white": null,
+          "mate_white": -1,
+          "depth": 245,
+          "nodes": 7351,
+          "pv": [
+            "d8h4"
+          ]
+        },
+        "after_safe_reply": {
+          "cp_white": -99,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 300295,
+          "pv": [
+            "f8c5",
+            "c2c3",
+            "b8c6",
+            "b2b4",
+            "c5b6",
+            "a2a4",
+            "a7a6",
+            "b1a3"
+          ]
+        },
+        "end": {
+          "terminal": true,
+          "result": "0-1",
+          "cp_white": null,
+          "mate_white": null,
+          "pv": [],
+          "depth": 0,
+          "nodes": 0
+        },
+        "engine": "Stockfish 17.1, one thread, 300000 nodes per sampled position",
+        "material_white_end": 0
+      },
+      "classification": "mate-example",
+      "source": {
+        "url": "https://lichess.org/study/Lg3Qgggs",
+        "license": "independently written explanation and independently verified illustrative line; no third-party commentary copied"
+      },
+      "source_plies": 0
+    }
+  ]
+}

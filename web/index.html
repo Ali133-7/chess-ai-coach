@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0a1222" />
+<meta name="description" content="مدرب شطرنج شخصي لمراجعة مباريات Chess.com المكتملة والتدرّب على أخطائك" />
+<title>Chess AI Coach · مدرّبك الذكي</title>
+<link rel="stylesheet" href="/assets/style.css?v=5" />
+<script src="/assets/quality-ui.js" defer></script>
+<script src="/assets/board-pro.js?v=5" defer></script>
+<script src="/assets/app.js?v=5" defer></script>
+<script src="/assets/advanced-ui.js?v=5" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" aria-label="القائمة الرئيسية">
+    <a class="brand" href="#dashboard"><span class="brand-icon">♞</span><span><strong>Chess AI Coach</strong><small>مدرّبك الشخصي</small></span></a>
+    <div class="side-label">مساحة التدريب</div>
+    <nav id="nav" aria-label="التنقل">
+      <button data-view="dashboard" class="nav-link active">▦ <span>نظرة عامة</span></button>
+      <button data-view="games" class="nav-link">♟ <span>مراجعة مبارياتي</span></button>
+      <button data-view="puzzles" class="nav-link">◈ <span>تحديات أخطائي</span></button>
+      <button data-view="training" class="nav-link">⚔ <span>العب ضد المحرك</span></button>
+      <button data-view="insights" class="nav-link">▥ <span>تحليل المستوى</span></button>
+      <button data-view="issues" class="nav-link">⚑ <span>سجل الأخطاء والتحسين</span></button>
+      <button data-view="plan" class="nav-link">☷ <span>الخطة الأسبوعية</span></button>
+    </nav>
+    <div class="sidebar-note"><span class="dot"></span> مراجعة بعد انتهاء المباراة فقط<br /><small>الـ API الرسمي لا يوفّر نقلات مباشرة للمباريات الحية.</small></div>
+    <div class="sidebar-bottom"><span class="status-dot"></span><span id="server-status">بانتظار الاتصال الآمن</span></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <button id="menu-button" class="icon-button menu-button" aria-label="فتح القائمة">☰</button>
+      <div class="crumb"><span>Chess AI Coach</span> <b>/</b> <strong id="page-heading">لوحة القيادة</strong></div>
+      <div class="top-actions"><span class="user-badge">♙ <span id="username">ali_ebrahim</span></span><button id="sync-button" class="btn btn-outline" disabled>⟳ تحديث المباريات</button></div>
+    </header>
+    <main class="main">
+      <section id="connection" class="connection-panel">
+        <div class="connection-inner">
+          <div class="connection-symbol">♞</div>
+          <p class="eyebrow">PRIVATE CHESS STUDIO</p>
+          <h1>طوّر مستواك، نقلة بعد نقلة.</h1>
+          <p class="muted">ادخل مفتاح API الخاص بمشروعك لتفتح لوحة التدريب. يبقى المفتاح في ذاكرة هذه الصفحة فقط، ولا يُحفظ في المتصفح.</p>
+          <form id="connect-form" class="connect-form">
+            <label for="api-key">مفتاح الوصول <code>CHESS_API_KEY</code></label>
+            <div class="connect-inputs"><input id="api-key" type="password" placeholder="ألصق المفتاح السري هنا" required autocomplete="off" spellcheck="false" /><button type="submit" class="btn btn-primary" id="connect-button">دخول آمن ←</button></div>
+            <p class="tiny muted">استخدم رابط SSH المحلي فقط. لا تنشر المفتاح أو الواجهة على الإنترنت العام.</p>
+            <p class="error-text" id="connect-error" role="alert"></p>
+          </form>
+        </div>
+      </section>
+      <div id="app-content" hidden>
+        <details class="grade-legend"><summary>دليل علامات جودة النقلات (تقييم تقريبي)</summary>
+          <div class="grade-legend-items"><span class="grade-mini grade-brilliant">!!</span> مدهشة
+          <span class="grade-mini grade-excellent">!</span> ممتازة
+          <span class="grade-mini grade-good">✓</span> جيدة
+          <span class="grade-mini grade-weak">?!</span> ضعيفة
+          <span class="grade-mini grade-missed">○</span> ضياع فرصة
+          <span class="grade-mini grade-mistake">?</span> خطأ
+          <span class="grade-mini grade-blunder">??</span> خطأ فادح</div>
+          <p class="muted tiny">تظهر العلامات عندما يتوفر تقييم Stockfish لمباراة منتهية أو تدريب خاص؛ لا تُقيّم النقلات المباشرة ضد البشر. التصنيفات ليست تصنيفات Chess.com الرسمية.</p>
+        </details>
+        <section class="view" id="view-dashboard">
+          <section class="panel deep-status-panel" style="margin-bottom:16px"><div class="between"><h2>تحليل Stockfish العميق في الخلفية</h2><button class="btn btn-small btn-outline" id="deep-refresh" type="button">تحديث الحالة</button></div><div id="deep-status" class="muted tiny">جارٍ جلب تقدم التحليل؛ يستمر على السيرفر بعد إغلاق المتصفح.</div></section>
+          <div class="hero"><div><p class="eyebrow">مرحباً بعودتك إلى الملعب</p><h1>كل خطأ فرصة<br />لتصبح أقوى.</h1><p>نتعلم من مبارياتك الحقيقية ونبني تدريباً يناسب مستواك.</p><button class="btn btn-primary" data-go="puzzles">ابدأ التحدي التالي <span>←</span></button></div><div class="hero-art" aria-hidden="true">♚<span>♞</span></div></div>
+          <div id="stat-cards" class="stats-grid"></div>
+          <div class="two-cols"><section class="panel"><div class="panel-heading"><h2>مبارياتك الأخيرة</h2><button class="link-button" data-go="games">عرض الكل ←</button></div><div id="dashboard-games" class="games-shortlist"></div></section><section class="panel"><div class="panel-heading"><h2>محور التدريب</h2><span class="pill">من بياناتك</span></div><div id="focus-card"></div></section></div>
+        </section>
+        <section class="view" id="view-games" hidden>
+          <div class="section-title"><div><p class="eyebrow">تحليل بعد المباراة</p><h1>مراجعة مبارياتي</h1><p>تابع كل نقلة، وافهم لماذا كان البديل أقوى.</p></div></div>
+          <div class="panel" id="games-list-panel"><div class="panel-heading"><h2>سجل المباريات</h2><span id="games-total" class="pill">—</span></div><div id="games-list" class="game-list"></div><div class="center"><button class="btn btn-outline" id="load-more-games" hidden>مباريات أقدم</button></div></div>
+          <section id="review" class="review-layout" hidden>
+            <div class="review-board panel"><div class="panel-heading"><h2 id="review-title">تحليل المباراة</h2><button id="close-review" class="link-button">✕ إغلاق</button></div><div class="board-wrap"><div id="review-board" class="chess-board" role="group" aria-label="رقعة مراجعة المباراة"></div></div><div class="move-controls"><button id="review-start" class="icon-button" aria-label="البداية">⇤</button><button id="review-prev" class="icon-button" aria-label="النقلة السابقة">→</button><input id="review-range" type="range" min="0" max="1" value="0" aria-label="موضع النقلة" /><button id="review-next" class="icon-button" aria-label="النقلة التالية">←</button><button id="review-end" class="icon-button" aria-label="النهاية">⇥</button></div><div class="between"><span id="review-counter" class="muted">بداية المباراة</span><button id="review-flip" class="link-button">↻ تدوير الرقعة</button></div>
+              <div class="practice-tools"><button id="review-explore" class="btn btn-outline btn-small">♟ جرب نقلة بنفسك</button><button id="review-reset-variation" class="btn btn-ghost btn-small">↶ إعادة الموقف</button></div><div id="scenario-controls" class="scenario-controls" hidden><strong id="scenario-title">خط التحليل</strong><p id="scenario-explanation" class="tiny muted"></p><div class="scenario-buttons"><button class="btn btn-small btn-outline" id="scenario-back">السابق</button><button class="btn btn-small btn-outline" id="scenario-next">النقلة التالية</button><button class="btn btn-small btn-ghost" id="scenario-autoplay">▶ تشغيل الخط</button><button class="btn btn-small btn-primary" id="scenario-continue">♟ أكمل اللعب من هنا</button><button class="btn btn-small btn-outline" id="scenario-exit">إغلاق السيناريو</button></div></div><p id="review-variation-status" class="muted tiny">فعّل تجربة النقلات للسحب والتحريك في وضع المراجعة.</p></div>
+            <div class="review-side"><section class="panel"><div class="panel-heading"><h2>النقلات</h2><button id="review-next-error" class="btn btn-small btn-outline">الخطأ التالي ←</button></div><div id="review-moves" class="moves-scroll"></div></section><section class="panel coaching-card"><div class="panel-heading"><h2>شرح المدرب</h2><button id="review-reanalyze" class="btn btn-small btn-outline">⟳ إعادة التحليل</button></div><div id="review-advice"></div></section>
+<section class="panel" id="review-metrics"><div class="panel-heading"><h2>تقييم المباراة وتطور الأفضلية</h2><span class="pill">تقريبي</span></div><div id="review-kpis" class="metric-cards"></div><div id="review-eval" class="eval-graph"></div><div id="review-lines"></div></section></div>
+          </section>
+        </section>
+        <section class="view" id="view-puzzles" hidden>
+          <div class="section-title"><div><p class="eyebrow">تدريب مخصص</p><h1>تحديات من أخطائي</h1><p>نفس الموقف الذي واجهته في المباراة، لكن هذه المرة ابحث عن أفضل نقلة.</p></div></div>
+          <div class="two-cols puzzles-layout"><div class="panel"><div class="between"><span id="puzzle-label" class="pill">تحميل التحديات</span><span id="puzzle-counter" class="muted"></span></div><div class="board-wrap"><div id="puzzle-board" class="chess-board" role="group" aria-label="رقعة التحدي"></div></div><div class="puzzle-footer"><button id="puzzle-skip" class="btn btn-outline">تحدٍّ آخر ←</button><button id="puzzle-hint" class="btn btn-ghost">↗ تلميح بسهم</button>
+              <button id="puzzle-retry" class="btn btn-outline" hidden>↻ أعد المحاولة</button>
+              <button id="puzzle-continue" class="btn btn-primary" hidden>♟ أكمل اللعب</button></div></div><div class="panel puzzle-info"><p class="eyebrow">THINK BEFORE YOU MOVE</p><h2>ابحث عن النقلة الأقوى</h2><p id="puzzle-description">اختر قطعة ثم مربع الوصول على الرقعة.</p><div id="puzzle-hint-text" class="hint-box" hidden></div><div id="puzzle-result" class="puzzle-result"></div><div id="puzzle-history" class="training-history"></div><div id="puzzle-progress"></div></div></div>
+        </section>
+        <section class="view" id="view-training" hidden>
+          <div class="section-title"><div><p class="eyebrow">مساحة تدريب مستقلة</p><h1>العب ضد Stockfish</h1><p>تمرّن بحرية واطلب تلميحاً في أي وقت. هذا ليس اتصالاً بمباراة Chess.com جارية.</p></div></div>
+          <div class="two-cols training-layout"><div class="panel"><div class="between"><span id="training-status" class="pill">ابدأ مباراة</span><button id="training-flip" class="link-button">↻ تدوير الرقعة</button></div><div class="board-wrap"><div id="training-board" class="chess-board" role="group" aria-label="رقعة التدريب"></div></div><div class="between"><span class="muted">المحرك يرد تلقائياً</span><button id="training-hint" class="btn btn-ghost" disabled>✧ تلميح</button></div></div><div class="stack"><section class="panel"><h2>إعداد المباراة</h2><label class="form-label" for="training-color">اللون</label><select id="training-color"><option value="white">الأبيض — أبدأ أولاً</option><option value="black">الأسود — يفتتح المحرك</option></select><label class="form-label" for="training-strength">مستوى المحرك: <strong id="strength-label">8 / 20</strong></label><input id="training-strength" type="range" min="0" max="20" step="1" value="20" /><div class="between tiny muted"><span>مبتدئ</span><span>متقدم</span></div><button id="training-start" class="btn btn-primary full-width">♟ مباراة تدريبية جديدة</button></section><section class="panel"><h2>ملاحظات المدرب</h2><div id="training-feedback" class="feedback muted">ابدأ مباراة لتظهر النصائح وتقييم نقلاتك هنا.</div><div id="training-moves" class="training-history"></div></section></div></div>
+        </section>
+        <section class="view" id="view-insights" hidden>
+          <div class="section-title"><div><p class="eyebrow">إحصاءات مستخرجة من الأرشيف</p><h1>خارطة مستواك</h1><p>افهم أنماط أدائك والافتتاحات الأكثر تكراراً.</p></div></div>
+          <div id="insights-content"></div><section class="panel" id="progress-panel"><div class="between"><h2>تطور مستواك خلال المباريات</h2><button id="bulk-reanalysis" class="btn btn-outline btn-small">ترقية تحليلات المباريات القديمة</button></div><p id="bulk-status" class="muted tiny"></p><div id="progress-content"></div></section>
+        </section>
+        <section class="view" id="view-issues" hidden>
+          <div class="section-title"><div><p class="eyebrow">PERSONAL IMPROVEMENT JOURNAL</p><h1>سجل الأخطاء والتحسين المستمر</h1><p>تعرف على مواقف ضعفك، تدرب عليها، وتتبع التقدم من مفتوح إلى تمت المعالجة.</p></div></div>
+          <div class="panel"><div class="between"><h2>الملاحظات المسجلة</h2><select id="issues-filter" aria-label="تصفية الأخطاء"><option value="all">كل الحالات</option><option value="open">مفتوحة</option><option value="practicing">قيد التدريب</option><option value="resolved">تمت المعالجة</option></select></div>
+          <div id="issues-summary" class="metric-cards"></div><div id="issues-content" class="issues-list"></div></div>
+        </section>
+        <section class="view" id="view-plan" hidden>
+          <div class="section-title"><div><p class="eyebrow">15–25 دقيقة يومياً</p><h1>خطتي الأسبوعية</h1><p>برنامج قابل للتطبيق يتغير وفق نتائج مراجعة مبارياتك.</p></div></div><div class="panel"><div id="plan-content"></div></div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">Chess AI Coach · تعليم وتحليل بعد انتهاء المباريات فقط · واجهة محلية خاصة</footer>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
