@@ -29,6 +29,7 @@ vulnerability or functional defect has been eliminated.
 | Discount-only settlement could undo an administrative access hold | Recheck the hold while committing a zero-amount grant |
 | Security validation used optimization-removable `assert` statements | Google service-account type/RSA strength and RTDN package checks now raise explicit errors |
 | cryptography version bounds allowed versions predating published fixes | Require cryptography 50.0.2+, update framework floors and record audited resolved dependencies in `requirements.lock` |
+| Legacy SQLite transaction contexts retained file handles | The connection factory now closes handles on both commit and rollback; 21 legacy/deep tests pass locally, including the five Windows cleanup failures that exposed the issue |
 
 Security headers retain CSP without unsafe inline scripts/styles, no-store for
 account responses, nosniff and frame denial. Added camera/microphone/geolocation
@@ -87,6 +88,10 @@ npm audit --audit-level=moderate
   not implemented; do not describe them as available.
 - No destructive production fuzzing, real financial transactions, credential
   rotation, operating-system reboot or change to unrelated services was performed.
+- The legacy SQLite-handle correction is included and tested in the repository;
+  the existing legacy container was not restarted. Its next controlled rebuild
+  must include this correction. The deployed Studio security image is
+  `chess-ai-coach-studio:security-20261123`.
 - Updates and backups remain necessary. Re-run dependency checks on every release;
   the lockfile does not replace security maintenance or restore drills.
 

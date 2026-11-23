@@ -37,9 +37,18 @@ MAX_NEW_PER_POLL = max(1, min(10, int(os.getenv("MAX_NEW_PER_POLL", "3"))))
 ANALYSIS_TIME_SECONDS = max(0.05, float(os.getenv("ANALYSIS_TIME_SECONDS", "0.12")))
 
 
+class ManagedConnection(sqlite3.Connection):
+    """A transaction context must also release its SQLite file handle."""
+    def __exit__(self, *args):
+        try:
+            return super().__exit__(*args)
+        finally:
+            self.close()
+
+
 def db_connect() -> sqlite3.Connection:
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    db = sqlite3.connect(DATABASE_PATH, timeout=30)
+    db = sqlite3.connect(DATABASE_PATH, timeout=30, factory=ManagedConnection)
     db.row_factory = sqlite3.Row
     return db
 
