@@ -6,16 +6,20 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Request, Response, HTTPException, Depends, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, Field
 from .core import (connection, setup, passhash, verify, now, safe_user, EMAIL_RE, config,config_set,
   GRADE_LABELS,LEVELS,course_outline,choose_lesson_position,game_analysis_counts,game_moves_from_pgn, user_analysis_speed, _lesson_candidates)
 
 log=logging.getLogger('studio')
+from . import security
 COOKIE_SECURE=os.getenv('STUDIO_COOKIE_SECURE','false').lower()=='true'
 BASE_URL=os.getenv('STUDIO_BASE_URL','').rstrip('/')
 SAME_ORIGIN=urlparse(BASE_URL).netloc if BASE_URL else None
 SESSION_AGE=14*86400
+DUMMY_PASSWORD_HASH=passhash(secrets.token_urlsafe(32))
 app=FastAPI(title='Chess AI Coach Studio v6 Beta',docs_url=None,redoc_url=None,openapi_url=None)
+app.add_middleware(TrustedHostMiddleware,allowed_hosts=['localhost','127.0.0.1','[::1]','testserver']+([urlparse(BASE_URL).hostname] if urlparse(BASE_URL).hostname else []))
 static=Path(__file__).parent/'static'
 app.mount('/assets',StaticFiles(directory=static),name='assets')
 app.mount('/pieces',StaticFiles(directory=Path(__file__).parent.parent/'web'/'pieces'),name='pieces')
@@ -40,6 +44,15 @@ async def request_language(req:Request,call_next):
 @app.middleware('http')
 async def security_headers(req:Request,call_next):
  if req.method in ('POST','PATCH','PUT','DELETE'):
+  maximum=2*1024*1024+16384
+  length=req.headers.get('content-length','')
+  if length and (not length.isdigit() or int(length)>maximum):return Response('Request too large',status_code=413)
+  body=bytearray()
+  async for chunk in req.stream():
+   if len(body)+len(chunk)>maximum:return Response('Request too large',status_code=413)
+   body.extend(chunk)
+  req._body=bytes(body)
+ if req.method in ('POST','PATCH','PUT','DELETE'):
   origin=req.headers.get('origin')
   if origin:
    # HTTP on SSH localhost is accepted in dev, in public mode exact HTTPS origin is required.
@@ -50,6 +63,8 @@ async def security_headers(req:Request,call_next):
  resp.headers['X-Content-Type-Options']='nosniff'
  resp.headers['Referrer-Policy']='no-referrer'
  resp.headers['X-Frame-Options']='DENY'
+ resp.headers['Permissions-Policy']='camera=(), microphone=(), geolocation=()'
+ if COOKIE_SECURE and BASE_URL.startswith('https://'):resp.headers['Strict-Transport-Security']='max-age=31536000'
  # Only public static files may be cached. Account/API responses stay private.
  public_asset=req.method in ('GET','HEAD') and resp.status_code in (200,304) and req.url.path.startswith(('/assets/','/pieces/'))
  if public_asset:
@@ -85,6 +100,8 @@ class PasswordChange(BaseModel):
 def ratelimit(key:str,limit=6,window=900):
  now_sec=int(time.time());name=hashlib.sha256(key.encode()).hexdigest()
  with connection() as db:
+  db.execute('BEGIN IMMEDIATE')
+  db.execute('DELETE FROM auth_attempts WHERE expires_at<=?',(now_sec,))
   row=db.execute('SELECT n,expires_at FROM auth_attempts WHERE key=?',(name,)).fetchone()
   if not row or row['expires_at']<=now_sec:
    db.execute('INSERT OR REPLACE INTO auth_attempts VALUES(?,?,?)',(name,1,now_sec+window))
@@ -134,9 +151,11 @@ def register(request:Request,response:Response,data:Register):
 @app.post('/api/auth/login')
 def login(request:Request,response:Response,data:Login):
  email=data.email.strip().lower()
+ ratelimit(f'login-ip:{request.client.host if request.client else "unknown"}',40)
  ratelimit(f'login:{request.client.host if request.client else "unknown"}:{email}',8)
  with connection() as db:row=db.execute('SELECT * FROM users WHERE email=?',(email,)).fetchone()
- if not row or not verify(data.password,row['pass_hash']) or row['disabled']:
+ valid=verify(data.password,row['pass_hash'] if row else DUMMY_PASSWORD_HASH)
+ if not row or not valid or row['disabled']:
   raise HTTPException(401,'البريد الإلكتروني أو كلمة المرور غير صحيحة')
  return {'ok':True,'csrf':issue_session(response,row['id']),'email':email}
 
@@ -202,7 +221,13 @@ def change_password(data:PasswordChange,user=Depends(auth)):
 
 @app.delete('/api/account')
 def delete_account(response:Response,user=Depends(auth)):
- with connection() as db:db.execute('DELETE FROM users WHERE id=?',(user['id'],))
+ with connection() as db:
+  db.execute('BEGIN IMMEDIATE')
+  if user['role']=='admin':raise HTTPException(409,'Transfer administration before deleting this account')
+  uid=user['id']
+  if any(db.execute('SELECT 1 FROM '+table+' WHERE user_id=? LIMIT 1',(uid,)).fetchone() for table in ('control_orders','control_play_purchases')):raise HTTPException(409,'Contact administration to resolve billing records before account deletion')
+  for table in ('control_ad_deliveries','control_ad_events','control_usage','control_memberships'):db.execute('DELETE FROM '+table+' WHERE user_id=?',(uid,))
+  db.execute('DELETE FROM users WHERE id=?',(uid,))
  response.delete_cookie('studio_session',path='/');return {'ok':True}
 
 @app.get('/api/dashboard')

@@ -49,10 +49,12 @@ def validate(name,env,public,secrets_map):
   if type(public.get('allow_test_purchases',False)) is not bool:raise HTTPException(422,'Invalid test purchase option')
   if 'service_account' in secrets_map and secrets_map['service_account']:
    try:
-    v=json.loads(secrets_map['service_account']);assert v['type']=='service_account' and v['client_email'].endswith('.gserviceaccount.com')
+    v=json.loads(secrets_map['service_account'])
+    if v['type']!='service_account' or not v['client_email'].endswith('.gserviceaccount.com'):raise ValueError('Invalid service account')
     from cryptography.hazmat.primitives.serialization import load_pem_private_key
     from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
-    key=load_pem_private_key(v['private_key'].encode(),password=None);assert isinstance(key,RSAPrivateKey) and key.key_size>=2048
+    key=load_pem_private_key(v['private_key'].encode(),password=None)
+    if not isinstance(key,RSAPrivateKey) or key.key_size<2048:raise ValueError('Invalid RSA key')
    except Exception:raise HTTPException(422,'Supply a valid RSA Google service-account JSON file') from None
  else:raise HTTPException(404,'Unknown payment gateway')
  if not set(public)<=allowed or not set(secrets_map)<=required:raise HTTPException(422,'Unknown gateway setting')

@@ -2,13 +2,14 @@ FROM python:3.12-slim
 RUN apt-get update && apt-get install -y --no-install-recommends stockfish \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt requirements.lock ./
+RUN pip install --no-cache-dir -r requirements.lock
 COPY *.py ./
 COPY studio ./studio
 COPY web ./web
 COPY tests ./tests
 COPY scripts ./scripts
+COPY database ./database
 RUN python scripts/prepare_public_data.py
 ENV STOCKFISH_PATH=/usr/games/stockfish \
     STUDIO_DB=/studio-data/studio.sqlite3 \

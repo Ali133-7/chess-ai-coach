@@ -54,7 +54,8 @@ def checkout(uid,data):
    with core.connection() as db:
     db.execute('BEGIN IMMEDIATE');state='paid' if profile['environment']=='live' else 'test_paid'
     db.execute('UPDATE control_orders SET status=?,paid_at=? WHERE id=?',(state,time.time(),oid))
-    if state=='paid':store.grant(db,uid,p['id'],p['days'],'discount',oid)
+    hold=db.execute("SELECT 1 FROM control_memberships WHERE user_id=? AND source='admin_block'",(uid,)).fetchone()
+    if state=='paid' and not hold:store.grant(db,uid,p['id'],p['days'],'discount',oid)
     store.audit(db,uid,'checkout.zero',oid,{'state':state,'discount':code})
     return public_order(db.execute('SELECT * FROM control_orders WHERE id=?',(oid,)).fetchone())
   pid,info=transport.create(profile,row,origin+'/api/billing/callback/'+data.gateway+'/'+oid+'/'+callback,origin+'/?billing_order='+oid)

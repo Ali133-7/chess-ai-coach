@@ -21,7 +21,7 @@ jobs:
           - group: studio
             modules: studio
           - group: control-and-payments
-            modules: test_control_center test_google_play test_database_export
+            modules: test_control_center test_google_play test_database_export test_security_review
     env:
       PYTHONPATH: .:tests
       STUDIO_DB: /tmp/chess-ci/studio.sqlite3
@@ -34,7 +34,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: sudo apt-get update && sudo apt-get install -y stockfish
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.lock
       - run: python scripts/prepare_public_data.py
       - if: matrix.group != 'studio'
         run: python -m unittest ${{ matrix.modules }} -q
@@ -50,3 +50,15 @@ jobs:
           node-version: "22"
       - run: npm ci
       - run: npm test
+      - run: npm audit --audit-level=moderate
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pip-audit bandit
+      - run: pip-audit -r requirements.lock
+      - run: bandit -r studio main.py -lll

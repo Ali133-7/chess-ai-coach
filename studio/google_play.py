@@ -88,7 +88,8 @@ def notification(authorization,payload):
  try:
   encoded=payload['message']['data']
   if len(encoded)>48000:raise ValueError()
-  body=json.loads(base64.b64decode(encoded,validate=True));assert body['packageName']==cfg['package_name']
+  body=json.loads(base64.b64decode(encoded,validate=True))
+  if body['packageName']!=cfg['package_name']:raise ValueError('Package mismatch')
   item=body.get('subscriptionNotification',{});purchase=item.get('purchaseToken')
   if not purchase:return {'ok':True}
   digest=hashlib.sha256(purchase.encode()).hexdigest()

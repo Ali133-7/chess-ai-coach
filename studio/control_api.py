@@ -25,9 +25,7 @@ async def bounded_body(request,maximum):
 def install(app,auth,admin):
  @app.exception_handler(RequestValidationError)
  async def safe_validation(request,exc):
-  if request.url.path.startswith(('/api/control/','/api/billing/')):
-   return JSONResponse(status_code=422,content={'detail':[{'loc':list(e['loc']),'msg':e['msg'],'type':e['type']} for e in exc.errors()]})
-  return await request_validation_exception_handler(request,exc)
+  return JSONResponse(status_code=422,content={'detail':[{'loc':list(e['loc']),'msg':e['msg'],'type':e['type']} for e in exc.errors()]})
 
  @app.get('/api/control/overview')
  def overview(user=Depends(admin)):

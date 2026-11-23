@@ -76,6 +76,7 @@ def route_feature(path,method):
  if path.startswith('/api/play/'):return 'play'
  if path.startswith('/api/knowledge/'):return 'knowledge'
  if path.startswith('/api/learning'):return 'curriculum'
+ if path=='/api/course' or path.startswith('/api/course/'):return 'curriculum'
  if path.startswith('/api/games/') or path=='/api/games':return 'review'
  return None
 
