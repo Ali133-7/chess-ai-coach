@@ -5,7 +5,8 @@ from contextlib import contextmanager
 import chess
 from studio.knowledge import study,store,recognition
 from studio import core
-GOLD=Path(os.environ.get('CHESS_TEST_KNOWLEDGE_GOLD',str(Path(__file__).resolve().parent.parent/'knowledge-dev/knowledge.sqlite3')))
+from knowledge_fixture import public_knowledge_fixture
+GOLD=public_knowledge_fixture()
 class StudyTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.old=core.DB;core.DB=Path(self.tmp.name)/'studio.sqlite3';core.setup();self.env=patch.dict(os.environ,{'CHESS_KNOWLEDGE_DB':str(Path(self.tmp.name)/'knowledge.sqlite3')});self.env.start();shutil.copyfile(GOLD,store.db_path());store.setup()

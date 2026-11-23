@@ -9,7 +9,8 @@ from studio.knowledge import store,recognition,perspectives,traps,study
 from studio.teacher_v7.router import setup_teacher
 from studio.play_groq import setup_play
 
-GOLD=Path(os.environ.get('CHESS_TEST_KNOWLEDGE_GOLD',str(Path(__file__).resolve().parent/'knowledge-dev/knowledge.sqlite3')))
+from knowledge_fixture import public_knowledge_fixture
+GOLD=public_knowledge_fixture()
 class ColorTrapTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.old=core.DB;core.DB=Path(self.tmp.name)/'studio.sqlite3'

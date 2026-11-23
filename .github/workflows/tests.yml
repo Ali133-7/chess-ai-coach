@@ -3,10 +3,25 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 jobs:
-  test:
+  python:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - group: legacy-and-providers
+            modules: test_coach_pro test_v5_deep test_play_groq test_providers
+          - group: learning
+            modules: test_curriculum test_daily_exercises test_placement_plans
+          - group: knowledge
+            modules: test_colors_traps test_knowledge test_locale test_opening_study
+          - group: masters-and-teacher
+            modules: test_master_games test_teacher_v7_integration test_training_teacher
+          - group: studio
+            modules: studio
     env:
+      PYTHONPATH: .:tests
       STUDIO_DB: /tmp/chess-ci/studio.sqlite3
       CHESS_KNOWLEDGE_DB: /tmp/chess-ci/knowledge.sqlite3
       DATABASE_PATH: /tmp/chess-ci/legacy.sqlite3
@@ -16,13 +31,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
       - run: sudo apt-get update && sudo apt-get install -y stockfish
       - run: pip install -r requirements.txt
       - run: python scripts/prepare_public_data.py
-      - run: python -m unittest discover -s tests -p 'test_*.py' -q
-      - run: python -m unittest discover -s studio/tests -p 'test_*.py' -q
+      - if: matrix.group != 'studio'
+        run: python -m unittest ${{ matrix.modules }} -q
+      - if: matrix.group == 'studio'
+        run: python -m unittest discover -s studio/tests -p 'test_*.py' -q
+  interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - run: npm ci
       - run: npm test
