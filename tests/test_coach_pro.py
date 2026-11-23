@@ -199,7 +199,7 @@ class CoachProTests(unittest.TestCase):
         self.assertEqual(response.status_code,200)
         data=response.json()
         self.assertTrue(data['correct'])
-        self.assertIn('أحسنت',data['success_explanation_ar'])
+        self.assertIn('طابق الحل الأقوى المحفوظ',data['success_explanation_ar'])
         self.assertNotIn('أضعفت موقفك',data['success_explanation_ar'])
         self.assertEqual(data['quality_code'],'excellent')
 

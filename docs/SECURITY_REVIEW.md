@@ -37,6 +37,11 @@ restrictions and HSTS when a configured HTTPS origin uses secure cookies.
 
 ## Verification
 
+Full release run: [GitHub Actions 45255550891](https://github.com/Ali133-7/chess-ai-coach/actions/runs/45255550891),
+all jobs passed: **242 Python tests, 14 UI suites**, plus dependency and static
+security checks. The subsequent legacy feedback assertion adjustment was also
+exercised by the 21-test Linux image gate before legacy deployment.
+
 - New focused regression module: `tests/test_security_review.py` (9 tests).
 - Existing control/payment/Google, teacher, tenant, knowledge, learning, engine
   and interface regression suites remain in GitHub Actions.
@@ -53,8 +58,9 @@ restrictions and HSTS when a configured HTTPS origin uses secure cookies.
   of private/cache rows, foreign keys and all 5,048 puzzle move sequences.
 - Before deployment, runtime source hashes are compared to the reviewed baseline;
   consistent private SQLite backups and the previous image/Compose file provide
-  rollback. Only the Studio web service is recreated; existing analysis workers
-  and the legacy service are preserved. Scheduled jobs use the corrected image.
+  rollback. Studio is recreated independently; existing analysis workers are
+  preserved. The legacy web service is updated separately after its own tests
+  and backup. Scheduled jobs use the corrected Studio image.
 
 Reproduce locally:
 
@@ -86,12 +92,19 @@ npm audit --audit-level=moderate
   encryption. Protect host/root access and backup access accordingly. Password
   reset email, email/Chess.com ownership verification and administrative MFA are
   not implemented; do not describe them as available.
+- The server password was previously shared in the project conversation. The
+  owner must rotate it through a private SSH session and verify recovery/key
+  access before disabling password-based SSH. It was deliberately not copied
+  into this repository or silently changed during application deployment.
 - No destructive production fuzzing, real financial transactions, credential
   rotation, operating-system reboot or change to unrelated services was performed.
-- The legacy SQLite-handle correction is included and tested in the repository;
-  the existing legacy container was not restarted. Its next controlled rebuild
-  must include this correction. The deployed Studio security image is
-  `chess-ai-coach-studio:security-20261123`.
+- Deployed images: `chess-ai-coach-studio:security-20261123` and
+  `chess-ai-coach-coach:security-20261123`. The former passed 63 affected Linux
+  tests before deployment; the latter passed 21 legacy/deep tests after matching
+  its original source hash. A historical feedback test now checks the explicit
+  reference-match explanation and unchanged quality/contradiction assertions,
+  instead of requiring an optional congratulatory word absent in the old image.
+  Both databases were backed up privately before their respective updates.
 - Updates and backups remain necessary. Re-run dependency checks on every release;
   the lockfile does not replace security maintenance or restore drills.
 
