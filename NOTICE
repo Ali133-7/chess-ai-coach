@@ -1,0 +1,10 @@
+Chess AI Coach / Chess Studio
+Project source code is licensed under GNU GPL version 3 or (at your option)
+any later version. See LICENSE. Copyright remains with the respective authors.
+
+Bundled datasets are separate works and retain their own licenses. In particular,
+Lichess broadcast game data and its adaptations are CC BY-SA 4.0, while the
+Lichess openings catalogue and puzzle/evaluation samples have their separately
+documented licenses. See THIRD_PARTY_NOTICES.md and the data manifests.
+Do not apply the source-code license to third-party data, chess-piece artwork,
+engines or dependencies in place of their original license notices.

@@ -1,5 +1,7 @@
 # Third-party data and components
 
+- **Expanded local game library**: built from the official monthly Lichess broadcast archives, explicitly CC BY-SA 4.0 (the broadcast section has its own license). Every accepted game retains its source URL, archive SHA-256 and ordinal. The release manifest records exact coverage and filtering. See `docs/OPEN_GAME_LIBRARY.md`; this does not incorporate Chessgames.com archives or member annotations.
+
 - **Lichess chess openings**: pinned TSV revision and SHA-256 values in `studio/knowledge/data/manifest.json`, CC0-1.0. Source: <https://github.com/lichess-org/chess-openings>.
 - **Lichess puzzle and evaluation samples**: bounded samples, source details, checksums and licensing in the same manifest. Source: <https://database.lichess.org/>. The bundled sample is not the entire Lichess database.
 - **1500 master games and derived annotations**: CC BY-SA 4.0; retain attribution and changes notice in `studio/knowledge/data/MASTER_GAMES_LICENSE.txt` and `master-games-manifest.json`. Original source links remain in each game. The compressed SQLite file contains public game data only.

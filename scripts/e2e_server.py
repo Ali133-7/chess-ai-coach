@@ -10,6 +10,17 @@ import studio.app as app_module
 from studio import core
 from studio.knowledge import importer
 start();importer.seed()
+# A real published PGN fixture exercises the optional compact catalogue. The
+# provenance here identifies the fixture, never pretends to be an upstream hash.
+import hashlib,io,chess.pgn
+from studio.knowledge import game_library
+sample=(Path(__file__).resolve().parents[1]/'tests/fixtures/master-first.pgn').read_text(encoding='utf8')
+game=chess.pgn.read_game(io.StringIO(sample));game_library.setup(root/'master-library.sqlite3')
+with game_library.connection(root/'master-library.sqlite3',True) as public_db:
+ public_db.execute("INSERT INTO library_archives(url,sha256,scope,status) VALUES(?,?,?,'complete')",('test-fixture:master-first.pgn',hashlib.sha256(sample.encode()).hexdigest(),'gm'))
+ row=game_library.pack_game(game,'test-fixture:master-first.pgn',game.headers['Result'])
+ public_db.execute('INSERT INTO library_games VALUES('+','.join('?'*19)+')',row)
+ public_db.execute('INSERT INTO library_provenance VALUES(?,?,?)',(row[0],'test-fixture:master-first.pgn',1))
 # This disposable harness repeatedly signs in the same four accounts. Keep
 # production rate limits intact; increase only fixture login budgets here.
 original_limit=app_module.ratelimit

@@ -7,11 +7,12 @@
   try{
    if(!append){offset=0;el('master-games').replaceChildren();}
    const params=new URLSearchParams({q:el('master-query').value.trim(),limit:'12',offset:String(offset)});
+   params.set('scope',el('master-scope')?.value||'gm');
    if(el('master-year').value)params.set('year',el('master-year').value);
    if(el('master-result').value)params.set('result',el('master-result').value);
    const r=await request('/knowledge/masters?'+params);if(seq!==sequence)return;
    if(!loaded){el('master-year').insertAdjacentHTML('beforeend',r.years.map(y=>`<option value="${y}">${y}</option>`).join(''));loaded=true;}
-   el('master-count').textContent=say(r.total+' مباراة مطابقة من '+r.all_count+' مباراة فعلية.',r.total+' matches from '+r.all_count+' real games.');
+   el('master-count').textContent=say(r.total+' مباراة مطابقة من '+r.all_count+' مباراة فعلية.',r.total+' matches from '+r.all_count+' real games.')+(r.expanded_library?say(' · أرشيف محلي موسّع. البحث ببداية كلمات الاسم أو الافتتاحية.',' · Expanded local archive. Search by player or opening word prefixes.'):'');
    el('master-games').insertAdjacentHTML('beforeend',r.items.map(g=>`<article class="master-game"><p class="tiny muted" data-no-i18n>${esc(g.date)} · ${esc(g.eco)} · ${esc(g.result)}</p><h3 data-no-i18n><bdi>${esc(g.white)}</bdi> <span>×</span> <bdi>${esc(g.black)}</bdi></h3><p data-no-i18n>${esc(g.event)}</p><p class="tiny muted" data-no-i18n>${esc(g.opening)}</p><button class="primary" data-master-game="${g.id}">${esc(say('شاهد وتعلّم','Watch and learn'))}</button></article>`).join(''));
    offset+=r.items.length;el('master-more').hidden=offset>=r.total;
    if(!r.total)el('master-games').textContent=say('لا توجد مباريات بهذه المرشحات. جرّب اسماً أو سنة أخرى.','No games match these filters. Try another name or year.');

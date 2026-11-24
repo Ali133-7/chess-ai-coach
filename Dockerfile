@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends stockfish \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY requirements.txt requirements.lock ./
+COPY LICENSE NOTICE THIRD_PARTY_NOTICES.md ./
 COPY compose.yaml .env.example ./
 RUN pip install --no-cache-dir -r requirements.lock
 COPY *.py ./

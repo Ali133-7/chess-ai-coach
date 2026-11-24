@@ -11,6 +11,18 @@ async function navigate(page,view){
  await page.locator(`#nav button[data-view="${view}"]`).click();await expect(page.locator('#view-'+view)).toBeVisible();
 }
 async function fits(page){expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
+
+test('expanded local game catalogue replays full PGN with offline autoplay',async({page},info)=>{
+ await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('#master-count')).toContainText('1');
+ await page.locator('#master-query').fill('Pragg Giri');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);
+ await page.locator('[data-master-game]').click();await expect(page.locator('#kc-study-dialog')).toBeVisible();await expect(page.locator('#kc-opening-title')).toContainText('2024');await expect(page.locator('#kc-board img').first()).toBeVisible();
+ const max=Number(await page.locator('#kc-study-seek').getAttribute('max'));expect(max).toBeGreaterThan(40);let requests=0;page.on('request',()=>requests++);
+ await page.locator('#kc-study-mode').click();await expect(page.locator('#kc-study-seek')).not.toHaveValue('0');await page.locator('#kc-study-mode').click();expect(requests).toBe(0);
+ await page.locator('#kc-study-seek').evaluate((element,value)=>{element.value=String(value);element.dispatchEvent(new Event('input',{bubbles:true}));},max);await expect(page.locator('#kc-study-total')).toHaveText(max+' / '+max);
+ const analysed=page.waitForResponse(r=>r.url().endsWith('/api/knowledge/position')&&r.request().method()==='POST'&&r.request().postDataJSON()?.refresh_engine===true);await page.locator('#master-analyse-position').click();const response=await analysed;expect(response.ok()).toBeTruthy();const position=await response.json();expect(position.engine.source).toBe('stockfish-local');expect(position.engine.pvs[0].moves.length).toBeGreaterThan(0);await expect(page.locator('#kc-engine')).toContainText('stockfish-local');
+ await page.keyboard.press('Escape');await expect(page.locator('#kc-study-dialog')).toBeVisible();await fits(page);if(info.project.name==='phone390')await page.screenshot({path:info.outputPath('expanded-master-library.png')});
+ await page.locator('#kc-study-close').click();await page.locator('.topbar .language-select').selectOption('en');await expect(page.locator('#master-scope option[value="all"]')).toHaveText('All archived games');await fits(page);
+});
 test('queue prioritization cancellation and saved-progress resume',async({page},info)=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await navigate(page,'games');await page.locator('#analysis-queue summary').first().click();
  await expect(page.locator('[data-job]').first()).toBeVisible();const gid=await page.locator('[data-job]').first().getAttribute('data-job');const row=page.locator(`[data-job="${gid}"]`);await row.locator('[data-job-action="prioritize"]').click();await row.locator('[data-job-action="cancel"]').click();await expect(row.locator('[data-job-action="resume"]')).toBeVisible();await row.locator('[data-job-action="resume"]').click();await expect(row.locator('[data-job-action="cancel"]')).toBeVisible();await fits(page);expect(errors).toEqual([]);if(['phone390','desktop'].includes(info.project.name))await page.screenshot({path:info.outputPath('verified-queue.png')});

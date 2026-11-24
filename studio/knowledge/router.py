@@ -90,9 +90,13 @@ def install(app,auth):
   return lesson(tid,variant)
 
  @app.get('/api/knowledge/masters')
- def master_games(q:str=Query(default='',max_length=120),year:int|None=Query(default=None,ge=1800,le=2100),result:Literal['1-0','0-1','1/2-1/2']|None=None,limit:int=Query(default=12,ge=1,le=24),offset:int=Query(default=0,ge=0,le=100000),user=Depends(auth)):
+ def master_games(q:str=Query(default='',max_length=120),year:int|None=Query(default=None,ge=1700,le=2100),result:Literal['1-0','0-1','1/2-1/2']|None=None,limit:int=Query(default=12,ge=1,le=24),offset:int=Query(default=0,ge=0,le=5000000),scope:Literal['gm','all']='gm',user=Depends(auth)):
   from .masters import search
-  return search(q,year,result,limit,offset)
+  return search(q,year,result,limit,offset,scope)
+ @app.get('/api/knowledge/masters/library-status')
+ def master_library_status(user=Depends(auth)):
+  from .game_library import status
+  return status()
  @app.get('/api/knowledge/masters/{gid}/pgn')
  def master_game_pgn(gid:str,user=Depends(auth)):
   from fastapi.responses import Response

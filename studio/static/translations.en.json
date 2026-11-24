@@ -1232,5 +1232,9 @@
   "إدارة المشروع": "Project administration",
   "الدفع والاشتراك": "Payment and membership",
   "إعلان": "Promotion",
-  "أُلغي التحليل — يمكن استئنافه": "Analysis cancelled — can be resumed"
+  "أُلغي التحليل — يمكن استئنافه": "Analysis cancelled — can be resumed",
+  "نوع المباريات": "Game scope",
+  "GM ضد GM": "GM vs GM",
+  "كل مباريات الأرشيف": "All archived games",
+  "حلّل هذه الوضعية بـ Stockfish": "Analyse this position with Stockfish"
 }

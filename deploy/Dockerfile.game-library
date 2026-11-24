@@ -1,0 +1,9 @@
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements-data.txt ./
+COPY LICENSE NOTICE THIRD_PARTY_NOTICES.md ./
+RUN pip install --no-cache-dir -r requirements-data.txt
+COPY scripts ./scripts
+COPY studio ./studio
+# Run as the owner of a separate public-data directory. Do not mount private data.
+CMD ["python", "scripts/build_game_library.py", "--database", "/data/master-library.sqlite3", "--work-directory", "/data/archives", "--scope", "gm"]

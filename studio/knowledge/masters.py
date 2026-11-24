@@ -97,7 +97,10 @@ def import_pgn(path,archive_sha,default_url):
  with store.connection() as db:db.execute("UPDATE kc_master_imports SET status='complete' WHERE sha=?",(sha,))
  return {'accepted':accepted,'rejected':rejected,'cursor':index,'sha':sha}
 
-def search(q='',year=None,result=None,limit=12,offset=0):
+def search(q='',year=None,result=None,limit=12,offset=0,scope='gm'):
+ from . import game_library
+ if game_library.available():
+  with game_library.connection(store.db_path()) as db:return game_library.search_local(db,q,year,result,limit,offset,scope)
  where=[];args=[]
  if q:
   where.append('(white LIKE ? ESCAPE \'!\' OR black LIKE ? ESCAPE \'!\' OR event LIKE ? ESCAPE \'!\' OR opening LIKE ? ESCAPE \'!\' OR eco LIKE ? ESCAPE \'!\')')
@@ -107,14 +110,16 @@ def search(q='',year=None,result=None,limit=12,offset=0):
  clause=' WHERE '+' AND '.join(where) if where else ''
  with store.connection() as db:
   total=db.execute('SELECT count(*) FROM kc_master_games'+clause,args).fetchone()[0]
-  rows=db.execute('SELECT id,white,black,date,year,event,result,eco,opening,plies FROM kc_master_games'+clause+' ORDER BY date DESC,id LIMIT ? OFFSET ?',(*args,limit,offset)).fetchall()
+  rows=db.execute('SELECT id,white,black,white_title,black_title,date,year,event,result,eco,opening,plies FROM kc_master_games'+clause+' ORDER BY date DESC,id LIMIT ? OFFSET ?',(*args,limit,offset)).fetchall()
   years=[r[0] for r in db.execute('SELECT DISTINCT year FROM kc_master_games ORDER BY year DESC')];all_count=db.execute('SELECT count(*) FROM kc_master_games').fetchone()[0]
  return {'items':[dict(r) for r in rows],'total':total,'all_count':all_count,'years':years,'offset':offset,'license':LICENSE,'source':'Lichess official broadcasts'}
 
 def detail(gid):
  with store.connection() as db:
   row=db.execute('SELECT * FROM kc_master_games WHERE id=?',(gid,)).fetchone()
-  if not row:raise HTTPException(404,'المباراة غير موجودة')
+  if not row:
+   from .game_library import detail as library_detail
+   return library_detail(gid)
   result=dict(row);rows=db.execute('SELECT * FROM kc_master_moves WHERE game_id=? ORDER BY ply',(gid,)).fetchall();cache={r['fen_key']:json.loads(r['payload']) for r in db.execute('SELECT fen_key,payload FROM kc_master_evals WHERE fen_key IN ('+','.join('?'*(len(rows)+1))+')',tuple([eval_key(chess.Board(result['initial_fen']))]+[eval_key(chess.Board(r['fen'])) for r in rows]))}
  b=chess.Board(result['initial_fen']);previous=cache.get(eval_key(b));steps=[]
  for r in rows:

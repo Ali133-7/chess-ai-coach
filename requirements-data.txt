@@ -1,0 +1,4 @@
+# Optional archive-building tools; the running website needs no zstd dependency.
+chess==1.11.2
+httpx==0.28.1
+zstandard==0.25.0
