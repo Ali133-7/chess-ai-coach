@@ -1,0 +1,14 @@
+[Unit]
+Description=Encrypted Chess Studio backup with verified isolated restore
+After=docker.service
+
+[Service]
+Type=oneshot
+User=root
+UMask=0077
+Nice=15
+IOSchedulingClass=idle
+NoNewPrivileges=true
+PrivateTmp=true
+TimeoutStartSec=3600
+ExecStart=/opt/chess-ops/venv/bin/python /opt/chess-ops/scripts/encrypted_backup.py run --config /etc/chess-private/backup.json

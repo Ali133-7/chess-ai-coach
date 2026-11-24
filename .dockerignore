@@ -24,4 +24,8 @@ playwright-report
 control-private
 control-media
 teacher-*.txt
+smtp-password
+backup-key
+*.enc
+*.receipt.json
 .openai_api_key

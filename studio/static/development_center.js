@@ -21,6 +21,6 @@
  }catch(err){($('analysis-message')||$('adaptive-message')).textContent=err.message;b.disabled=false;queueBusy=false;}});
  document.addEventListener('adaptive:changed',()=>{planGeneration++;planBusy=false;plan=null;planHTML();if(a.open)loadPlan(true);});
  const perf=mount('performance-monitor','view-admin');perf.innerHTML='<summary>Performance / قياسات الأداء</summary><pre id="performance-data"></pre>';
- perf.addEventListener('toggle',async()=>{if(!perf.open||S.me?.role!=='admin')return;try{$('performance-data').textContent=JSON.stringify({browser:window.StudioRequests?.metrics(),server:await request('/analysis/metrics')},null,2);}catch(e){$('performance-data').textContent=e.message;}});
+ perf.addEventListener('toggle',async()=>{if(!perf.open||S.me?.role!=='admin')return;try{$('performance-data').textContent=JSON.stringify({browser:window.StudioRequests?.metrics(),server:await request('/analysis/metrics'),history:await request('/operations/metrics'),alerts:await request('/operations/alerts')},null,2);}catch(e){$('performance-data').textContent=e.message;}});
  queueHTML();planHTML();
 })();

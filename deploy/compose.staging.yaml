@@ -1,0 +1,35 @@
+name: chess-staging
+x-stage: &stage
+  image: ${CHESS_RELEASE_IMAGE:?Set an immutable GHCR image digest}
+  restart: unless-stopped
+  security_opt: ["no-new-privileges:true"]
+  networks: [isolated]
+  volumes: ["stage-data:/studio-data"]
+  environment: &environment
+    STUDIO_DB: /studio-data/studio.sqlite3
+    CHESS_KNOWLEDGE_DB: /studio-data/knowledge.sqlite3
+    STUDIO_BASE_URL: http://127.0.0.1:18002
+    STUDIO_COOKIE_SECURE: "false"
+    TEACHER_PROVIDERS_FILE: /disabled/no-provider.json
+    TEACHER_KEY_FILE: /disabled/no-key
+    STUDIO_SMTP_HOST: ""
+services:
+  studio:
+    <<: *stage
+    ports: ["127.0.0.1:18002:8001"]
+    mem_limit: 512m
+    cpus: "0.5"
+  studio-worker:
+    <<: *stage
+    command: ["python", "-u", "-m", "studio.worker"]
+    environment:
+      <<: *environment
+      STUDIO_ENGINE_THREADS: "1"
+      STUDIO_ENGINE_HASH_MB: "32"
+    mem_limit: 768m
+    cpus: "0.5"
+networks:
+  isolated:
+    internal: true
+volumes:
+  stage-data:

@@ -88,6 +88,12 @@ def setup():
   setup_analysis_runtime(db)
   from .adaptive_training import setup as setup_adaptive
   setup_adaptive(db)
+  from .analysis_evidence import setup as setup_evidence
+  setup_evidence(db)
+  from .player_diagnostics import setup as setup_diagnostics
+  setup_diagnostics(db)
+  from .account_security import setup as setup_accounts
+  setup_accounts(db)
 
 def passhash(password):
  salt=secrets.token_bytes(16)

@@ -29,7 +29,7 @@ async function rawRequest(path,{method='GET',body,signal}={}){
 }
 async function boot(){try{S.me=await request('/me');S.csrf=S.me.csrf;showApp();}catch{showAuth();}}
 function showAuth(){S.csrf='';S.review=null;S.lesson=null;S.dashboard=null;S.games=[];window.StudioRequests?.invalidate();document.dispatchEvent(new CustomEvent('studio:session',{detail:{id:null}}));$('auth-screen').hidden=false;$('workspace').hidden=true;}
-function showApp(){document.dispatchEvent(new CustomEvent('studio:session',{detail:{id:S.me.id}}));$('auth-screen').hidden=true;$('workspace').hidden=false;$('admin-nav').hidden=S.me.role!=='admin';
+function showApp(){if(window.AccountSecurity?.hasLink()){S.me=null;showAuth();return;}document.dispatchEvent(new CustomEvent('studio:session',{detail:{id:S.me.id}}));$('auth-screen').hidden=true;$('workspace').hidden=false;$('admin-nav').hidden=S.me.role!=='admin';
  $('current-player').textContent=S.me.chess_username||'اربط حساب Chess.com';setTheme(S.me.theme);document.body.dataset.board=S.me.board_theme||'classic';
  switchView(!S.me.chess_username?'settings':'home');}
 function setTheme(theme){const value=theme==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):theme;
@@ -39,6 +39,7 @@ $('tab-login').addEventListener('click',()=>{registerMode=false;$('tab-login').c
 $('tab-register').addEventListener('click',()=>{registerMode=true;$('tab-register').classList.add('active');$('tab-login').classList.remove('active');$('auth-submit').textContent='إنشاء حساب';});
 $('auth-form').addEventListener('submit',async e=>{e.preventDefault();$('auth-error').textContent='';const btn=$('auth-submit');btn.disabled=true;
  try{const d=await request('/auth/'+(registerMode?'register':'login'),{method:'POST',body:{email:$('auth-email').value,password:$('auth-pass').value}});
+  if(d.mfa_required){window.AccountSecurity.challenge(d.challenge);return;}
   S.csrf=d.csrf;S.me=await request('/me');$('auth-pass').value='';showApp();
  }catch(error){$('auth-error').textContent=error.message;}finally{btn.disabled=false;}});
 $('logout').addEventListener('click',async()=>{try{await request('/auth/logout',{method:'POST'});S.me=null;S.csrf='';showAuth();location.reload();}catch(e){toast(e.message);}});
@@ -124,7 +125,7 @@ $('review-grade-summary').addEventListener('click',e=>{
  const next=relevant.find(m=>m.ply>S.ply)||relevant[0];goPly(next.ply);
 });
 function findMove(){return S.review?.moves[S.ply-1]||null;}
-function drawReview(){const r=S.review;if(!r)return;const entry=findMove();
+function drawReview(){document.dispatchEvent(new CustomEvent('studio:position'));const r=S.review;if(!r)return;const entry=findMove();
  const position=S.practicing?(S.scenario?.practiceFen||entry?.fen_before):S.scenario?.fens?.[S.scenarioStep]||entry?.fen_after||r.moves[0]?.fen_before||'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
  const mainLast=S.scenario&&!S.practicing?S.scenario.moves[S.scenarioStep-1]:entry?.uci;
  const orientation=S.flip?(r.white.toLowerCase()===(S.me?.chess_username||'')?'black':'white'):(r.white.toLowerCase()===(S.me?.chess_username||'')?'white':'black');

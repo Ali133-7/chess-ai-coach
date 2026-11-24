@@ -24,6 +24,8 @@ jobs:
             modules: test_control_center test_google_play test_database_export test_security_review
           - group: analysis-and-adaptation
             modules: test_analysis_runtime test_analysis_engine test_adaptive_grounding
+          - group: reliability-and-security
+            modules: test_account_security test_reliability_analysis test_encrypted_backup test_release_promotion
     env:
       PYTHONPATH: .:tests
       STUDIO_DB: /tmp/chess-ci/studio.sqlite3
@@ -63,7 +65,7 @@ jobs:
           python-version: "3.12"
       - run: pip install pip-audit bandit
       - run: pip-audit -r requirements.lock
-      - run: bandit -r studio main.py -lll
+      - run: bandit -r studio scripts deploy main.py -lll
   browser:
     runs-on: ubuntu-latest
     timeout-minutes: 12
@@ -86,4 +88,37 @@ jobs:
           path: |
             playwright-report/
             test-results/
+          retention-days: 7
+  release-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.lock
+      - name: Build source-pinned candidate image
+        run: docker build --build-arg "APP_REVISION=$GITHUB_SHA" -t chess-candidate:ci .
+      - name: Verify real image startup and isolated additive migration
+        run: |
+          mkdir -p /tmp/chess-release-seed /tmp/chess-release-stage
+          docker run --rm --network none --mount type=bind,src=/tmp/chess-release-seed,dst=/studio-data chess-candidate:ci python -c "from studio.app import start; start()"
+          python -c "from pathlib import Path; from scripts.promote_release import stage; print(stage('chess-candidate:ci',{'studio':'/tmp/chess-release-seed/studio.sqlite3','knowledge':'/tmp/chess-release-seed/knowledge.sqlite3'},Path('/tmp/chess-release-stage')))"
+  load-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.lock
+      - run: python scripts/prepare_public_data.py
+      - run: python scripts/load_test.py --levels 10 --seconds 2 --output load-smoke.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: load-smoke
+          path: load-smoke.json
           retention-days: 7

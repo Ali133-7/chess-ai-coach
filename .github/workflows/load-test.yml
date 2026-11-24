@@ -1,0 +1,26 @@
+name: Measure mixed load
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      STOCKFISH_PATH: /usr/games/stockfish
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y stockfish
+      - run: pip install -r requirements.lock
+      - run: python scripts/prepare_public_data.py
+      - run: python scripts/load_test.py --levels 10,25,50 --seconds 30 --engine --output mixed-load.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mixed-load-report
+          path: mixed-load.json
+          retention-days: 14

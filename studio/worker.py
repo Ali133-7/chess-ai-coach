@@ -173,7 +173,9 @@ def scan_position(engine,board,multipv,seconds):
   outcome=board.outcome(claim_draw=True)
   cp=0 if not outcome or outcome.winner is None else (1500 if outcome.winner==chess.WHITE else -1500)
   return {'eval':cp,'lines':[],'terminal':True}
+ search_started=time.perf_counter()
  infos=engine.analyse(board,chess.engine.Limit(time=seconds),multipv=multipv)
+ elapsed_ms=round((time.perf_counter()-search_started)*1000,2)
  if isinstance(infos,dict):infos=[infos]
  lines=[]
  for info in infos:
@@ -184,8 +186,8 @@ def scan_position(engine,board,multipv,seconds):
    if m not in temp.legal_moves:break
    san.append(temp.san(m));temp.push(m)
   lines.append({'uci':pv[0].uci(),'san':san[0],'eval':eval_white(info),
-     'pv_uci':[m.uci() for m in pv[:12]],'line':san,'depth':info.get('depth')})
- return {'eval':eval_white(infos[0]),'lines':lines,'terminal':False}
+     'pv_uci':[m.uci() for m in pv[:12]],'line':san,'depth':info.get('depth'),'nodes':info.get('nodes'),'seldepth':info.get('seldepth'),'engine_time':info.get('time')})
+ return {'eval':eval_white(infos[0]),'lines':lines,'terminal':False,'elapsed_ms':elapsed_ms,'engine_id':engine.id if isinstance(getattr(engine,'id',None),dict) else {}}
 
 def material_balance(board):
  vals={chess.PAWN:1,chess.KNIGHT:3,chess.BISHOP:3,chess.ROOK:5,chess.QUEEN:9}
@@ -279,6 +281,10 @@ def analyze_game(row):
       json.dumps(pre['lines'],ensure_ascii=False),phase(chess.Board(before))))
   db.execute("UPDATE games SET stage='done',completed_positions=?,updated_at=?,error=NULL WHERE id=?",(total,now(),gid))
  log.info('Finished game %d (%d moves)',gid,len(positions))
+ try:
+  from .player_diagnostics import update_game
+  update_game(gid,user_id)
+ except Exception:log.warning('Optional player observations not refreshed for game %s',gid)
 
 def job():
  row=runtime.claim()
@@ -296,6 +302,8 @@ def run():
  setup();refresh_book();log.info('Studio v6 deep analysis worker started; independent of browser and archive synchronizer')
  while True:
   try:
+   from .analysis_evidence import job as evidence_job
+   evidence_job()
    if job():continue
   except Exception:log.exception('Deep analysis worker loop error')
   time.sleep(12)

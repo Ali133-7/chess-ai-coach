@@ -1,0 +1,50 @@
+{
+  "fixture": "Synthetic local-only workloads, 50 isolated accounts; not real users or historical games",
+  "background_stockfish": true,
+  "engine": {
+    "cached_positions": 30,
+    "completed_fixture_games": 0
+  },
+  "results": [
+    {
+      "virtual_users": 10,
+      "duration_seconds": 5,
+      "requests": 556,
+      "statuses": {
+        "200": 556
+      },
+      "error_rate": 0.0,
+      "p50_ms": 67.5,
+      "p95_ms": 116.12,
+      "max_ms": 162.79
+    },
+    {
+      "virtual_users": 25,
+      "duration_seconds": 5,
+      "requests": 401,
+      "statuses": {
+        "200": 401
+      },
+      "error_rate": 0.0,
+      "p50_ms": 267.3,
+      "p95_ms": 481.62,
+      "max_ms": 844.02
+    },
+    {
+      "virtual_users": 50,
+      "duration_seconds": 5,
+      "requests": 326,
+      "statuses": {
+        "200": 326
+      },
+      "error_rate": 0.0,
+      "p50_ms": 808.18,
+      "p95_ms": 1465.52,
+      "max_ms": 1524.05
+    }
+  ],
+  "host_cpu_count": 16,
+  "python": "3.12.10",
+  "method": "Closed-loop virtual users after client/connection warm-up, 30ms think time, six authenticated read routes and one preference write per seven requests; p95 uses nearest rank. External AI, SMTP, billing and archive sync are disabled. Results characterize this machine, not production capacity.",
+  "passed": true
+}

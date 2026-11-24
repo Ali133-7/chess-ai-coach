@@ -109,11 +109,17 @@ def ratelimit(key:str,limit=6,window=900):
    if row['n']>=limit:raise HTTPException(429,'محاولات كثيرة. حاول لاحقاً.')
    db.execute('UPDATE auth_attempts SET n=n+1 WHERE key=?',(name,))
 
-def issue_session(resp:Response,uid:int):
+def issue_session(resp:Response,uid:int,*,db=None,mfa=False):
  token=secrets.token_urlsafe(32);csrf=secrets.token_urlsafe(24)
- with connection() as db:
-  db.execute('INSERT INTO sessions(token_hash,user_id,csrf,expires_at) VALUES (?,?,?,?)',
-      (hashlib.sha256(token.encode()).hexdigest(),uid,csrf,int(time.time())+SESSION_AGE))
+ def save(conn):
+  token_hash=hashlib.sha256(token.encode()).hexdigest()
+  conn.execute('INSERT INTO sessions(token_hash,user_id,csrf,expires_at) VALUES (?,?,?,?)',
+      (token_hash,uid,csrf,int(time.time())+SESSION_AGE))
+  from .account_security import record_session
+  record_session(conn,token_hash,mfa)
+ if db is None:
+  with connection() as conn:save(conn)
+ else:save(db)
  resp.set_cookie('studio_session',token,httponly=True,secure=COOKIE_SECURE,samesite='strict',max_age=SESSION_AGE,path='/')
  return csrf
 
@@ -125,15 +131,24 @@ async def auth(req:Request):
         WHERE s.token_hash=? AND s.expires_at>? AND u.disabled=0''',
         (hashlib.sha256(token.encode()).hexdigest(),int(time.time()))).fetchone()
  if not row:raise HTTPException(401,'انتهت الجلسة')
+ with connection() as db:
+  from .account_security import session_guard
+  session_guard(db,dict(row),hashlib.sha256(token.encode()).hexdigest())
  if req.method in ('POST','PUT','PATCH','DELETE'):
   provided=req.headers.get('X-CSRF-Token','')
   if not provided or not hmac.compare_digest(provided,row['csrf']):raise HTTPException(403,'رمز حماية الطلب مفقود')
  from .control_store import authorize
  authorize(dict(row),req)
- return dict(row)
+ return {**dict(row),'_session_hash':hashlib.sha256(token.encode()).hexdigest()}
 
 def admin(user=Depends(auth)):
  if user['role']!='admin':raise HTTPException(403,'للمدير فقط')
+ if os.getenv('STUDIO_REQUIRE_ADMIN_MFA','false').lower()=='true':
+  with connection() as db:
+   from .account_security import security
+   if not security(db,user['id'])['totp_ref']:
+    from .reliability_locale import LocalizedError
+    raise LocalizedError(403,'Enable two-factor authentication in account settings before administration')
  return user
 
 @app.post('/api/auth/register',status_code=201)
@@ -157,6 +172,9 @@ def login(request:Request,response:Response,data:Login):
  valid=verify(data.password,row['pass_hash'] if row else DUMMY_PASSWORD_HASH)
  if not row or not valid or row['disabled']:
   raise HTTPException(401,'البريد الإلكتروني أو كلمة المرور غير صحيحة')
+ from .account_security import challenge
+ second_factor=challenge(dict(row))
+ if second_factor:return second_factor
  return {'ok':True,'csrf':issue_session(response,row['id']),'email':email}
 
 @app.post('/api/auth/logout')
@@ -553,5 +571,11 @@ from .analysis_runtime import install as _install_analysis
 from .adaptive_training import install as _install_adaptive
 _install_analysis(app,auth)
 _install_adaptive(app,auth)
+from .analysis_evidence import install as _install_evidence
+_install_evidence(app,auth)
+from .player_diagnostics import install as _install_diagnostics
+_install_diagnostics(app,auth)
+from .account_security import install as _install_accounts
+_install_accounts(app,auth)
 from .performance import install as _install_performance
 _install_performance(app,admin)

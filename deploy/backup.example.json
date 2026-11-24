@@ -1,0 +1,12 @@
+{
+  "data_directory": "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data",
+  "databases": {
+    "studio": "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data/studio.sqlite3",
+    "knowledge": "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data/knowledge.sqlite3"
+  },
+  "private_includes": ["/home/deploy/chess-ai-coach/chess-ai-coach/.env", "/home/deploy/chess-ai-coach/chess-ai-coach/compose.yaml", "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data/control-private", "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data/teacher-providers.json"],
+  "key_file": "/etc/chess-private/backup-key",
+  "output_directory": "/var/backups/chess-encrypted",
+  "ssh_destination": null,
+  "identity_file": null
+}

@@ -1,8 +1,22 @@
+CREATE TABLE account_challenges(token_hash TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,expires_at REAL NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,password_version TEXT NOT NULL,totp_ref TEXT NOT NULL);
+
+CREATE TABLE account_email_tokens(token_hash TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,purpose TEXT NOT NULL,expires_at REAL NOT NULL,password_version TEXT NOT NULL);
+
+CREATE TABLE account_mail_outbox(id TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,purpose TEXT NOT NULL,private_ref TEXT NOT NULL,status TEXT NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,available_at REAL NOT NULL,lease_until REAL NOT NULL DEFAULT 0,token TEXT,created_at REAL NOT NULL,last_error TEXT);
+
+CREATE TABLE account_recovery_codes(code_hash TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE);
+
+CREATE TABLE account_security(user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,email_verified_at REAL,totp_ref TEXT,pending_ref TEXT,pending_until REAL,enabled_at REAL,last_counter INTEGER NOT NULL DEFAULT -1);
+
+CREATE TABLE account_session_info(token_hash TEXT PRIMARY KEY REFERENCES sessions(token_hash) ON DELETE CASCADE,public_id TEXT NOT NULL UNIQUE,created_at REAL NOT NULL,last_seen_at REAL NOT NULL,mfa_at REAL);
+
 CREATE TABLE adaptive_attempts(session_id TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,puzzle_id TEXT NOT NULL,score REAL NOT NULL,themes_json TEXT NOT NULL,created_at REAL NOT NULL);
 
 CREATE TABLE adaptive_reviews(user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,puzzle_id TEXT NOT NULL,streak INTEGER NOT NULL DEFAULT 0,due_at REAL NOT NULL,last_score REAL NOT NULL,PRIMARY KEY(user_id,puzzle_id));
 
 CREATE TABLE adaptive_skills(user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,theme TEXT NOT NULL,attempts INTEGER NOT NULL,success_weight REAL NOT NULL,updated_at REAL NOT NULL,PRIMARY KEY(user_id,theme));
+
+CREATE TABLE analysis_experiments(id TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,game_id INTEGER NOT NULL REFERENCES games(id) ON DELETE CASCADE,ply INTEGER NOT NULL,seconds INTEGER NOT NULL,multipv INTEGER NOT NULL,status TEXT NOT NULL,token TEXT,lease_until REAL NOT NULL DEFAULT 0,original_json TEXT NOT NULL,result_json TEXT,error TEXT,created_at REAL NOT NULL,finished_at REAL);
 
 CREATE TABLE analysis_jobs(game_id INTEGER PRIMARY KEY REFERENCES games(id) ON DELETE CASCADE,priority INTEGER NOT NULL DEFAULT 0,generation INTEGER NOT NULL DEFAULT 0,token TEXT,lease_until REAL NOT NULL DEFAULT 0,requested_at REAL NOT NULL DEFAULT 0);
 
@@ -101,6 +115,10 @@ CREATE TABLE moves(game_id INTEGER REFERENCES games(id) ON DELETE CASCADE,ply IN
        grade TEXT NOT NULL, loss_cp INTEGER, eval_cp_white INTEGER, best_uci TEXT,best_san TEXT,
        book_name TEXT, lines_json TEXT, phase TEXT, PRIMARY KEY(game_id,ply));
 
+CREATE TABLE player_skill_games(game_id INTEGER PRIMARY KEY REFERENCES games(id) ON DELETE CASCADE,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,fingerprint TEXT NOT NULL,finished_at INTEGER NOT NULL,counts_json TEXT NOT NULL,updated_at TEXT NOT NULL);
+
+CREATE TABLE player_skill_observations(game_id INTEGER NOT NULL REFERENCES games(id) ON DELETE CASCADE,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,ply INTEGER NOT NULL,skill TEXT NOT NULL,loss_cp INTEGER NOT NULL,evidence_json TEXT NOT NULL,PRIMARY KEY(game_id,ply,skill));
+
 CREATE TABLE position_scans(game_id INTEGER REFERENCES games(id) ON DELETE CASCADE,ply INTEGER,
        fen TEXT NOT NULL, scan_json TEXT NOT NULL, PRIMARY KEY(game_id,ply));
 
@@ -152,7 +170,15 @@ CREATE TABLE users(id INTEGER PRIMARY KEY, email TEXT NOT NULL UNIQUE, pass_hash
 
 CREATE TABLE worker_state(key TEXT PRIMARY KEY,value TEXT NOT NULL);
 
+CREATE INDEX account_email_owner ON account_email_tokens(user_id,purpose);
+
+CREATE INDEX account_mail_queue ON account_mail_outbox(status,available_at,lease_until);
+
 CREATE INDEX adaptive_due ON adaptive_reviews(user_id,due_at);
+
+CREATE INDEX analysis_experiment_owner ON analysis_experiments(user_id,created_at);
+
+CREATE INDEX analysis_experiment_queue ON analysis_experiments(status,lease_until,created_at);
 
 CREATE INDEX analysis_job_lease ON analysis_jobs(lease_until,priority);
 
@@ -191,5 +217,9 @@ CREATE INDEX learning_session_owner ON learning_sessions(user_id,revision,lesson
 CREATE INDEX placement_result_owner ON learning_placement_results(user_id,created_at);
 
 CREATE INDEX placement_session_owner ON learning_placement_sessions(user_id,updated_at);
+
+CREATE INDEX player_skill_chronology ON player_skill_games(user_id,finished_at,game_id);
+
+CREATE INDEX player_skill_examples ON player_skill_observations(user_id,skill,loss_cp);
 
 CREATE INDEX puzzle_session_owner ON knowledge_puzzle_sessions(user_id,puzzle_id,status);

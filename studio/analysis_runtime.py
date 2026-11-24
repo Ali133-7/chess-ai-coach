@@ -69,6 +69,8 @@ def shared_scan(board,seconds,multipv,compute):
  try:
   scan=compute()
   if not checked_scan(board,scan):raise ValueError('Engine returned an invalid principal variation')
+  from .analysis_evidence import metadata
+  scan=metadata(scan,seconds,multipv)
   with core.connection() as db:
    db.execute('UPDATE shared_engine_scans SET scan_json=?,token=NULL,lease_until=0 WHERE key=? AND token=?',(json.dumps(scan),key,token))
    # Bounded retention; never remove active single-flight leases.
@@ -126,7 +128,7 @@ def action(uid,gid,verb):
  return {'ok':True}
 
 def jobs(uid):
- with core.connection() as db:return {'items':[dict(r) for r in db.execute('SELECT g.id,g.white,g.black,g.stage,g.completed_positions,g.total_positions,g.updated_at,coalesce(q.priority,0) priority,coalesce(q.generation,0) generation FROM games g LEFT JOIN analysis_jobs q ON q.game_id=g.id WHERE g.user_id=? ORDER BY CASE WHEN g.stage IN (\'running\',\'pending\') THEN 0 ELSE 1 END,g.finished_at DESC LIMIT 30',(uid,))],'quantum_positions':QUANTUM,'cancellation':'Between engine positions; in-flight computation is fenced from committing after cancellation.'}
+ with core.connection() as db:return {'items':[dict(r) for r in db.execute('SELECT g.id,g.white,g.black,g.stage,g.completed_positions,g.total_positions,g.updated_at,coalesce(q.priority,0) priority,coalesce(q.generation,0) generation FROM games g LEFT JOIN analysis_jobs q ON q.game_id=g.id WHERE g.user_id=? ORDER BY CASE WHEN g.stage IN (\'running\',\'pending\') THEN 0 WHEN g.stage IN (\'cancelled\',\'error\') THEN 1 ELSE 2 END,g.finished_at DESC LIMIT 30',(uid,))],'quantum_positions':QUANTUM,'cancellation':'Between engine positions; in-flight computation is fenced from committing after cancellation.'}
 
 def install(app,auth):
  from fastapi import Depends

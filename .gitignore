@@ -26,6 +26,12 @@ venv/
 node_modules/
 test-results/
 playwright-report/
+load-smoke.json
+mixed-load.json
+*.enc
+*.receipt.json
+smtp-password
+backup-key
 .DS_Store
 .coverage
 htmlcov/

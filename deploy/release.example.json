@@ -1,0 +1,17 @@
+{
+  "repository": "ghcr.io/ali133-7/chess-ai-coach",
+  "compose": "/home/deploy/chess-ai-coach/chess-ai-coach/compose.yaml",
+  "release_directory": "/var/lib/chess-releases",
+  "services": ["studio", "studio-worker", "studio-sync"],
+  "health_url": "http://127.0.0.1:8001/health",
+  "systemd_units": ["chess-coach-exercises-20261122.service", "chess-control-status.service"],
+  "one_shot_containers": ["chess-coach-daily-exercises", "chess-control-status-refresh"],
+  "backup": {
+    "data_directory": "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data",
+    "key_file": "/etc/chess-private/backup-key",
+    "output_directory": "/var/backups/chess-encrypted",
+    "private_includes": ["/var/lib/docker/volumes/chess-ai-coach_studiodata/_data/control-private", "/var/lib/docker/volumes/chess-ai-coach_studiodata/_data/teacher-providers.json"],
+    "ssh_destination": null,
+    "identity_file": null
+  }
+}

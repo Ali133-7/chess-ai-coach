@@ -1,0 +1,1091 @@
+{
+  "version": 1,
+  "license": "Original project instructional fixtures",
+  "authorship": "Manually specified legal sequences and original bilingual questions; generated IDs enumerate paraphrases, not independent historical games. Expected chess facts are recomputed with python-chess. Lexical concept labels require human review for teaching quality.",
+  "cases": [
+    {
+      "id": "central-development-ar-1",
+      "topic": "central-development",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [],
+      "move": "e2e4",
+      "concept_groups": [
+        [
+          "مركز",
+          "وسط"
+        ]
+      ]
+    },
+    {
+      "id": "central-development-ar-2",
+      "topic": "central-development",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [],
+      "move": "e2e4",
+      "concept_groups": [
+        [
+          "مركز",
+          "وسط"
+        ]
+      ]
+    },
+    {
+      "id": "central-development-en-1",
+      "topic": "central-development",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [],
+      "move": "e2e4",
+      "concept_groups": [
+        [
+          "center",
+          "centre"
+        ]
+      ]
+    },
+    {
+      "id": "central-development-en-2",
+      "topic": "central-development",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [],
+      "move": "e2e4",
+      "concept_groups": [
+        [
+          "center",
+          "centre"
+        ]
+      ]
+    },
+    {
+      "id": "knight-development-ar-1",
+      "topic": "knight-development",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [
+        "e2e4",
+        "e7e5"
+      ],
+      "move": "g1f3",
+      "concept_groups": [
+        [
+          "حصان"
+        ],
+        [
+          "تطوير",
+          "تطور"
+        ]
+      ]
+    },
+    {
+      "id": "knight-development-ar-2",
+      "topic": "knight-development",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [
+        "e2e4",
+        "e7e5"
+      ],
+      "move": "g1f3",
+      "concept_groups": [
+        [
+          "حصان"
+        ],
+        [
+          "تطوير",
+          "تطور"
+        ]
+      ]
+    },
+    {
+      "id": "knight-development-en-1",
+      "topic": "knight-development",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [
+        "e2e4",
+        "e7e5"
+      ],
+      "move": "g1f3",
+      "concept_groups": [
+        [
+          "knight"
+        ],
+        [
+          "develop"
+        ]
+      ]
+    },
+    {
+      "id": "knight-development-en-2",
+      "topic": "knight-development",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [
+        "e2e4",
+        "e7e5"
+      ],
+      "move": "g1f3",
+      "concept_groups": [
+        [
+          "knight"
+        ],
+        [
+          "develop"
+        ]
+      ]
+    },
+    {
+      "id": "central-capture-ar-1",
+      "topic": "central-capture",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "d2d4"
+      ],
+      "move": "e5d4",
+      "concept_groups": [
+        [
+          "بيدق"
+        ],
+        [
+          "اسر",
+          "اخذ",
+          "تبادل"
+        ]
+      ]
+    },
+    {
+      "id": "central-capture-ar-2",
+      "topic": "central-capture",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "d2d4"
+      ],
+      "move": "e5d4",
+      "concept_groups": [
+        [
+          "بيدق"
+        ],
+        [
+          "اسر",
+          "اخذ",
+          "تبادل"
+        ]
+      ]
+    },
+    {
+      "id": "central-capture-en-1",
+      "topic": "central-capture",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "d2d4"
+      ],
+      "move": "e5d4",
+      "concept_groups": [
+        [
+          "pawn"
+        ],
+        [
+          "capture",
+          "take",
+          "exchange"
+        ]
+      ]
+    },
+    {
+      "id": "central-capture-en-2",
+      "topic": "central-capture",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "d2d4"
+      ],
+      "move": "e5d4",
+      "concept_groups": [
+        [
+          "pawn"
+        ],
+        [
+          "capture",
+          "take",
+          "exchange"
+        ]
+      ]
+    },
+    {
+      "id": "fools-mate-ar-1",
+      "topic": "fools-mate",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [
+        "f2f3",
+        "e7e5",
+        "g2g4"
+      ],
+      "move": "d8h4",
+      "concept_groups": [
+        [
+          "مات"
+        ]
+      ]
+    },
+    {
+      "id": "fools-mate-ar-2",
+      "topic": "fools-mate",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [
+        "f2f3",
+        "e7e5",
+        "g2g4"
+      ],
+      "move": "d8h4",
+      "concept_groups": [
+        [
+          "مات"
+        ]
+      ]
+    },
+    {
+      "id": "fools-mate-en-1",
+      "topic": "fools-mate",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [
+        "f2f3",
+        "e7e5",
+        "g2g4"
+      ],
+      "move": "d8h4",
+      "concept_groups": [
+        [
+          "mate"
+        ]
+      ]
+    },
+    {
+      "id": "fools-mate-en-2",
+      "topic": "fools-mate",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [
+        "f2f3",
+        "e7e5",
+        "g2g4"
+      ],
+      "move": "d8h4",
+      "concept_groups": [
+        [
+          "mate"
+        ]
+      ]
+    },
+    {
+      "id": "scholars-mate-ar-1",
+      "topic": "scholars-mate",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "f1c4",
+        "b8c6",
+        "d1h5",
+        "g8f6"
+      ],
+      "move": "h5f7",
+      "concept_groups": [
+        [
+          "مات"
+        ],
+        [
+          "وزير",
+          "ملكة"
+        ]
+      ]
+    },
+    {
+      "id": "scholars-mate-ar-2",
+      "topic": "scholars-mate",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "f1c4",
+        "b8c6",
+        "d1h5",
+        "g8f6"
+      ],
+      "move": "h5f7",
+      "concept_groups": [
+        [
+          "مات"
+        ],
+        [
+          "وزير",
+          "ملكة"
+        ]
+      ]
+    },
+    {
+      "id": "scholars-mate-en-1",
+      "topic": "scholars-mate",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "f1c4",
+        "b8c6",
+        "d1h5",
+        "g8f6"
+      ],
+      "move": "h5f7",
+      "concept_groups": [
+        [
+          "mate"
+        ],
+        [
+          "queen"
+        ]
+      ]
+    },
+    {
+      "id": "scholars-mate-en-2",
+      "topic": "scholars-mate",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "f1c4",
+        "b8c6",
+        "d1h5",
+        "g8f6"
+      ],
+      "move": "h5f7",
+      "concept_groups": [
+        [
+          "mate"
+        ],
+        [
+          "queen"
+        ]
+      ]
+    },
+    {
+      "id": "castling-ar-1",
+      "topic": "castling",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1c4",
+        "g8f6"
+      ],
+      "move": "e1g1",
+      "concept_groups": [
+        [
+          "تبييت"
+        ],
+        [
+          "ملك"
+        ]
+      ]
+    },
+    {
+      "id": "castling-ar-2",
+      "topic": "castling",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1c4",
+        "g8f6"
+      ],
+      "move": "e1g1",
+      "concept_groups": [
+        [
+          "تبييت"
+        ],
+        [
+          "ملك"
+        ]
+      ]
+    },
+    {
+      "id": "castling-en-1",
+      "topic": "castling",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1c4",
+        "g8f6"
+      ],
+      "move": "e1g1",
+      "concept_groups": [
+        [
+          "castl"
+        ],
+        [
+          "king"
+        ]
+      ]
+    },
+    {
+      "id": "castling-en-2",
+      "topic": "castling",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1c4",
+        "g8f6"
+      ],
+      "move": "e1g1",
+      "concept_groups": [
+        [
+          "castl"
+        ],
+        [
+          "king"
+        ]
+      ]
+    },
+    {
+      "id": "en-passant-ar-1",
+      "topic": "en-passant",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [
+        "e2e4",
+        "a7a6",
+        "e4e5",
+        "d7d5"
+      ],
+      "move": "e5d6",
+      "concept_groups": [
+        [
+          "تجاوز",
+          "مرور"
+        ],
+        [
+          "بيدق"
+        ]
+      ]
+    },
+    {
+      "id": "en-passant-ar-2",
+      "topic": "en-passant",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [
+        "e2e4",
+        "a7a6",
+        "e4e5",
+        "d7d5"
+      ],
+      "move": "e5d6",
+      "concept_groups": [
+        [
+          "تجاوز",
+          "مرور"
+        ],
+        [
+          "بيدق"
+        ]
+      ]
+    },
+    {
+      "id": "en-passant-en-1",
+      "topic": "en-passant",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [
+        "e2e4",
+        "a7a6",
+        "e4e5",
+        "d7d5"
+      ],
+      "move": "e5d6",
+      "concept_groups": [
+        [
+          "passant"
+        ],
+        [
+          "pawn"
+        ]
+      ]
+    },
+    {
+      "id": "en-passant-en-2",
+      "topic": "en-passant",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [
+        "e2e4",
+        "a7a6",
+        "e4e5",
+        "d7d5"
+      ],
+      "move": "e5d6",
+      "concept_groups": [
+        [
+          "passant"
+        ],
+        [
+          "pawn"
+        ]
+      ]
+    },
+    {
+      "id": "stalemate-ar-1",
+      "topic": "stalemate",
+      "language": "ar",
+      "intent": "position",
+      "question": "اشرح هذه النقلة وفائدتها ومخاطرها.",
+      "prefix": [],
+      "move": "g5g6",
+      "concept_groups": [
+        [
+          "تعادل",
+          "بات"
+        ]
+      ],
+      "fen": "7k/5K2/8/6Q1/8/8/8/8 w - - 0 1"
+    },
+    {
+      "id": "stalemate-ar-2",
+      "topic": "stalemate",
+      "language": "ar",
+      "intent": "position",
+      "question": "لماذا هذه النقلة مهمة في هذه الوضعية؟",
+      "prefix": [],
+      "move": "g5g6",
+      "concept_groups": [
+        [
+          "تعادل",
+          "بات"
+        ]
+      ],
+      "fen": "7k/5K2/8/6Q1/8/8/8/8 w - - 0 1"
+    },
+    {
+      "id": "stalemate-en-1",
+      "topic": "stalemate",
+      "language": "en",
+      "intent": "position",
+      "question": "Explain this move, its benefit and its risks.",
+      "prefix": [],
+      "move": "g5g6",
+      "concept_groups": [
+        [
+          "stalemate",
+          "draw"
+        ]
+      ],
+      "fen": "7k/5K2/8/6Q1/8/8/8/8 w - - 0 1"
+    },
+    {
+      "id": "stalemate-en-2",
+      "topic": "stalemate",
+      "language": "en",
+      "intent": "position",
+      "question": "Why is this move important in this position?",
+      "prefix": [],
+      "move": "g5g6",
+      "concept_groups": [
+        [
+          "stalemate",
+          "draw"
+        ]
+      ],
+      "fen": "7k/5K2/8/6Q1/8/8/8/8 w - - 0 1"
+    },
+    {
+      "id": "identity-ar-1",
+      "topic": "identity",
+      "language": "ar",
+      "intent": "identity",
+      "question": "من أنت؟",
+      "concept_groups": [
+        [
+          "معلم",
+          "مساعد"
+        ]
+      ]
+    },
+    {
+      "id": "identity-ar-2",
+      "topic": "identity",
+      "language": "ar",
+      "intent": "identity",
+      "question": "هل أنت إنسان؟",
+      "concept_groups": [
+        [
+          "معلم",
+          "مساعد"
+        ]
+      ]
+    },
+    {
+      "id": "identity-en-1",
+      "topic": "identity",
+      "language": "en",
+      "intent": "identity",
+      "question": "Who are you?",
+      "concept_groups": [
+        [
+          "assistant",
+          "teacher"
+        ]
+      ]
+    },
+    {
+      "id": "identity-en-2",
+      "topic": "identity",
+      "language": "en",
+      "intent": "identity",
+      "question": "What are you?",
+      "concept_groups": [
+        [
+          "assistant",
+          "teacher"
+        ]
+      ]
+    },
+    {
+      "id": "greeting-ar-1",
+      "topic": "greeting",
+      "language": "ar",
+      "intent": "greeting",
+      "question": "مرحبا",
+      "concept_groups": []
+    },
+    {
+      "id": "greeting-ar-2",
+      "topic": "greeting",
+      "language": "ar",
+      "intent": "greeting",
+      "question": "السلام عليكم",
+      "concept_groups": []
+    },
+    {
+      "id": "greeting-en-1",
+      "topic": "greeting",
+      "language": "en",
+      "intent": "greeting",
+      "question": "Hello",
+      "concept_groups": []
+    },
+    {
+      "id": "greeting-en-2",
+      "topic": "greeting",
+      "language": "en",
+      "intent": "greeting",
+      "question": "Good morning",
+      "concept_groups": []
+    },
+    {
+      "id": "italian-ar-1",
+      "topic": "italian",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام ما فكرة الافتتاح الإيطالي؟",
+      "concept_groups": [
+        [
+          "تطوير",
+          "تطور"
+        ]
+      ]
+    },
+    {
+      "id": "italian-ar-2",
+      "topic": "italian",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام كيف أتعلم الافتتاح الإيطالي؟",
+      "concept_groups": [
+        [
+          "تطوير",
+          "تطور"
+        ]
+      ]
+    },
+    {
+      "id": "italian-en-1",
+      "topic": "italian",
+      "language": "en",
+      "intent": "general",
+      "question": "What is the idea of the Italian opening?",
+      "concept_groups": [
+        [
+          "develop"
+        ]
+      ]
+    },
+    {
+      "id": "italian-en-2",
+      "topic": "italian",
+      "language": "en",
+      "intent": "general",
+      "question": "How can I study the Italian opening?",
+      "concept_groups": [
+        [
+          "develop"
+        ]
+      ]
+    },
+    {
+      "id": "king-safety-ar-1",
+      "topic": "king-safety",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام كيف أحمي الملك؟",
+      "concept_groups": [
+        [
+          "ملك"
+        ]
+      ]
+    },
+    {
+      "id": "king-safety-ar-2",
+      "topic": "king-safety",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام لماذا نهتم بأمان الملك؟",
+      "concept_groups": [
+        [
+          "ملك"
+        ]
+      ]
+    },
+    {
+      "id": "king-safety-en-1",
+      "topic": "king-safety",
+      "language": "en",
+      "intent": "general",
+      "question": "How do I protect my king in general?",
+      "concept_groups": [
+        [
+          "king"
+        ]
+      ]
+    },
+    {
+      "id": "king-safety-en-2",
+      "topic": "king-safety",
+      "language": "en",
+      "intent": "general",
+      "question": "Why is king safety important?",
+      "concept_groups": [
+        [
+          "king"
+        ]
+      ]
+    },
+    {
+      "id": "fork-definition-ar-1",
+      "topic": "fork-definition",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام ما الشوكة في الشطرنج؟",
+      "concept_groups": [
+        [
+          "قطعتين",
+          "هدفين",
+          "اكثر من"
+        ]
+      ]
+    },
+    {
+      "id": "fork-definition-ar-2",
+      "topic": "fork-definition",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام كيف أفهم تكتيك الشوكة؟",
+      "concept_groups": [
+        [
+          "قطعتين",
+          "هدفين",
+          "اكثر من"
+        ]
+      ]
+    },
+    {
+      "id": "fork-definition-en-1",
+      "topic": "fork-definition",
+      "language": "en",
+      "intent": "general",
+      "question": "What is a fork in chess?",
+      "concept_groups": [
+        [
+          "two",
+          "multiple",
+          "simultaneous"
+        ]
+      ]
+    },
+    {
+      "id": "fork-definition-en-2",
+      "topic": "fork-definition",
+      "language": "en",
+      "intent": "general",
+      "question": "How does a chess fork work?",
+      "concept_groups": [
+        [
+          "two",
+          "multiple",
+          "simultaneous"
+        ]
+      ]
+    },
+    {
+      "id": "endgames-ar-1",
+      "topic": "endgames",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام كيف أدرس نهايات البيادق؟",
+      "concept_groups": [
+        [
+          "ملك"
+        ],
+        [
+          "بيدق",
+          "بيادق"
+        ]
+      ]
+    },
+    {
+      "id": "endgames-ar-2",
+      "topic": "endgames",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام ما أهمية نشاط الملك في النهاية؟",
+      "concept_groups": [
+        [
+          "ملك"
+        ],
+        [
+          "بيدق",
+          "بيادق"
+        ]
+      ]
+    },
+    {
+      "id": "endgames-en-1",
+      "topic": "endgames",
+      "language": "en",
+      "intent": "general",
+      "question": "How should I study pawn endings?",
+      "concept_groups": [
+        [
+          "king"
+        ],
+        [
+          "pawn"
+        ]
+      ]
+    },
+    {
+      "id": "endgames-en-2",
+      "topic": "endgames",
+      "language": "en",
+      "intent": "general",
+      "question": "Why is king activity important in endgames?",
+      "concept_groups": [
+        [
+          "king"
+        ],
+        [
+          "pawn"
+        ]
+      ]
+    },
+    {
+      "id": "opening-principles-ar-1",
+      "topic": "opening-principles",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام ما مبادئ الافتتاح؟",
+      "concept_groups": [
+        [
+          "مركز",
+          "وسط"
+        ],
+        [
+          "تطوير",
+          "تطور"
+        ]
+      ]
+    },
+    {
+      "id": "opening-principles-ar-2",
+      "topic": "opening-principles",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام كيف أبدأ مباراة شطرنج؟",
+      "concept_groups": [
+        [
+          "مركز",
+          "وسط"
+        ],
+        [
+          "تطوير",
+          "تطور"
+        ]
+      ]
+    },
+    {
+      "id": "opening-principles-en-1",
+      "topic": "opening-principles",
+      "language": "en",
+      "intent": "general",
+      "question": "What are opening principles?",
+      "concept_groups": [
+        [
+          "center",
+          "centre"
+        ],
+        [
+          "develop"
+        ]
+      ]
+    },
+    {
+      "id": "opening-principles-en-2",
+      "topic": "opening-principles",
+      "language": "en",
+      "intent": "general",
+      "question": "How should I begin a chess game?",
+      "concept_groups": [
+        [
+          "center",
+          "centre"
+        ],
+        [
+          "develop"
+        ]
+      ]
+    },
+    {
+      "id": "pinned-piece-ar-1",
+      "topic": "pinned-piece",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام ما تثبيت القطعة؟",
+      "concept_groups": [
+        [
+          "ملك",
+          "قطعة",
+          "قيم"
+        ]
+      ]
+    },
+    {
+      "id": "pinned-piece-ar-2",
+      "topic": "pinned-piece",
+      "language": "ar",
+      "intent": "general",
+      "question": "بشكل عام كيف أتعرف على الربط؟",
+      "concept_groups": [
+        [
+          "ملك",
+          "قطعة",
+          "قيم"
+        ]
+      ]
+    },
+    {
+      "id": "pinned-piece-en-1",
+      "topic": "pinned-piece",
+      "language": "en",
+      "intent": "general",
+      "question": "What is a pinned piece?",
+      "concept_groups": [
+        [
+          "king",
+          "piece",
+          "valuable"
+        ]
+      ]
+    },
+    {
+      "id": "pinned-piece-en-2",
+      "topic": "pinned-piece",
+      "language": "en",
+      "intent": "general",
+      "question": "How do I recognize a pin in chess?",
+      "concept_groups": [
+        [
+          "king",
+          "piece",
+          "valuable"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+name: Publish immutable release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+  packages: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require successful tests for this exact commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$GITHUB_SHA&status=success&per_page=100" --jq '.workflow_runs | any(.name == "Tests" and .conclusion == "success")' | grep -qx true
+      - name: Build and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}:sha-$GITHUB_SHA"
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker build --build-arg "APP_REVISION=$GITHUB_SHA" -t "$IMAGE" .
+          docker push "$IMAGE"
+          docker image inspect "$IMAGE" --format '{{index .RepoDigests 0}}' >> "$GITHUB_STEP_SUMMARY"
+          docker logout ghcr.io

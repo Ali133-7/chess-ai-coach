@@ -1,0 +1,8 @@
+[Unit]
+Description=Daily verified Chess Studio backup
+[Timer]
+OnCalendar=*-*-* 03:15:00 Asia/Baghdad
+RandomizedDelaySec=300
+Persistent=true
+[Install]
+WantedBy=timers.target

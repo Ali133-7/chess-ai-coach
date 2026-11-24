@@ -1,0 +1,59 @@
+name: Promote verified release
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        type: choice
+        options: [staging, production]
+        default: staging
+        required: true
+      image:
+        description: Full ghcr.io repository@sha256 digest
+        required: true
+      commit:
+        description: Full source commit matching the image label
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: chess-release-${{ inputs.target }}
+  cancel-in-progress: false
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: ${{ inputs.target }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate inputs and exact tested revision
+        env:
+          IMAGE: ${{ inputs.image }}
+          COMMIT: ${{ inputs.commit }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$IMAGE" =~ ^ghcr.io/ali133-7/chess-ai-coach@sha256:[a-f0-9]{64}$ ]]
+          [[ "$COMMIT" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$COMMIT" == "$GITHUB_SHA" ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$COMMIT&status=success&per_page=100" --jq '.workflow_runs | any(.name == "Tests" and .conclusion == "success")' | grep -qx true
+      - name: Promote through restricted SSH command
+        env:
+          HOST: ${{ secrets.RELEASE_SSH_HOST }}
+          SSH_USER: ${{ secrets.RELEASE_SSH_USER }}
+          SSH_KEY: ${{ secrets.RELEASE_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.RELEASE_KNOWN_HOSTS }}
+          IMAGE: ${{ inputs.image }}
+          COMMIT: ${{ inputs.commit }}
+          TARGET: ${{ inputs.target }}
+        run: |
+          test -n "$HOST" && test -n "$SSH_USER" && test -n "$SSH_KEY" && test -n "$KNOWN_HOSTS"
+          [[ "$HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]
+          [[ "$SSH_USER" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$ ]]
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/chess_release
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          trap 'rm -f ~/.ssh/chess_release' EXIT
+          MODE=stage
+          if [[ "$TARGET" == production ]]; then MODE=promote; fi
+          ssh -i ~/.ssh/chess_release -o BatchMode=yes -o StrictHostKeyChecking=yes "$SSH_USER@$HOST" "$MODE $IMAGE $COMMIT"

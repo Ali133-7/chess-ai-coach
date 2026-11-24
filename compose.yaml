@@ -50,6 +50,16 @@ services:
     cpus: "0.15"
     mem_limit: 192m
     pids_limit: 48
+  mail-worker:
+    <<: *runtime
+    profiles: ["mail"]
+    command: ["python", "-u", "-m", "studio.mailer", "--loop"]
+    environment:
+      STUDIO_DB: /studio-data/studio.sqlite3
+    volumes: ["studiodata:/studio-data"]
+    cpus: "0.1"
+    mem_limit: 192m
+    pids_limit: 32
   daily-exercises:
     <<: *runtime
     profiles: ["automation"]

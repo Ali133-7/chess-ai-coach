@@ -138,6 +138,7 @@ def generate(cfg, instructions, supplied, *, answer_type=TutorAnswer, schema=Non
                 payload['response_format'] = {'type':'json_schema', 'json_schema':{
                     'name':task_name, 'strict':True, 'schema':schema}}
 
+        attempt_started=time.monotonic();attempt_status='error';ins=outs=0;usage_known=False
         try:
             with httpx.Client(timeout=httpx.Timeout(min(20, remaining), connect=min(5, remaining)),
                               follow_redirects=False, trust_env=False) as client:
@@ -145,6 +146,7 @@ def generate(cfg, instructions, supplied, *, answer_type=TutorAnswer, schema=Non
                                    headers={'Authorization':'Bearer '+secret,'Content-Type':'application/json'}) as response:
                     code = response.status_code
                     if code in RETRYABLE:
+                        attempt_status='rate_limited' if code==429 else 'temporary_failure'
                         failure_code = "rate_limited" if code == 429 else "temporary_failure"
                         continue
                     if code != 200:
@@ -164,6 +166,7 @@ def generate(cfg, instructions, supplied, *, answer_type=TutorAnswer, schema=Non
                 content = '\n'.join(texts)
                 usage = result.get('usage') or {}
                 ins, outs = usage.get('input_tokens',0), usage.get('output_tokens',0)
+                usage_known=all(isinstance(usage.get(k),int) for k in ('input_tokens','output_tokens'))
             else:
                 choice = result['choices'][0]
                 if choice.get('finish_reason') == 'length':
@@ -173,9 +176,11 @@ def generate(cfg, instructions, supplied, *, answer_type=TutorAnswer, schema=Non
                 content = choice['message']['content']
                 usage = result.get('usage') or {}
                 ins, outs = usage.get('prompt_tokens',0), usage.get('completion_tokens',0)
+                usage_known=all(isinstance(usage.get(k),int) for k in ('prompt_tokens','completion_tokens'))
             answer = answer_type.model_validate_json(content, strict=True)
             if teacher_task and any(n.scenario_id not in {s['id'] for s in supplied['VERIFIED_CONTEXT'].get('scenarios',[])} for n in answer.scenario_notes):
                 raise ValueError()
+            attempt_status='ok'
             return answer, max(0,int(ins)), max(0,int(outs)), name, p['model']
         except ProviderError:
             raise
@@ -184,4 +189,7 @@ def generate(cfg, instructions, supplied, *, answer_type=TutorAnswer, schema=Non
             continue
         except Exception:
             raise ProviderError('Invalid teacher response: '+name, 'invalid_output') from None
+        finally:
+            from ..telemetry import record
+            record('provider',name,attempt_status,(time.monotonic()-attempt_started)*1000,ins,outs,usage_known)
     raise ProviderError('No teacher provider available', failure_code)
