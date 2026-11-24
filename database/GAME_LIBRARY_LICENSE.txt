@@ -1,0 +1,27 @@
+Expanded local game library
+
+Source: Lichess official broadcast archives, https://database.lichess.org/#broadcasts
+Attribution: Lichess official broadcasts and the tournaments linked in each record.
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+License text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+Changes: selection of completed standard games with known player names and year;
+validation of all recorded mainline moves; normalized dates; exact-identity
+deduplication; compressed PGN and numerical source evaluations; search index.
+Human annotations and side variations are not included. Bilingual board-fact
+explanations are generated locally by the application, rather than copied from
+members of another site. Source engine settings are unknown; missing evaluations
+remain unscored. No separately computed deep analysis of every position is claimed.
+
+The adapted game data and original board-fact game notes are shared under
+CC BY-SA 4.0. Retain this attribution, license link and changes notice when
+redistributing, and share adaptations under the same license.
+
+The artifact's game-library-manifest.json identifies exact archive URLs, SHA-256
+checksums, import scopes, record counts and exclusions. Coverage is limited to
+those accepted records. This is not all chess games ever played and is not a
+redistribution of the Chessgames.com archive.
+
+Application source code is separately GPL-3.0-or-later. See ../LICENSE and
+../THIRD_PARTY_NOTICES.md. No player accounts, payment records, service keys or
+private training history are included in this public library.

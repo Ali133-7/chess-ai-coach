@@ -31,3 +31,9 @@ python scripts/export_public_database.py \
 ```
 
 Review the manifest and tests before copying only the output directory into Git. Never copy the private input files, key directories or backup folder.
+
+## Expanded local game library — 25 November 2026
+
+The separate [game-library release](https://github.com/Ali133-7/chess-ai-coach/releases/tag/local-games-2026-11-25) contains **52,809 completed GM-vs-GM game records**, **4,661,211 recorded plies** and **4,070,105 numerical source annotations** (2019–2026). All 82 monthly files in the pinned Lichess broadcast list were processed: 1,299,343 source records, with acceptance, duplicate, rejection and skip counts in [game-library-manifest.json](game-library-manifest.json). Source annotations have unknown engine settings; missing scores remain unscored.
+
+Download the gzip and manifest together from the release assets. The 71,985,972-byte gzip is not duplicated in Git history. [library.schema.sql](library.schema.sql) contains only the optional catalogue schema; [GAME_LIBRARY_LICENSE.txt](GAME_LIBRARY_LICENSE.txt) records attribution and changes. Install it as **master-library.sqlite3**, separately from account and knowledge databases. See [installation and analysis limits](../docs/OPEN_GAME_LIBRARY.md). All recorded mainlines were checked on import and rechecked during packaging. No account, secret, payment or private player-history rows enter this artifact.
