@@ -31,6 +31,7 @@ class MasterTests(unittest.TestCase):
  def test_source_evaluations_keep_provenance(self):
   g=masters.detail(self.gid);evals=[s['evaluation'] for s in g['path'] if s['evaluation']];self.assertTrue(evals)
   for e in evals:self.assertEqual(e['source'],'broadcast-eval');self.assertIsNone(e['nodes']);self.assertIn('broadcast',e['engine'])
+  self.assertTrue(all(s['loss_cp_estimate'] is None for s in g['path']),'unknown source engine budgets cannot grade moves')
  def test_import_resume_and_deduplication(self):
   first=masters.search()['total'];masters.import_pgn(self.pgn,'same','https://database.lichess.org/#broadcasts');self.assertEqual(masters.search()['total'],first)
   with store.connection() as db:db.execute("UPDATE kc_master_imports SET cursor=0,status='pending'")
