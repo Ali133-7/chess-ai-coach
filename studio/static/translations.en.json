@@ -1236,5 +1236,9 @@
   "نوع المباريات": "Game scope",
   "GM ضد GM": "GM vs GM",
   "كل مباريات الأرشيف": "All archived games",
-  "حلّل هذه الوضعية بـ Stockfish": "Analyse this position with Stockfish"
+  "حلّل هذه الوضعية بـ Stockfish": "Analyse this position with Stockfish",
+  "مصدر المباريات": "Game source",
+  "كل المصادر": "All sources",
+  "مباريات موثقة من أرشيفات مرخّصة، مع شرح النقلات وعرض تلقائي. مرشح GM يتطلب لقباً صريحاً في المصدر.": "Documented games from licensed archives, with move explanations and autoplay. The GM filter requires explicit source titles.",
+  "مصادر مرخّصة؛ يظهر المصدر والترخيص داخل كل مباراة. شروح الرقعة آلية، والتقييمات تقديرات محفوظة أو تحليل عند الطلب.": "Licensed archives; each game shows its source and license. Board notes are generated automatically. Scores are stored estimates or analysis requested by you."
 }

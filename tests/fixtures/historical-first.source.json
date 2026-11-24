@@ -1,0 +1,12 @@
+{
+  "source_id": "figshare-4276523-v1",
+  "source": "https://doi.org/10.6084/m9.figshare.4276523.v1",
+  "archive_sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+  "archive_member": "all.pgn",
+  "ordinal": 1,
+  "fixture_sha256": "2b0d0fa16e1c4d63affc4e993a8380dc4a346232254519f4159e3cdd7fbbfd7c",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Ana Schaigorodsky (2016), Chess Database, figshare.",
+  "changes": "Redundant blank lines normalized; first real game extracted; mainline reserialized with python-chess. No human annotations or side variations included."
+}

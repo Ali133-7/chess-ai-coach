@@ -17,7 +17,7 @@ jobs:
           - group: knowledge
             modules: test_colors_traps test_knowledge test_locale test_opening_study
           - group: masters-and-teacher
-            modules: test_master_games test_game_library test_teacher_v7_integration test_training_teacher
+            modules: test_master_games test_game_library test_historical_library test_teacher_v7_integration test_training_teacher
           - group: studio
             modules: studio
           - group: control-and-payments

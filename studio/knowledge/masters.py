@@ -97,11 +97,12 @@ def import_pgn(path,archive_sha,default_url):
  with store.connection() as db:db.execute("UPDATE kc_master_imports SET status='complete' WHERE sha=?",(sha,))
  return {'accepted':accepted,'rejected':rejected,'cursor':index,'sha':sha}
 
-def search(q='',year=None,result=None,limit=12,offset=0,scope='gm'):
+def search(q='',year=None,result=None,limit=12,offset=0,scope='gm',source_id=None):
  from . import game_library
  if game_library.available():
-  with game_library.connection(store.db_path()) as db:return game_library.search_local(db,q,year,result,limit,offset,scope)
+  with game_library.connection(store.db_path()) as db:return game_library.search_local(db,q,year,result,limit,offset,scope,source_id)
  where=[];args=[]
+ if source_id and source_id!='lichess-broadcasts':where.append('0')
  if q:
   where.append('(white LIKE ? ESCAPE \'!\' OR black LIKE ? ESCAPE \'!\' OR event LIKE ? ESCAPE \'!\' OR opening LIKE ? ESCAPE \'!\' OR eco LIKE ? ESCAPE \'!\')')
   escaped=q.replace('!','!!').replace('%','!%').replace('_','!_');args.extend(['%'+escaped+'%']*5)

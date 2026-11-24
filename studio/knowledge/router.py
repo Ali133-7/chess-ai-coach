@@ -90,9 +90,9 @@ def install(app,auth):
   return lesson(tid,variant)
 
  @app.get('/api/knowledge/masters')
- def master_games(q:str=Query(default='',max_length=120),year:int|None=Query(default=None,ge=1700,le=2100),result:Literal['1-0','0-1','1/2-1/2']|None=None,limit:int=Query(default=12,ge=1,le=24),offset:int=Query(default=0,ge=0,le=5000000),scope:Literal['gm','all']='gm',user=Depends(auth)):
+ def master_games(q:str=Query(default='',max_length=120),year:int|None=Query(default=None,ge=1700,le=2100),result:Literal['1-0','0-1','1/2-1/2']|None=None,limit:int=Query(default=12,ge=1,le=24),offset:int=Query(default=0,ge=0,le=5000000),scope:Literal['gm','all']='gm',source_id:Literal['lichess-broadcasts','figshare-4276523-v1']|None=None,user=Depends(auth)):
   from .masters import search
-  return search(q,year,result,limit,offset,scope)
+  return search(q,year,result,limit,offset,scope,source_id)
  @app.get('/api/knowledge/masters/library-status')
  def master_library_status(user=Depends(auth)):
   from .game_library import status
@@ -106,8 +106,8 @@ def install(app,auth):
   import io,chess.pgn
   exported=chess.pgn.read_game(io.StringIO(game['pgn']))
   exported.headers['Source']=game['source_url']
-  exported.headers['License']='CC BY-SA 4.0; https://creativecommons.org/licenses/by-sa/4.0/'
-  exported.headers['Attribution']='Lichess official broadcasts; filtered and validated game data'
+  exported.headers['License']=game['license'].replace('CC-BY-SA-4.0','CC BY-SA 4.0').replace('CC-BY-4.0','CC BY 4.0')+'; '+game['license_url']
+  exported.headers['Attribution']=game['attribution']
   payload=exported.accept(chess.pgn.StringExporter(headers=True,variations=False,comments=False))+'\n'
   return Response(payload,media_type='application/x-chess-pgn',headers={'Content-Disposition':'attachment; filename=gm-'+gid[:12]+'.pgn'})
  @app.get('/api/knowledge/masters/{gid}')

@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "source_id": "figshare-4276523-v1",
+  "checked_local_date": "2026-11-25",
+  "api": "https://api.figshare.com/v2/articles/4276523/versions/1",
+  "doi": "10.6084/m9.figshare.4276523.v1",
+  "publisher": "Ana Schaigorodsky",
+  "license": {
+    "value": 1,
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "archive": {
+    "id": 6971717,
+    "url": "https://ndownloader.figshare.com/files/6971717",
+    "bytes": 870891090,
+    "publisher_md5": "90bed9e33640e7eab354a40dfd1eddb8",
+    "project_sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+    "member": "all.pgn",
+    "uncompressed_bytes": 3076796490,
+    "encoding": "cp1252",
+    "full_crc_checked": true
+  },
+  "publisher_reported_coverage": {
+    "approximate_raw_records": 3500000,
+    "first_year": 1783,
+    "last_year": 2009,
+    "notice": "Publisher description, not an accepted/unique game count. The filtered text file is not imported as complete PGN."
+  },
+  "import_policy": {
+    "standard_start_required": true,
+    "known_names_and_year": true,
+    "legal_mainlines_only": true,
+    "matching_header_and_body_result": true,
+    "human_comments_and_variations_discarded": true,
+    "normalizer": "header-aware-v2",
+    "titles_inferred": false
+  }
+}

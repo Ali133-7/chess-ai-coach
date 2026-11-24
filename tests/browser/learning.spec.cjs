@@ -13,7 +13,7 @@ async function navigate(page,view){
 async function fits(page){expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
 
 test('expanded local game catalogue replays full PGN with offline autoplay',async({page},info)=>{
- await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('#master-count')).toContainText('1');
+ await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('#master-count')).toContainText('2');
  await page.locator('#master-query').fill('Pragg Giri');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);
  await page.locator('[data-master-game]').click();await expect(page.locator('#kc-study-dialog')).toBeVisible();await expect(page.locator('#kc-opening-title')).toContainText('2024');await expect(page.locator('#kc-board img').first()).toBeVisible();
  const max=Number(await page.locator('#kc-study-seek').getAttribute('max'));expect(max).toBeGreaterThan(40);let requests=0;page.on('request',()=>requests++);
@@ -23,6 +23,14 @@ test('expanded local game catalogue replays full PGN with offline autoplay',asyn
  const afterAnalysis=requests;await page.locator('#kc-first').click();await page.locator('#kc-study-mode').click();await expect(page.locator('#kc-study-seek')).not.toHaveValue('0');await page.locator('#kc-study-mode').click();expect(requests).toBe(afterAnalysis);
  await page.keyboard.press('Escape');await expect(page.locator('#kc-study-dialog')).toBeVisible();await fits(page);if(info.project.name==='phone390')await page.screenshot({path:info.outputPath('expanded-master-library.png')});
  await page.locator('#kc-study-close').click();await page.locator('.topbar .language-select').selectOption('en');await expect(page.locator('#master-scope option[value="all"]')).toHaveText('All archived games');await fits(page);
+});
+
+test('historical source filter and original license remain visible',async({page})=>{
+ await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('#master-source option[value="figshare-4276523-v1"]')).toHaveCount(1);
+ await page.locator('#master-source').selectOption('figshare-4276523-v1');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);await expect(page.locator('#master-games')).toContainText('Kasparov');
+ await page.locator('[data-master-game]').click();await expect(page.locator('#kc-study-dialog')).toBeVisible();await expect(page.locator('#kc-opening-title')).toContainText('2000');await expect(page.locator('#master-license')).toHaveText('CC-BY-4.0');await expect(page.locator('#master-license')).toHaveAttribute('href','https://creativecommons.org/licenses/by/4.0/');await expect(page.locator('#master-source-credit')).toContainText('Ana Schaigorodsky');expect(await page.locator('#kc-study-seek').getAttribute('max')).toBe('67');await fits(page);
+ await page.locator('#kc-study-close').click();await page.locator('#master-scope').selectOption('gm');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(0);
+ await page.locator('.topbar .language-select').selectOption('en');await expect(page.locator('#master-source option[value=""]')).toHaveText('All sources');await fits(page);
 });
 test('queue prioritization cancellation and saved-progress resume',async({page},info)=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await navigate(page,'games');await page.locator('#analysis-queue summary').first().click();
