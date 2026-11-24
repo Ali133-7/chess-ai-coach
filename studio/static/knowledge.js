@@ -53,11 +53,12 @@
   el('kc-tablebase-fetch').hidden=tb.available||fen().split(' ')[0].replace(/[\d/]/g,'').length>7;
  }
  async function loadPosition(flags={}){
+  if(K.master&&K.timeline[K.at].legal_moves&&!Object.keys(flags).length){++K.seq;K.posBusy=false;K.selected=null;const step=K.timeline[K.at],cached=step.positionInfo;K.pos=cached?.dataset===el('kc-dataset').value?cached.payload:{fen:fen(),legal_moves:step.legal_moves,statistics:{},engine:{...(step.evaluation||{}),pvs:[]},tablebase:{},children:[]};board();inspector();return;}
   if(K.opening&&K.timeline[K.at].legal_moves&&!Object.keys(flags).length&&!el('kc-study-dialog').querySelector('.opening-inspector').open&&!el('kc-study-dialog').querySelector('.opening-branches').open){++K.seq;K.posBusy=false;K.selected=null;K.pos={fen:fen(),legal_moves:K.timeline[K.at].legal_moves};message(text('اختر افتتاحية أو تمريناً لتبدأ.','Choose an opening or a puzzle to begin.'));board();return;}
 
   const seq=++K.seq,currentFen=fen();K.posBusy=true;K.selected=null;if(K.pos?.fen!==currentFen)K.pos=null;board();inspector();
   el('kc-analyse').disabled=true;el('kc-refresh-stats').disabled=true;message('جارٍ قراءة الوضعية…');
-  try{const result=await request('/knowledge/position',{method:'POST',body:{fen:currentFen,dataset:el('kc-dataset').value,...flags}});if(seq!==K.seq)return;K.pos=result;message('البيانات المحلية جاهزة. الجلب الخارجي والحساب لا يعملان إلا عند طلبهما.');}
+  try{const result=await request('/knowledge/position',{method:'POST',body:{fen:currentFen,dataset:el('kc-dataset').value,...flags}});if(seq!==K.seq)return;K.pos=result;if(K.master)K.timeline[K.at].positionInfo={dataset:el('kc-dataset').value,payload:result};message('البيانات المحلية جاهزة. الجلب الخارجي والحساب لا يعملان إلا عند طلبهما.');}
   catch(err){if(seq===K.seq)message(err.message,true);}
   finally{if(seq===K.seq){K.posBusy=false;board();inspector();el('kc-analyse').disabled=false;el('kc-refresh-stats').disabled=false;}}
  }
