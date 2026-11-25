@@ -101,19 +101,24 @@ def search(q='',year=None,result=None,limit=12,offset=0,scope='gm',source_id=Non
  from . import game_library
  if game_library.available():
   with game_library.connection(store.db_path()) as db:return game_library.search_local(db,q,year,result,limit,offset,scope,source_id)
- where=[];args=[]
+ from . import player_names
+ player=player_names.resolve(q);where=[];args=[]
  if source_id and source_id!='lichess-broadcasts':where.append('0')
- if q:
+ if player:
+  # Register the deterministic matcher on the connection used below.
+  where.append('(chess_player_matches(white,?) OR chess_player_matches(black,?))');args.extend([player['id'],player['id']])
+ elif q:
   where.append('(white LIKE ? ESCAPE \'!\' OR black LIKE ? ESCAPE \'!\' OR event LIKE ? ESCAPE \'!\' OR opening LIKE ? ESCAPE \'!\' OR eco LIKE ? ESCAPE \'!\')')
   escaped=q.replace('!','!!').replace('%','!%').replace('_','!_');args.extend(['%'+escaped+'%']*5)
  if year:where.append('year=?');args.append(year)
  if result:where.append('result=?');args.append(result)
  clause=' WHERE '+' AND '.join(where) if where else ''
  with store.connection() as db:
+  if player:player_names.seed_filter(db,player)
   total=db.execute('SELECT count(*) FROM kc_master_games'+clause,args).fetchone()[0]
   rows=db.execute('SELECT id,white,black,white_title,black_title,date,year,event,result,eco,opening,plies FROM kc_master_games'+clause+' ORDER BY date DESC,id LIMIT ? OFFSET ?',(*args,limit,offset)).fetchall()
   years=[r[0] for r in db.execute('SELECT DISTINCT year FROM kc_master_games ORDER BY year DESC')];all_count=db.execute('SELECT count(*) FROM kc_master_games').fetchone()[0]
- return {'items':[dict(r) for r in rows],'total':total,'all_count':all_count,'years':years,'offset':offset,'license':LICENSE,'source':'Lichess official broadcasts'}
+ return {'items':[dict(r) for r in rows],'total':total,'all_count':all_count,'years':years,'offset':offset,'license':LICENSE,'source':'Lichess official broadcasts','player_match':player_names.public(player)}
 
 def detail(gid):
  with store.connection() as db:

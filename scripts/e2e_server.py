@@ -27,6 +27,12 @@ with game_library.connection(root/'master-library.sqlite3',True) as public_db:
  row=game_library.pack_game(game,source_url,game.headers['Result'],'figshare-4276523-v1')
  public_db.execute('INSERT INTO library_games VALUES('+','.join('?'*19)+')',row)
  public_db.execute('INSERT INTO library_provenance VALUES(?,?,?)',(row[0],source_url,1))
+ tal=(Path(__file__).resolve().parents[1]/'tests/fixtures/tal-real.pgn').read_text(encoding='utf8')
+ game=chess.pgn.read_game(io.StringIO(tal));source_url='test-fixture:tal-real.pgn'
+ public_db.execute("INSERT INTO library_archives(url,sha256,scope,status,source_id) VALUES(?,?,?,'complete','figshare-4276523-v1')",(source_url,hashlib.sha256(tal.encode()).hexdigest(),'fixture'))
+ row=game_library.pack_game(game,source_url,game.headers['Result'],'figshare-4276523-v1')
+ public_db.execute('INSERT INTO library_games VALUES('+','.join('?'*19)+')',row)
+ public_db.execute('INSERT INTO library_provenance VALUES(?,?,?)',(row[0],source_url,1))
 # This disposable harness repeatedly signs in the same four accounts. Keep
 # production rate limits intact; increase only fixture login budgets here.
 original_limit=app_module.ratelimit

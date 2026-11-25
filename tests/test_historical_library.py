@@ -95,6 +95,40 @@ class HistoricalTests(unittest.TestCase):
   self.assertEqual(first['items'][0]['year'],2024);self.assertEqual(second['items'][0]['year'],2000)
   self.assertEqual(masters.search(scope='all',limit=1,offset=2)['items'],[])
   self.assertEqual(masters.search(scope='all',year=2000)['total'],1)
+ def test_tal_full_name_aliases_keep_player_fields_and_filters(self):
+  tal=(FIXTURES/'tal-real.pgn').read_text(encoding='utf8')
+  # Synthetic decoys use the real move sequence but deliberately unrelated names.
+  decoys=[tal.replace('Tal, Mihail','Tal, Synthetic Other').replace('Tringov, Georgi P','Mikhail, Synthetic Opponent'),tal.replace('Tal, Mihail','Baron, Tal').replace('[Event "Munich ol (Men) fin-A"]','[Event "Mikhail Tal Memorial"]')]
+  self.archive('\n\n'.join([tal,*decoys]));self.run_import()
+  expected=masters.search('Tal, Mihail',scope='all')['items'][0]['id']
+  for query in ('Mikhail Tal','Mihail Tal','Tal, Mikhail','  MIKHAIL   TAL ','ميخائيل تال','ميخايل تال'):
+   result=masters.search(query,scope='all');self.assertEqual(result['total'],1,query);self.assertEqual(result['items'][0]['id'],expected);self.assertEqual(result['player_match']['name'],'Mikhail Tal')
+  self.assertEqual(masters.search('Mikhail Tal',scope='gm')['total'],0)
+  self.assertEqual(masters.search('Mikhail Tal',scope='all',year=1959)['total'],0)
+  self.assertEqual(masters.search('Mikhail Tal',scope='all',source_id='lichess-broadcasts')['total'],0)
+  self.assertEqual(masters.search('Mikhail Tal',scope='all',offset=1)['items'],[])
+ def test_known_player_aliases_work_in_legacy_seed_without_library(self):
+  # Synthetic seed-name fixture only; no invented game enters distributed data.
+  raw=(FIXTURES/'master-first.pgn').read_text(encoding='utf8');game=chess.pgn.read_game(io.StringIO(raw));game.headers['White']='Tal, Mihail'
+  seed=self.root/'synthetic-seed.pgn';seed.write_text(str(game),encoding='utf8');masters.import_pgn(seed,'synthetic-alias-seed',lib.SOURCE)
+  self.assertFalse(self.db.exists());result=masters.search('Mikhail Tal');self.assertEqual(result['total'],1);self.assertEqual(result['items'][0]['white'],'Tal, Mihail')
+ def test_player_selection_and_supplement_preserve_library_and_reject_private_data(self):
+  from scripts.export_player_games import export
+  from scripts.apply_game_library_supplement import apply
+  source=self.root/'source.sqlite3';tal=(FIXTURES/'tal-real.pgn').read_text(encoding='utf8');self.archive(tal+'\n\n'+self.raw);self.run_import(db=source)
+  selected=self.root/'selected/master-library.sqlite3';selection=export(source,selected,'Mikhail Tal');self.assertEqual(selection['selected_games'],1)
+  self.assertEqual(validate(selected,deep=True)[0]['games'],1)
+  with self.assertRaises(ValueError):export(core.DB,self.root/'bad-public.sqlite3','Mikhail Tal')
+  self.assertFalse((self.root/'bad-public.sqlite3').exists())
+  packed=self.root/'supplement';meta=package(selected,packed);self.broadcast(self.db)
+  with lib.connection(self.db,True) as db:db.execute('PRAGMA wal_checkpoint(TRUNCATE)');db.execute('PRAGMA journal_mode=DELETE')
+  before=digest(self.db)
+  with self.assertRaises(ValueError):apply(packed/meta['file'],packed/'game-library-manifest.json',self.db,'0'*64)
+  self.assertEqual(digest(self.db),before)
+  with self.assertRaises(ValueError):apply(packed/meta['file'],packed/'game-library-manifest.json',core.DB)
+  result=apply(packed/meta['file'],packed/'game-library-manifest.json',self.db,before);self.assertEqual(result['stats']['games'],2);self.assertEqual(result['games_added'],1);self.assertTrue(result['all_existing_ids_preserved'])
+  installed=digest(self.db);again=apply(packed/meta['file'],packed/'game-library-manifest.json',self.db,installed);self.assertEqual(again['status'],'already-applied');self.assertEqual(digest(self.db),installed)
+  self.assertEqual(masters.search('Mikhail Tal',scope='all')['total'],1);self.assertTrue(Path(result['backup']).exists())
  def test_merge_keeps_resumed_checkpoints_without_stale_archive_cursors(self):
   # Repeated real game in a synthetic two-record ZIP: this is a merge fixture only.
   self.archive(self.raw+'\n\n'+self.raw);a=self.root/'paused.sqlite3';b=self.root/'complete.sqlite3'

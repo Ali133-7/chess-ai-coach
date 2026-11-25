@@ -14,9 +14,13 @@
    const r=await request('/knowledge/masters?'+params);if(seq!==sequence)return;
    if(!loaded){el('master-source')?.insertAdjacentHTML('beforeend',(r.sources||[]).map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join(''));el('master-year').insertAdjacentHTML('beforeend',r.years.map(y=>`<option value="${y}">${y}</option>`).join(''));loaded=true;}
    el('master-count').textContent=say(r.total+' مباراة مطابقة من '+r.all_count+' مباراة فعلية.',r.total+' matches from '+r.all_count+' real games.')+(r.expanded_library?say(' · أرشيف محلي موسّع. البحث ببداية كلمات الاسم أو الافتتاحية.',' · Expanded local archive. Search by player or opening word prefixes.'):'');
+   if(r.player_match)el('master-count').textContent+=say(' · شمل البحث صيغ اسم ',' · Matched known spellings of ')+r.player_match.name;
    el('master-games').insertAdjacentHTML('beforeend',r.items.map(g=>`<article class="master-game"><p class="tiny muted" data-no-i18n>${esc(g.date)} · ${esc(g.eco)} · ${esc(g.result)}</p><h3 data-no-i18n><bdi>${esc(g.white)}</bdi> <span>×</span> <bdi>${esc(g.black)}</bdi></h3><p data-no-i18n>${esc(g.event)}</p><p class="tiny muted" data-no-i18n>${esc(g.opening)}</p><button class="primary" data-master-game="${g.id}">${esc(say('شاهد وتعلّم','Watch and learn'))}</button></article>`).join(''));
    offset+=r.items.length;el('master-more').hidden=offset>=r.total;
-   if(!r.total)el('master-games').textContent=say('لا توجد مباريات بهذه المرشحات. جرّب اسماً أو سنة أخرى.','No games match these filters. Try another name or year.');
+   if(!r.total){
+    el('master-games').textContent=el('master-scope')?.value==='gm'?say('بعض المباريات التاريخية لا تتضمن حقول الألقاب، فتغيب عن مرشح GM.','Some historical records omit title fields and are excluded by the GM filter.'):say('لا توجد مباريات بهذه المرشحات. جرّب اسماً أو سنة أخرى.','No games match these filters. Try another name or year.');
+    if(el('master-scope')?.value==='gm'){const all=document.createElement('button');all.type='button';all.className='outline';all.textContent=say('ابحث في كل مباريات الأرشيف','Search all archived games');all.addEventListener('click',()=>{el('master-scope').value='all';load();});el('master-games').append(all);}
+   }
   }catch(e){el('master-count').textContent=e.message;}finally{busy=false;el('master-more').disabled=false;}
  }
  window.loadMasterLibrary=()=>{if(!loaded)load();};

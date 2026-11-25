@@ -1,0 +1,20 @@
+{
+  "id": "f25bdb76912f1fdffcf380937735fb852e7b32d6bda89a0e0e38e797627966df",
+  "white": "Tal, Mihail",
+  "black": "Tringov, Georgi P",
+  "date": "1958.??.??",
+  "event": "Munich ol (Men) fin-A",
+  "result": "1-0",
+  "plies": 39,
+  "license": "CC-BY-4.0",
+  "source": "Ana Schaigorodsky (2016), Chess Database, Figshare v1",
+  "doi": "10.6084/m9.figshare.4276523.v1",
+  "fixture_sha256": "587cc8df4177e15458acb319ff2cb84284b5cd09a11282eb7c1b34bd754be03c",
+  "provenance": [
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=35f68c6f576fc3c6795f7b43",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "ordinal": 41499
+    }
+  ]
+}

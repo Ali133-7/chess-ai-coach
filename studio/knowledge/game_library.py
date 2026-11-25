@@ -169,6 +169,8 @@ def search_local(db,q='',year=None,result=None,limit=12,offset=0,scope='gm',sour
  catalog_sources=[dict(r) for r in db.execute('SELECT DISTINCT s.* FROM library.library_sources s JOIN library.library_archives a ON a.source_id=s.id ORDER BY s.id')] if multi else []
  columns='id,white,black,white_title,black_title,date,year,event,result,eco,opening,plies'
  seed_where=[];large_where=[];seed_args=[];large_args=[]
+ from . import player_names
+ player=player_names.resolve(q)
  if source_id:
   if source_id!='lichess-broadcasts':seed_where.append('0')
   if multi:
@@ -176,7 +178,10 @@ def search_local(db,q='',year=None,result=None,limit=12,offset=0,scope='gm',sour
   elif source_id!='lichess-broadcasts':large_where.append('0')
  if scope=='gm':
   seed_where.append("white_title='GM' AND black_title='GM'");large_where.append("white_title='GM' AND black_title='GM'")
- if q:
+ if player:
+  clause,values=player_names.seed_filter(db,player);seed_where.append(clause);seed_args.extend(values)
+  large_where.append('rowid IN (SELECT rowid FROM library.library_search WHERE library_search MATCH ?)');large_args.append(player_names.fts_query(player))
+ elif q:
   escaped=q.replace('!','!!').replace('%','!%').replace('_','!_')
   seed_where.append('('+' OR '.join(c+" LIKE ? ESCAPE '!'" for c in ('white','black','event','opening','eco'))+')');seed_args.extend(['%'+escaped+'%']*5)
   words=re.findall(r'[^\W_]+',q,flags=re.UNICODE)[:12]
@@ -204,7 +209,7 @@ def search_local(db,q='',year=None,result=None,limit=12,offset=0,scope='gm',sour
  ) SELECT year FROM main.kc_master_games
  UNION SELECT year FROM archive_years WHERE year IS NOT NULL ORDER BY year DESC''')]
  all_count=db.execute('SELECT (SELECT count(*) FROM main.kc_master_games)+(SELECT count(*) FROM library.library_games)-(SELECT count(*) FROM main.kc_master_games seed JOIN library.library_games g ON g.id=seed.id)').fetchone()[0]
- return {'items':[dict(r) for r in rows],'total':total,'all_count':all_count,'years':years,'offset':offset,'license':LICENSE,'source':'Licensed public archives' if multi else 'Lichess official broadcasts','sources':catalog_sources,'source_id':source_id,'scope':scope,'expanded_library':True,'search_mode':'word-prefixes','coverage_notice':'Only accepted records in the installed archives; not all chess games. Source numerical scores have unknown engine settings; titles are never inferred from player names.'}
+ return {'items':[dict(r) for r in rows],'total':total,'all_count':all_count,'years':years,'offset':offset,'license':LICENSE,'source':'Licensed public archives' if multi else 'Lichess official broadcasts','sources':catalog_sources,'source_id':source_id,'scope':scope,'expanded_library':True,'search_mode':'known-player-alias' if player else 'word-prefixes','player_match':player_names.public(player),'coverage_notice':'Only accepted records in the installed archives; not all chess games. Source numerical scores have unknown engine settings; titles are never inferred from player names.'}
 
 def status():
  if not available():return {'installed':False,'games':0,'gm_vs_gm':0,'source_page':SOURCE,'license':LICENSE}

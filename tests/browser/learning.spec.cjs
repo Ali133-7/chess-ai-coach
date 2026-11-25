@@ -27,10 +27,18 @@ test('expanded local game catalogue replays full PGN with offline autoplay',asyn
 
 test('historical source filter and original license remain visible',async({page})=>{
  await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('#master-source option[value="figshare-4276523-v1"]')).toHaveCount(1);
- await page.locator('#master-source').selectOption('figshare-4276523-v1');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);await expect(page.locator('#master-games')).toContainText('Kasparov');
- await page.locator('[data-master-game]').click();await expect(page.locator('#kc-study-dialog')).toBeVisible();await expect(page.locator('#kc-opening-title')).toContainText('2000');await expect(page.locator('#master-license')).toHaveText('CC-BY-4.0');await expect(page.locator('#master-license')).toHaveAttribute('href','https://creativecommons.org/licenses/by/4.0/');await expect(page.locator('#master-source-credit')).toContainText('Ana Schaigorodsky');expect(await page.locator('#kc-study-seek').getAttribute('max')).toBe('67');await fits(page);
+ await page.locator('#master-source').selectOption('figshare-4276523-v1');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(2);await expect(page.locator('#master-games')).toContainText('Kasparov');
+ await page.locator('[data-master-game]').first().click();await expect(page.locator('#kc-study-dialog')).toBeVisible();await expect(page.locator('#kc-opening-title')).toContainText('2000');await expect(page.locator('#master-license')).toHaveText('CC-BY-4.0');await expect(page.locator('#master-license')).toHaveAttribute('href','https://creativecommons.org/licenses/by/4.0/');await expect(page.locator('#master-source-credit')).toContainText('Ana Schaigorodsky');expect(await page.locator('#kc-study-seek').getAttribute('max')).toBe('67');await fits(page);
  await page.locator('#kc-study-close').click();await page.locator('#master-scope').selectOption('gm');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(0);
  await page.locator('.topbar .language-select').selectOption('en');await expect(page.locator('#master-source option[value=""]')).toHaveText('All sources');await fits(page);
+});
+
+test('Mikhail Tal spelling finds real historical games and explains the GM filter',async({page})=>{
+ await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();
+ await page.locator('#master-query').fill('Mikhail Tal');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);await expect(page.locator('#master-games')).toContainText('Tal, Mihail');await expect(page.locator('#master-count')).toContainText('Mikhail Tal');
+ await page.locator('[data-master-game]').click();await expect(page.locator('#kc-opening-title')).toContainText('1958');await expect(page.locator('#master-license')).toHaveText('CC-BY-4.0');expect(await page.locator('#kc-study-seek').getAttribute('max')).toBe('39');await page.locator('#kc-study-close').click();
+ await page.locator('#master-scope').selectOption('gm');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(0);await expect(page.locator('#master-games')).toContainText('GM');await page.locator('#master-games button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);
+ await page.locator('.topbar .language-select').selectOption('en');await expect(page.locator('#master-games')).toContainText('Tal, Mihail');await fits(page);
 });
 test('queue prioritization cancellation and saved-progress resume',async({page},info)=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await navigate(page,'games');await page.locator('#analysis-queue summary').first().click();
