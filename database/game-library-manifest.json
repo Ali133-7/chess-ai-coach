@@ -1,23 +1,36 @@
 {
   "format": 1,
-  "schema_version": 1,
-  "generated_at_utc": "2026-11-24T22:36:32.778798+00:00",
+  "schema_version": 2,
+  "generated_at_utc": "2026-11-25T00:40:23.139638+00:00",
   "file": "master-library.sqlite3.gz",
-  "compressed_bytes": 71985972,
-  "compressed_sha256": "8e18162e7a862b9b78bf152536c653ba95d4389b4d56c9e00f709608cc68208c",
-  "database_bytes": 129753088,
-  "database_sha256": "993f7deab730d798fcbe10072187db60e09775c6e78f7a3c4afb468dc68edf1a",
+  "compressed_bytes": 1515941183,
+  "compressed_sha256": "b7f66def7c23e53496e32cbf58e916445d0da0731936bf960d112ec79647a981",
+  "database_bytes": 2927587328,
+  "database_sha256": "bc3c8949da08824adc8e6f5979c7d7c778beaea2ed350bbfda4e0245ea961957",
   "stats": {
-    "games": 52809,
+    "games": 1051601,
     "gm_vs_gm": 52809,
-    "plies": 4661211,
-    "source_evaluations": 4070105,
-    "first_year": 2019,
+    "plies": 90580594,
+    "source_evaluations": 74860494,
+    "first_year": 1749,
     "last_year": 2026
   },
   "archives": [
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-01.pgn.zst",
+      "sha256": "9461382d6933dedfbe7bb3de2ac139066d8d8657f2070cb11d59c7686f00f47e",
+      "scope": "all",
+      "cursor": 952,
+      "accepted": 854,
+      "duplicates": 0,
+      "rejected": 43,
+      "skipped": 55,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 39, \"unfinished\": 55, \"invalid_continuation\": 3, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-01.pgn.zst#catalogue-scan=546d11e5b71675616d3d20a3",
       "sha256": "9461382d6933dedfbe7bb3de2ac139066d8d8657f2070cb11d59c7686f00f47e",
       "scope": "gm",
       "cursor": 952,
@@ -26,10 +39,24 @@
       "rejected": 0,
       "skipped": 929,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 929}"
+      "reasons_json": "{\"not_gm_vs_gm\": 929}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-02.pgn.zst",
+      "sha256": "013411015df5a2c07f6005de16cc956b846b1aef36ee56643fb0a909d4a3feb6",
+      "scope": "all",
+      "cursor": 1236,
+      "accepted": 1007,
+      "duplicates": 0,
+      "rejected": 85,
+      "skipped": 144,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 35, \"unknown_year\": 142, \"unfinished\": 2, \"no_recorded_moves\": 48, \"invalid_continuation\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-02.pgn.zst#catalogue-scan=75971090ecd1810ff5a803cd",
       "sha256": "013411015df5a2c07f6005de16cc956b846b1aef36ee56643fb0a909d4a3feb6",
       "scope": "gm",
       "cursor": 1236,
@@ -38,10 +65,24 @@
       "rejected": 0,
       "skipped": 1211,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 1211}"
+      "reasons_json": "{\"not_gm_vs_gm\": 1211}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-03.pgn.zst",
+      "sha256": "51adf1be8b7dc69cb317093ab06aba50131e056d1aa69f849a3c2ca9e1e3babc",
+      "scope": "all",
+      "cursor": 196,
+      "accepted": 184,
+      "duplicates": 0,
+      "rejected": 12,
+      "skipped": 0,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 8, \"invalid_continuation\": 1, \"no_recorded_moves\": 3}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-03.pgn.zst#catalogue-scan=1f48eab0609f6c95b47606e3",
       "sha256": "51adf1be8b7dc69cb317093ab06aba50131e056d1aa69f849a3c2ca9e1e3babc",
       "scope": "gm",
       "cursor": 196,
@@ -50,10 +91,24 @@
       "rejected": 2,
       "skipped": 176,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 176, \"invalid_or_nonstandard\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 176, \"invalid_or_nonstandard\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-04.pgn.zst",
+      "sha256": "8c39dfedff509c36a37a017d2be5dd066b1e1dbb9e62a6bf63b16c018d496725",
+      "scope": "all",
+      "cursor": 79,
+      "accepted": 79,
+      "duplicates": 0,
+      "rejected": 0,
+      "skipped": 0,
+      "status": "complete",
+      "reasons_json": "{}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-04.pgn.zst#catalogue-scan=b013a2bbf185a7ad9d5fbb3a",
       "sha256": "8c39dfedff509c36a37a017d2be5dd066b1e1dbb9e62a6bf63b16c018d496725",
       "scope": "gm",
       "cursor": 79,
@@ -62,10 +117,24 @@
       "rejected": 0,
       "skipped": 0,
       "status": "complete",
-      "reasons_json": "{}"
+      "reasons_json": "{}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-05.pgn.zst",
+      "sha256": "1e791e6578e434b5e35df1f0780e3e9ddff6b22d047579dba8230ab5c1f7ea7d",
+      "scope": "all",
+      "cursor": 554,
+      "accepted": 474,
+      "duplicates": 40,
+      "rejected": 0,
+      "skipped": 40,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 40}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-05.pgn.zst#catalogue-scan=78c9c8429640d8287c707d5f",
       "sha256": "1e791e6578e434b5e35df1f0780e3e9ddff6b22d047579dba8230ab5c1f7ea7d",
       "scope": "gm",
       "cursor": 554,
@@ -74,10 +143,24 @@
       "rejected": 0,
       "skipped": 105,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 65, \"unfinished\": 40}"
+      "reasons_json": "{\"not_gm_vs_gm\": 65, \"unfinished\": 40}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-06.pgn.zst",
+      "sha256": "2cb57e6681cdaaa18142f3287d0cdb057210638f519b2e65a90374a78acf7cdd",
+      "scope": "all",
+      "cursor": 382,
+      "accepted": 303,
+      "duplicates": 0,
+      "rejected": 4,
+      "skipped": 75,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 62, \"invalid_or_nonstandard\": 3, \"no_recorded_moves\": 1, \"nonstandard\": 13}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-06.pgn.zst#catalogue-scan=bfb30c9bd7d7453d957fa926",
       "sha256": "2cb57e6681cdaaa18142f3287d0cdb057210638f519b2e65a90374a78acf7cdd",
       "scope": "gm",
       "cursor": 382,
@@ -86,10 +169,24 @@
       "rejected": 0,
       "skipped": 203,
       "status": "complete",
-      "reasons_json": "{\"unfinished\": 60, \"not_gm_vs_gm\": 130, \"nonstandard\": 13}"
+      "reasons_json": "{\"unfinished\": 60, \"not_gm_vs_gm\": 130, \"nonstandard\": 13}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-07.pgn.zst",
+      "sha256": "d2d12d73ea2721122a50622ec669ab8a50324fb97faf2a3721d292a9824353e4",
+      "scope": "all",
+      "cursor": 468,
+      "accepted": 301,
+      "duplicates": 0,
+      "rejected": 10,
+      "skipped": 157,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 51, \"invalid_or_nonstandard\": 9, \"no_recorded_moves\": 1, \"unknown_year\": 100, \"unfinished\": 6}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-07.pgn.zst#catalogue-scan=0840c5c004c22de7ef6dbe11",
       "sha256": "d2d12d73ea2721122a50622ec669ab8a50324fb97faf2a3721d292a9824353e4",
       "scope": "gm",
       "cursor": 468,
@@ -98,10 +195,24 @@
       "rejected": 2,
       "skipped": 263,
       "status": "complete",
-      "reasons_json": "{\"nonstandard\": 51, \"not_gm_vs_gm\": 106, \"invalid_or_nonstandard\": 2, \"unknown_year\": 100, \"unfinished\": 6}"
+      "reasons_json": "{\"nonstandard\": 51, \"not_gm_vs_gm\": 106, \"invalid_or_nonstandard\": 2, \"unknown_year\": 100, \"unfinished\": 6}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-08.pgn.zst",
+      "sha256": "bfc3216b85ccdc63b7ffd6261d826347f5b294006ba222e82585433d8fb7fe18",
+      "scope": "all",
+      "cursor": 319,
+      "accepted": 191,
+      "duplicates": 0,
+      "rejected": 8,
+      "skipped": 120,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 96, \"unfinished\": 24, \"invalid_or_nonstandard\": 8}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-08.pgn.zst#catalogue-scan=84841ebe62578d53c46da195",
       "sha256": "bfc3216b85ccdc63b7ffd6261d826347f5b294006ba222e82585433d8fb7fe18",
       "scope": "gm",
       "cursor": 319,
@@ -110,10 +221,24 @@
       "rejected": 1,
       "skipped": 283,
       "status": "complete",
-      "reasons_json": "{\"nonstandard\": 96, \"unfinished\": 20, \"not_gm_vs_gm\": 167, \"invalid_or_nonstandard\": 1}"
+      "reasons_json": "{\"nonstandard\": 96, \"unfinished\": 20, \"not_gm_vs_gm\": 167, \"invalid_or_nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-09.pgn.zst",
+      "sha256": "69169589e509b1717faabaa8ff03067af10869642d156b6500f421e2775a798e",
+      "scope": "all",
+      "cursor": 543,
+      "accepted": 488,
+      "duplicates": 0,
+      "rejected": 4,
+      "skipped": 51,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 6, \"invalid_or_nonstandard\": 3, \"nonstandard\": 45, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-09.pgn.zst#catalogue-scan=163bc28857e54266ef2f845c",
       "sha256": "69169589e509b1717faabaa8ff03067af10869642d156b6500f421e2775a798e",
       "scope": "gm",
       "cursor": 543,
@@ -122,10 +247,24 @@
       "rejected": 2,
       "skipped": 280,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 231, \"unfinished\": 4, \"invalid_or_nonstandard\": 1, \"nonstandard\": 45, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 231, \"unfinished\": 4, \"invalid_or_nonstandard\": 1, \"nonstandard\": 45, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-10.pgn.zst",
+      "sha256": "23c6f9726b7f50af1297442316dba364c7a19fb2ab5c5cecdb9526a69e6f1664",
+      "scope": "all",
+      "cursor": 730,
+      "accepted": 692,
+      "duplicates": 0,
+      "rejected": 15,
+      "skipped": 23,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 15, \"unfinished\": 23}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-10.pgn.zst#catalogue-scan=8987e2cecc36c9d808f77df0",
       "sha256": "23c6f9726b7f50af1297442316dba364c7a19fb2ab5c5cecdb9526a69e6f1664",
       "scope": "gm",
       "cursor": 730,
@@ -134,10 +273,24 @@
       "rejected": 0,
       "skipped": 563,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 555, \"unfinished\": 8}"
+      "reasons_json": "{\"not_gm_vs_gm\": 555, \"unfinished\": 8}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-11.pgn.zst",
+      "sha256": "61a489bba13af03271c0eaa3fc08cda6054bc94e07c82a933810767e63b55e88",
+      "scope": "all",
+      "cursor": 488,
+      "accepted": 52,
+      "duplicates": 4,
+      "rejected": 0,
+      "skipped": 432,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 11, \"unknown_year\": 245, \"nonstandard\": 176}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-11.pgn.zst#catalogue-scan=5ca87a697e6740d94fbc6718",
       "sha256": "61a489bba13af03271c0eaa3fc08cda6054bc94e07c82a933810767e63b55e88",
       "scope": "gm",
       "cursor": 488,
@@ -146,10 +299,24 @@
       "rejected": 0,
       "skipped": 460,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 281, \"unfinished\": 3, \"nonstandard\": 176}"
+      "reasons_json": "{\"not_gm_vs_gm\": 281, \"unfinished\": 3, \"nonstandard\": 176}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-12.pgn.zst",
+      "sha256": "91b4ad4576ee1e53aeff3492ccacd25a0e58112befe8058016fff5fb62c32369",
+      "scope": "all",
+      "cursor": 1789,
+      "accepted": 1179,
+      "duplicates": 99,
+      "rejected": 47,
+      "skipped": 464,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 174, \"unfinished\": 132, \"invalid_or_nonstandard\": 41, \"no_recorded_moves\": 5, \"nonstandard\": 158, \"invalid_continuation\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2020-12.pgn.zst#catalogue-scan=c69d55c64c150bcf597bad33",
       "sha256": "91b4ad4576ee1e53aeff3492ccacd25a0e58112befe8058016fff5fb62c32369",
       "scope": "gm",
       "cursor": 1789,
@@ -158,10 +325,24 @@
       "rejected": 0,
       "skipped": 1737,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 1623, \"unfinished\": 7, \"nonstandard\": 107}"
+      "reasons_json": "{\"not_gm_vs_gm\": 1623, \"unfinished\": 7, \"nonstandard\": 107}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-01.pgn.zst",
+      "sha256": "48159f1a55c61dca8addf1e37f555ac4a10f129851b0ae5331afbd70b53b7b8f",
+      "scope": "all",
+      "cursor": 908,
+      "accepted": 711,
+      "duplicates": 38,
+      "rejected": 13,
+      "skipped": 146,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 20, \"unfinished\": 125, \"invalid_or_nonstandard\": 8, \"no_recorded_moves\": 1, \"invalid_continuation\": 4, \"unknown_year\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-01.pgn.zst#catalogue-scan=da2ac5dd1f52c1ba669358aa",
       "sha256": "48159f1a55c61dca8addf1e37f555ac4a10f129851b0ae5331afbd70b53b7b8f",
       "scope": "gm",
       "cursor": 908,
@@ -170,10 +351,24 @@
       "rejected": 1,
       "skipped": 802,
       "status": "complete",
-      "reasons_json": "{\"nonstandard\": 20, \"unfinished\": 17, \"not_gm_vs_gm\": 765, \"invalid_continuation\": 1}"
+      "reasons_json": "{\"nonstandard\": 20, \"unfinished\": 17, \"not_gm_vs_gm\": 765, \"invalid_continuation\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-02.pgn.zst",
+      "sha256": "d68fb32b9a895e2b1acb420ea50414c81ca95a8dca83223cc44e871958113ca2",
+      "scope": "all",
+      "cursor": 492,
+      "accepted": 278,
+      "duplicates": 0,
+      "rejected": 2,
+      "skipped": 212,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 28, \"nonstandard\": 184, \"invalid_or_nonstandard\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-02.pgn.zst#catalogue-scan=a3f035815e63f1f36d891d3b",
       "sha256": "d68fb32b9a895e2b1acb420ea50414c81ca95a8dca83223cc44e871958113ca2",
       "scope": "gm",
       "cursor": 492,
@@ -182,10 +377,24 @@
       "rejected": 0,
       "skipped": 430,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 237, \"unfinished\": 9, \"nonstandard\": 184}"
+      "reasons_json": "{\"not_gm_vs_gm\": 237, \"unfinished\": 9, \"nonstandard\": 184}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-03.pgn.zst",
+      "sha256": "c8610ce7a1e03093236f8e3ffd6f18642bafc8706f42cc61d48214dc1810432b",
+      "scope": "all",
+      "cursor": 875,
+      "accepted": 641,
+      "duplicates": 0,
+      "rejected": 15,
+      "skipped": 219,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 23, \"nonstandard\": 194, \"invalid_or_nonstandard\": 14, \"invalid_continuation\": 1, \"unknown_year\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-03.pgn.zst#catalogue-scan=93fb81bd91eb903b019ad7a0",
       "sha256": "c8610ce7a1e03093236f8e3ffd6f18642bafc8706f42cc61d48214dc1810432b",
       "scope": "gm",
       "cursor": 875,
@@ -194,10 +403,24 @@
       "rejected": 0,
       "skipped": 840,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 637, \"unfinished\": 7, \"nonstandard\": 194, \"unknown_year\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 637, \"unfinished\": 7, \"nonstandard\": 194, \"unknown_year\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-04.pgn.zst",
+      "sha256": "ca86c70aff854377423a6cfedd17290e377b47a594bf5f263211441d4f23a42b",
+      "scope": "all",
+      "cursor": 926,
+      "accepted": 443,
+      "duplicates": 30,
+      "rejected": 44,
+      "skipped": 409,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 288, \"no_recorded_moves\": 31, \"invalid_or_nonstandard\": 13, \"nonstandard\": 121}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-04.pgn.zst#catalogue-scan=70af69b46ec65b39c80e4757",
       "sha256": "ca86c70aff854377423a6cfedd17290e377b47a594bf5f263211441d4f23a42b",
       "scope": "gm",
       "cursor": 926,
@@ -206,10 +429,24 @@
       "rejected": 0,
       "skipped": 875,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 791, \"nonstandard\": 80, \"unfinished\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 791, \"nonstandard\": 80, \"unfinished\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-05.pgn.zst",
+      "sha256": "4bd8733d23c1318207a1f492e10d176edd1e3a505c637e0442ff82ecd00c7370",
+      "scope": "all",
+      "cursor": 4752,
+      "accepted": 3823,
+      "duplicates": 118,
+      "rejected": 148,
+      "skipped": 663,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 331, \"no_recorded_moves\": 120, \"invalid_or_nonstandard\": 27, \"unfinished\": 332, \"invalid_continuation\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-05.pgn.zst#catalogue-scan=ff0d8358f63678e955bdf24a",
       "sha256": "4bd8733d23c1318207a1f492e10d176edd1e3a505c637e0442ff82ecd00c7370",
       "scope": "gm",
       "cursor": 4752,
@@ -218,10 +455,24 @@
       "rejected": 8,
       "skipped": 3880,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 3495, \"nonstandard\": 324, \"unfinished\": 61, \"no_recorded_moves\": 6, \"invalid_or_nonstandard\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 3495, \"nonstandard\": 324, \"unfinished\": 61, \"no_recorded_moves\": 6, \"invalid_or_nonstandard\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-06.pgn.zst",
+      "sha256": "99c37b910da4be0d9d8aa1491456c7e08a6e9932e54244cb17b41b7afd754ee6",
+      "scope": "all",
+      "cursor": 6629,
+      "accepted": 4766,
+      "duplicates": 10,
+      "rejected": 570,
+      "skipped": 1283,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 95, \"unfinished\": 939, \"no_recorded_moves\": 463, \"invalid_continuation\": 12, \"nonstandard\": 344}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-06.pgn.zst#catalogue-scan=0164afed3f8feca080925921",
       "sha256": "99c37b910da4be0d9d8aa1491456c7e08a6e9932e54244cb17b41b7afd754ee6",
       "scope": "gm",
       "cursor": 6629,
@@ -230,10 +481,24 @@
       "rejected": 6,
       "skipped": 6429,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 6234, \"invalid_or_nonstandard\": 4, \"invalid_continuation\": 2, \"unfinished\": 5, \"nonstandard\": 190}"
+      "reasons_json": "{\"not_gm_vs_gm\": 6234, \"invalid_or_nonstandard\": 4, \"invalid_continuation\": 2, \"unfinished\": 5, \"nonstandard\": 190}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-07.pgn.zst",
+      "sha256": "facfbdeff07d7f36cdcf14bd342ef7b663dcb6cb5c643af920aa3f3076d7861a",
+      "scope": "all",
+      "cursor": 12899,
+      "accepted": 7439,
+      "duplicates": 16,
+      "rejected": 2077,
+      "skipped": 3367,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 100, \"unfinished\": 3207, \"invalid_continuation\": 29, \"no_recorded_moves\": 1911, \"invalid_or_nonstandard\": 136, \"result_contradicts_board\": 1, \"unknown_year\": 60}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-07.pgn.zst#catalogue-scan=2033903d65d6a5a8bd9b0e95",
       "sha256": "facfbdeff07d7f36cdcf14bd342ef7b663dcb6cb5c643af920aa3f3076d7861a",
       "scope": "gm",
       "cursor": 12899,
@@ -242,10 +507,24 @@
       "rejected": 11,
       "skipped": 12389,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 12265, \"nonstandard\": 98, \"unfinished\": 11, \"invalid_or_nonstandard\": 6, \"no_recorded_moves\": 3, \"invalid_continuation\": 2, \"unknown_year\": 15}"
+      "reasons_json": "{\"not_gm_vs_gm\": 12265, \"nonstandard\": 98, \"unfinished\": 11, \"invalid_or_nonstandard\": 6, \"no_recorded_moves\": 3, \"invalid_continuation\": 2, \"unknown_year\": 15}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-08.pgn.zst",
+      "sha256": "da11a29ce22c92e6ad87bc33e005b69e91040bc99ee981db39b99ea50a05f38b",
+      "scope": "all",
+      "cursor": 21478,
+      "accepted": 18862,
+      "duplicates": 134,
+      "rejected": 1239,
+      "skipped": 1243,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 209, \"unfinished\": 853, \"result_contradicts_board\": 2, \"no_recorded_moves\": 1014, \"nonstandard\": 278, \"unknown_year\": 112, \"invalid_continuation\": 14}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-08.pgn.zst#catalogue-scan=8a9ab63819e652e6eae3a94f",
       "sha256": "da11a29ce22c92e6ad87bc33e005b69e91040bc99ee981db39b99ea50a05f38b",
       "scope": "gm",
       "cursor": 21478,
@@ -254,10 +533,24 @@
       "rejected": 8,
       "skipped": 21153,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 20831, \"invalid_or_nonstandard\": 5, \"nonstandard\": 277, \"unknown_year\": 26, \"unfinished\": 19, \"invalid_continuation\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 20831, \"invalid_or_nonstandard\": 5, \"nonstandard\": 277, \"unknown_year\": 26, \"unfinished\": 19, \"invalid_continuation\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-09.pgn.zst",
+      "sha256": "4d21b63b49b1ff458f6011033bb242f3d95138b6ddb5ccc01b0a24213cb92711",
+      "scope": "all",
+      "cursor": 9896,
+      "accepted": 8575,
+      "duplicates": 0,
+      "rejected": 244,
+      "skipped": 1077,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 112, \"no_recorded_moves\": 120, \"nonstandard\": 320, \"unfinished\": 570, \"unknown_year\": 187, \"invalid_continuation\": 12}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-09.pgn.zst#catalogue-scan=f2a47fba716c273228b38431",
       "sha256": "4d21b63b49b1ff458f6011033bb242f3d95138b6ddb5ccc01b0a24213cb92711",
       "scope": "gm",
       "cursor": 9896,
@@ -266,10 +559,24 @@
       "rejected": 8,
       "skipped": 9380,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 9192, \"nonstandard\": 175, \"unfinished\": 10, \"invalid_or_nonstandard\": 3, \"invalid_continuation\": 4, \"unknown_year\": 3, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 9192, \"nonstandard\": 175, \"unfinished\": 10, \"invalid_or_nonstandard\": 3, \"invalid_continuation\": 4, \"unknown_year\": 3, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-10.pgn.zst",
+      "sha256": "22a23de4e16713846452c3a7c2f9071501f3046d2d5f7e54348a3d33551459f3",
+      "scope": "all",
+      "cursor": 10930,
+      "accepted": 8367,
+      "duplicates": 116,
+      "rejected": 982,
+      "skipped": 1465,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1171, \"invalid_or_nonstandard\": 230, \"nonstandard\": 124, \"no_recorded_moves\": 730, \"invalid_continuation\": 21, \"unknown_year\": 170, \"result_contradicts_board\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-10.pgn.zst#catalogue-scan=521576b82f30724883716daf",
       "sha256": "22a23de4e16713846452c3a7c2f9071501f3046d2d5f7e54348a3d33551459f3",
       "scope": "gm",
       "cursor": 10930,
@@ -278,10 +585,24 @@
       "rejected": 5,
       "skipped": 10554,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 10437, \"nonstandard\": 100, \"unfinished\": 17, \"invalid_continuation\": 1, \"invalid_or_nonstandard\": 3, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 10437, \"nonstandard\": 100, \"unfinished\": 17, \"invalid_continuation\": 1, \"invalid_or_nonstandard\": 3, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-11.pgn.zst",
+      "sha256": "23b4b06d4309ab726349a89040493cdb0bf1cca524a7ddbf480f41fa7bacf8f9",
+      "scope": "all",
+      "cursor": 12226,
+      "accepted": 9055,
+      "duplicates": 16,
+      "rejected": 963,
+      "skipped": 2192,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 622, \"no_recorded_moves\": 747, \"invalid_continuation\": 17, \"invalid_or_nonstandard\": 199, \"unknown_year\": 1570}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-11.pgn.zst#catalogue-scan=8ea88eec5e64ac1d26271a47",
       "sha256": "23b4b06d4309ab726349a89040493cdb0bf1cca524a7ddbf480f41fa7bacf8f9",
       "scope": "gm",
       "cursor": 12226,
@@ -290,10 +611,24 @@
       "rejected": 3,
       "skipped": 12150,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 12141, \"unfinished\": 9, \"invalid_or_nonstandard\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 12141, \"unfinished\": 9, \"invalid_or_nonstandard\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-12.pgn.zst",
+      "sha256": "a88ce4bb96ec670f52716e108743bb629fa70e3fe0dd3d892c042d4c68a799a7",
+      "scope": "all",
+      "cursor": 10334,
+      "accepted": 8404,
+      "duplicates": 86,
+      "rejected": 519,
+      "skipped": 1325,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 391, \"unfinished\": 1297, \"no_recorded_moves\": 88, \"invalid_continuation\": 36, \"result_contradicts_board\": 4, \"unknown_year\": 28}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2021-12.pgn.zst#catalogue-scan=d91cf8d7c78f42b1231ddf28",
       "sha256": "a88ce4bb96ec670f52716e108743bb629fa70e3fe0dd3d892c042d4c68a799a7",
       "scope": "gm",
       "cursor": 10334,
@@ -302,10 +637,24 @@
       "rejected": 5,
       "skipped": 9980,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 9842, \"unfinished\": 135, \"invalid_or_nonstandard\": 1, \"no_recorded_moves\": 2, \"invalid_continuation\": 2, \"unknown_year\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 9842, \"unfinished\": 135, \"invalid_or_nonstandard\": 1, \"no_recorded_moves\": 2, \"invalid_continuation\": 2, \"unknown_year\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-01.pgn.zst",
+      "sha256": "b66e0af21df09713bb7093cac853ef04527d589963e0bcbd39620cf03f20303f",
+      "scope": "all",
+      "cursor": 2889,
+      "accepted": 2650,
+      "duplicates": 0,
+      "rejected": 105,
+      "skipped": 134,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 86, \"unknown_year\": 70, \"invalid_continuation\": 8, \"unfinished\": 64, \"no_recorded_moves\": 11}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-01.pgn.zst#catalogue-scan=bf3d1a17001ac5e133e2a26b",
       "sha256": "b66e0af21df09713bb7093cac853ef04527d589963e0bcbd39620cf03f20303f",
       "scope": "gm",
       "cursor": 2889,
@@ -314,10 +663,24 @@
       "rejected": 4,
       "skipped": 2682,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 2679, \"unknown_year\": 2, \"unfinished\": 1, \"invalid_or_nonstandard\": 1, \"no_recorded_moves\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 2679, \"unknown_year\": 2, \"unfinished\": 1, \"invalid_or_nonstandard\": 1, \"no_recorded_moves\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-02.pgn.zst",
+      "sha256": "fcca15bd3d0060bade81a799fb42ecfdbaf70bcc8746488b7ad623b45431b805",
+      "scope": "all",
+      "cursor": 3698,
+      "accepted": 3143,
+      "duplicates": 0,
+      "rejected": 100,
+      "skipped": 455,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 85, \"unfinished\": 142, \"no_recorded_moves\": 12, \"invalid_continuation\": 3, \"nonstandard\": 149, \"unknown_year\": 164}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-02.pgn.zst#catalogue-scan=c8d53b436a4cbc8834645253",
       "sha256": "fcca15bd3d0060bade81a799fb42ecfdbaf70bcc8746488b7ad623b45431b805",
       "scope": "gm",
       "cursor": 3698,
@@ -326,10 +689,24 @@
       "rejected": 0,
       "skipped": 3540,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 3388, \"nonstandard\": 149, \"unfinished\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 3388, \"nonstandard\": 149, \"unfinished\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-03.pgn.zst",
+      "sha256": "b5ab992f88d28ed9a225f1fe64ab74485de9811483fbd66edfb9095aac2aa408",
+      "scope": "all",
+      "cursor": 4709,
+      "accepted": 3382,
+      "duplicates": 104,
+      "rejected": 144,
+      "skipped": 1079,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 553, \"invalid_or_nonstandard\": 118, \"unknown_year\": 344, \"invalid_continuation\": 7, \"no_recorded_moves\": 19, \"nonstandard\": 182}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-03.pgn.zst#catalogue-scan=bb68ca3a4094dc7d11edc043",
       "sha256": "b5ab992f88d28ed9a225f1fe64ab74485de9811483fbd66edfb9095aac2aa408",
       "scope": "gm",
       "cursor": 4709,
@@ -338,10 +715,24 @@
       "rejected": 13,
       "skipped": 4459,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 4266, \"invalid_or_nonstandard\": 12, \"unknown_year\": 2, \"invalid_continuation\": 1, \"unfinished\": 9, \"nonstandard\": 182}"
+      "reasons_json": "{\"not_gm_vs_gm\": 4266, \"invalid_or_nonstandard\": 12, \"unknown_year\": 2, \"invalid_continuation\": 1, \"unfinished\": 9, \"nonstandard\": 182}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-04.pgn.zst",
+      "sha256": "c0b2607462be962125535ad4afdce21f362a0d4113aa4db3c6daddacd3ea03f3",
+      "scope": "all",
+      "cursor": 7149,
+      "accepted": 5547,
+      "duplicates": 0,
+      "rejected": 251,
+      "skipped": 1351,
+      "status": "complete",
+      "reasons_json": "{\"result_contradicts_board\": 2, \"nonstandard\": 199, \"invalid_or_nonstandard\": 209, \"unknown_year\": 395, \"unfinished\": 757, \"no_recorded_moves\": 28, \"invalid_continuation\": 12}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-04.pgn.zst#catalogue-scan=f4c09bd0d8c80735bce38808",
       "sha256": "c0b2607462be962125535ad4afdce21f362a0d4113aa4db3c6daddacd3ea03f3",
       "scope": "gm",
       "cursor": 7149,
@@ -350,10 +741,24 @@
       "rejected": 2,
       "skipped": 6974,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 6758, \"nonstandard\": 199, \"no_recorded_moves\": 1, \"invalid_or_nonstandard\": 1, \"unfinished\": 17}"
+      "reasons_json": "{\"not_gm_vs_gm\": 6758, \"nonstandard\": 199, \"no_recorded_moves\": 1, \"invalid_or_nonstandard\": 1, \"unfinished\": 17}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-05.pgn.zst",
+      "sha256": "752168d1f620544e12e6974d92e1974655687055049b59b86bd98bf99aa3ab72",
+      "scope": "all",
+      "cursor": 5695,
+      "accepted": 4639,
+      "duplicates": 2,
+      "rejected": 115,
+      "skipped": 939,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 239, \"invalid_or_nonstandard\": 92, \"no_recorded_moves\": 16, \"invalid_continuation\": 7, \"unknown_year\": 546, \"nonstandard\": 154}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-05.pgn.zst#catalogue-scan=f80c867be40a4e694e13907f",
       "sha256": "752168d1f620544e12e6974d92e1974655687055049b59b86bd98bf99aa3ab72",
       "scope": "gm",
       "cursor": 5695,
@@ -362,10 +767,24 @@
       "rejected": 6,
       "skipped": 5114,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 4947, \"invalid_or_nonstandard\": 3, \"unfinished\": 13, \"nonstandard\": 154, \"invalid_continuation\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 4947, \"invalid_or_nonstandard\": 3, \"unfinished\": 13, \"nonstandard\": 154, \"invalid_continuation\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-06.pgn.zst",
+      "sha256": "517cf19858c8fb43f17fa4375f1bb8c6a52a5f21599232e5b62e81341056fc96",
+      "scope": "all",
+      "cursor": 7588,
+      "accepted": 5184,
+      "duplicates": 136,
+      "rejected": 673,
+      "skipped": 1595,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 199, \"invalid_continuation\": 13, \"no_recorded_moves\": 458, \"unfinished\": 977, \"unknown_year\": 618, \"result_contradicts_board\": 3}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-06.pgn.zst#catalogue-scan=ed6caad0675d9277a022c7da",
       "sha256": "517cf19858c8fb43f17fa4375f1bb8c6a52a5f21599232e5b62e81341056fc96",
       "scope": "gm",
       "cursor": 7588,
@@ -374,10 +793,24 @@
       "rejected": 16,
       "skipped": 7070,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 7054, \"invalid_or_nonstandard\": 10, \"invalid_continuation\": 3, \"no_recorded_moves\": 3, \"unknown_year\": 11, \"unfinished\": 5}"
+      "reasons_json": "{\"not_gm_vs_gm\": 7054, \"invalid_or_nonstandard\": 10, \"invalid_continuation\": 3, \"no_recorded_moves\": 3, \"unknown_year\": 11, \"unfinished\": 5}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-07.pgn.zst",
+      "sha256": "fcee46c674066941d46531938511fc7a7de45a5153fc115465dde7f8032a5b96",
+      "scope": "all",
+      "cursor": 15810,
+      "accepted": 10929,
+      "duplicates": 265,
+      "rejected": 886,
+      "skipped": 3730,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 331, \"unfinished\": 1901, \"unknown_year\": 1681, \"result_contradicts_board\": 2, \"no_recorded_moves\": 535, \"missing_player_name\": 1, \"invalid_continuation\": 17, \"nonstandard\": 148}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-07.pgn.zst#catalogue-scan=9eb3d3951b2b3c3083bad006",
       "sha256": "fcee46c674066941d46531938511fc7a7de45a5153fc115465dde7f8032a5b96",
       "scope": "gm",
       "cursor": 15810,
@@ -386,10 +819,24 @@
       "rejected": 5,
       "skipped": 15467,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 15267, \"invalid_continuation\": 1, \"unfinished\": 5, \"nonstandard\": 148, \"unknown_year\": 47, \"invalid_or_nonstandard\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 15267, \"invalid_continuation\": 1, \"unfinished\": 5, \"nonstandard\": 148, \"unknown_year\": 47, \"invalid_or_nonstandard\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-08.pgn.zst",
+      "sha256": "2cdc93fe77ab43e534214ae6a44462d261bebb10c47ad61d1c4d02b67d313461",
+      "scope": "all",
+      "cursor": 19030,
+      "accepted": 15850,
+      "duplicates": 81,
+      "rejected": 1414,
+      "skipped": 1685,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 686, \"no_recorded_moves\": 677, \"invalid_continuation\": 45, \"unfinished\": 828, \"result_contradicts_board\": 6, \"unknown_year\": 788, \"nonstandard\": 69}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-08.pgn.zst#catalogue-scan=47958a1c00654f606b2a8495",
       "sha256": "2cdc93fe77ab43e534214ae6a44462d261bebb10c47ad61d1c4d02b67d313461",
       "scope": "gm",
       "cursor": 19030,
@@ -398,10 +845,24 @@
       "rejected": 2,
       "skipped": 18667,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 18598, \"unfinished\": 12, \"invalid_or_nonstandard\": 1, \"unknown_year\": 6, \"nonstandard\": 51, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 18598, \"unfinished\": 12, \"invalid_or_nonstandard\": 1, \"unknown_year\": 6, \"nonstandard\": 51, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-09.pgn.zst",
+      "sha256": "e1a80febd895ac08f9be0c405d5c788381084a49af8a991b9a5a4a070ef448a0",
+      "scope": "all",
+      "cursor": 7522,
+      "accepted": 5806,
+      "duplicates": 6,
+      "rejected": 432,
+      "skipped": 1278,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 13, \"no_recorded_moves\": 208, \"invalid_or_nonstandard\": 210, \"unfinished\": 142, \"nonstandard\": 1060, \"result_contradicts_board\": 1, \"unknown_year\": 76}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-09.pgn.zst#catalogue-scan=74ae32af2cfb0d7cfefd06c5",
       "sha256": "e1a80febd895ac08f9be0c405d5c788381084a49af8a991b9a5a4a070ef448a0",
       "scope": "gm",
       "cursor": 7522,
@@ -410,10 +871,24 @@
       "rejected": 2,
       "skipped": 7285,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 6974, \"nonstandard\": 296, \"invalid_or_nonstandard\": 2, \"unfinished\": 15}"
+      "reasons_json": "{\"not_gm_vs_gm\": 6974, \"nonstandard\": 296, \"invalid_or_nonstandard\": 2, \"unfinished\": 15}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-10.pgn.zst",
+      "sha256": "316cca64cce9ebf1b31c2f646a63e9ff8122eb18da5c2830a37276d9f829871d",
+      "scope": "all",
+      "cursor": 9138,
+      "accepted": 6964,
+      "duplicates": 6,
+      "rejected": 507,
+      "skipped": 1661,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1078, \"no_recorded_moves\": 278, \"unknown_year\": 279, \"invalid_or_nonstandard\": 218, \"nonstandard\": 304, \"invalid_continuation\": 11}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-10.pgn.zst#catalogue-scan=d423af0ba1f2de107b39754e",
       "sha256": "316cca64cce9ebf1b31c2f646a63e9ff8122eb18da5c2830a37276d9f829871d",
       "scope": "gm",
       "cursor": 9138,
@@ -422,10 +897,24 @@
       "rejected": 4,
       "skipped": 8824,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 8651, \"unknown_year\": 9, \"nonstandard\": 153, \"unfinished\": 11, \"invalid_or_nonstandard\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 8651, \"unknown_year\": 9, \"nonstandard\": 153, \"unfinished\": 11, \"invalid_or_nonstandard\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-11.pgn.zst",
+      "sha256": "fba1b54c418521dd803e854560dc5c5d338bf815da98ebf82e547e544f118102",
+      "scope": "all",
+      "cursor": 4664,
+      "accepted": 3293,
+      "duplicates": 103,
+      "rejected": 612,
+      "skipped": 656,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 530, \"unfinished\": 448, \"invalid_or_nonstandard\": 70, \"invalid_continuation\": 12, \"nonstandard\": 67, \"unknown_year\": 141}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-11.pgn.zst#catalogue-scan=29f44e1f991d66dbc06e8b3b",
       "sha256": "fba1b54c418521dd803e854560dc5c5d338bf815da98ebf82e547e544f118102",
       "scope": "gm",
       "cursor": 4664,
@@ -434,10 +923,24 @@
       "rejected": 13,
       "skipped": 4180,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 4017, \"no_recorded_moves\": 2, \"unknown_year\": 11, \"nonstandard\": 66, \"unfinished\": 86, \"invalid_or_nonstandard\": 9, \"invalid_continuation\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 4017, \"no_recorded_moves\": 2, \"unknown_year\": 11, \"nonstandard\": 66, \"unfinished\": 86, \"invalid_or_nonstandard\": 9, \"invalid_continuation\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-12.pgn.zst",
+      "sha256": "698ada93a6474d7c8036759454e4903b86d5d79965ee61f271275e5f58179033",
+      "scope": "all",
+      "cursor": 15158,
+      "accepted": 10871,
+      "duplicates": 127,
+      "rejected": 534,
+      "skipped": 3626,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 321, \"no_recorded_moves\": 169, \"invalid_continuation\": 36, \"unfinished\": 916, \"result_contradicts_board\": 8, \"unknown_year\": 2710}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2022-12.pgn.zst#catalogue-scan=07b3e14dd6cc01806f83ebc8",
       "sha256": "698ada93a6474d7c8036759454e4903b86d5d79965ee61f271275e5f58179033",
       "scope": "gm",
       "cursor": 15158,
@@ -446,10 +949,24 @@
       "rejected": 15,
       "skipped": 13839,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 13834, \"unfinished\": 5, \"invalid_or_nonstandard\": 10, \"no_recorded_moves\": 1, \"invalid_continuation\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 13834, \"unfinished\": 5, \"invalid_or_nonstandard\": 10, \"no_recorded_moves\": 1, \"invalid_continuation\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-01.pgn.zst",
+      "sha256": "4bb223a574c148a75eccd260bb89c1d748c2ee505e594ad1578cfc1a0b97fe3e",
+      "scope": "all",
+      "cursor": 6673,
+      "accepted": 4576,
+      "duplicates": 0,
+      "rejected": 585,
+      "skipped": 1512,
+      "status": "complete",
+      "reasons_json": "{\"invalid_or_nonstandard\": 91, \"no_recorded_moves\": 478, \"unfinished\": 1423, \"invalid_continuation\": 15, \"result_contradicts_board\": 1, \"unknown_year\": 89}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-01.pgn.zst#catalogue-scan=868de40980092a7fb0316011",
       "sha256": "4bb223a574c148a75eccd260bb89c1d748c2ee505e594ad1578cfc1a0b97fe3e",
       "scope": "gm",
       "cursor": 6673,
@@ -458,10 +975,24 @@
       "rejected": 1,
       "skipped": 6571,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 6562, \"invalid_or_nonstandard\": 1, \"unknown_year\": 9}"
+      "reasons_json": "{\"not_gm_vs_gm\": 6562, \"invalid_or_nonstandard\": 1, \"unknown_year\": 9}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-02.pgn.zst",
+      "sha256": "bcb758ec420c5e38a9aedceff21b20b80451e3418ee6893fa10398386981b964",
+      "scope": "all",
+      "cursor": 7132,
+      "accepted": 5707,
+      "duplicates": 22,
+      "rejected": 248,
+      "skipped": 1155,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 10, \"no_recorded_moves\": 237, \"unfinished\": 781, \"unknown_year\": 374, \"result_contradicts_board\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-02.pgn.zst#catalogue-scan=3aeab55f02b6d97f4cd25c17",
       "sha256": "bcb758ec420c5e38a9aedceff21b20b80451e3418ee6893fa10398386981b964",
       "scope": "gm",
       "cursor": 7132,
@@ -470,10 +1001,24 @@
       "rejected": 8,
       "skipped": 6077,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 6069, \"no_recorded_moves\": 8, \"unfinished\": 8}"
+      "reasons_json": "{\"not_gm_vs_gm\": 6069, \"no_recorded_moves\": 8, \"unfinished\": 8}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-03.pgn.zst",
+      "sha256": "3c4fa359993716557123ca4f6ba9c73c098a407646fbc909e08f4378db15a910",
+      "scope": "all",
+      "cursor": 6849,
+      "accepted": 6181,
+      "duplicates": 22,
+      "rejected": 107,
+      "skipped": 539,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 358, \"unknown_year\": 181, \"no_recorded_moves\": 78, \"missing_player_name\": 1, \"invalid_continuation\": 26, \"invalid_or_nonstandard\": 1, \"result_contradicts_board\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-03.pgn.zst#catalogue-scan=4c8b830b0cda576c20dd91ec",
       "sha256": "3c4fa359993716557123ca4f6ba9c73c098a407646fbc909e08f4378db15a910",
       "scope": "gm",
       "cursor": 6849,
@@ -482,10 +1027,24 @@
       "rejected": 2,
       "skipped": 6513,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 6463, \"unknown_year\": 30, \"unfinished\": 20, \"invalid_continuation\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 6463, \"unknown_year\": 30, \"unfinished\": 20, \"invalid_continuation\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-04.pgn.zst",
+      "sha256": "74174b6a3bd4981ac0366cf26258f62f252aabfc790affc35792b16ab04461f8",
+      "scope": "all",
+      "cursor": 10889,
+      "accepted": 7968,
+      "duplicates": 878,
+      "rejected": 321,
+      "skipped": 1722,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1623, \"invalid_continuation\": 25, \"unknown_year\": 99, \"no_recorded_moves\": 296}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-04.pgn.zst#catalogue-scan=862b019ae0515eecc0f5f279",
       "sha256": "74174b6a3bd4981ac0366cf26258f62f252aabfc790affc35792b16ab04461f8",
       "scope": "gm",
       "cursor": 10889,
@@ -494,10 +1053,24 @@
       "rejected": 0,
       "skipped": 10519,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 10501, \"unfinished\": 18}"
+      "reasons_json": "{\"not_gm_vs_gm\": 10501, \"unfinished\": 18}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-05.pgn.zst",
+      "sha256": "1a6c0bba0cced51feb50b9e62a85f5713ba4ad957334e056f9713db94f423450",
+      "scope": "all",
+      "cursor": 8655,
+      "accepted": 7215,
+      "duplicates": 23,
+      "rejected": 193,
+      "skipped": 1224,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1131, \"invalid_continuation\": 33, \"no_recorded_moves\": 158, \"unknown_year\": 93, \"result_contradicts_board\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-05.pgn.zst#catalogue-scan=59f43cd13dcde4f182f0f49e",
       "sha256": "1a6c0bba0cced51feb50b9e62a85f5713ba4ad957334e056f9713db94f423450",
       "scope": "gm",
       "cursor": 8655,
@@ -506,10 +1079,24 @@
       "rejected": 5,
       "skipped": 8287,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 8283, \"invalid_continuation\": 2, \"unfinished\": 4, \"no_recorded_moves\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 8283, \"invalid_continuation\": 2, \"unfinished\": 4, \"no_recorded_moves\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-06.pgn.zst",
+      "sha256": "49cff44dcef9877a4b658118f887a954d67a6875a2da4595ad4b5c72cbb37302",
+      "scope": "all",
+      "cursor": 18415,
+      "accepted": 15216,
+      "duplicates": 18,
+      "rejected": 194,
+      "skipped": 2987,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 2205, \"no_recorded_moves\": 132, \"invalid_continuation\": 49, \"result_contradicts_board\": 12, \"missing_player_name\": 1, \"unknown_year\": 774, \"nonstandard\": 8}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-06.pgn.zst#catalogue-scan=d0c09539d408c5f9dba07f5e",
       "sha256": "49cff44dcef9877a4b658118f887a954d67a6875a2da4595ad4b5c72cbb37302",
       "scope": "gm",
       "cursor": 18415,
@@ -518,10 +1105,24 @@
       "rejected": 3,
       "skipped": 17058,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 17054, \"no_recorded_moves\": 1, \"invalid_continuation\": 2, \"unfinished\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 17054, \"no_recorded_moves\": 1, \"invalid_continuation\": 2, \"unfinished\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-07.pgn.zst",
+      "sha256": "895655258162edfbfaa7c81529e481772bfdb85495a2363a84f95c4aed55ddc7",
+      "scope": "all",
+      "cursor": 25568,
+      "accepted": 20631,
+      "duplicates": 136,
+      "rejected": 217,
+      "skipped": 4584,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 135, \"unfinished\": 3487, \"nonstandard\": 4, \"invalid_continuation\": 61, \"result_contradicts_board\": 21, \"unknown_year\": 1093}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-07.pgn.zst#catalogue-scan=c91b04535e5b7387186be03b",
       "sha256": "895655258162edfbfaa7c81529e481772bfdb85495a2363a84f95c4aed55ddc7",
       "scope": "gm",
       "cursor": 25568,
@@ -530,10 +1131,24 @@
       "rejected": 2,
       "skipped": 25247,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 25234, \"invalid_continuation\": 2, \"unfinished\": 5, \"unknown_year\": 8}"
+      "reasons_json": "{\"not_gm_vs_gm\": 25234, \"invalid_continuation\": 2, \"unfinished\": 5, \"unknown_year\": 8}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-08.pgn.zst",
+      "sha256": "db8fcee8390c2edbf959c197f9da89714ac565d00e10b221afcd769366ea7691",
+      "scope": "all",
+      "cursor": 14820,
+      "accepted": 11768,
+      "duplicates": 12,
+      "rejected": 355,
+      "skipped": 2685,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1469, \"unknown_year\": 1216, \"no_recorded_moves\": 313, \"invalid_continuation\": 40, \"result_contradicts_board\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-08.pgn.zst#catalogue-scan=0220ff9c0ef9fe6514674184",
       "sha256": "db8fcee8390c2edbf959c197f9da89714ac565d00e10b221afcd769366ea7691",
       "scope": "gm",
       "cursor": 14820,
@@ -542,10 +1157,24 @@
       "rejected": 8,
       "skipped": 14405,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 14388, \"invalid_continuation\": 3, \"no_recorded_moves\": 5, \"unknown_year\": 10, \"unfinished\": 7}"
+      "reasons_json": "{\"not_gm_vs_gm\": 14388, \"invalid_continuation\": 3, \"no_recorded_moves\": 5, \"unknown_year\": 10, \"unfinished\": 7}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-09.pgn.zst",
+      "sha256": "b11402dab04b8270942723660956f9258f51aeea687e4f4b95942bc801336be6",
+      "scope": "all",
+      "cursor": 12132,
+      "accepted": 10460,
+      "duplicates": 37,
+      "rejected": 122,
+      "skipped": 1513,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1030, \"no_recorded_moves\": 81, \"invalid_continuation\": 32, \"unknown_year\": 483, \"missing_player_name\": 1, \"result_contradicts_board\": 8}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-09.pgn.zst#catalogue-scan=3dcec449df552f975f127bb5",
       "sha256": "b11402dab04b8270942723660956f9258f51aeea687e4f4b95942bc801336be6",
       "scope": "gm",
       "cursor": 12132,
@@ -554,10 +1183,24 @@
       "rejected": 1,
       "skipped": 11397,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 11372, \"unfinished\": 11, \"unknown_year\": 14, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 11372, \"unfinished\": 11, \"unknown_year\": 14, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-10.pgn.zst",
+      "sha256": "9589177b519c848236fe684d28ad3cc2afa80a360755a31376efd7767a247452",
+      "scope": "all",
+      "cursor": 18013,
+      "accepted": 15170,
+      "duplicates": 0,
+      "rejected": 135,
+      "skipped": 2708,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 2558, \"no_recorded_moves\": 96, \"invalid_continuation\": 35, \"result_contradicts_board\": 4, \"unknown_year\": 150}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-10.pgn.zst#catalogue-scan=4af279b2041fd7be857774d5",
       "sha256": "9589177b519c848236fe684d28ad3cc2afa80a360755a31376efd7767a247452",
       "scope": "gm",
       "cursor": 18013,
@@ -566,10 +1209,24 @@
       "rejected": 23,
       "skipped": 17081,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 17057, \"unfinished\": 24, \"no_recorded_moves\": 1, \"invalid_continuation\": 3, \"unknown_year\": 19}"
+      "reasons_json": "{\"not_gm_vs_gm\": 17057, \"unfinished\": 24, \"no_recorded_moves\": 1, \"invalid_continuation\": 3, \"unknown_year\": 19}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-11.pgn.zst",
+      "sha256": "3390ad4bd2f2a5d6ad3a4475723fb591fe8f4bc16926ec9eb1854696f400399c",
+      "scope": "all",
+      "cursor": 12397,
+      "accepted": 11795,
+      "duplicates": 0,
+      "rejected": 151,
+      "skipped": 451,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 436, \"no_recorded_moves\": 92, \"invalid_continuation\": 56, \"result_contradicts_board\": 3, \"unknown_year\": 15}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-11.pgn.zst#catalogue-scan=83b97c4d1952746a1f730aa9",
       "sha256": "3390ad4bd2f2a5d6ad3a4475723fb591fe8f4bc16926ec9eb1854696f400399c",
       "scope": "gm",
       "cursor": 12397,
@@ -578,10 +1235,24 @@
       "rejected": 8,
       "skipped": 11394,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 11393, \"invalid_continuation\": 8, \"unfinished\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 11393, \"invalid_continuation\": 8, \"unfinished\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-12.pgn.zst",
+      "sha256": "a2fa6ef6a6d3bc219c6acbbfded72df45f6aa24111a2cb314153e0b88caf0048",
+      "scope": "all",
+      "cursor": 17783,
+      "accepted": 15549,
+      "duplicates": 40,
+      "rejected": 168,
+      "skipped": 2026,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 82, \"unfinished\": 1267, \"invalid_continuation\": 78, \"result_contradicts_board\": 8, \"unknown_year\": 759}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2023-12.pgn.zst#catalogue-scan=b9720165cb92701ed4c23c02",
       "sha256": "a2fa6ef6a6d3bc219c6acbbfded72df45f6aa24111a2cb314153e0b88caf0048",
       "scope": "gm",
       "cursor": 17783,
@@ -590,10 +1261,24 @@
       "rejected": 85,
       "skipped": 15331,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 15323, \"no_recorded_moves\": 5, \"unknown_year\": 69, \"unfinished\": 8, \"invalid_continuation\": 11}"
+      "reasons_json": "{\"not_gm_vs_gm\": 15323, \"no_recorded_moves\": 5, \"unknown_year\": 69, \"unfinished\": 8, \"invalid_continuation\": 11}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-01.pgn.zst",
+      "sha256": "edd008e921e495e0f176967eb81434004692c52ae1cd1fe20e3d03bde37d24fb",
+      "scope": "all",
+      "cursor": 14421,
+      "accepted": 12538,
+      "duplicates": 90,
+      "rejected": 156,
+      "skipped": 1637,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 117, \"unknown_year\": 469, \"invalid_continuation\": 33, \"unfinished\": 1168, \"result_contradicts_board\": 6}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-01.pgn.zst#catalogue-scan=6c3300144ded7d3e965c13b9",
       "sha256": "edd008e921e495e0f176967eb81434004692c52ae1cd1fe20e3d03bde37d24fb",
       "scope": "gm",
       "cursor": 14421,
@@ -602,10 +1287,24 @@
       "rejected": 11,
       "skipped": 14030,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 14030, \"unknown_year\": 10, \"invalid_continuation\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 14030, \"unknown_year\": 10, \"invalid_continuation\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-02.pgn.zst",
+      "sha256": "5b363f1041d893c034f7e349bbe8b290c909b135eca116c0eb1a942bd1d08ae4",
+      "scope": "all",
+      "cursor": 12767,
+      "accepted": 10223,
+      "duplicates": 10,
+      "rejected": 134,
+      "skipped": 2400,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 649, \"no_recorded_moves\": 82, \"missing_player_name\": 13, \"unfinished\": 1618, \"invalid_continuation\": 25, \"nonstandard\": 133, \"invalid_initial_position\": 9, \"result_contradicts_board\": 5}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-02.pgn.zst#catalogue-scan=a0fab2aeb2d05e086d033094",
       "sha256": "5b363f1041d893c034f7e349bbe8b290c909b135eca116c0eb1a942bd1d08ae4",
       "scope": "gm",
       "cursor": 12767,
@@ -614,10 +1313,24 @@
       "rejected": 75,
       "skipped": 11980,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 11904, \"unknown_year\": 61, \"nonstandard\": 76, \"invalid_initial_position\": 9, \"no_recorded_moves\": 5}"
+      "reasons_json": "{\"not_gm_vs_gm\": 11904, \"unknown_year\": 61, \"nonstandard\": 76, \"invalid_initial_position\": 9, \"no_recorded_moves\": 5}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-03.pgn.zst",
+      "sha256": "1174cfd7900603ab9f435a1f37f0447aa613c3d646e650e8828e0a6eb7766551",
+      "scope": "all",
+      "cursor": 17381,
+      "accepted": 15559,
+      "duplicates": 14,
+      "rejected": 306,
+      "skipped": 1502,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 656, \"invalid_continuation\": 31, \"unfinished\": 836, \"no_recorded_moves\": 136, \"invalid_date\": 135, \"result_contradicts_board\": 4, \"nonstandard\": 10}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-03.pgn.zst#catalogue-scan=d1fd182d9feb55eacfa167ab",
       "sha256": "1174cfd7900603ab9f435a1f37f0447aa613c3d646e650e8828e0a6eb7766551",
       "scope": "gm",
       "cursor": 17381,
@@ -626,10 +1339,24 @@
       "rejected": 39,
       "skipped": 16847,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 16839, \"unknown_year\": 37, \"invalid_continuation\": 1, \"unfinished\": 8, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 16839, \"unknown_year\": 37, \"invalid_continuation\": 1, \"unfinished\": 8, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-04.pgn.zst",
+      "sha256": "8f9081128c29713868e02f7a862cae50274f74f3dad1d9e3af0f6ef2c29f4fef",
+      "scope": "all",
+      "cursor": 14523,
+      "accepted": 12677,
+      "duplicates": 1,
+      "rejected": 182,
+      "skipped": 1663,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1272, \"no_recorded_moves\": 125, \"unknown_year\": 343, \"invalid_continuation\": 45, \"invalid_initial_position\": 8, \"nonstandard\": 48, \"result_contradicts_board\": 4}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-04.pgn.zst#catalogue-scan=f5ec915d7553c24d8a848080",
       "sha256": "8f9081128c29713868e02f7a862cae50274f74f3dad1d9e3af0f6ef2c29f4fef",
       "scope": "gm",
       "cursor": 14523,
@@ -638,10 +1365,24 @@
       "rejected": 32,
       "skipped": 14010,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 14008, \"unfinished\": 2, \"no_recorded_moves\": 2, \"unknown_year\": 28, \"invalid_continuation\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 14008, \"unfinished\": 2, \"no_recorded_moves\": 2, \"unknown_year\": 28, \"invalid_continuation\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-05.pgn.zst",
+      "sha256": "b367b00f0d594e6a5942947a8ca55fc243f9de5dbf4a16fc851ff8404c596fea",
+      "scope": "all",
+      "cursor": 22611,
+      "accepted": 20661,
+      "duplicates": 45,
+      "rejected": 328,
+      "skipped": 1577,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1219, \"no_recorded_moves\": 219, \"invalid_continuation\": 76, \"result_contradicts_board\": 32, \"unknown_year\": 358, \"missing_player_name\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-05.pgn.zst#catalogue-scan=02d096de4498e26c3eb66536",
       "sha256": "b367b00f0d594e6a5942947a8ca55fc243f9de5dbf4a16fc851ff8404c596fea",
       "scope": "gm",
       "cursor": 22611,
@@ -650,10 +1391,24 @@
       "rejected": 10,
       "skipped": 21577,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 21571, \"unfinished\": 6, \"unknown_year\": 4, \"invalid_continuation\": 5, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 21571, \"unfinished\": 6, \"unknown_year\": 4, \"invalid_continuation\": 5, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-06.pgn.zst",
+      "sha256": "ea871988a15bb72c4e359ee935ceb18103eb978672c86983f5563139e9eefeb1",
+      "scope": "all",
+      "cursor": 23580,
+      "accepted": 20512,
+      "duplicates": 43,
+      "rejected": 312,
+      "skipped": 2713,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1797, \"no_recorded_moves\": 227, \"invalid_continuation\": 64, \"result_contradicts_board\": 19, \"invalid_or_nonstandard\": 1, \"unknown_year\": 915, \"nonstandard\": 1, \"missing_player_name\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-06.pgn.zst#catalogue-scan=0189cbb8eedc06fc73f5e479",
       "sha256": "ea871988a15bb72c4e359ee935ceb18103eb978672c86983f5563139e9eefeb1",
       "scope": "gm",
       "cursor": 23580,
@@ -662,10 +1417,24 @@
       "rejected": 6,
       "skipped": 22734,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 22637, \"unknown_year\": 2, \"invalid_continuation\": 2, \"no_recorded_moves\": 2, \"unfinished\": 97}"
+      "reasons_json": "{\"not_gm_vs_gm\": 22637, \"unknown_year\": 2, \"invalid_continuation\": 2, \"no_recorded_moves\": 2, \"unfinished\": 97}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-07.pgn.zst",
+      "sha256": "8b9d0e9f247363d799947232854bd2aee88c27faf80a6a3a2468d72bb6d2853e",
+      "scope": "all",
+      "cursor": 32778,
+      "accepted": 26418,
+      "duplicates": 1,
+      "rejected": 294,
+      "skipped": 6065,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 75, \"result_contradicts_board\": 12, \"unknown_year\": 4093, \"unfinished\": 1803, \"no_recorded_moves\": 115, \"invalid_initial_position\": 92, \"nonstandard\": 169}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-07.pgn.zst#catalogue-scan=a8debc071718abd2a34305bf",
       "sha256": "8b9d0e9f247363d799947232854bd2aee88c27faf80a6a3a2468d72bb6d2853e",
       "scope": "gm",
       "cursor": 32778,
@@ -674,10 +1443,24 @@
       "rejected": 193,
       "skipped": 31625,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 31596, \"unfinished\": 2, \"invalid_continuation\": 10, \"unknown_year\": 167, \"invalid_initial_position\": 15, \"nonstandard\": 27, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 31596, \"unfinished\": 2, \"invalid_continuation\": 10, \"unknown_year\": 167, \"invalid_initial_position\": 15, \"nonstandard\": 27, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-08.pgn.zst",
+      "sha256": "1ad8ce6ab83688ff2813b62ae98b0962ab467756c3cf79641c4a7ce7e99f2137",
+      "scope": "all",
+      "cursor": 33225,
+      "accepted": 23097,
+      "duplicates": 99,
+      "rejected": 233,
+      "skipped": 9796,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 9249, \"invalid_continuation\": 97, \"unfinished\": 547, \"no_recorded_moves\": 116, \"result_contradicts_board\": 20}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-08.pgn.zst#catalogue-scan=96ec401e605895826cbbb337",
       "sha256": "1ad8ce6ab83688ff2813b62ae98b0962ab467756c3cf79641c4a7ce7e99f2137",
       "scope": "gm",
       "cursor": 33225,
@@ -686,10 +1469,24 @@
       "rejected": 349,
       "skipped": 32158,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 32151, \"unknown_year\": 346, \"invalid_continuation\": 3, \"unfinished\": 7}"
+      "reasons_json": "{\"not_gm_vs_gm\": 32151, \"unknown_year\": 346, \"invalid_continuation\": 3, \"unfinished\": 7}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-09.pgn.zst",
+      "sha256": "e6b441d0c8994648be6b024e7d14feaaaba675567b76607decf6cc91cfeda447",
+      "scope": "all",
+      "cursor": 21737,
+      "accepted": 14066,
+      "duplicates": 19,
+      "rejected": 115,
+      "skipped": 7537,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 5993, \"unfinished\": 1544, \"no_recorded_moves\": 78, \"invalid_continuation\": 28, \"result_contradicts_board\": 8, \"invalid_or_nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-09.pgn.zst#catalogue-scan=df80216d301495b809411377",
       "sha256": "e6b441d0c8994648be6b024e7d14feaaaba675567b76607decf6cc91cfeda447",
       "scope": "gm",
       "cursor": 21737,
@@ -698,10 +1495,24 @@
       "rejected": 270,
       "skipped": 20710,
       "status": "complete",
-      "reasons_json": "{\"unknown_year\": 268, \"not_gm_vs_gm\": 20708, \"invalid_continuation\": 2, \"unfinished\": 2}"
+      "reasons_json": "{\"unknown_year\": 268, \"not_gm_vs_gm\": 20708, \"invalid_continuation\": 2, \"unfinished\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-10.pgn.zst",
+      "sha256": "7d2042e12bfd9e077402865dd4ca0c335d68da31d414a88f2c94842b48971603",
+      "scope": "all",
+      "cursor": 19322,
+      "accepted": 9697,
+      "duplicates": 3,
+      "rejected": 98,
+      "skipped": 9524,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 26, \"unknown_year\": 8853, \"no_recorded_moves\": 68, \"unfinished\": 671, \"result_contradicts_board\": 3, \"invalid_or_nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-10.pgn.zst#catalogue-scan=a67f79b6b95e63563be1f4b6",
       "sha256": "7d2042e12bfd9e077402865dd4ca0c335d68da31d414a88f2c94842b48971603",
       "scope": "gm",
       "cursor": 19322,
@@ -710,10 +1521,24 @@
       "rejected": 466,
       "skipped": 18212,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 18210, \"unknown_year\": 460, \"invalid_continuation\": 5, \"no_recorded_moves\": 1, \"unfinished\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 18210, \"unknown_year\": 460, \"invalid_continuation\": 5, \"no_recorded_moves\": 1, \"unfinished\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-11.pgn.zst",
+      "sha256": "354d96760609711ce471c131339a3a999d83929cb790615be4d76fb00bd3a89d",
+      "scope": "all",
+      "cursor": 19447,
+      "accepted": 5692,
+      "duplicates": 28,
+      "rejected": 63,
+      "skipped": 13664,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 13112, \"unfinished\": 551, \"invalid_continuation\": 13, \"no_recorded_moves\": 45, \"result_contradicts_board\": 2, \"invalid_initial_position\": 2, \"nonstandard\": 1, \"invalid_or_nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-11.pgn.zst#catalogue-scan=670207c3cde504011012d9d7",
       "sha256": "354d96760609711ce471c131339a3a999d83929cb790615be4d76fb00bd3a89d",
       "scope": "gm",
       "cursor": 19447,
@@ -722,10 +1547,24 @@
       "rejected": 547,
       "skipped": 18483,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 18475, \"unknown_year\": 545, \"unfinished\": 8, \"invalid_continuation\": 1, \"invalid_initial_position\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 18475, \"unknown_year\": 545, \"unfinished\": 8, \"invalid_continuation\": 1, \"invalid_initial_position\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-12.pgn.zst",
+      "sha256": "b2ae52c6cacfc078045760e2f4fd5e8e5ae3d24accf6d02fb8692d3fb5b02e9e",
+      "scope": "all",
+      "cursor": 30573,
+      "accepted": 15656,
+      "duplicates": 112,
+      "rejected": 215,
+      "skipped": 14590,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 53, \"unknown_year\": 12753, \"unfinished\": 1719, \"no_recorded_moves\": 144, \"result_contradicts_board\": 17, \"nonstandard\": 118, \"invalid_or_nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2024-12.pgn.zst#catalogue-scan=9ebe8ca891ba171e84b2a60d",
       "sha256": "b2ae52c6cacfc078045760e2f4fd5e8e5ae3d24accf6d02fb8692d3fb5b02e9e",
       "scope": "gm",
       "cursor": 30573,
@@ -734,10 +1573,24 @@
       "rejected": 857,
       "skipped": 28254,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 28222, \"unfinished\": 8, \"unknown_year\": 846, \"nonstandard\": 24, \"invalid_continuation\": 9, \"no_recorded_moves\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 28222, \"unfinished\": 8, \"unknown_year\": 846, \"nonstandard\": 24, \"invalid_continuation\": 9, \"no_recorded_moves\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-01.pgn.zst",
+      "sha256": "301bb574c3aca71d51a070ef7c43954434c10601e90869a262adf21c38801423",
+      "scope": "all",
+      "cursor": 22851,
+      "accepted": 9446,
+      "duplicates": 79,
+      "rejected": 78,
+      "skipped": 13248,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 7915, \"unfinished\": 5332, \"no_recorded_moves\": 47, \"invalid_continuation\": 12, \"result_contradicts_board\": 19, \"nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-01.pgn.zst#catalogue-scan=cbee0c2fb33259a4e1d949f4",
       "sha256": "301bb574c3aca71d51a070ef7c43954434c10601e90869a262adf21c38801423",
       "scope": "gm",
       "cursor": 22851,
@@ -746,10 +1599,24 @@
       "rejected": 195,
       "skipped": 22337,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 22337, \"unknown_year\": 195}"
+      "reasons_json": "{\"not_gm_vs_gm\": 22337, \"unknown_year\": 195}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-02.pgn.zst",
+      "sha256": "f92d0fea95e6c733898a920c0790a8c02f3f8a1e1c9ca0c42f15330cd5430434",
+      "scope": "all",
+      "cursor": 18834,
+      "accepted": 7595,
+      "duplicates": 82,
+      "rejected": 701,
+      "skipped": 10456,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 7437, \"invalid_continuation\": 14, \"unfinished\": 2634, \"no_recorded_moves\": 431, \"invalid_initial_position\": 237, \"nonstandard\": 385, \"result_contradicts_board\": 17, \"invalid_or_nonstandard\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-02.pgn.zst#catalogue-scan=8a200f1b280eea78a3576797",
       "sha256": "f92d0fea95e6c733898a920c0790a8c02f3f8a1e1c9ca0c42f15330cd5430434",
       "scope": "gm",
       "cursor": 18834,
@@ -758,10 +1625,24 @@
       "rejected": 360,
       "skipped": 17401,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 17397, \"unknown_year\": 277, \"invalid_initial_position\": 80, \"unfinished\": 4, \"no_recorded_moves\": 3}"
+      "reasons_json": "{\"not_gm_vs_gm\": 17397, \"unknown_year\": 277, \"invalid_initial_position\": 80, \"unfinished\": 4, \"no_recorded_moves\": 3}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-03.pgn.zst",
+      "sha256": "840bdb7d640f82032f8373c86efcb69d0801c0d54cf3edf2152e4b8d25b8da87",
+      "scope": "all",
+      "cursor": 16525,
+      "accepted": 9926,
+      "duplicates": 0,
+      "rejected": 365,
+      "skipped": 6234,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 5022, \"unfinished\": 1210, \"no_recorded_moves\": 84, \"invalid_continuation\": 29, \"result_contradicts_board\": 16, \"invalid_initial_position\": 236, \"nonstandard\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-03.pgn.zst#catalogue-scan=3c7bcfb736e9bc1aed707f12",
       "sha256": "840bdb7d640f82032f8373c86efcb69d0801c0d54cf3edf2152e4b8d25b8da87",
       "scope": "gm",
       "cursor": 16525,
@@ -770,10 +1651,24 @@
       "rejected": 58,
       "skipped": 15905,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 15900, \"unknown_year\": 44, \"unfinished\": 5, \"invalid_continuation\": 2, \"invalid_initial_position\": 12}"
+      "reasons_json": "{\"not_gm_vs_gm\": 15900, \"unknown_year\": 44, \"unfinished\": 5, \"invalid_continuation\": 2, \"invalid_initial_position\": 12}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-04.pgn.zst",
+      "sha256": "6b6fd9e9e79a94e80d0f556fb323ad951922fdff1f42089fc18a348e65d79624",
+      "scope": "all",
+      "cursor": 26464,
+      "accepted": 22858,
+      "duplicates": 0,
+      "rejected": 271,
+      "skipped": 3335,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 180, \"unfinished\": 1238, \"unknown_year\": 1307, \"invalid_continuation\": 65, \"result_contradicts_board\": 26, \"nonstandard\": 790}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-04.pgn.zst#catalogue-scan=f5382dd6ecaa320f4cf72fcc",
       "sha256": "6b6fd9e9e79a94e80d0f556fb323ad951922fdff1f42089fc18a348e65d79624",
       "scope": "gm",
       "cursor": 26464,
@@ -782,10 +1677,24 @@
       "rejected": 35,
       "skipped": 25751,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 25497, \"nonstandard\": 250, \"unknown_year\": 31, \"unfinished\": 4, \"invalid_continuation\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 25497, \"nonstandard\": 250, \"unknown_year\": 31, \"unfinished\": 4, \"invalid_continuation\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-05.pgn.zst",
+      "sha256": "ed1b62de4c4f81e19d8e269a0ddbb4c5133361ff942439938f9d20f3d904795c",
+      "scope": "all",
+      "cursor": 23738,
+      "accepted": 21228,
+      "duplicates": 36,
+      "rejected": 354,
+      "skipped": 2120,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 276, \"unfinished\": 1646, \"unknown_year\": 311, \"invalid_continuation\": 62, \"result_contradicts_board\": 16, \"nonstandard\": 163}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-05.pgn.zst#catalogue-scan=b1f6dfacb3b439c496ad908e",
       "sha256": "ed1b62de4c4f81e19d8e269a0ddbb4c5133361ff942439938f9d20f3d904795c",
       "scope": "gm",
       "cursor": 23738,
@@ -794,10 +1703,24 @@
       "rejected": 17,
       "skipped": 21799,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 21780, \"unfinished\": 18, \"unknown_year\": 6, \"no_recorded_moves\": 4, \"invalid_continuation\": 7, \"nonstandard\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 21780, \"unfinished\": 18, \"unknown_year\": 6, \"no_recorded_moves\": 4, \"invalid_continuation\": 7, \"nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-06.pgn.zst",
+      "sha256": "b226325f2798003e4811dca8ea9556dc91837ec9ae3493f00ba102b50a73a43c",
+      "scope": "all",
+      "cursor": 30185,
+      "accepted": 28405,
+      "duplicates": 0,
+      "rejected": 373,
+      "skipped": 1407,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 246, \"unfinished\": 1406, \"invalid_continuation\": 87, \"result_contradicts_board\": 26, \"missing_player_name\": 14, \"nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-06.pgn.zst#catalogue-scan=098ea40aeb19884b5f13fcc1",
       "sha256": "b226325f2798003e4811dca8ea9556dc91837ec9ae3493f00ba102b50a73a43c",
       "scope": "gm",
       "cursor": 30185,
@@ -806,10 +1729,24 @@
       "rejected": 11,
       "skipped": 28870,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 28866, \"unfinished\": 4, \"invalid_continuation\": 9, \"no_recorded_moves\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 28866, \"unfinished\": 4, \"invalid_continuation\": 9, \"no_recorded_moves\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-07.pgn.zst",
+      "sha256": "1ffc6b775d27631ac988dd816a137b6dd0ec05561aeee8b45861e0c08dbcb10b",
+      "scope": "all",
+      "cursor": 38308,
+      "accepted": 35672,
+      "duplicates": 42,
+      "rejected": 497,
+      "skipped": 2097,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1580, \"no_recorded_moves\": 360, \"result_contradicts_board\": 37, \"invalid_continuation\": 100, \"nonstandard\": 517}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-07.pgn.zst#catalogue-scan=f6995aa068eb02d7632e7874",
       "sha256": "1ffc6b775d27631ac988dd816a137b6dd0ec05561aeee8b45861e0c08dbcb10b",
       "scope": "gm",
       "cursor": 38308,
@@ -818,10 +1755,24 @@
       "rejected": 3,
       "skipped": 37205,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 37041, \"unfinished\": 8, \"invalid_continuation\": 3, \"nonstandard\": 156}"
+      "reasons_json": "{\"not_gm_vs_gm\": 37041, \"unfinished\": 8, \"invalid_continuation\": 3, \"nonstandard\": 156}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-08.pgn.zst",
+      "sha256": "f925d1f3b494517c8eae223976a886bed77a7b8627b17ec287e50cdda766dae8",
+      "scope": "all",
+      "cursor": 45335,
+      "accepted": 141,
+      "duplicates": 0,
+      "rejected": 1,
+      "skipped": 45193,
+      "status": "complete",
+      "reasons_json": "{\"unknown_year\": 43422, \"unfinished\": 1310, \"nonstandard\": 461, \"invalid_continuation\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-08.pgn.zst#catalogue-scan=bbc705a225d967dd6b364fe5",
       "sha256": "f925d1f3b494517c8eae223976a886bed77a7b8627b17ec287e50cdda766dae8",
       "scope": "gm",
       "cursor": 45335,
@@ -830,10 +1781,24 @@
       "rejected": 1263,
       "skipped": 44072,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 44063, \"unknown_year\": 1263, \"unfinished\": 7, \"nonstandard\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 44063, \"unknown_year\": 1263, \"unfinished\": 7, \"nonstandard\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-09.pgn.zst",
+      "sha256": "da3a261e926a2c0f5e79c393818e643d76448edf94cfdaefa3892258a6f9e7ba",
+      "scope": "all",
+      "cursor": 28536,
+      "accepted": 25403,
+      "duplicates": 32,
+      "rejected": 342,
+      "skipped": 2759,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 241, \"invalid_continuation\": 78, \"unfinished\": 2548, \"nonstandard\": 211, \"result_contradicts_board\": 23}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-09.pgn.zst#catalogue-scan=e1656a8b9b06702a34d473e6",
       "sha256": "da3a261e926a2c0f5e79c393818e643d76448edf94cfdaefa3892258a6f9e7ba",
       "scope": "gm",
       "cursor": 28536,
@@ -842,10 +1807,24 @@
       "rejected": 6,
       "skipped": 27349,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 27340, \"unfinished\": 9, \"invalid_continuation\": 6}"
+      "reasons_json": "{\"not_gm_vs_gm\": 27340, \"unfinished\": 9, \"invalid_continuation\": 6}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-10.pgn.zst",
+      "sha256": "77be4c998ca8d3b303928e1619f0f9dc2a03a71d5ab6a59d02d42291ae0524e3",
+      "scope": "all",
+      "cursor": 29670,
+      "accepted": 25354,
+      "duplicates": 253,
+      "rejected": 356,
+      "skipped": 3707,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 626, \"invalid_continuation\": 77, \"no_recorded_moves\": 258, \"unfinished\": 3054, \"result_contradicts_board\": 21, \"unknown_year\": 27}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-10.pgn.zst#catalogue-scan=df148f7e054d6abe0dab96ba",
       "sha256": "77be4c998ca8d3b303928e1619f0f9dc2a03a71d5ab6a59d02d42291ae0524e3",
       "scope": "gm",
       "cursor": 29670,
@@ -854,10 +1833,24 @@
       "rejected": 3,
       "skipped": 28830,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 28813, \"invalid_continuation\": 3, \"nonstandard\": 12, \"unfinished\": 5}"
+      "reasons_json": "{\"not_gm_vs_gm\": 28813, \"invalid_continuation\": 3, \"nonstandard\": 12, \"unfinished\": 5}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-11.pgn.zst",
+      "sha256": "39deb43faf6e2f4569a76f369ca0a3b87aa7787330c9e2ff87705c6f3bf32ff1",
+      "scope": "all",
+      "cursor": 25753,
+      "accepted": 24269,
+      "duplicates": 365,
+      "rejected": 334,
+      "skipped": 785,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 231, \"unfinished\": 785, \"invalid_continuation\": 80, \"result_contradicts_board\": 23}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-11.pgn.zst#catalogue-scan=a63085a57a391c8b84e54ede",
       "sha256": "39deb43faf6e2f4569a76f369ca0a3b87aa7787330c9e2ff87705c6f3bf32ff1",
       "scope": "gm",
       "cursor": 25753,
@@ -866,10 +1859,24 @@
       "rejected": 13,
       "skipped": 24316,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 24299, \"no_recorded_moves\": 3, \"unfinished\": 17, \"invalid_continuation\": 9, \"result_contradicts_board\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 24299, \"no_recorded_moves\": 3, \"unfinished\": 17, \"invalid_continuation\": 9, \"result_contradicts_board\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-12.pgn.zst",
+      "sha256": "fadbe80ee65e9f8499578e934d7600ece69d09b1cf8abc75fdd3bd840f61e63f",
+      "scope": "all",
+      "cursor": 35892,
+      "accepted": 33588,
+      "duplicates": 7,
+      "rejected": 367,
+      "skipped": 1930,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1864, \"no_recorded_moves\": 217, \"invalid_continuation\": 116, \"result_contradicts_board\": 34, \"nonstandard\": 66}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2025-12.pgn.zst#catalogue-scan=a460a9189023cf608705f172",
       "sha256": "fadbe80ee65e9f8499578e934d7600ece69d09b1cf8abc75fdd3bd840f61e63f",
       "scope": "gm",
       "cursor": 35892,
@@ -878,10 +1885,24 @@
       "rejected": 12,
       "skipped": 32876,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 32812, \"nonstandard\": 64, \"invalid_continuation\": 11, \"no_recorded_moves\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 32812, \"nonstandard\": 64, \"invalid_continuation\": 11, \"no_recorded_moves\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-01.pgn.zst",
+      "sha256": "9abf10d106a8bf5ecd41359825b3bf55c2f124c8a790a380cb98844c2cca5dca",
+      "scope": "all",
+      "cursor": 25362,
+      "accepted": 23585,
+      "duplicates": 17,
+      "rejected": 255,
+      "skipped": 1505,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 76, \"unfinished\": 1504, \"no_recorded_moves\": 153, \"result_contradicts_board\": 26, \"unknown_year\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-01.pgn.zst#catalogue-scan=d8d04dd65b55a0459925e50d",
       "sha256": "9abf10d106a8bf5ecd41359825b3bf55c2f124c8a790a380cb98844c2cca5dca",
       "scope": "gm",
       "cursor": 25362,
@@ -890,10 +1911,24 @@
       "rejected": 5,
       "skipped": 24569,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 24565, \"invalid_continuation\": 5, \"unfinished\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 24565, \"invalid_continuation\": 5, \"unfinished\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-02.pgn.zst",
+      "sha256": "ea977569917718b33940ba5379db2adad77d58876c29084294d357f15fe6a31b",
+      "scope": "all",
+      "cursor": 19752,
+      "accepted": 18402,
+      "duplicates": 2,
+      "rejected": 171,
+      "skipped": 1177,
+      "status": "complete",
+      "reasons_json": "{\"invalid_continuation\": 54, \"unfinished\": 1048, \"no_recorded_moves\": 97, \"result_contradicts_board\": 20, \"nonstandard\": 126, \"unknown_year\": 3}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-02.pgn.zst#catalogue-scan=b764e7d720218ffc88a58a54",
       "sha256": "ea977569917718b33940ba5379db2adad77d58876c29084294d357f15fe6a31b",
       "scope": "gm",
       "cursor": 19752,
@@ -902,10 +1937,24 @@
       "rejected": 2,
       "skipped": 19038,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 18968, \"unfinished\": 7, \"nonstandard\": 63, \"invalid_continuation\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 18968, \"unfinished\": 7, \"nonstandard\": 63, \"invalid_continuation\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-03.pgn.zst",
+      "sha256": "1a5ad83fc9f440dcdadde17b11cc81a953f4895aaf8b8588470b3078209dc7fc",
+      "scope": "all",
+      "cursor": 27662,
+      "accepted": 24961,
+      "duplicates": 8,
+      "rejected": 515,
+      "skipped": 2178,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1916, \"no_recorded_moves\": 429, \"result_contradicts_board\": 25, \"invalid_continuation\": 61, \"nonstandard\": 260, \"unknown_year\": 2}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-03.pgn.zst#catalogue-scan=8c6bc4b9ea91103f85d46220",
       "sha256": "1a5ad83fc9f440dcdadde17b11cc81a953f4895aaf8b8588470b3078209dc7fc",
       "scope": "gm",
       "cursor": 27662,
@@ -914,10 +1963,24 @@
       "rejected": 21,
       "skipped": 25760,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 25718, \"invalid_continuation\": 5, \"no_recorded_moves\": 16, \"unfinished\": 5, \"nonstandard\": 37}"
+      "reasons_json": "{\"not_gm_vs_gm\": 25718, \"invalid_continuation\": 5, \"no_recorded_moves\": 16, \"unfinished\": 5, \"nonstandard\": 37}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-04.pgn.zst",
+      "sha256": "97b036f3a3639ae3be59c1508b1e18c76ac1b2e8fada4587d1b5c5a93c438d5d",
+      "scope": "all",
+      "cursor": 32165,
+      "accepted": 27236,
+      "duplicates": 93,
+      "rejected": 797,
+      "skipped": 4039,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 3316, \"no_recorded_moves\": 673, \"nonstandard\": 719, \"result_contradicts_board\": 29, \"invalid_continuation\": 95, \"unknown_year\": 4}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-04.pgn.zst#catalogue-scan=837f18f93e52c850639ae88e",
       "sha256": "97b036f3a3639ae3be59c1508b1e18c76ac1b2e8fada4587d1b5c5a93c438d5d",
       "scope": "gm",
       "cursor": 32165,
@@ -926,10 +1989,24 @@
       "rejected": 2,
       "skipped": 31184,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 31069, \"nonstandard\": 115, \"result_contradicts_board\": 1, \"invalid_continuation\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 31069, \"nonstandard\": 115, \"result_contradicts_board\": 1, \"invalid_continuation\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-05.pgn.zst",
+      "sha256": "d212987f7972a70268809ff6c726acff8bf0987161aacd7647b160f8564f6a53",
+      "scope": "all",
+      "cursor": 37447,
+      "accepted": 33775,
+      "duplicates": 70,
+      "rejected": 636,
+      "skipped": 2966,
+      "status": "complete",
+      "reasons_json": "{\"nonstandard\": 596, \"unfinished\": 2369, \"no_recorded_moves\": 476, \"invalid_continuation\": 109, \"result_contradicts_board\": 49, \"invalid_initial_position\": 2, \"unknown_year\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-05.pgn.zst#catalogue-scan=e96281e390084e91845053ea",
       "sha256": "d212987f7972a70268809ff6c726acff8bf0987161aacd7647b160f8564f6a53",
       "scope": "gm",
       "cursor": 37447,
@@ -938,10 +2015,24 @@
       "rejected": 11,
       "skipped": 36230,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 36228, \"invalid_continuation\": 7, \"unfinished\": 2, \"no_recorded_moves\": 4}"
+      "reasons_json": "{\"not_gm_vs_gm\": 36228, \"invalid_continuation\": 7, \"unfinished\": 2, \"no_recorded_moves\": 4}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-06.pgn.zst",
+      "sha256": "65905d611c0d78d90ab57cd9edd3821f4119b46c22b5489fd7e265a74c6767b3",
+      "scope": "all",
+      "cursor": 36996,
+      "accepted": 34694,
+      "duplicates": 47,
+      "rejected": 797,
+      "skipped": 1458,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 651, \"unfinished\": 1458, \"invalid_continuation\": 104, \"result_contradicts_board\": 42}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-06.pgn.zst#catalogue-scan=e4b6c1de3dd4816e45ec3b9b",
       "sha256": "65905d611c0d78d90ab57cd9edd3821f4119b46c22b5489fd7e265a74c6767b3",
       "scope": "gm",
       "cursor": 36996,
@@ -950,10 +2041,24 @@
       "rejected": 35,
       "skipped": 35114,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 35075, \"invalid_continuation\": 4, \"no_recorded_moves\": 30, \"unfinished\": 39, \"result_contradicts_board\": 1}"
+      "reasons_json": "{\"not_gm_vs_gm\": 35075, \"invalid_continuation\": 4, \"no_recorded_moves\": 30, \"unfinished\": 39, \"result_contradicts_board\": 1}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-07.pgn.zst",
+      "sha256": "714d0eb99f99fca8d791142038b6c59b5ca6a51b3339bd3891a92f4bdffcbf0c",
+      "scope": "all",
+      "cursor": 40038,
+      "accepted": 36682,
+      "duplicates": 88,
+      "rejected": 440,
+      "skipped": 2828,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 2257, \"no_recorded_moves\": 294, \"invalid_continuation\": 102, \"result_contradicts_board\": 44, \"nonstandard\": 571}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-07.pgn.zst#catalogue-scan=fa3fe8eba5ad4faa6133a0d3",
       "sha256": "714d0eb99f99fca8d791142038b6c59b5ca6a51b3339bd3891a92f4bdffcbf0c",
       "scope": "gm",
       "cursor": 40038,
@@ -962,10 +2067,24 @@
       "rejected": 6,
       "skipped": 39130,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 39091, \"invalid_continuation\": 6, \"unfinished\": 1, \"nonstandard\": 38}"
+      "reasons_json": "{\"not_gm_vs_gm\": 39091, \"invalid_continuation\": 6, \"unfinished\": 1, \"nonstandard\": 38}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-08.pgn.zst",
+      "sha256": "e227c35c3207ebade754849c1825982e2717ae82c013013d896778e27be77724",
+      "scope": "all",
+      "cursor": 48940,
+      "accepted": 46732,
+      "duplicates": 257,
+      "rejected": 522,
+      "skipped": 1429,
+      "status": "complete",
+      "reasons_json": "{\"no_recorded_moves\": 302, \"invalid_continuation\": 182, \"unfinished\": 1100, \"nonstandard\": 329, \"result_contradicts_board\": 38}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-08.pgn.zst#catalogue-scan=24bb1478f5a1a040197cecfa",
       "sha256": "e227c35c3207ebade754849c1825982e2717ae82c013013d896778e27be77724",
       "scope": "gm",
       "cursor": 48940,
@@ -974,10 +2093,24 @@
       "rejected": 6,
       "skipped": 47459,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 47450, \"unfinished\": 6, \"nonstandard\": 3, \"invalid_continuation\": 4, \"no_recorded_moves\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 47450, \"unfinished\": 6, \"nonstandard\": 3, \"invalid_continuation\": 4, \"no_recorded_moves\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-09.pgn.zst",
+      "sha256": "27a39d035767a30901b89602f33f2a7b27d4ab5025842071165fa079f8fff1df",
+      "scope": "all",
+      "cursor": 28638,
+      "accepted": 27258,
+      "duplicates": 16,
+      "rejected": 279,
+      "skipped": 1085,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 854, \"no_recorded_moves\": 188, \"result_contradicts_board\": 23, \"invalid_continuation\": 67, \"nonstandard\": 231, \"invalid_or_nonstandard\": 1}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-09.pgn.zst#catalogue-scan=7217eebd17f9bae35434d0ca",
       "sha256": "27a39d035767a30901b89602f33f2a7b27d4ab5025842071165fa079f8fff1df",
       "scope": "gm",
       "cursor": 28638,
@@ -986,10 +2119,24 @@
       "rejected": 5,
       "skipped": 27727,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 27711, \"unfinished\": 4, \"nonstandard\": 12, \"invalid_continuation\": 3, \"no_recorded_moves\": 2}"
+      "reasons_json": "{\"not_gm_vs_gm\": 27711, \"unfinished\": 4, \"nonstandard\": 12, \"invalid_continuation\": 3, \"no_recorded_moves\": 2}",
+      "source_id": "lichess-broadcasts"
     },
     {
       "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-10.pgn.zst",
+      "sha256": "d9c0c78c7ed8cd200723c9972b01a1cd35fd8568dd4b6324fbcc3ee7c07374c9",
+      "scope": "all",
+      "cursor": 35430,
+      "accepted": 33714,
+      "duplicates": 57,
+      "rejected": 535,
+      "skipped": 1124,
+      "status": "complete",
+      "reasons_json": "{\"unfinished\": 1124, \"no_recorded_moves\": 413, \"invalid_continuation\": 101, \"result_contradicts_board\": 21}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://database.lichess.org/broadcast/lichess_db_broadcast_2026-10.pgn.zst#catalogue-scan=a71040852d203364054bc79b",
       "sha256": "d9c0c78c7ed8cd200723c9972b01a1cd35fd8568dd4b6324fbcc3ee7c07374c9",
       "scope": "gm",
       "cursor": 35430,
@@ -998,20 +2145,128 @@
       "rejected": 4,
       "skipped": 34435,
       "status": "complete",
-      "reasons_json": "{\"not_gm_vs_gm\": 34429, \"invalid_continuation\": 4, \"unfinished\": 6}"
+      "reasons_json": "{\"not_gm_vs_gm\": 34429, \"invalid_continuation\": 4, \"unfinished\": 6}",
+      "source_id": "lichess-broadcasts"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=0bf4ae45495c19f04e132f34",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 20200,
+      "accepted": 20094,
+      "duplicates": 0,
+      "rejected": 68,
+      "skipped": 38,
+      "status": "paused",
+      "reasons_json": "{\"no_recorded_moves\": 59, \"nonstandard_start_or_fragment\": 38, \"invalid_continuation\": 9}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=35f68c6f576fc3c6795f7b43",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"partition\":2,\"partitions\":3,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 8600,
+      "accepted": 0,
+      "duplicates": 2844,
+      "rejected": 11,
+      "skipped": 5745,
+      "status": "running",
+      "reasons_json": "{\"outside_partition\": 5734, \"nonstandard_start_or_fragment\": 11, \"no_recorded_moves\": 9, \"invalid_continuation\": 2}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=a058aa3e5d252a59462609c2",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"partition\":0,\"partitions\":3,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 8600,
+      "accepted": 0,
+      "duplicates": 2842,
+      "rejected": 10,
+      "skipped": 5748,
+      "status": "running",
+      "reasons_json": "{\"outside_partition\": 5733, \"no_recorded_moves\": 8, \"invalid_continuation\": 2, \"nonstandard_start_or_fragment\": 15}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=a53a705dc5b66e43b4faa99b",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"players\":[\"alekhine\",\"anderssen\",\"capablanca\",\"lasker\",\"morphy\",\"philidor\",\"steinitz\"],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 3561471,
+      "accepted": 6125,
+      "duplicates": 0,
+      "rejected": 45,
+      "skipped": 3555301,
+      "status": "complete",
+      "reasons_json": "{\"outside_priority_players\": 3554989, \"unknown_year\": 105, \"unfinished\": 13, \"nonstandard_start_or_fragment\": 194, \"no_recorded_moves\": 40, \"invalid_date\": 1, \"invalid_continuation\": 4}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=abc6b77b908ab3a873e0844a",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"partition\":1,\"partitions\":3,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 8600,
+      "accepted": 0,
+      "duplicates": 2847,
+      "rejected": 10,
+      "skipped": 5743,
+      "status": "running",
+      "reasons_json": "{\"outside_partition\": 5733, \"nonstandard_start_or_fragment\": 10, \"no_recorded_moves\": 10}",
+      "source_id": "figshare-4276523-v1"
     }
   ],
-  "source_page": "https://database.lichess.org/#broadcasts",
+  "source_page": "https://github.com/Ali133-7/chess-ai-coach/blob/main/docs/GAME_SOURCE_RESEARCH.md",
   "license": "CC-BY-SA-4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "attribution": "Lichess official broadcasts and the tournaments linked in each record. Adapted game data CC BY-SA 4.0.",
+  "attribution": "Ana Schaigorodsky (2016), Chess Database, figshare. DOI: 10.6084/m9.figshare.4276523.v1. Related study: Schaigorodsky, Perotti and Billoni, PLOS ONE 11(12):e0168213. Lichess official broadcasts and the tournaments linked in each record. Adapted combined collection CC BY-SA 4.0; individual records retain their source license.",
   "changes": "Selected completed standard games, validated all recorded mainline moves, normalized dates, deduplicated identical player/date/event/round/start/move identities, compressed PGN and retained numerical evaluation annotations. No human commentary or side variations. Board-fact explanations are generated locally when viewed.",
   "analysis_notice": "Source engine settings are unknown. Missing scores remain unscored; no best-play claim or estimated player rating. A completed PGN may end by resignation/draw agreement and need not contain checkmate.",
   "coverage_notice": "Only accepted records in the listed archives and scopes. Not all world chess games, not the Chessgames.com collection.",
+  "sources": [
+    {
+      "id": "figshare-4276523-v1",
+      "name": "Chess Database — Ana Schaigorodsky (2016)",
+      "page": "https://doi.org/10.6084/m9.figshare.4276523.v1",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Ana Schaigorodsky (2016), Chess Database, figshare. DOI: 10.6084/m9.figshare.4276523.v1. Related study: Schaigorodsky, Perotti and Billoni, PLOS ONE 11(12):e0168213.",
+      "evidence": "https://api.figshare.com/v2/articles/4276523/versions/1",
+      "category": "historical"
+    },
+    {
+      "id": "lichess-broadcasts",
+      "name": "Lichess official broadcasts",
+      "page": "https://database.lichess.org/#broadcasts",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Lichess official broadcasts and the tournaments linked in each record.",
+      "evidence": "https://database.lichess.org/#broadcasts",
+      "category": "broadcast"
+    }
+  ],
+  "merges": [
+    {
+      "id": "c8996fcc824c8533daa20f95515cd5d799b2448d6c026b8163fe2905bc6a21cc",
+      "source_sha256": "c8996fcc824c8533daa20f95515cd5d799b2448d6c026b8163fe2905bc6a21cc",
+      "source_schema": 1,
+      "games_read": 52809,
+      "games_added": 0,
+      "duplicates": 52809,
+      "merged_at": "2026-11-25T00:15:35.564221+00:00"
+    },
+    {
+      "id": "b1d90d3048a50a37b41ccf6883835f79639fd640d2dd4810eee9e21dfd1269ff",
+      "source_sha256": "b1d90d3048a50a37b41ccf6883835f79639fd640d2dd4810eee9e21dfd1269ff",
+      "source_schema": 2,
+      "games_read": 26219,
+      "games_added": 26219,
+      "duplicates": 0,
+      "merged_at": "2026-11-25T00:16:13.257076+00:00"
+    }
+  ],
   "verification": {
     "sqlite_integrity_and_foreign_keys": true,
     "public_tables_only": true,
     "all_mainlines_checked_during_import": true,
-    "all_mainlines_rechecked_during_packaging": true
+    "all_mainlines_rechecked_during_packaging": false
   }
 }
