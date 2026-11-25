@@ -11,6 +11,9 @@ def digest(file):
 
 def validate(file,deep=False):
  with library.connection(file) as db:
+  # Offline validation walks parent keys for millions of rows. Bound its page
+  # cache separately from ordinary web connections to avoid repeated disk reads.
+  db.execute('PRAGMA cache_size=-131072')
   names={r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
   if names not in (TABLES,TABLES|{'library_sources','library_merges'}):raise ValueError('Unexpected tables: public catalogue only')
   version=db.execute("SELECT value FROM library_meta WHERE key='schema_version'").fetchone()

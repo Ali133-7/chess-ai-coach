@@ -6,6 +6,10 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from studio.knowledge import game_library as library
 from scripts.game_library_artifact import validate,digest
 
+# Two snapshots of the same archive/policy may have different resume checkpoints.
+# Keep both scan ledgers rather than attach new records to an older cursor.
+SCAN_KEYS=('sha256','scope','source_id','cursor','accepted','duplicates','rejected','skipped','status','reasons_json')
+
 def merge(inputs,output):
  if not inputs:raise ValueError('At least one source catalogue is required')
  if output.exists():raise FileExistsError('Use a new output; never merge into a live database')
@@ -37,13 +41,13 @@ def merge(inputs,output):
      db.execute('BEGIN IMMEDIATE')
      for raw in db.execute('SELECT * FROM incoming.library_archives').fetchall():
       row=dict(raw);row.setdefault('source_id','lichess-broadcasts');old_url=row['url']
-      existing=db.execute('SELECT sha256,scope,source_id FROM main.library_archives WHERE url=?',(old_url,)).fetchone()
-      signature=(row['sha256'],row['scope'],row['source_id'])
-      if existing and tuple(existing)!=signature:
+      existing=db.execute('SELECT * FROM main.library_archives WHERE url=?',(old_url,)).fetchone()
+      signature=tuple(row[k] for k in SCAN_KEYS)
+      if existing and tuple(existing[k] for k in SCAN_KEYS)!=signature:
        suffix=hashlib.sha256(json.dumps([old_url,*signature],separators=(',',':')).encode()).hexdigest()[:24]
        row['url']=old_url+('&' if '#' in old_url else '#')+'catalogue-scan='+suffix
-       existing=db.execute('SELECT sha256,scope,source_id FROM main.library_archives WHERE url=?',(row['url'],)).fetchone()
-       if existing and tuple(existing)!=signature:raise ValueError('Import scan identifier collision')
+       existing=db.execute('SELECT * FROM main.library_archives WHERE url=?',(row['url'],)).fetchone()
+       if existing and tuple(existing[k] for k in SCAN_KEYS)!=signature:raise ValueError('Import scan identifier collision')
       keys=('url','sha256','scope','cursor','accepted','duplicates','rejected','skipped','status','reasons_json','source_id')
       db.execute('INSERT OR IGNORE INTO main.library_archives('+','.join(keys)+') VALUES('+','.join('?'*len(keys))+')',tuple(row[k] for k in keys))
       db.execute('INSERT INTO archive_map VALUES(?,?)',(old_url,row['url']))

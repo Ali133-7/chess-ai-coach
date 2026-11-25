@@ -5,6 +5,15 @@ Attribution: Lichess official broadcasts and the tournaments linked in each reco
 License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 License text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+Additional source: Ana Schaigorodsky (2016), Chess Database, Figshare version 1.
+DOI: https://doi.org/10.6084/m9.figshare.4276523.v1
+Metadata: https://api.figshare.com/v2/articles/4276523/versions/1
+Original historical records: Creative Commons Attribution 4.0 International.
+License text: https://creativecommons.org/licenses/by/4.0/legalcode
+The original per-record license and source attribution are retained in the
+database, game detail view and individual PGN export. Do not relabel an original
+historical record as Lichess material.
+
 Changes: selection of completed standard games with known player names and year;
 validation of all recorded mainline moves; normalized dates; exact-identity
 deduplication; compressed PGN and numerical source evaluations; search index.
@@ -13,9 +22,10 @@ explanations are generated locally by the application, rather than copied from
 members of another site. Source engine settings are unknown; missing evaluations
 remain unscored. No separately computed deep analysis of every position is claimed.
 
-The adapted game data and original board-fact game notes are shared under
-CC BY-SA 4.0. Retain this attribution, license link and changes notice when
-redistributing, and share adaptations under the same license.
+The adapted combined collection and original board-fact game notes are shared
+under CC BY-SA 4.0; individual records retain their original source license.
+Retain each source's attribution, license link and changes notice when
+redistributing, and share adaptations of the combined collection under CC BY-SA.
 
 The artifact's game-library-manifest.json identifies exact archive URLs, SHA-256
 checksums, import scopes, record counts and exclusions. Coverage is limited to

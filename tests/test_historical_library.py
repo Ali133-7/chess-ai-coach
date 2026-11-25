@@ -87,6 +87,16 @@ class HistoricalTests(unittest.TestCase):
   validate(self.db,deep=True)
   again=self.root/'again.sqlite3';merge([self.db,b],again)
   with lib.connection(again) as db:self.assertEqual(db.execute('SELECT count(*) FROM library_games').fetchone()[0],2)
+ def test_merge_keeps_resumed_checkpoints_without_stale_archive_cursors(self):
+  # Repeated real game in a synthetic two-record ZIP: this is a merge fixture only.
+  self.archive(self.raw+'\n\n'+self.raw);a=self.root/'paused.sqlite3';b=self.root/'complete.sqlite3'
+  self.run_import(db=a,max_records=1);self.run_import(db=b);merge([a,b],self.db)
+  with lib.connection() as db:
+   self.assertEqual(db.execute('SELECT count(*) FROM library_games').fetchone()[0],1)
+   self.assertEqual({(r['cursor'],r['status']) for r in db.execute('SELECT * FROM library_archives')},{(1,'paused'),(2,'complete')})
+   self.assertEqual(db.execute('SELECT count(*) FROM library_provenance').fetchone()[0],2)
+  validate(self.db,deep=True);again=self.root/'checkpoint-again.sqlite3';merge([self.db,b],again)
+  with lib.connection(again) as db:self.assertEqual(db.execute('SELECT count(*) FROM library_archives').fetchone()[0],2)
  def test_wrong_source_license_and_private_input_are_rejected(self):
   self.archive();self.run_import()
   with lib.connection(self.db,True) as db:db.execute("UPDATE library_games SET license='CC-BY-SA-4.0'")
