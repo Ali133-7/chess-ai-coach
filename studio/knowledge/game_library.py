@@ -20,9 +20,11 @@ def path():
 def connection(filename=None,write=False):
  target=Path(filename) if filename else path()
  if write:
-  target.parent.mkdir(parents=True,exist_ok=True);db=sqlite3.connect(target.resolve().as_uri()+'?mode=rwc',uri=True,timeout=40)
+  target.parent.mkdir(parents=True,exist_ok=True);db=sqlite3.connect(target.resolve().as_uri()+'?mode=rwc',uri=True,timeout=300)
  else:db=sqlite3.connect(target.resolve().as_uri()+'?mode=ro',uri=True,timeout=5)
- db.row_factory=sqlite3.Row;db.execute('PRAGMA foreign_keys=ON');db.execute('PRAGMA busy_timeout=40000' if write else 'PRAGMA busy_timeout=5000')
+ # Offline FTS checkpoints can hold the single writer while IO is throttled.
+ # Web readers keep their independent short timeout on the immutable catalogue.
+ db.row_factory=sqlite3.Row;db.execute('PRAGMA foreign_keys=ON');db.execute('PRAGMA busy_timeout=300000' if write else 'PRAGMA busy_timeout=5000')
  try:yield db;db.commit()
  except BaseException:db.rollback();raise
  finally:db.close()
