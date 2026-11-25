@@ -192,7 +192,15 @@ def search_local(db,q='',year=None,result=None,limit=12,offset=0,scope='gm',sour
  args=(*seed_args,*large_args)
  rows=db.execute(prefix+'SELECT * FROM ('+sql+') ORDER BY date DESC,id LIMIT ? OFFSET ?',(*args,limit,offset)).fetchall()
  total=db.execute(prefix+'SELECT (SELECT count(*) FROM seed_matches)+(SELECT count(*) FROM library.library_games WHERE '+large_filter+')-(SELECT count(*) FROM library.library_games WHERE '+large_filter+' AND id IN (SELECT id FROM seed_matches))',(*seed_args,*large_args,*large_args)).fetchone()[0]
- years=[r[0] for r in db.execute('SELECT year FROM main.kc_master_games UNION SELECT year FROM library.library_games ORDER BY year DESC')]
+ # Walk distinct indexed year boundaries instead of reading a year from every
+ # game. This matters on cold million-record catalogues with bounded RAM.
+ years=[r[0] for r in db.execute('''WITH RECURSIVE archive_years(year) AS (
+  SELECT max(year) FROM library.library_games
+  UNION ALL
+  SELECT (SELECT max(g.year) FROM library.library_games g WHERE g.year<archive_years.year)
+  FROM archive_years WHERE year IS NOT NULL
+ ) SELECT year FROM main.kc_master_games
+ UNION SELECT year FROM archive_years WHERE year IS NOT NULL ORDER BY year DESC''')]
  all_count=db.execute('SELECT (SELECT count(*) FROM main.kc_master_games)+(SELECT count(*) FROM library.library_games)-(SELECT count(*) FROM main.kc_master_games seed JOIN library.library_games g ON g.id=seed.id)').fetchone()[0]
  return {'items':[dict(r) for r in rows],'total':total,'all_count':all_count,'years':years,'offset':offset,'license':LICENSE,'source':'Licensed public archives' if multi else 'Lichess official broadcasts','sources':catalog_sources,'source_id':source_id,'scope':scope,'expanded_library':True,'search_mode':'word-prefixes','coverage_notice':'Only accepted records in the installed archives; not all chess games. Source numerical scores have unknown engine settings; titles are never inferred from player names.'}
 

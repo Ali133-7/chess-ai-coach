@@ -87,6 +87,14 @@ class HistoricalTests(unittest.TestCase):
   validate(self.db,deep=True)
   again=self.root/'again.sqlite3';merge([self.db,b],again)
   with lib.connection(again) as db:self.assertEqual(db.execute('SELECT count(*) FROM library_games').fetchone()[0],2)
+ def test_combined_years_pages_and_counts_keep_seed_deduplication(self):
+  lib.setup(self.db);self.assertEqual(masters.search(scope='all')['years'],[])
+  self.broadcast(self.db);self.archive();self.run_import();masters.import_pgn(FIXTURES/'master-first.pgn','year-test',lib.SOURCE)
+  first=masters.search(scope='all',limit=1);second=masters.search(scope='all',limit=1,offset=1)
+  self.assertEqual(first['years'],[2024,2000]);self.assertEqual(first['total'],2);self.assertEqual(first['all_count'],2)
+  self.assertEqual(first['items'][0]['year'],2024);self.assertEqual(second['items'][0]['year'],2000)
+  self.assertEqual(masters.search(scope='all',limit=1,offset=2)['items'],[])
+  self.assertEqual(masters.search(scope='all',year=2000)['total'],1)
  def test_merge_keeps_resumed_checkpoints_without_stale_archive_cursors(self):
   # Repeated real game in a synthetic two-record ZIP: this is a merge fixture only.
   self.archive(self.raw+'\n\n'+self.raw);a=self.root/'paused.sqlite3';b=self.root/'complete.sqlite3'
