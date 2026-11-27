@@ -1,9 +1,9 @@
 'use strict';
 (()=>{
- let offset=0,sequence=0,loaded=false,busy=false;
+ let offset=0,sequence=0,loaded=false,busy=false,refreshQueued=false;
  const el=id=>document.getElementById(id),en=()=>window.I18n?.lang==='en',say=(ar,eng)=>en()?eng:ar;
  async function load(append=false){
-  if(busy)return;busy=true;const seq=++sequence;el('master-more').disabled=true;
+  if(busy){if(!append){refreshQueued=true;sequence++;}return;}busy=true;const seq=++sequence;el('master-more').disabled=true;
   try{
    if(!append){offset=0;el('master-games').replaceChildren();}
    const params=new URLSearchParams({q:el('master-query').value.trim(),limit:'12',offset:String(offset)});
@@ -21,7 +21,7 @@
     el('master-games').textContent=el('master-scope')?.value==='gm'?say('بعض المباريات التاريخية لا تتضمن حقول الألقاب، فتغيب عن مرشح GM.','Some historical records omit title fields and are excluded by the GM filter.'):say('لا توجد مباريات بهذه المرشحات. جرّب اسماً أو سنة أخرى.','No games match these filters. Try another name or year.');
     if(el('master-scope')?.value==='gm'){const all=document.createElement('button');all.type='button';all.className='outline';all.textContent=say('ابحث في كل مباريات الأرشيف','Search all archived games');all.addEventListener('click',()=>{el('master-scope').value='all';load();});el('master-games').append(all);}
    }
-  }catch(e){el('master-count').textContent=e.message;}finally{busy=false;el('master-more').disabled=false;}
+  }catch(e){if(seq===sequence)el('master-count').textContent=e.message;}finally{busy=false;el('master-more').disabled=false;if(refreshQueued){refreshQueued=false;load();}}
  }
  window.loadMasterLibrary=()=>{if(!loaded)load();};
  el('master-search-form').addEventListener('submit',e=>{e.preventDefault();load();});
