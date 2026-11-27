@@ -1,0 +1,16 @@
+const {JSDOM}=require('jsdom'),fs=require('fs'),assert=require('node:assert/strict');
+const root=(process.env.RUNTIME||process.cwd())+'/studio/static/';
+const dom=new JSDOM('<body><form><label><span>الخطة</span><select name="plan" required><option value="">اختر</option><option value="free">مجاني</option><option value="pro">Professional</option><option value="locked" disabled>Locked</option><option value="unsafe">&lt;img src=x&gt;</option></select></label><button type="submit">Save</button></form></body>',{runScripts:'outside-only',pretendToBeVisual:true}),w=dom.window,d=w.document;
+w.I18n={lang:'ar'};w.eval(fs.readFileSync(root+'admin_select.js','utf8'));w.AdminSelect.enhance(d);w.AdminSelect.enhance(d);
+const select=d.querySelector('select'),input=d.querySelector('[role=combobox]'),menu=d.querySelector('[role=listbox]');let changes=0;select.addEventListener('change',()=>changes++);
+const key=k=>input.dispatchEvent(new w.KeyboardEvent('keydown',{key:k,bubbles:true,cancelable:true}));
+assert.equal(d.querySelectorAll('[role=combobox]').length,1);assert.equal(input.getAttribute('aria-label'),'الخطة');assert.equal(input.getAttribute('aria-required'),'true');
+input.click();assert.equal(input.getAttribute('aria-expanded'),'true');assert.equal(menu.querySelectorAll('[role=option]').length,4);assert.equal(d.querySelector('img'),null);
+input.value='Prof';input.dispatchEvent(new w.Event('input',{bubbles:true}));assert.equal(menu.querySelectorAll('[role=option]').length,1);assert.equal(select.value,'');assert.equal(new w.FormData(d.querySelector('form')).get('plan'),'');key('Enter');assert.equal(select.value,'pro');assert.equal(changes,1);assert.equal(input.value,'Professional');assert.equal(input.getAttribute('aria-expanded'),'false');
+input.click();input.value='does not exist';input.dispatchEvent(new w.Event('input'));assert(menu.textContent.includes('لا توجد'));key('Escape');assert.equal(select.value,'pro');assert.equal(input.value,'Professional');
+key('ArrowDown');key('Home');key('ArrowDown');key('Enter');assert.equal(select.value,'free');assert.equal(changes,2);
+input.click();key('End');key('Tab');assert.equal(select.value,'free','Tab cancels rather than committing the highlighted choice');
+select.disabled=true;w.AdminSelect.sync(select);assert(input.disabled);select.disabled=false;w.AdminSelect.sync(select);
+w.I18n.lang='en';d.querySelector('label>span').textContent='Plan';w.AdminSelect.enhance(d);assert.equal(input.getAttribute('aria-label'),'Plan');assert.equal(input.placeholder,'Search or choose…');assert.equal(select.value,'free');
+select.value='';select.dispatchEvent(new w.Event('invalid',{cancelable:true}));assert.equal(input.getAttribute('aria-invalid'),'true');assert.equal(input.getAttribute('aria-expanded'),'true');
+console.log('ADMIN_SELECT_OK: native form values and validation, search without mutation, keyboard commit/cancel, disabled options, escaping, labels and idempotent enhancement.');dom.window.close();

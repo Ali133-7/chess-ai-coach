@@ -7,7 +7,7 @@ w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};w.HTMLDialog
 const plan={id:'free',title_ar:'مجاني',title_en:'Free',description_ar:'',description_en:'',price_iqd:0,days:30,enabled:true,features:{knowledge:true},limits:{teacher_daily:20},version:1};
 const responses={plans:{items:[plan]},overview:{stats:{users:2},jobs:[],daily:{},features:{knowledge:['المعرفة','Knowledge']}},users:{items:[],total:0,page:1,limit:25},discounts:{items:[]},gateways:{items:['zaincash','fib','google_play'].map(name=>({name,enabled:false,environment:'sandbox',ready:false,public:{},configured_secrets:{}}))},campaigns:{items:[]},orders:{items:[],google_play:[],total:0,page:1},audit:{items:[],total:0},providers:{enabled:true,primary:'groq',fallback:[],models:{groq:'test-model'},configured:{groq:true}},settings:{site_name:'Studio',tagline_ar:'تعلم',tagline_en:'Learn',support_email:'',ai_enabled:true,daily_enabled:true,daily_target:24,maintenance:false,maintenance_ar:'صيانة',maintenance_en:'Maintenance'}};
 const calls=[];w.request=async(path,options)=>{calls.push([path,options]);return structuredClone(responses[path.split('/')[2].split('?')[0]]||{});};
-w.loadLegacyAdmin=async()=>{};w.eval(fs.readFileSync(root+'control_center.js','utf8'));
+w.confirm=()=>true;w.loadLegacyAdmin=async()=>{};w.eval(fs.readFileSync(root+'admin_select.js','utf8'));w.eval(fs.readFileSync(root+'admin_workspace.js','utf8'));w.eval(fs.readFileSync(root+'control_center.js','utf8'));
 const flush=async()=>{await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));};
 (async()=>{
  await w.loadControl();assert.equal(d.querySelectorAll('[data-control-tab]').length,11);
