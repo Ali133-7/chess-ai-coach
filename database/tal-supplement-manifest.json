@@ -1,0 +1,124 @@
+{
+  "format": 1,
+  "schema_version": 2,
+  "generated_at_utc": "2026-11-27T09:35:38.360483+00:00",
+  "file": "tal-supplement.sqlite3.gz",
+  "compressed_bytes": 1837019,
+  "compressed_sha256": "1fbd90601c30c1c3676f55f9c5f55eba8f9af56519abc0868ba7d57ccb13b62c",
+  "database_bytes": 4079616,
+  "database_sha256": "2985a12715c3a694fd0bb6dba3a61ee166b9966cbef470ee14cd96b760dae5c4",
+  "stats": {
+    "games": 1999,
+    "gm_vs_gm": 0,
+    "plies": 138197,
+    "source_evaluations": 0,
+    "first_year": 1949,
+    "last_year": 1992
+  },
+  "archives": [
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=0bf4ae45495c19f04e132f34",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 20200,
+      "accepted": 20094,
+      "duplicates": 0,
+      "rejected": 68,
+      "skipped": 38,
+      "status": "paused",
+      "reasons_json": "{\"no_recorded_moves\": 59, \"nonstandard_start_or_fragment\": 38, \"invalid_continuation\": 9}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=35f68c6f576fc3c6795f7b43",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"partition\":2,\"partitions\":3,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 2543200,
+      "accepted": 833031,
+      "duplicates": 7185,
+      "rejected": 7422,
+      "skipped": 1695562,
+      "status": "running",
+      "reasons_json": "{\"outside_partition\": 1695445, \"nonstandard_start_or_fragment\": 79, \"no_recorded_moves\": 7089, \"invalid_continuation\": 252, \"unknown_year\": 25, \"invalid_date\": 65, \"unfinished\": 13, \"result_contradicts_board\": 16}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=a058aa3e5d252a59462609c2",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"partition\":0,\"partitions\":3,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 3561471,
+      "accepted": 1165145,
+      "duplicates": 8732,
+      "rejected": 13042,
+      "skipped": 2374552,
+      "status": "complete",
+      "reasons_json": "{\"outside_partition\": 2374233, \"no_recorded_moves\": 12612, \"invalid_continuation\": 345, \"nonstandard_start_or_fragment\": 201, \"unknown_year\": 105, \"unfinished\": 13, \"result_contradicts_board\": 17, \"invalid_date\": 68}",
+      "source_id": "figshare-4276523-v1"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/6971717#selection=abc6b77b908ab3a873e0844a",
+      "sha256": "86732c0a23421da5985f5ba40d9db9bf2be1f6e2456b88629c35740ae71be54d",
+      "scope": "{\"blank_lines\":\"header-aware-v2\",\"encoding\":\"cp1252\",\"max_year\":null,\"min_year\":null,\"partition\":1,\"partitions\":3,\"players\":[],\"policy_version\":1,\"standard_start_only\":true}",
+      "cursor": 2577600,
+      "accepted": 844291,
+      "duplicates": 7193,
+      "rejected": 7626,
+      "skipped": 1718490,
+      "status": "running",
+      "reasons_json": "{\"outside_partition\": 1718371, \"nonstandard_start_or_fragment\": 80, \"no_recorded_moves\": 7301, \"invalid_continuation\": 266, \"unknown_year\": 26, \"unfinished\": 13, \"invalid_date\": 51, \"result_contradicts_board\": 8}",
+      "source_id": "figshare-4276523-v1"
+    }
+  ],
+  "source_page": "https://doi.org/10.6084/m9.figshare.4276523.v1",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "attribution": "Ana Schaigorodsky (2016), Chess Database, figshare. DOI: 10.6084/m9.figshare.4276523.v1. Related study: Schaigorodsky, Perotti and Billoni, PLOS ONE 11(12):e0168213. Adapted combined collection CC BY-SA 4.0; individual records retain their source license.",
+  "changes": "Selected completed standard games, validated all recorded mainline moves, normalized dates, deduplicated identical player/date/event/round/start/move identities, compressed PGN and retained numerical evaluation annotations. No human commentary or side variations. Board-fact explanations are generated locally when viewed.",
+  "analysis_notice": "Source engine settings are unknown. Missing scores remain unscored; no best-play claim or estimated player rating. A completed PGN may end by resignation/draw agreement and need not contain checkmate.",
+  "coverage_notice": "Additive player supplement: Archive counters describe the original committed source scans, not this subset size. Original game IDs, headers, PGN, license and source ordinals are retained. The live historical source may remain incomplete.",
+  "sources": [
+    {
+      "id": "figshare-4276523-v1",
+      "name": "Chess Database — Ana Schaigorodsky (2016)",
+      "page": "https://doi.org/10.6084/m9.figshare.4276523.v1",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Ana Schaigorodsky (2016), Chess Database, figshare. DOI: 10.6084/m9.figshare.4276523.v1. Related study: Schaigorodsky, Perotti and Billoni, PLOS ONE 11(12):e0168213.",
+      "evidence": "https://api.figshare.com/v2/articles/4276523/versions/1",
+      "category": "historical"
+    }
+  ],
+  "merges": [],
+  "verification": {
+    "sqlite_integrity_and_foreign_keys": true,
+    "public_tables_only": true,
+    "all_mainlines_checked_during_import": true,
+    "all_mainlines_rechecked_during_packaging": false
+  },
+  "selection": {
+    "format": 1,
+    "player": {
+      "id": "mikhail-tal",
+      "name": "Mikhail Tal",
+      "matched_spellings": [
+        "Mikhail Tal",
+        "Mihail Tal",
+        "ميخائيل تال",
+        "ميخايل تال"
+      ]
+    },
+    "selected_games": 1999,
+    "source_read_at_utc": "2026-11-27T09:35:36.203572+00:00",
+    "stats": {
+      "games": 1999,
+      "gm_vs_gm": 0,
+      "plies": 138197,
+      "source_evaluations": 0,
+      "first_year": 1949,
+      "last_year": 1992
+    },
+    "selection": "Exact known full-name spellings in one player field; no opponent/opening cross-match.",
+    "provenance_notice": "Archive counters describe the original committed source scans, not this subset size. Original game IDs, headers, PGN, license and source ordinals are retained. The live historical source may remain incomplete.",
+    "all_selected_mainlines_rechecked": true
+  }
+}

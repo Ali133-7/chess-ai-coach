@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "player": {
+    "id": "mikhail-tal",
+    "name": "Mikhail Tal",
+    "matched_spellings": [
+      "Mikhail Tal",
+      "Mihail Tal",
+      "ميخائيل تال",
+      "ميخايل تال"
+    ]
+  },
+  "selected_games": 1999,
+  "source_read_at_utc": "2026-11-27T09:35:36.203572+00:00",
+  "stats": {
+    "games": 1999,
+    "gm_vs_gm": 0,
+    "plies": 138197,
+    "source_evaluations": 0,
+    "first_year": 1949,
+    "last_year": 1992
+  },
+  "selection": "Exact known full-name spellings in one player field; no opponent/opening cross-match.",
+  "provenance_notice": "Archive counters describe the original committed source scans, not this subset size. Original game IDs, headers, PGN, license and source ordinals are retained. The live historical source may remain incomplete.",
+  "all_selected_mainlines_rechecked": true
+}
