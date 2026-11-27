@@ -13,7 +13,7 @@ async function navigate(page,view){
 async function fits(page){expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
 
 test('expanded local game catalogue replays full PGN with offline autoplay',async({page},info)=>{
- await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('#master-count')).toContainText('2');
+ await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('[data-master-game]')).toHaveCount(3);
  await page.locator('#master-query').fill('Pragg Giri');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);
  await page.locator('[data-master-game]').click();await expect(page.locator('#kc-study-dialog')).toBeVisible();await expect(page.locator('#kc-opening-title')).toContainText('2024');await expect(page.locator('#kc-board img').first()).toBeVisible();
  const max=Number(await page.locator('#kc-study-seek').getAttribute('max'));expect(max).toBeGreaterThan(40);let requests=0;page.on('request',()=>requests++);
