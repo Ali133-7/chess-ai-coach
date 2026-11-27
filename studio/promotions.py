@@ -3,10 +3,10 @@ import json,time,secrets,re
 from fastapi import Depends,HTTPException,Query,Request
 from fastapi.responses import FileResponse
 from . import core,control_store as store
-from .control_models import Campaign,AdEvent
+from .control_models import Campaign,AdEvent,CampaignState,BANNER_PLACEMENTS
 
 def campaign(row):
- x=dict(row);x['enabled']=bool(x['enabled']);return x
+ x=dict(row);x['enabled']=bool(x['enabled']);x['visible']=bool(x.get('visible',1));x['dismissible']=bool(x.get('dismissible',1));x['views']=json.loads(x.pop('views_json','[]'));return x
 
 def install(app,auth,admin):
  @app.get('/api/control/campaigns')
@@ -26,11 +26,23 @@ def install(app,auth,admin):
    if data.image_path:
     from .control_api import media_root
     if not (media_root()/data.image_path.rsplit('/',1)[1]).is_file():raise HTTPException(422,'Upload the campaign image first')
-   vals=(data.title_ar,data.title_en,data.body_ar,data.body_en,data.image_path,data.link_url,data.button_ar,data.button_en,data.placement,data.event,data.after_n,data.daily_cap,data.cooldown_minutes,data.plan_id,int(data.enabled),data.starts_at,data.ends_at,data.priority,data.version+1,core.now())
-   if old:db.execute('UPDATE control_ads SET title_ar=?,title_en=?,body_ar=?,body_en=?,image_path=?,link_url=?,button_ar=?,button_en=?,placement=?,event=?,after_n=?,daily_cap=?,cooldown_minutes=?,plan_id=?,enabled=?,starts_at=?,ends_at=?,priority=?,version=?,updated_at=? WHERE id=?',(*vals,cid))
-   else:db.execute('INSERT INTO control_ads VALUES('+','.join('?'*21)+')',(cid,*vals))
+   values=data.model_dump(exclude={'id'});values['views_json']=json.dumps(values.pop('views'));values['version']=data.version+1;values['updated_at']=core.now()
+   columns=list(values)
+   if old:db.execute('UPDATE control_ads SET '+','.join(k+'=?' for k in columns)+' WHERE id=?',(*values.values(),cid))
+   else:db.execute('INSERT INTO control_ads (id,'+','.join(columns)+') VALUES('+','.join('?' for _ in range(len(columns)+1))+')',(cid,*values.values()))
    store.audit(db,user['id'],'campaign.save',cid,{'enabled':data.enabled,'event':data.event,'placement':data.placement,'version':data.version+1})
   return {'id':cid,'ok':True}
+
+ @app.post('/api/control/campaigns/{cid}/state')
+ def change_state(cid:str,data:CampaignState,user=Depends(admin)):
+  with core.connection() as db:
+   db.execute('BEGIN IMMEDIATE');old=db.execute('SELECT version FROM control_ads WHERE id=?',(cid,)).fetchone()
+   if not old:raise HTTPException(404,'Campaign not found')
+   if old['version']!=data.version:raise HTTPException(409,'Campaign changed; reload before changing state')
+   field='enabled' if data.action in ('activate','pause') else 'visible';value=int(data.action in ('activate','show'))
+   db.execute('UPDATE control_ads SET '+field+'=?,version=version+1,updated_at=? WHERE id=?',(value,core.now(),cid))
+   store.audit(db,user['id'],'campaign.'+data.action,cid,{'version':data.version+1})
+  return {'ok':True}
 
  @app.post('/api/control/media')
  async def upload(request:Request,user=Depends(admin)):
@@ -60,6 +72,8 @@ def install(app,auth,admin):
   now=time.time();uid=user['id'];start=now-(now+10800)%86400
   with core.connection() as db:
    db.execute('BEGIN IMMEDIATE');ent=store.entitlement(uid,db)
+   from .advertising import settings
+   if not settings(db)['enabled']:return {'items':[]}
    if ent['plan']['features'].get('no_ads') or user['role']=='admin':return {'items':[]}
    # Learning completion events must refer to an owned server-confirmed completion.
    checks={'lesson_complete':("SELECT 1 FROM learning_sessions WHERE id=? AND user_id=? AND json_extract(state_json,'$.completed')=1",(data.resource,uid)),
@@ -74,8 +88,10 @@ def install(app,auth,admin):
    count=db.execute('SELECT count(*) FROM control_ad_events WHERE user_id=? AND event=?',(uid,data.event)).fetchone()[0]
    # Prune only browser visit telemetry; owned learning completion deduplication remains durable.
    db.execute("DELETE FROM control_ad_events WHERE created_at<? AND event IN ('home_visit','knowledge_visit','play_visit','login')",(now-86400*90,))
-   rows=db.execute('SELECT * FROM control_ads WHERE enabled=1 AND starts_at<=? AND ends_at>? AND event=? AND after_n<=? AND (plan_id IS NULL OR plan_id=?) ORDER BY priority DESC,updated_at DESC',(now,now,data.event,count,ent['plan']['id'])).fetchall();out=[];modal=False;placements=set()
+   rows=db.execute('SELECT * FROM control_ads WHERE enabled=1 AND visible=1 AND starts_at<=? AND ends_at>? AND event=? AND after_n<=? AND (plan_id IS NULL OR plan_id=?) ORDER BY priority DESC,updated_at DESC',(now,now,data.event,count,ent['plan']['id'])).fetchall();out=[];modal=False;placements=set()
    for row in rows:
+    if row['placement'] in BANNER_PLACEMENTS:continue
+    if db.execute('SELECT 1 FROM control_ad_dismissals WHERE user_id=? AND campaign_id=? AND until_at>?',(uid,row['id'],now)).fetchone():continue
     if row['placement']=='modal' and modal or row['placement'] in placements:continue
     recent=db.execute('SELECT count(*) n,max(created_at) last FROM control_ad_deliveries WHERE user_id=? AND campaign_id=? AND created_at>?',(uid,row['id'],min(start,now-row['cooldown_minutes']*60))).fetchone()
     daily=db.execute('SELECT count(*) FROM control_ad_deliveries WHERE user_id=? AND campaign_id=? AND created_at>=?',(uid,row['id'],start)).fetchone()[0]
@@ -89,7 +105,9 @@ def install(app,auth,admin):
   with core.connection() as db:
    row=db.execute('SELECT a.* FROM control_ad_deliveries d JOIN control_ads a ON a.id=d.campaign_id WHERE d.id=? AND d.user_id=?',(delivery,user['id'])).fetchone()
    ent=store.entitlement(user['id'],db)
-   if not row or not row['enabled'] or not row['starts_at']<=time.time()<row['ends_at'] or ent['plan']['features'].get('no_ads') or row['plan_id'] and row['plan_id']!=ent['plan']['id']:return {'show':False}
+   from .advertising import settings
+   if not row or not row['enabled'] or not row['visible'] or user['role']=='admin' or not settings(db)['enabled'] or not row['starts_at']<=time.time()<row['ends_at'] or ent['plan']['features'].get('no_ads') or row['plan_id'] and row['plan_id']!=ent['plan']['id']:return {'show':False}
+   if db.execute('SELECT 1 FROM control_ad_dismissals WHERE user_id=? AND campaign_id=? AND until_at>?',(user['id'],row['id'],time.time())).fetchone():return {'show':False}
    db.execute('UPDATE control_ad_deliveries SET shown_at=coalesce(shown_at,?) WHERE id=?',(time.time(),delivery))
    return {'show':True,'campaign':campaign(row)|{'delivery_id':delivery}}
 

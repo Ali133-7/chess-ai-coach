@@ -4,7 +4,7 @@ from typing import Literal
 from pathlib import Path
 from urllib.parse import urlparse
 from fastapi import FastAPI, Request, Response, HTTPException, Depends, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse,HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, Field
@@ -74,10 +74,19 @@ async def security_headers(req:Request,call_next):
  else:resp.headers['Cache-Control']='no-store'
  resp.headers['Content-Security-Policy']=("default-src 'self'; img-src 'self' data:; style-src 'self'; "
          "script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
+ if getattr(req.state,'ad_nonce',None):
+  from .advertising import google_csp
+  resp.headers['Content-Security-Policy']=google_csp(req.state.ad_nonce)
  return resp
 
 @app.get('/')
-def home():return FileResponse(static/'index.html',headers={'Cache-Control':'no-store'})
+def home(request:Request):
+ from .advertising import bootstrap_nonce
+ nonce=bootstrap_nonce(request)
+ if not nonce:return FileResponse(static/'index.html',headers={'Cache-Control':'no-store'})
+ request.state.ad_nonce=nonce
+ text=(static/'index.html').read_text(encoding='utf8').replace('<script ',f'<script nonce="{nonce}" ').replace('</head>',f'<meta name="studio-ad-nonce" content="{nonce}"/></head>')
+ return HTMLResponse(text,headers={'Cache-Control':'no-store'})
 
 @app.get('/health')
 def health():return {'status':'ok','mode':'completed-games-only','version':'6-beta'}

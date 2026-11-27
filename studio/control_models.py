@@ -28,12 +28,43 @@ class Discount(Model):
   if self.ends_at<=self.starts_at or self.kind=='percent' and self.value>100:raise ValueError('Invalid percentage or dates')
   return self
 EVENTS=('home_visit','knowledge_visit','play_visit','login','lesson_complete','puzzle_solved','game_finished','review_opened')
+BANNER_PLACEMENTS=('screen_top','screen_bottom','screen_left','screen_right')
+BANNER_VIEWS=('home','games','knowledge','learning','play','grades','course')
+class AdvertisingSettings(Model):
+ enabled:bool=True
+ slots:dict[str,bool]=Field(default_factory=lambda:{p:True for p in BANNER_PLACEMENTS})
+ side_min_width:Literal[1800,1920,2200]=1800
+ max_active:int=Field(default=4,ge=1,le=4)
+ google_enabled:bool=False
+ google_client:str=Field(default='',pattern=r'^(|ca-pub-[0-9]{16})$')
+ google_consent_ready:bool=False
+ dismiss_hours:int=Field(default=24,ge=1,le=168)
+ version:int=Field(default=0,ge=0)
+ confirm_password:str=Field(default='',max_length=128)
+ @model_validator(mode='after')
+ def check(self):
+  if set(self.slots)!=set(BANNER_PLACEMENTS):raise ValueError('Supply all four banner placements')
+  if self.google_enabled and (not self.google_client or not self.google_consent_ready):raise ValueError('Supply the AdSense publisher ID and configure your certified consent platform before enabling Google ads')
+  return self
+class BannerContext(Model):
+ view:Literal['home','games','knowledge','learning','play','grades','course']
+ width:int=Field(ge=0,le=20000)
+ visit:str=Field(min_length=1,max_length=100,pattern=r'^[a-zA-Z0-9:_-]+$')
+class CampaignState(Model):
+ action:Literal['activate','pause','show','hide']
+ version:int=Field(ge=1)
 class Campaign(Model):
  id:str=Field(default='',pattern=r'^(|[a-f0-9]{32})$');title_ar:str=Field(min_length=1,max_length=160);title_en:str=Field(min_length=1,max_length=160)
  body_ar:str=Field(default='',max_length=2000);body_en:str=Field(default='',max_length=2000)
  image_path:str=Field(default='',pattern=r'^(|/api/promotions/media/[a-f0-9]{32}\.(png|jpg|webp))$')
  link_url:str=Field(default='',max_length=1500);button_ar:str=Field(default='اعرف المزيد',max_length=60);button_en:str=Field(default='Learn more',max_length=60)
- placement:Literal['home_top','knowledge_top','play_top','modal']='home_top';event:Literal['home_visit','knowledge_visit','play_visit','login','lesson_complete','puzzle_solved','game_finished','review_opened']='home_visit'
+ placement:Literal['home_top','knowledge_top','play_top','modal','screen_top','screen_bottom','screen_left','screen_right']='home_top';event:Literal['home_visit','knowledge_visit','play_visit','login','lesson_complete','puzzle_solved','game_finished','review_opened']='home_visit'
+ kind:Literal['custom','adsense']='custom'
+ visible:bool=True;dismissible:bool=True
+ views:list[Literal['home','games','knowledge','learning','play','grades','course']]=Field(default_factory=lambda:['home','games','knowledge','learning'],min_length=1,max_length=7)
+ adsense_slot:str=Field(default='',pattern=r'^(|[0-9]{5,20})$')
+ image_fit:Literal['contain','cover']='contain'
+ alt_ar:str=Field(default='',max_length=240);alt_en:str=Field(default='',max_length=240)
  after_n:int=Field(default=1,ge=1,le=1000);daily_cap:int=Field(default=1,ge=1,le=10);cooldown_minutes:int=Field(default=1440,ge=1,le=525600)
  plan_id:str|None=None;enabled:bool=False;starts_at:float=Field(ge=0);ends_at:float=Field(gt=0);priority:int=Field(default=0,ge=0,le=100);version:int=Field(default=0,ge=0)
  @field_validator('link_url')
@@ -49,7 +80,10 @@ class Campaign(Model):
  def check(self):
   if self.ends_at<=self.starts_at:raise ValueError('Invalid campaign dates')
   expected={'home_top':'home_visit','knowledge_top':'knowledge_visit','play_top':'play_visit'}
-  if self.placement!='modal' and self.event!=expected[self.placement]:raise ValueError('Banner event must match its placement')
+  if self.placement in expected and self.event!=expected[self.placement]:raise ValueError('Banner event must match its placement')
+  if len(self.views)!=len(set(self.views)):raise ValueError('Duplicate audience views')
+  if self.kind=='adsense' and (self.placement not in BANNER_PLACEMENTS or not self.adsense_slot):raise ValueError('Google ads require a manual banner placement and AdSense slot ID')
+  if self.kind=='adsense' and (self.image_path or self.link_url):raise ValueError('Google manages its own creative and destination; remove the custom image and link')
   return self
 class SiteSettings(Model):
  site_name:str=Field(min_length=1,max_length=80);tagline_ar:str=Field(max_length=200);tagline_en:str=Field(max_length=200);support_email:str=Field(default='',max_length=255)

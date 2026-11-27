@@ -26,8 +26,18 @@ def setup(db):
  CREATE INDEX IF NOT EXISTS control_ad_user ON control_ad_deliveries(user_id,campaign_id,created_at);
  CREATE TABLE IF NOT EXISTS control_play_purchases(token_hash TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id),gateway_version TEXT NOT NULL,product_id TEXT NOT NULL,plan_id TEXT NOT NULL REFERENCES control_plans(id),order_id TEXT NOT NULL,expires_at REAL NOT NULL,state TEXT NOT NULL,token_ref TEXT NOT NULL,last_check REAL NOT NULL,UNIQUE(order_id));
  ''')
+ db.execute('BEGIN IMMEDIATE')
  cols={r['name'] for r in db.execute('PRAGMA table_info(control_ad_deliveries)')}
  if 'shown_at' not in cols:db.execute('ALTER TABLE control_ad_deliveries ADD COLUMN shown_at REAL')
+ # Preserve every existing campaign and delivery during advertising upgrades.
+ ad_columns={r['name'] for r in db.execute('PRAGMA table_info(control_ads)')}
+ additions={'kind':"TEXT NOT NULL DEFAULT 'custom'",'visible':'INTEGER NOT NULL DEFAULT 1','dismissible':'INTEGER NOT NULL DEFAULT 1','views_json':'''TEXT NOT NULL DEFAULT '["home","games","knowledge","learning"]' ''','adsense_slot':"TEXT NOT NULL DEFAULT ''",'image_fit':"TEXT NOT NULL DEFAULT 'contain'",'alt_ar':"TEXT NOT NULL DEFAULT ''",'alt_en':"TEXT NOT NULL DEFAULT ''"}
+ for name,definition in additions.items():
+  if name not in ad_columns:db.execute('ALTER TABLE control_ads ADD COLUMN '+name+' '+definition)
+ if 'visit_key' not in cols:db.execute("ALTER TABLE control_ad_deliveries ADD COLUMN visit_key TEXT NOT NULL DEFAULT ''")
+ if 'banner_placement' not in cols:db.execute("ALTER TABLE control_ad_deliveries ADD COLUMN banner_placement TEXT NOT NULL DEFAULT ''")
+ db.execute("CREATE UNIQUE INDEX IF NOT EXISTS control_banner_visit ON control_ad_deliveries(user_id,campaign_id,visit_key) WHERE visit_key<>''")
+ db.execute('CREATE TABLE IF NOT EXISTS control_ad_dismissals(user_id INTEGER NOT NULL REFERENCES users(id),campaign_id TEXT NOT NULL REFERENCES control_ads(id),until_at REAL NOT NULL,PRIMARY KEY(user_id,campaign_id))')
  features={k:k!='no_ads' for k in FEATURES}
  db.execute('INSERT OR IGNORE INTO control_plans VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',('free','مجاني','Free','المميزات الحالية متاحة افتراضياً؛ يمكن للمدير تعديلها.','Existing features remain available by default; administrators can edit them.',0,30,1,json.dumps(features),json.dumps(LIMITS),1,core.now()))
  for name in ('zaincash','fib','google_play'):db.execute('INSERT OR IGNORE INTO control_gateways(name,updated_at) VALUES(?,?)',(name,core.now()))

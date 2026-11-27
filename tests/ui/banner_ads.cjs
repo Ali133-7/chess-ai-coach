@@ -1,0 +1,23 @@
+const {JSDOM}=require('jsdom'),fs=require('fs'),assert=require('node:assert/strict');
+const root=(process.env.RUNTIME||process.cwd())+'/studio/static/';
+const dom=new JSDOM(fs.readFileSync(root+'index.html','utf8'),{url:'https://studio.example.net/',runScripts:'outside-only',pretendToBeVisual:true}),w=dom.window,d=w.document;
+w.S={me:{id:1,role:'user'},view:'home'};w.I18n={lang:'ar'};d.querySelector('#workspace').hidden=false;w.innerWidth=1920;
+const timers=new Map(),observations=[];let nextTimer=0,calls=[],enabled=true;
+w.setTimeout=(fn,ms)=>{timers.set(++nextTimer,{fn,ms});return nextTimer};w.clearTimeout=id=>timers.delete(id);
+w.IntersectionObserver=class{constructor(callback){this.callback=callback;observations.push(this);}observe(element){this.element=element;}disconnect(){this.disconnected=true;}};
+const positions=['screen_top','screen_bottom','screen_left','screen_right'],campaigns=positions.map((placement,i)=>({id:'campaign-'+i,title_ar:'<script>not code</script>',title_en:'Test creative',body_ar:'نص',body_en:'Copy',button_ar:'اعرف المزيد',button_en:'Learn more',image_path:'',link_url:'https://example.net',kind:'custom',enabled:true,visible:true,dismissible:true,placement,ends_at:Date.now()/1000+3600,priority:1,version:1}));
+w.rawRequest=async(path,options={})=>{calls.push([path,options]);if(path.startsWith('/promotions/banners?')||path==='/promotions/banners/select')return {config:{enabled,side_min_width:1800,max_active:4,google_ready:false,google_enabled:false},items:campaigns};if(path.endsWith('/impression'))return {show:true,delivery_id:'delivery-'+path.split('/')[3]};return {ok:true};};
+const flush=async()=>{await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));};
+const fire=async(ms)=>{for(const [id,timer] of [...timers])if(timer.ms===ms){timers.delete(id);timer.fn();}await flush();};
+(async()=>{
+ w.eval(fs.readFileSync(root+'banner_ads.js','utf8'));await flush();assert.equal(d.querySelectorAll('.banner-creative').length,4);assert.equal(calls.filter(([p])=>p.endsWith('/impression')).length,0,'inventory selection is not an impression');assert.equal(d.querySelectorAll('.banner-creative script').length,0);assert(d.querySelector('.banner-title').textContent.includes('<script>'));
+ const top=observations.find(o=>o.element.closest('#banner-screen_top'));top.callback([{isIntersecting:true,intersectionRatio:.49}]);await fire(1000);assert.equal(calls.filter(([p])=>p.endsWith('/impression')).length,0);
+ top.callback([{isIntersecting:true,intersectionRatio:.5}]);await fire(1000);assert.equal(calls.filter(([p])=>p.endsWith('/impression')).length,1);assert.equal(d.querySelector('#banner-screen_top article').dataset.measured,'true');
+ w.innerWidth=390;w.dispatchEvent(new w.Event('resize'));await fire(250);assert(d.querySelector('#banner-screen_left').hidden);assert(d.querySelector('#banner-screen_right').hidden);assert.equal(d.querySelectorAll('script[src*="googlesyndication"]').length,0);
+ d.querySelector('#review-modal').setAttribute('open','');await flush();assert(d.querySelector('.banner-layout').classList.contains('banners-suppressed'));const before=calls.length;await fire(15000);assert.equal(calls.length,before,'no polling requests while studying in a modal');d.querySelector('#review-modal').removeAttribute('open');await flush();
+ w.I18n.lang='en';d.dispatchEvent(new w.Event('languagechange'));assert.equal(d.querySelector('#banner-screen_top .banner-title').textContent,'Test creative');
+ d.querySelector('#banner-screen_top .banner-dismiss').click();await flush();assert(d.querySelector('#banner-screen_top').hidden);assert(calls.some(([p])=>p.endsWith('/dismiss')));
+ enabled=false;w.dispatchEvent(new w.Event('resize'));await fire(250);assert.equal(d.querySelectorAll('.banner-creative').length,0);
+ w.S.me={id:2,role:'admin'};d.dispatchEvent(new w.Event('studio:session'));const last=calls.length;d.dispatchEvent(new w.Event('studio:view'));await flush();assert.equal(calls.length,last,'administrator has no ad inventory requests');
+ console.log('BANNER_ADS_OK: visibility timing, real acknowledgements, desktop-only sides, safe text, study suppression, dismissal, language, global pause and session isolation.');dom.window.close();
+})().catch(e=>{console.error(e);dom.window.close();process.exitCode=1;});

@@ -21,7 +21,7 @@ jobs:
           - group: studio
             modules: studio
           - group: control-and-payments
-            modules: test_control_center test_google_play test_database_export test_security_review
+            modules: test_control_center test_advertising test_google_play test_database_export test_security_review
           - group: analysis-and-adaptation
             modules: test_analysis_runtime test_analysis_engine test_adaptive_grounding
           - group: reliability-and-security

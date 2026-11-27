@@ -30,11 +30,13 @@ CREATE TABLE archive_months(user_id INTEGER REFERENCES users(id) ON DELETE CASCA
 
 CREATE TABLE auth_attempts(key TEXT PRIMARY KEY, n INTEGER, expires_at INTEGER);
 
-CREATE TABLE control_ad_deliveries(id TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id),campaign_id TEXT NOT NULL REFERENCES control_ads(id),created_at REAL NOT NULL,clicked_at REAL, shown_at REAL);
+CREATE TABLE control_ad_deliveries(id TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id),campaign_id TEXT NOT NULL REFERENCES control_ads(id),created_at REAL NOT NULL,clicked_at REAL, shown_at REAL, visit_key TEXT NOT NULL DEFAULT '', banner_placement TEXT NOT NULL DEFAULT '');
+
+CREATE TABLE control_ad_dismissals(user_id INTEGER NOT NULL REFERENCES users(id),campaign_id TEXT NOT NULL REFERENCES control_ads(id),until_at REAL NOT NULL,PRIMARY KEY(user_id,campaign_id));
 
 CREATE TABLE control_ad_events(user_id INTEGER NOT NULL REFERENCES users(id),event TEXT NOT NULL,resource TEXT NOT NULL,created_at REAL NOT NULL,PRIMARY KEY(user_id,event,resource));
 
-CREATE TABLE control_ads(id TEXT PRIMARY KEY,title_ar TEXT NOT NULL,title_en TEXT NOT NULL,body_ar TEXT NOT NULL,body_en TEXT NOT NULL,image_path TEXT NOT NULL,link_url TEXT NOT NULL,button_ar TEXT NOT NULL,button_en TEXT NOT NULL,placement TEXT NOT NULL,event TEXT NOT NULL,after_n INTEGER NOT NULL,daily_cap INTEGER NOT NULL,cooldown_minutes INTEGER NOT NULL,plan_id TEXT,enabled INTEGER NOT NULL,starts_at REAL NOT NULL,ends_at REAL NOT NULL,priority INTEGER NOT NULL,version INTEGER NOT NULL DEFAULT 1,updated_at TEXT NOT NULL);
+CREATE TABLE control_ads(id TEXT PRIMARY KEY,title_ar TEXT NOT NULL,title_en TEXT NOT NULL,body_ar TEXT NOT NULL,body_en TEXT NOT NULL,image_path TEXT NOT NULL,link_url TEXT NOT NULL,button_ar TEXT NOT NULL,button_en TEXT NOT NULL,placement TEXT NOT NULL,event TEXT NOT NULL,after_n INTEGER NOT NULL,daily_cap INTEGER NOT NULL,cooldown_minutes INTEGER NOT NULL,plan_id TEXT,enabled INTEGER NOT NULL,starts_at REAL NOT NULL,ends_at REAL NOT NULL,priority INTEGER NOT NULL,version INTEGER NOT NULL DEFAULT 1,updated_at TEXT NOT NULL, kind TEXT NOT NULL DEFAULT 'custom', visible INTEGER NOT NULL DEFAULT 1, dismissible INTEGER NOT NULL DEFAULT 1, views_json TEXT NOT NULL DEFAULT '["home","games","knowledge","learning"]', adsense_slot TEXT NOT NULL DEFAULT '', image_fit TEXT NOT NULL DEFAULT 'contain', alt_ar TEXT NOT NULL DEFAULT '', alt_en TEXT NOT NULL DEFAULT '');
 
 CREATE TABLE control_audit(id INTEGER PRIMARY KEY,actor_id INTEGER,action TEXT NOT NULL,target TEXT NOT NULL,details_json TEXT NOT NULL,created_at TEXT NOT NULL);
 
@@ -183,6 +185,8 @@ CREATE INDEX analysis_experiment_queue ON analysis_experiments(status,lease_unti
 CREATE INDEX analysis_job_lease ON analysis_jobs(lease_until,priority);
 
 CREATE INDEX control_ad_user ON control_ad_deliveries(user_id,campaign_id,created_at);
+
+CREATE UNIQUE INDEX control_banner_visit ON control_ad_deliveries(user_id,campaign_id,visit_key) WHERE visit_key<>'';
 
 CREATE INDEX control_order_status ON control_orders(status,created_at);
 

@@ -252,3 +252,5 @@ def install(app,auth,admin):
 
  from .promotions import install as install_promotions
  install_promotions(app,auth,admin)
+ from .advertising import install as install_advertising
+ install_advertising(app,auth,admin)
