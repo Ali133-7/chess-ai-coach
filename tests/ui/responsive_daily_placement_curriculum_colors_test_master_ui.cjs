@@ -6,7 +6,7 @@ let timers=new Map(),timerId=0,config,calls=[];
 w.setTimeout=fn=>{timers.set(++timerId,fn);return timerId};w.clearTimeout=id=>timers.delete(id);
 w.ChessBoardPro={render:(el,fen,side,c)=>{config=c;el.dataset.fen=fen},promotion:(ms,cb)=>cb(ms[0])};
 w.request=async(path,options)=>{calls.push(path);if(path==='/knowledge/status')return{counts:{},sources:[],imports:[],themes:[],coverage_note:''};if(path.startsWith('/knowledge/openings?'))return{items:[opening],total:1};if(path==='/knowledge/position')return{fen:options.body.fen,legal_moves:game.initial_legal_moves,engine:{pvs:[]},statistics:{},tablebase:{},children:[]};if(path.includes('/study'))return structuredClone(opening);if(path.startsWith('/knowledge/masters/'))return structuredClone(game);if(path.startsWith('/knowledge/masters?'))return{items:[game],total:1,all_count:1500,years:[2025,2024,2023]};throw Error(path)};
-w.eval(fs.readFileSync(root+'knowledge.js','utf8'));w.eval(fs.readFileSync(root+'master_games.js','utf8'));
+w.eval(fs.readFileSync(root+'game_players.js','utf8'));w.eval(fs.readFileSync(root+'knowledge.js','utf8'));w.eval(fs.readFileSync(root+'master_games.js','utf8'));
 const flush=()=>new Promise(r=>setImmediate(r)),click=id=>d.getElementById(id).click(),runTimer=async()=>{const [id,fn]=timers.entries().next().value;timers.delete(id);fn();await flush()};
 (async()=>{
  w.selectKnowledgeTab('masters');await flush();assert(d.querySelector('#master-count').textContent.includes('1500'));assert(d.querySelector('#master-games').textContent.includes(game.white));d.querySelector('[data-master-game]').click();await flush();await flush();

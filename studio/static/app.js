@@ -72,7 +72,7 @@ async function loadRatingTrend(){
 function showRatings(items){const r=items||[];
  $('ratings').innerHTML=r.length?r.map(x=>`<div class="rating-card"><small>${esc(x.format.toUpperCase())} · Chess.com</small><strong>${esc(x.rating??'—')}</strong><small>الأعلى ${esc(x.best??'—')} · ${esc(x.wins||0)} فوز</small></div>`).join(''):
  '<p class="muted">بانتظار استيراد التصنيفات المنشورة من Chess.com.</p>';}
-function gameEntry(x){return `<div class="game-card" data-open-game="${Number(x.id)}"><div><strong>${esc(x.white)} × ${esc(x.black)}</strong><small>${fmtDate(x.finished_at)} · ${esc(x.stage==='done'?'تحليل عميق جاهز':x.stage==='running'?'جارٍ التحليل':x.stage==='error'?'خطأ في التحليل':x.stage==='cancelled'?'أُلغي التحليل — يمكن استئنافه':'قيد الانتظار')}</small></div><div>${esc(x.grade_count??'')}<small>${esc(x.result)}</small></div></div>`;}
+function gameEntry(x){return `<div class="game-card" data-open-game="${Number(x.id)}" role="button" tabindex="0"><div class="game-card-main">${window.GamePlayers.card(x,S.me?.chess_username)}<small class="game-card-meta">${fmtDate(x.finished_at)} · ${esc(x.stage==='done'?'تحليل عميق جاهز':x.stage==='running'?'جارٍ التحليل':x.stage==='error'?'خطأ في التحليل':x.stage==='cancelled'?'أُلغي التحليل — يمكن استئنافه':'قيد الانتظار')}</small></div>${x.grade_count==null?'':`<div class="game-card-analysis">${esc(x.grade_count)}<small>${window.I18n?.lang==='en'?'Matching moves':'نقلات مطابقة'}</small></div>`}</div>`;}
 async function loadHome(){try{const d=await request('/dashboard?summary_only=true');S.dashboard=d;
  const g=d.games;$('summary').innerHTML=stat(g.total||0,'مباراة مستوردة')+stat(g.done||0,'مباراة محللة')+stat(g.pending||0,'بانتظار التحليل')+stat(d.lessons_passed+' / '+d.lessons_total,'دروس مجتازة');
  showRatings(d.ratings);loadRatingTrend();const done=Number(g.done||0),total=Number(g.total||0);const pct=total?100*done/total:0;
@@ -91,6 +91,7 @@ async function loadGames(){const seq=++gamesReadSequence;try{const path='/games?
  }catch(e){if(e.name!=='AbortError')toast(e.message);}}
 document.addEventListener('click',e=>{const g=e.target.closest('[data-grade-filter]');if(g){S.filter=g.dataset.gradeFilter;S.page=1;switchView('games');}
  const x=e.target.closest('[data-open-game]');if(x){switchView('games');openGame(Number(x.dataset.openGame));}});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-open-game]')){e.preventDefault();e.target.click();}});
 $('scope').addEventListener('change',e=>{S.scope=e.target.value;$('grade-scope').value=S.scope;S.page=1;loadGames();});
 $('grade-scope').addEventListener('change',e=>{S.scope=e.target.value;$('scope').value=S.scope;S.page=1;loadGrades();});
 async function loadGrades(){try{const d=await request('/grades?scope='+S.scope);$('grade-cards').innerHTML=Object.keys(LABELS).map(k=>`<button class="grade-card" data-grade-filter="${k}">${badge(k)} <strong>${Number(d.counts[k]||0)}</strong><small>${esc(LABELS[k])} · عرض المباريات</small></button>`).join('');}catch(e){if(e.name!=='AbortError')toast(e.message);}}
@@ -128,7 +129,9 @@ function findMove(){return S.review?.moves[S.ply-1]||null;}
 function drawReview(){document.dispatchEvent(new CustomEvent('studio:position'));const r=S.review;if(!r)return;const entry=findMove();
  const position=S.practicing?(S.scenario?.practiceFen||entry?.fen_before):S.scenario?.fens?.[S.scenarioStep]||entry?.fen_after||r.moves[0]?.fen_before||'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
  const mainLast=S.scenario&&!S.practicing?S.scenario.moves[S.scenarioStep-1]:entry?.uci;
- const orientation=S.flip?(r.white.toLowerCase()===(S.me?.chess_username||'')?'black':'white'):(r.white.toLowerCase()===(S.me?.chess_username||'')?'white':'black');
+ const ownSide=window.GamePlayers.sideFor(r,S.me?.chess_username)||'white';
+ const orientation=S.flip?(ownSide==='white'?'black':'white'):ownSide;
+ window.GamePlayers.board($('board'),r,{orientation,fen:position,username:S.me?.chess_username,finished:!S.scenario&&S.ply===r.moves.length&&['1-0','0-1','1/2-1/2'].includes(r.result)});
  const allowed=S.practicing?(S.scenario?.legalMoves||[]):[];
  const targets=S.selected?allowed.filter(m=>m.startsWith(S.selected)).map(m=>m.slice(2,4)):[];
  window.ChessBoardPro.render($('board'),position,orientation,{last:mainLast?[mainLast.slice(0,2),mainLast.slice(2,4)]:[],lastUci:mainLast,
@@ -473,3 +476,5 @@ $('admin-users').addEventListener('click',async e=>{
  try{await request('/admin/users/'+b.dataset.adminUid,{method:'PATCH',body:{disabled:b.dataset.adminDisabled==='1'}});
    toast('تم تحديث حالة الحساب');await loadAdmin();}catch(err){toast(err.message);}
 });
+
+document.addEventListener('languagechange',()=>{if(S.review)drawReview();});

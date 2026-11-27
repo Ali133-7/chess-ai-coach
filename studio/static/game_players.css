@@ -1,0 +1,27 @@
+.match-pair{display:grid;gap:7px;min-width:0;width:100%}
+.match-player{display:flex;align-items:center;gap:10px;min-width:0;color:var(--text);text-align:start}
+.match-piece{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:10px;background:#e4e9ed;border:1px solid #b2bec9;font-size:28px;line-height:1;font-family:Georgia,'Segoe UI Symbol',serif;color:#fff;-webkit-text-stroke:.6px #334155}
+.match-player[data-side=black] .match-piece{color:#141c26;-webkit-text-stroke:.4px #141c26}
+.match-identity{flex:1;min-width:0}.match-name-line{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;min-width:0;line-height:1.5}
+.match-name{font-size:.94rem;font-weight:700;overflow-wrap:anywhere;min-width:0}
+.match-title{font-size:.68rem;font-weight:800;color:var(--red);flex:none}
+.match-labels{display:flex;align-items:center;flex-wrap:wrap;gap:9px;font-size:.75rem;line-height:1.5;color:var(--muted)}
+.match-you{font-size:.65rem;font-weight:600;padding:0 6px;border-radius:5px;background:var(--panel2);color:var(--accent)}
+.match-turn{font-size:.7rem;font-weight:700;color:var(--accent)}.match-turn:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-inline-end:5px}
+.match-score{flex:none;min-width:26px;text-align:center;font-size:1.1rem;font-weight:750;font-variant-numeric:tabular-nums;color:var(--text)}
+.match-player-rail{width:100%;min-height:49px;flex:none;margin-inline:auto;padding:5px 8px;border:1px solid var(--stroke);border-radius:10px;background:var(--panel2)}
+.match-player-rail.match-to-move{border-inline-start:3px solid var(--accent)}
+.game-card .game-card-main{flex:1;min-width:0}.game-card .game-card-meta{margin-top:10px;overflow-wrap:anywhere;font-size:.78rem}
+.game-card .game-card-analysis{flex:none;text-align:center;max-width:86px}.game-card .game-card-analysis small{font-size:.7rem}
+.master-game .match-pair{margin-bottom:4px}.master-game .master-result{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.75rem;color:var(--muted)}
+.review-modal .review-board-panel:has(#board[data-has-players]) #board{max-width:min(540px,max(180px,calc(100dvh - 365px)));margin-block:8px}
+.review-modal .match-player-rail{max-width:min(540px,max(180px,calc(100dvh - 365px)))}
+.review-modal .review-board-panel:has(#scenario-controls:not([hidden])) #board[data-has-players],.review-modal .review-board-panel:has(#scenario-controls:not([hidden])) .match-player-rail{max-width:min(480px,max(180px,calc(100dvh - 490px)))}
+.kc-stage #kc-board[data-has-players]{width:min(100%,max(180px,calc(100dvh - 510px)),620px)!important}
+.kc-stage .match-player-rail{width:min(100%,max(180px,calc(100dvh - 510px)),620px)}
+.kc-stage:has(#kc-board[data-has-players]){overflow-y:auto;scrollbar-width:thin}
+.kc-stage:has(#kc-board[data-has-players]) .kc-line{min-height:38px;max-height:38px}
+.kc-study-dialog .match-player{--text:#18333b;--muted:#536b75;--panel2:#edf3f5;--stroke:#c8d8df;--accent:#087f78;--red:#a73146}
+@media(max-width:850px){.review-modal .review-board-panel:has(#board[data-has-players]) #board,.review-modal .review-board-panel:has(#scenario-controls:not([hidden])) #board[data-has-players],.review-modal .match-player-rail,.review-modal .review-board-panel:has(#scenario-controls:not([hidden])) .match-player-rail{max-width:min(520px,100%)}}
+@media(max-width:800px){.kc-stage #kc-board[data-has-players]{width:min(100%,430px)!important}.kc-stage .match-player-rail{width:min(100%,430px)}.kc-stage:has(#kc-board[data-has-players]){overflow:visible}}
+@media(max-width:400px){.match-player{gap:7px}.match-piece{width:30px;height:32px;flex-basis:30px;font-size:25px}.match-name{font-size:.86rem}.game-card .game-card-analysis{max-width:58px}.match-player-rail{padding:4px 6px}}

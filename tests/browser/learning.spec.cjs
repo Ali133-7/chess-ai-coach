@@ -12,6 +12,31 @@ async function navigate(page,view){
 }
 async function fits(page){expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
 
+test('player names colours and recorded scores stay aligned with both game boards',async({page},info)=>{
+ await navigate(page,'games');const first=page.locator('#game-list [data-open-game]').first();
+ await expect(first.locator('[data-side="white"] .match-name')).toHaveText('browser_fixture'+projects.indexOf(info.project.name));
+ await expect(first.locator('[data-side="white"] .match-color')).toHaveText('الأبيض');
+ await expect(first.locator('[data-side="black"] .match-name')).toHaveText('Test Opponent');
+ await expect(first.locator('[data-side="black"] .match-color')).toHaveText('الأسود');
+ await first.focus();await page.keyboard.press('Enter');await expect(page.locator('#review-modal')).toBeVisible();
+ const personal=page.locator('.match-player-rail[data-match-board="board"]');
+ await expect(personal.first()).toHaveAttribute('data-side','black');await expect(personal.last().locator('.match-you')).toBeVisible();
+ await expect(personal.last().locator('.match-turn')).toBeVisible();await page.locator('#next-move').click();await expect(personal.first().locator('.match-turn')).toBeVisible();
+ await page.locator('#flip-board').click();await expect(personal.first()).toHaveAttribute('data-side','white');await expect(personal.last()).toHaveAttribute('data-side','black');
+ await page.locator('#review-modal .language-select').selectOption('en');await expect(personal.first().locator('.match-color')).toHaveText('White');await expect(personal.last().locator('.match-color')).toHaveText('Black');
+ await page.locator('#last-move').click();await expect(personal.locator('.match-turn:visible')).toHaveCount(0);await expect(personal.first().locator('.match-score')).toHaveText('1');await fits(page);
+ if(['desktop','phone390'].includes(info.project.name))await page.screenshot({path:info.outputPath('personal-players.png')});
+ await page.locator('#close-review').click();await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();
+ await page.locator('#master-query').fill('Mikhail Tal');await page.locator('#master-search-form button').click();const card=page.locator('.master-game');await expect(card).toHaveCount(1);
+ await expect(card.locator('[data-side="white"] .match-name')).toHaveText('Tal, Mihail');await expect(card.locator('[data-side="white"] .match-color')).toHaveText('White');await expect(card.locator('.match-title')).toHaveCount(0);
+ await page.locator('[data-master-game]').click();const historical=page.locator('.match-player-rail[data-match-board="kc-board"]');await expect(historical.first()).toHaveAttribute('data-side','black');await expect(historical.last().locator('.match-name')).toHaveText('Tal, Mihail');
+ await page.locator('#kc-flip').click();await expect(historical.first().locator('.match-name')).toHaveText('Tal, Mihail');await expect(historical.last()).toHaveAttribute('data-side','black');
+ await page.locator('#kc-study-dialog .language-select').selectOption('ar');await expect(historical.first().locator('.match-color')).toHaveText('الأبيض');await expect(historical.last().locator('.match-color')).toHaveText('الأسود');
+ for(const rail of await historical.all()){expect(await rail.evaluate(node=>node.scrollWidth<=node.clientWidth)).toBeTruthy();expect(Math.abs((await rail.boundingBox()).width-(await page.locator('#kc-board').boundingBox()).width)).toBeLessThan(2);}
+ await expect(page.locator('#kc-first')).toBeInViewport();await fits(page);
+ if(['desktop','phone390'].includes(info.project.name))await page.screenshot({path:info.outputPath('historical-players.png')});
+});
+
 test('expanded local game catalogue replays full PGN with offline autoplay',async({page},info)=>{
  await navigate(page,'knowledge');await page.locator('[data-kc-tab="masters"]').click();await expect(page.locator('[data-master-game]')).toHaveCount(3);
  await page.locator('#master-query').fill('Pragg Giri');await page.locator('#master-search-form button').click();await expect(page.locator('[data-master-game]')).toHaveCount(1);
