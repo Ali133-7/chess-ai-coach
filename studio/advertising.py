@@ -65,9 +65,9 @@ def google_csp(nonce):
  # Google documents strict-dynamic because downstream serving hosts change.
  # Google's documented compatibility policy applies only to opted-in ad pages.
  # Nonce + strict-dynamic continue to block untrusted injected script elements.
- return ("default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; "
-         f"script-src 'nonce-{nonce}' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https:; "
-         "style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; frame-src https:; connect-src 'self' https:")
+ return ("object-src 'none'; base-uri 'none'; frame-ancestors 'none'; "
+         f"script-src 'nonce-{nonce}' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:")
+
 
 def install(app,auth,admin):
  from .promotions import campaign
