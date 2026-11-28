@@ -37,6 +37,10 @@ def setup(db):
  if 'visit_key' not in cols:db.execute("ALTER TABLE control_ad_deliveries ADD COLUMN visit_key TEXT NOT NULL DEFAULT ''")
  if 'banner_placement' not in cols:db.execute("ALTER TABLE control_ad_deliveries ADD COLUMN banner_placement TEXT NOT NULL DEFAULT ''")
  db.execute("CREATE UNIQUE INDEX IF NOT EXISTS control_banner_visit ON control_ad_deliveries(user_id,campaign_id,visit_key) WHERE visit_key<>''")
+ db.execute('CREATE INDEX IF NOT EXISTS control_ad_campaign ON control_ad_deliveries(campaign_id,shown_at,clicked_at)')
+ db.execute('CREATE INDEX IF NOT EXISTS control_ad_event_age ON control_ad_events(event,created_at)')
+ db.execute('CREATE INDEX IF NOT EXISTS control_ad_visit_placement ON control_ad_deliveries(user_id,visit_key,banner_placement)')
+ db.execute('CREATE INDEX IF NOT EXISTS control_ad_inventory ON control_ads(enabled,visible,placement,starts_at,ends_at)')
  db.execute('CREATE TABLE IF NOT EXISTS control_ad_dismissals(user_id INTEGER NOT NULL REFERENCES users(id),campaign_id TEXT NOT NULL REFERENCES control_ads(id),until_at REAL NOT NULL,PRIMARY KEY(user_id,campaign_id))')
  features={k:k!='no_ads' for k in FEATURES}
  db.execute('INSERT OR IGNORE INTO control_plans VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',('free','مجاني','Free','المميزات الحالية متاحة افتراضياً؛ يمكن للمدير تعديلها.','Existing features remain available by default; administrators can edit them.',0,30,1,json.dumps(features),json.dumps(LIMITS),1,core.now()))
@@ -49,7 +53,8 @@ def settings(db=None):
  if db is None:
   with core.connection() as conn:return settings(conn)
  out=dict(DEFAULT_SETTINGS)
- for r in db.execute('SELECT key,value FROM control_settings'):out[r['key']]=json.loads(r['value'])
+ for r in db.execute('SELECT key,value FROM control_settings'):
+  if r['key'] in DEFAULT_SETTINGS:out[r['key']]=json.loads(r['value'])
  return out
 
 def plan(row):

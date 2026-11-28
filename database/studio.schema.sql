@@ -184,7 +184,15 @@ CREATE INDEX analysis_experiment_queue ON analysis_experiments(status,lease_unti
 
 CREATE INDEX analysis_job_lease ON analysis_jobs(lease_until,priority);
 
+CREATE INDEX control_ad_campaign ON control_ad_deliveries(campaign_id,shown_at,clicked_at);
+
+CREATE INDEX control_ad_event_age ON control_ad_events(event,created_at);
+
+CREATE INDEX control_ad_inventory ON control_ads(enabled,visible,placement,starts_at,ends_at);
+
 CREATE INDEX control_ad_user ON control_ad_deliveries(user_id,campaign_id,created_at);
+
+CREATE INDEX control_ad_visit_placement ON control_ad_deliveries(user_id,visit_key,banner_placement);
 
 CREATE UNIQUE INDEX control_banner_visit ON control_ad_deliveries(user_id,campaign_id,visit_key) WHERE visit_key<>'';
 

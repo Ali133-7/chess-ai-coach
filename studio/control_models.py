@@ -3,7 +3,7 @@ from urllib.parse import urlsplit
 from pydantic import BaseModel,ConfigDict,Field,field_validator,model_validator
 from .control_store import FEATURES,LIMITS
 
-class Model(BaseModel):model_config=ConfigDict(extra='forbid')
+class Model(BaseModel):model_config=ConfigDict(extra='forbid',allow_inf_nan=False)
 class Plan(Model):
  id:str=Field(pattern=r'^[a-z][a-z0-9_-]{1,40}$')
  title_ar:str=Field(min_length=1,max_length=100);title_en:str=Field(min_length=1,max_length=100)
@@ -83,6 +83,7 @@ class Campaign(Model):
   if self.placement in expected and self.event!=expected[self.placement]:raise ValueError('Banner event must match its placement')
   if len(self.views)!=len(set(self.views)):raise ValueError('Duplicate audience views')
   if self.kind=='adsense' and (self.placement not in BANNER_PLACEMENTS or not self.adsense_slot):raise ValueError('Google ads require a manual banner placement and AdSense slot ID')
+  if self.kind=='adsense':self.dismissible=False
   if self.kind=='adsense' and (self.image_path or self.link_url):raise ValueError('Google manages its own creative and destination; remove the custom image and link')
   return self
 class SiteSettings(Model):

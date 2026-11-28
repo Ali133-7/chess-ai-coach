@@ -37,3 +37,5 @@ backup-key
 htmlcov/
 *.tar.gz
 *.zip
+
+test-results-advertising/

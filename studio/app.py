@@ -4,7 +4,7 @@ from typing import Literal
 from pathlib import Path
 from urllib.parse import urlparse
 from fastapi import FastAPI, Request, Response, HTTPException, Depends, Query
-from fastapi.responses import FileResponse,HTMLResponse
+from fastapi.responses import FileResponse,HTMLResponse,JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, Field
@@ -43,10 +43,16 @@ async def request_language(req:Request,call_next):
 
 @app.middleware('http')
 async def security_headers(req:Request,call_next):
+ # Authenticate image uploads before buffering or decoding their bodies.
+ if req.method=='POST' and req.url.path=='/api/control/media':
+  try:
+   user=await auth(req);admin(user);ratelimit('ad-media:'+str(user['id']),10,60)
+  except HTTPException as error:return JSONResponse({'detail':error.detail},status_code=error.status_code)
  if req.method in ('POST','PATCH','PUT','DELETE'):
   maximum=2*1024*1024+16384
+  if req.url.path.startswith(('/api/promotions/','/api/control/campaigns','/api/control/advertising')):maximum=64*1024
   length=req.headers.get('content-length','')
-  if length and (not length.isdigit() or int(length)>maximum):return Response('Request too large',status_code=413)
+  if length and (len(length)>10 or not length.isascii() or not length.isdigit() or int(length)>maximum):return Response('Request too large',status_code=413)
   body=bytearray()
   async for chunk in req.stream():
    if len(body)+len(chunk)>maximum:return Response('Request too large',status_code=413)
@@ -66,9 +72,10 @@ async def security_headers(req:Request,call_next):
  resp.headers['Permissions-Policy']='camera=(), microphone=(), geolocation=()'
  if COOKIE_SECURE and BASE_URL.startswith('https://'):resp.headers['Strict-Transport-Security']='max-age=31536000'
  # Only public static files may be cached. Account/API responses stay private.
- public_asset=req.method in ('GET','HEAD') and resp.status_code in (200,304) and req.url.path.startswith(('/assets/','/pieces/'))
+ public_asset=req.method in ('GET','HEAD') and resp.status_code in (200,304) and req.url.path.startswith(('/assets/','/pieces/','/api/promotions/media/'))
  if public_asset:
-  if req.query_params.get('v'):resp.headers['Cache-Control']='public, max-age=31536000, immutable'
+  if req.url.path.startswith('/api/promotions/media/'):resp.headers['Cache-Control']='public, max-age=31536000, immutable'
+  elif req.query_params.get('v'):resp.headers['Cache-Control']='public, max-age=31536000, immutable'
   elif req.url.path.startswith(('/assets/pieces/','/pieces/')):resp.headers['Cache-Control']='public, max-age=86400'
   else:resp.headers['Cache-Control']='public, max-age=0, must-revalidate'
  else:resp.headers['Cache-Control']='no-store'
@@ -85,7 +92,7 @@ def home(request:Request):
  nonce=bootstrap_nonce(request)
  if not nonce:return FileResponse(static/'index.html',headers={'Cache-Control':'no-store'})
  request.state.ad_nonce=nonce
- text=(static/'index.html').read_text(encoding='utf8').replace('<script ',f'<script nonce="{nonce}" ').replace('</head>',f'<meta name="studio-ad-nonce" content="{nonce}"/></head>')
+ text=(static/'index.html').read_text(encoding='utf8').replace('<script ',f'<script nonce="{nonce}" ').replace('</head>',f'<meta name="studio-ad-nonce" content="{nonce}"/><meta name="studio-ad-owner" content="{getattr(request.state,"ad_user_id",0)}"/></head>')
  return HTMLResponse(text,headers={'Cache-Control':'no-store'})
 
 @app.get('/health')
@@ -253,7 +260,7 @@ def delete_account(response:Response,user=Depends(auth)):
   if user['role']=='admin':raise HTTPException(409,'Transfer administration before deleting this account')
   uid=user['id']
   if any(db.execute('SELECT 1 FROM '+table+' WHERE user_id=? LIMIT 1',(uid,)).fetchone() for table in ('control_orders','control_play_purchases')):raise HTTPException(409,'Contact administration to resolve billing records before account deletion')
-  for table in ('control_ad_deliveries','control_ad_events','control_usage','control_memberships'):db.execute('DELETE FROM '+table+' WHERE user_id=?',(uid,))
+  for table in ('control_ad_dismissals','control_ad_deliveries','control_ad_events','control_usage','control_memberships'):db.execute('DELETE FROM '+table+' WHERE user_id=?',(uid,))
   db.execute('DELETE FROM users WHERE id=?',(uid,))
  response.delete_cookie('studio_session',path='/');return {'ok':True}
 

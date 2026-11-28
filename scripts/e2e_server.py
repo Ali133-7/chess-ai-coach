@@ -36,7 +36,7 @@ with game_library.connection(root/'master-library.sqlite3',True) as public_db:
 # This disposable harness repeatedly signs in the same four accounts. Keep
 # production rate limits intact; increase only fixture login budgets here.
 original_limit=app_module.ratelimit
-def fixture_limit(key,limit=6,window=900):return original_limit(key,limit*20 if key.startswith(('login:','login-ip:')) else limit,window)
+def fixture_limit(key,limit=6,window=900):return original_limit(key,limit*20 if key.startswith(('login:','login-ip:','ad-media:')) else limit,window)
 app_module.ratelimit=fixture_limit
 with core.connection() as db:
  for index in range(4):

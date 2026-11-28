@@ -85,6 +85,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y stockfish
       - run: echo "STOCKFISH_PATH=/usr/games/stockfish" >> "$GITHUB_ENV"
       - run: npm run test:e2e
+      - run: npm run test:ads-security
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -92,6 +93,7 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            test-results-advertising/
           retention-days: 7
   release-readiness:
     runs-on: ubuntu-latest
@@ -120,9 +122,12 @@ jobs:
       - run: pip install -r requirements.lock
       - run: python scripts/prepare_public_data.py
       - run: python scripts/load_test.py --levels 10 --seconds 2 --output load-smoke.json
+      - run: python scripts/advertising_load_test.py --output advertising-load-smoke.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: load-smoke
-          path: load-smoke.json
+          path: |
+            load-smoke.json
+            advertising-load-smoke.json
           retention-days: 7

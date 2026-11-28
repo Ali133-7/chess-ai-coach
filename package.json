@@ -5,7 +5,8 @@
   "description": "UI regression tests for Chess Studio",
   "scripts": {
     "test": "node scripts/run_ui_tests.cjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:ads-security": "playwright test --config=playwright.advertising.config.cjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",

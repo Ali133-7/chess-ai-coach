@@ -1,17 +1,51 @@
 """Text-only campaigns, controlled image uploads and atomic per-user frequency caps."""
-import json,time,secrets,re
+import json,time,secrets,re,hashlib
 from fastapi import Depends,HTTPException,Query,Request
 from fastapi.responses import FileResponse
+from typing import Literal
 from . import core,control_store as store
 from .control_models import Campaign,AdEvent,CampaignState,BANNER_PLACEMENTS
 
 def campaign(row):
- x=dict(row);x['enabled']=bool(x['enabled']);x['visible']=bool(x.get('visible',1));x['dismissible']=bool(x.get('dismissible',1));x['views']=json.loads(x.pop('views_json','[]'));return x
+ x=dict(row);x['enabled']=bool(x['enabled']);x['visible']=bool(x.get('visible',1));x['dismissible']=bool(x.get('dismissible',1));raw=x.pop('views_json','[]')
+ try:
+  decoded=json.loads(raw);x['views']=decoded if isinstance(decoded,list) else []
+ except (ValueError,TypeError):x['views']=[]
+ return x
+
+def store_poster(raw,uid):
+ from .control_api import media_root
+ from .ad_media import normalise
+ raw,ext=normalise(raw)
+ from .ad_media import MAX_STORED_BYTES,MAX_STORED_FILES
+ name=hashlib.sha256(raw).hexdigest()[:32]+'.'+ext;p=media_root()/name
+ with core.connection() as db:
+  db.execute('BEGIN IMMEDIATE')
+  if p.is_symlink():raise HTTPException(409,'Poster storage conflict')
+  if not p.exists():
+   count=stored=0
+   for entry in p.parent.iterdir():
+    if entry.is_file() and not entry.is_symlink():count+=1;stored+=entry.stat().st_size
+    if count>=MAX_STORED_FILES or stored+len(raw)>MAX_STORED_BYTES:raise HTTPException(413,'Poster storage budget reached; remove unused poster files before uploading more')
+   with p.open('xb') as stream:stream.write(raw)
+   p.chmod(0o600)
+  store.audit(db,uid,'media.upload',name,{'bytes':len(raw)})
+ return {'path':'/api/promotions/media/'+name}
 
 def install(app,auth,admin):
  @app.get('/api/control/campaigns')
- def campaigns(user=Depends(admin)):
-  with core.connection() as db:return {'items':[campaign(x) for x in db.execute('SELECT a.*,(SELECT count(*) FROM control_ad_deliveries WHERE campaign_id=a.id) deliveries,(SELECT count(*) FROM control_ad_deliveries WHERE campaign_id=a.id AND shown_at IS NOT NULL) displays,(SELECT count(*) FROM control_ad_deliveries WHERE campaign_id=a.id AND clicked_at IS NOT NULL) clicks FROM control_ads a ORDER BY updated_at DESC')],'events':['home_visit','knowledge_visit','play_visit','login','lesson_complete','puzzle_solved','game_finished','review_opened']}
+ def campaigns(page:int=Query(default=1,ge=1,le=100000),limit:int=Query(default=25,ge=1,le=100),q:str=Query(default='',max_length=160),filter:Literal['all','active','paused','hidden','custom','adsense']='all',user=Depends(admin)):
+  clauses=[];params=[]
+  if q:
+   pattern='%'+q.lower().replace('\\','\\\\').replace('%','\\%').replace('_','\\_')+'%'
+   clauses.append("(lower(a.title_ar) LIKE ? ESCAPE '\\' OR lower(a.title_en) LIKE ? ESCAPE '\\')");params.extend((pattern,pattern))
+  fixed={'active':'a.enabled=1','paused':'a.enabled=0','hidden':'a.visible=0','custom':"a.kind='custom'",'adsense':"a.kind='adsense'"}
+  if filter in fixed:clauses.append(fixed[filter])
+  where=' WHERE '+' AND '.join(clauses) if clauses else ''
+  with core.connection() as db:
+   total=db.execute('SELECT count(*) FROM control_ads a'+where,params).fetchone()[0]
+   sql='SELECT a.*,(SELECT count(*) FROM control_ad_deliveries WHERE campaign_id=a.id) deliveries,(SELECT count(*) FROM control_ad_deliveries WHERE campaign_id=a.id AND shown_at IS NOT NULL) displays,(SELECT count(*) FROM control_ad_deliveries WHERE campaign_id=a.id AND clicked_at IS NOT NULL) clicks FROM control_ads a'+where+' ORDER BY updated_at DESC,id LIMIT ? OFFSET ?'
+   return {'items':[campaign(x) for x in db.execute(sql,(*params,limit,(page-1)*limit))],'total':total,'page':page,'limit':limit,'q':q,'filter':filter,'events':['home_visit','knowledge_visit','play_visit','login','lesson_complete','puzzle_solved','game_finished','review_opened']}
 
  @app.put('/api/control/campaigns/{cid}')
  def save_campaign(cid:str,data:Campaign,user=Depends(admin)):
@@ -48,14 +82,8 @@ def install(app,auth,admin):
  async def upload(request:Request,user=Depends(admin)):
   from .control_api import bounded_body,media_root
   raw=await bounded_body(request,2*1024*1024)
-  ext=None
-  if raw.startswith(b'\x89PNG\r\n\x1a\n') and len(raw)>=24:ext='png'
-  elif raw.startswith(b'\xff\xd8\xff') and raw.endswith(b'\xff\xd9'):ext='jpg'
-  elif raw.startswith(b'RIFF') and raw[8:12]==b'WEBP':ext='webp'
-  if not ext:raise HTTPException(422,'Upload a PNG, JPEG or WebP image; SVG and HTML are not accepted')
-  name=secrets.token_hex(16)+'.'+ext;p=media_root()/name;p.write_bytes(raw)
-  with core.connection() as db:store.audit(db,user['id'],'media.upload',name,{'bytes':len(raw)})
-  return {'path':'/api/promotions/media/'+name}
+  from starlette.concurrency import run_in_threadpool
+  return await run_in_threadpool(store_poster,raw,user['id'])
 
  @app.get('/api/promotions/media/{name}')
  def media(name:str):
@@ -83,12 +111,13 @@ def install(app,auth,admin):
    if data.event in checks:
     sql,args=checks[data.event]
     if not db.execute(sql,args).fetchone():raise HTTPException(422,'Event is not an owned completed activity')
+   if not db.execute("SELECT 1 FROM control_ads WHERE enabled=1 AND visible=1 AND kind='custom' AND placement IN ('home_top','knowledge_top','play_top','modal') AND starts_at<=? AND ends_at>? AND event=? AND (plan_id IS NULL OR plan_id=?) LIMIT 1",(now,now,data.event,ent['plan']['id'])).fetchone():return {'items':[]}
    inserted=db.execute('INSERT OR IGNORE INTO control_ad_events VALUES(?,?,?,?)',(uid,data.event,data.resource,now)).rowcount
    if not inserted:return {'items':[]}
    count=db.execute('SELECT count(*) FROM control_ad_events WHERE user_id=? AND event=?',(uid,data.event)).fetchone()[0]
    # Prune only browser visit telemetry; owned learning completion deduplication remains durable.
    db.execute("DELETE FROM control_ad_events WHERE created_at<? AND event IN ('home_visit','knowledge_visit','play_visit','login')",(now-86400*90,))
-   rows=db.execute('SELECT * FROM control_ads WHERE enabled=1 AND visible=1 AND starts_at<=? AND ends_at>? AND event=? AND after_n<=? AND (plan_id IS NULL OR plan_id=?) ORDER BY priority DESC,updated_at DESC',(now,now,data.event,count,ent['plan']['id'])).fetchall();out=[];modal=False;placements=set()
+   rows=db.execute("SELECT * FROM control_ads WHERE enabled=1 AND visible=1 AND kind='custom' AND placement IN ('home_top','knowledge_top','play_top','modal') AND starts_at<=? AND ends_at>? AND event=? AND after_n<=? AND (plan_id IS NULL OR plan_id=?) ORDER BY priority DESC,updated_at DESC",(now,now,data.event,count,ent['plan']['id'])).fetchall();out=[];modal=False;placements=set()
    for row in rows:
     if row['placement'] in BANNER_PLACEMENTS:continue
     if db.execute('SELECT 1 FROM control_ad_dismissals WHERE user_id=? AND campaign_id=? AND until_at>?',(uid,row['id'],now)).fetchone():continue
@@ -114,6 +143,6 @@ def install(app,auth,admin):
  @app.post('/api/promotions/{delivery}/click')
  def click(delivery:str,user=Depends(auth)):
   with core.connection() as db:
-   r=db.execute('UPDATE control_ad_deliveries SET clicked_at=coalesce(clicked_at,?) WHERE id=? AND user_id=? AND shown_at IS NOT NULL',(time.time(),delivery,user['id']))
+   r=db.execute("UPDATE control_ad_deliveries SET clicked_at=coalesce(clicked_at,?) WHERE id=? AND user_id=? AND shown_at IS NOT NULL AND campaign_id IN (SELECT id FROM control_ads WHERE kind='custom')",(time.time(),delivery,user['id']))
    if not r.rowcount:raise HTTPException(404,'Delivery not found')
   return {'ok':True}

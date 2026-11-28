@@ -13,3 +13,5 @@
 - **python-chess and Python/JavaScript dependencies**: retain their upstream licenses when redistributing dependencies. Runtime requirements and UI-test dependencies are declared in `requirements.txt` and `package.json`.
 
 The responsive interface was written within this project's existing components. Reference projects and educational design sources are documented in `docs/interface-review-ar.txt`; their code was not imported as a new dependency.
+
+- **Pillow 13.0.0**: bounded raster poster decoding and metadata-free re-encoding; MIT-CMU. Source and licence: <https://github.com/python-pillow/Pillow>. Preserve its bundled licence when redistributing dependencies.
