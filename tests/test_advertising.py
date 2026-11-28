@@ -172,6 +172,9 @@ class AdvertisingTests(unittest.TestCase):
   self.assertEqual(self.post('/api/promotions/google-delivery/click',{},1).status_code,404)
   from studio.control_models import Campaign
   with self.assertRaises(ValueError):Campaign(title_ar='a',title_en='b',starts_at=0,ends_at=float('inf'))
+  with self.assertRaises(ValueError):Campaign(title_ar='a',title_en='b',starts_at=0,ends_at=1e308)
+  bad={'title_ar':'a','title_en':'b','starts_at':0,'ends_at':1e308}
+  self.assertEqual(self.put('/api/control/campaigns/new',bad).status_code,422)
  def test_corrupted_ad_settings_disable_ads_without_breaking_home(self):
   with core.connection() as db:db.execute("INSERT OR REPLACE INTO control_settings VALUES('advertising','invalid-json')")
   self.assertEqual(self.clients[1].get('/').status_code,200);self.assertFalse(self.select()['config']['enabled'])

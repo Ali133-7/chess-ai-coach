@@ -66,7 +66,7 @@ class Campaign(Model):
  image_fit:Literal['contain','cover']='contain'
  alt_ar:str=Field(default='',max_length=240);alt_en:str=Field(default='',max_length=240)
  after_n:int=Field(default=1,ge=1,le=1000);daily_cap:int=Field(default=1,ge=1,le=10);cooldown_minutes:int=Field(default=1440,ge=1,le=525600)
- plan_id:str|None=None;enabled:bool=False;starts_at:float=Field(ge=0);ends_at:float=Field(gt=0);priority:int=Field(default=0,ge=0,le=100);version:int=Field(default=0,ge=0)
+ plan_id:str|None=None;enabled:bool=False;starts_at:float=Field(ge=0,le=4102444800);ends_at:float=Field(gt=0,le=4102444800);priority:int=Field(default=0,ge=0,le=100);version:int=Field(default=0,ge=0)
  @field_validator('link_url')
  @classmethod
  def url(cls,v):
