@@ -136,6 +136,13 @@ class AdvertisingTests(unittest.TestCase):
   with TestClient(app) as anonymous:
    self.assertEqual(anonymous.post('/api/control/media',content=body()).status_code,401)
   self.assertEqual(consumed,[])
+  from studio.ad_payload import validate_json
+  for text in ('[{'+chr(92)+chr(34)+']}' , '['*100):self.assertEqual(validate_json(json.dumps({'text':text}).encode())['text'],text)
+  self.assertEqual(validate_json(b'['*32+b'0'+b']'*32),json.loads(b'['*32+b'0'+b']'*32))
+  cid=self.campaign();self.assertEqual(self.clients[1].post('/api/promotions/banners/'+cid+'/dismiss',headers=self.headers[1]).status_code,200)
+  self.assertEqual(validate_json(b'{"text":"\\ud83d\\ude00"}')['text'],'\U0001f600')
+  for bad in (b'{"\\ud800":1}',b'{"value":NaN}',b'{"value":1e9999}'):
+   self.assertEqual(self.clients[1].post('/api/promotions/banners/select',content=bad,headers={**self.headers[1],'Content-Type':'application/json'}).status_code,400)
   nested=b'['*1500+b']'*1500
   self.assertEqual(self.clients[1].post('/api/promotions/banners/select',content=nested,headers={**self.headers[1],'Content-Type':'application/json'}).status_code,400)
   self.assertEqual(self.clients[1].post('/api/promotions/banners/select',content=b'{}',headers={**self.headers[1],'Content-Length':'9'*5000}).status_code,413)
