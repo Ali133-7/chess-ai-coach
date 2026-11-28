@@ -58,6 +58,11 @@ async def security_headers(req:Request,call_next):
    if len(body)+len(chunk)>maximum:return Response('Request too large',status_code=413)
    body.extend(chunk)
   req._body=bytes(body)
+  if req.url.path.startswith(('/api/promotions/','/api/control/campaigns','/api/control/advertising')):
+   media_type=req.headers.get('content-type','').partition(';')[0].strip().lower()
+   if not media_type or media_type=='application/json' or media_type.endswith('+json'):
+    try:json.loads(req._body)
+    except (ValueError,UnicodeError,RecursionError):return JSONResponse({'detail':'Invalid or excessively nested advertising JSON'},status_code=400)
  if req.method in ('POST','PATCH','PUT','DELETE'):
   origin=req.headers.get('origin')
   if origin:

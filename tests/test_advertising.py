@@ -136,6 +136,8 @@ class AdvertisingTests(unittest.TestCase):
   with TestClient(app) as anonymous:
    self.assertEqual(anonymous.post('/api/control/media',content=body()).status_code,401)
   self.assertEqual(consumed,[])
+  nested=b'['*1500+b']'*1500
+  self.assertEqual(self.clients[1].post('/api/promotions/banners/select',content=nested,headers={**self.headers[1],'Content-Type':'application/json'}).status_code,400)
   self.assertEqual(self.clients[1].post('/api/promotions/banners/select',content=b'{}',headers={**self.headers[1],'Content-Length':'9'*5000}).status_code,413)
   self.assertEqual(self.clients[1].post('/api/promotions/banners/select',content=b'x'*(64*1024+1),headers=self.headers[1]).status_code,413)
  def test_media_concurrency_budget_and_content_size(self):
